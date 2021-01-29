@@ -105,12 +105,12 @@ const components = {
 };
 
 const stories = {
-  "where-i-was-meant-to-be": {
+  "hawaii": {
     Header: dynamic(
-      () => import(`../../../content/where-i-was-meant-to-be/header`)
+      () => import(`../../../content/hawaii/header`)
     ),
     Body: dynamic(
-      () => import(`../../../content/where-i-was-meant-to-be/index.mdx`)
+      () => import(`../../../content/hawaii/index.mdx`)
     ),
   },
 } as const;
