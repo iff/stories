@@ -113,6 +113,30 @@ const stories = {
       () => import(`../../../content/hawaii/index.mdx`)
     ),
   },
+  "nz": {
+    Header: dynamic(
+      () => import(`../../../content/nz/header`)
+    ),
+    Body: dynamic(
+      () => import(`../../../content/nz/index.mdx`)
+    ),
+  },
+  "amsterdam": {
+    Header: dynamic(
+      () => import(`../../../content/amsterdam/header`)
+    ),
+    Body: dynamic(
+      () => import(`../../../content/amsterdam/index.mdx`)
+    ),
+  },
+  "marocco": {
+    Header: dynamic(
+      () => import(`../../../content/marokko/header`)
+    ),
+    Body: dynamic(
+      () => import(`../../../content/marokko/index.mdx`)
+    ),
+  },
   "bavona": {
     Header: dynamic(
       () => import(`../../../content/bavona/header`)
