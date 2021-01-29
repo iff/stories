@@ -113,6 +113,14 @@ const stories = {
       () => import(`../../../content/hawaii/index.mdx`)
     ),
   },
+  "bavona": {
+    Header: dynamic(
+      () => import(`../../../content/bavona/header`)
+    ),
+    Body: dynamic(
+      () => import(`../../../content/bavona/index.mdx`)
+    ),
+  },
 } as const;
 
 interface Props {
