@@ -1,4 +1,5 @@
 import { Content } from "@/components/Content";
+import { Footer } from "@/components/Footer";
 import { Group } from "@/components/Group";
 import { Header } from "@/components/Header";
 import { Image } from "@/components/Image";
@@ -102,6 +103,7 @@ const components = {
     );
   },
   Group,
+  Footer,
 };
 
 const stories = {
