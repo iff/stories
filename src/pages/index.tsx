@@ -56,7 +56,7 @@ const cards = {
   "amsterdam": {Card: dynamic(
     () => import(`../../content/amsterdam/card`)
   )},
-  "marokko": {Card: dynamic(
+  "marocco": {Card: dynamic(
     () => import(`../../content/marokko/card`)
   )},
   "bavona": {Card: dynamic(
