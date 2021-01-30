@@ -1,3 +1,4 @@
+import { Card } from "@/components/Card";
 import { Content } from "@/components/Content";
 import { Footer } from "@/components/Footer";
 import { Group } from "@/components/Group";
@@ -104,6 +105,7 @@ const components = {
   },
   Group,
   Footer,
+  Card,
 };
 
 const stories = {
