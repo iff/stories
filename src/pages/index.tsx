@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
-import * as React from "react";
+import Link from "next/link";
 import styled from "styled-components";
+import * as React from "react";
 
 import { GetStaticProps } from "next";
 
@@ -28,6 +29,10 @@ const Cards = styled.div`
   margin-bottom: 1rem;
   line-height: 1.5;
 
+  a {
+    text-decoration: none;
+  }
+
   @media (min-width: 48rem) {
     margin-top: 5rem;
     margin-bottom: 5rem;
@@ -47,17 +52,17 @@ const Cards = styled.div`
   }
 `;
 
-const cards = [
-  dynamic(
+const cards = {
+  "amsterdam": {Card: dynamic(
     () => import(`../../content/amsterdam/card`)
-  ),
-  dynamic(
+  )},
+  "marokko": {Card: dynamic(
     () => import(`../../content/marokko/card`)
-  ),
-  dynamic(
+  )},
+  "bavona": {Card: dynamic(
     () => import(`../../content/bavona/card`)
-  ),
-] as const;
+  )},
+} as const;
 
 interface Props {
 }
@@ -72,8 +77,10 @@ export default function Page(props: Props) {
 
       <Cards className="wp">
         <div className="grid">
-          {cards.map((Card) => (
-            <Card />
+          {Object.keys(cards).map((name) => (
+            <Link href={`/${name}`}>
+              <a>{React.createElement(cards[name].Card)}</a>
+            </Link>
           ))}
         </div>
       </Cards>

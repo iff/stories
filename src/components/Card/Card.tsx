@@ -48,7 +48,8 @@ const Root = styled.div`
     border-radius: 4px;
 
     align-self: start;
-    justify-self: end;
+    justify-self: center;
+    
   }
 `;
 
