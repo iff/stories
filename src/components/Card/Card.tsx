@@ -39,9 +39,8 @@ const Root = styled.div`
 
   .title {
     font-size: 1rem;
-    // color: #1d1f20;
     color: #fff;
-    padding: 5vh 5vw;
+    padding: 5vh 0;
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: opacity .8s ease-out 1s;
