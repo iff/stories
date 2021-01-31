@@ -6,18 +6,20 @@ import styled from "styled-components";
  */
 const Root = styled.div`
   display: grid;
+  font-size: 14px;
 
   grid-template-columns: [le] 16px [lex lc] 1fr [rc rex] 16px [re];
 
   @media (min-width: 48rem) {
+    font-size: 16px;
     grid-template-columns: [le] 24px [lex] 1fr [lc] minmax(0, 48rem) [rc] 1fr [rex] 24px [re];
   }
 
   @media (min-width: 72rem) {
+    font-size: 19px;
     grid-template-columns: [le] 1fr 24px [lex] minmax(0, 12rem) [lc] 48rem [rc] minmax(0, 12rem) [rex] 24px 1fr [re];
   }
 
-  font-size: 19px;
   line-height: 1.6;
 
   .wp {
