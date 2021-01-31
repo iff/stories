@@ -1,19 +1,70 @@
-import { Viewport } from "@timvir/blocks";
+import { Grid, Exhibit } from "@timvir/blocks";
+import { Sample } from "@timvir/macro";
 
 # Image
 
-The `<Image>` component displays an image.
+The `<Image>` component is used to display images inside stories.
 
-The layout options are:
+## DOM
 
- - **full**: all the way to the edge of the viewport
- - **extended**: slighty wider than the text column
- - **regular**: same width as the text column
- - **narrow**: narrower than the text column
+The DOM tree looks roughly as follows:
 
-The height of the image is always as determined by the image aspect ratio.
+```html
+<div>
+  <figure>
+    <img />
+  </figure>
 
-The component allows caption text to be added, which is shown below the image.
+  <figcaption />
+</div>
+```
 
-<Viewport src="/docs/components/Image/samples/basic" />
+## Layout
 
+By default the image is displayed in its intrinsic aspect ratio. It's also possible
+to make it fill the available space (~ `object-fit: cover`).
+
+<Grid style={{ margin: "20px 0" }}>
+  <Exhibit caption="Image in its intrinsic aspect ratio">
+    <Sample variant="basic" caption={undefined} />
+  </Exhibit>
+  <Exhibit caption="Image fills available space (height: 200px)">
+    <div style={{ display: 'grid', height: 200 }}>
+      <Sample variant="basic" caption={undefined} layout="fill" />
+    </div>
+  </Exhibit>
+</Grid>
+
+## Placeholder
+
+As long as the image is not loaded yet, a placeholder image (generted by [SQIP]) is shown
+in its place. Once the image is loaded, the placeholder image is faded away.
+
+<Grid style={{ margin: "20px 0" }}>
+  <Exhibit caption="Placeholder showing while image is loading.">
+    <div style={{ display: 'grid', height: 200 }}>
+      <Sample variant="placeholder" layout="fill" />
+    </div>
+  </Exhibit>
+  <Exhibit caption="After image is loaded.">
+    <div style={{ display: 'grid', height: 200 }}>
+      <Sample variant="basic" caption={undefined} layout="fill" />
+    </div>
+  </Exhibit>
+</Grid>
+
+## Caption
+
+The caption can be either placed below the image (default), or into an overlay which is visible
+on hover. The later is used when the image is placed into a `<Group>`.
+
+<Grid style={{ margin: "20px 0" }}>
+  <Exhibit caption="Caption below the image">
+    <Sample variant="basic" captionPlacement="below" />
+  </Exhibit>
+  <Exhibit caption="Caption shown in overlay on hover">
+    <Sample variant="basic" captionPlacement="overlay" />
+  </Exhibit>
+</Grid>
+
+[SQIP]: https://github.com/axe312ger/sqip
