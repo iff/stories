@@ -1,4 +1,6 @@
+import { Card } from "@/components/Card";
 import { Content } from "@/components/Content";
+import { Footer } from "@/components/Footer";
 import { Group } from "@/components/Group";
 import { Header } from "@/components/Header";
 import { Image } from "@/components/Image";
@@ -7,9 +9,11 @@ import { MDXProvider } from "@mdx-js/react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import NextImage from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import * as React from "react";
 import { useImmer } from "use-immer";
+import { css, cx } from "@linaria/core";
 
 interface Value {
   mutate: any;
@@ -17,7 +21,7 @@ interface Value {
 }
 
 const Context = React.createContext<Value>({
-  mutate: () => {},
+  mutate: () => { },
   highlight: undefined,
 });
 
@@ -125,14 +129,40 @@ const components = {
   Group: (props: any) => {
     return <Group className="wp" {...props} />;
   },
+  Footer,
+  Card,
 };
 
 const stories = {
-  "where-i-was-meant-to-be": {
-    meta: require("../../content/where-i-was-meant-to-be/meta").default,
-    Header: dynamic(() => import(`../../content/where-i-was-meant-to-be/header`)),
-    Body: dynamic(() => import(`../../content/where-i-was-meant-to-be/body.mdx`)),
-    Image: dynamic(() => import(`../../content/where-i-was-meant-to-be/image`)),
+  hawaii: {
+    meta: require("../../content/hawaii/meta").default,
+    Header: dynamic(() => import(`../../content/hawaii/header`)),
+    Body: dynamic(() => import(`../../content/hawaii/index.mdx`)),
+    Image: dynamic(() => import(`../../content/bavona/image`)),
+  },
+  nz: {
+    meta: require("../../content/nz/meta").default,
+    Header: dynamic(() => import(`../../content/nz/header`)),
+    Body: dynamic(() => import(`../../content/nz/index.mdx`)),
+    Image: dynamic(() => import(`../../content/bavona/image`)),
+  },
+  amsterdam: {
+    meta: require("../../content/amsterdam/meta").default,
+    Header: dynamic(() => import(`../../content/amsterdam/header`)),
+    Body: dynamic(() => import(`../../content/amsterdam/index.mdx`)),
+    Image: dynamic(() => import(`../../content/bavona/image`)),
+  },
+  marocco: {
+    meta: require("../../content/marokko/meta").default,
+    Header: dynamic(() => import(`../../content/marokko/header`)),
+    Body: dynamic(() => import(`../../content/marokko/index.mdx`)),
+    Image: dynamic(() => import(`../../content/bavona/image`)),
+  },
+  bavona: {
+    meta: require("../../content/bavona/meta").default,
+    Header: dynamic(() => import(`../../content/bavona/header`)),
+    Body: dynamic(() => import(`../../content/bavona/body.mdx`)),
+    Image: dynamic(() => import(`../../content/bavona/image`)),
   },
 } as const;
 
@@ -169,7 +199,8 @@ export default function Page() {
             <meta property="og:title" content={meta.title} />
             <meta
               property="og:image"
-              content={`${process.env.NEXT_PUBLIC_URL ? `https://${process.env.NEXT_PUBLIC_URL}` : "http://localhost:3000"}/api/screenshot?path=/${storyId}/og:image`}
+              content={`${process.env.NEXT_PUBLIC_URL ? `https://${process.env.NEXT_PUBLIC_URL}` : "http://localhost:3000"
+                }/api/screenshot?path=/${storyId}/og:image`}
             />
 
             <meta name="twitter:card" content="summary_large_image" />
@@ -177,6 +208,10 @@ export default function Page() {
 
           <div style={{ marginBottom: "10vh" }}>
             <Header />
+          </div>
+
+          <div className={cx(classes.back)}>
+            <Link href="/"><a>X</a></Link>
           </div>
 
           <Content>
@@ -334,3 +369,32 @@ function Inner({ image }: any) {
     </div>
   );
 }
+
+const classes = {
+  back: css`
+    position: -webkit-sticky
+    position: sticky;
+    z-index: 1000;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0.1, 0.1, 0.1, 0.4);
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgb(0 0 0 / 6%), 0 2px 32px 0 rgb(0 0 0 / 16%);
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50px;
+      height: 50px;
+      color: white;
+      text-decoration: none;
+    }
+  `,
+};
