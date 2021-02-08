@@ -164,6 +164,12 @@ const stories = {
     Body: dynamic(() => import(`../../content/bavona/body.mdx`)),
     Image: dynamic(() => import(`../../content/bavona/image`)),
   },
+  bergell: {
+    meta: require("../../content/bergell/meta").default,
+    Header: dynamic(() => import(`../../content/bergell/header`)),
+    Body: dynamic(() => import(`../../content/bergell/index.mdx`)),
+    Image: dynamic(() => import(`../../content/bergell/image`)),
+  },
 } as const;
 
 interface State {
