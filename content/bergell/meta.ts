@@ -1,3 +1,3 @@
 export default {
-  title: "Bavona",
+  title: "Bergell",
 }
