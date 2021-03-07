@@ -170,11 +170,11 @@ const stories = {
     Body: dynamic(() => import(`../../content/bergell/index.mdx`)),
     Image: dynamic(() => import(`../../content/bergell/image`)),
   },
-  early_spring_hike: {
+  snowline: {
     meta: require("../../content/early-spring-hike/meta").default,
-    Header: dynamic(() => import(`../../content/early-spring-hike/header`)),
-    Body: dynamic(() => import(`../../content/early-spring-hike/index.mdx`)),
-    Image: dynamic(() => import(`../../content/early-spring-hike/image`)),
+    Header: dynamic(() => import(`../../content/snowline/header`)),
+    Body: dynamic(() => import(`../../content/snowline/index.mdx`)),
+    Image: dynamic(() => import(`../../content/snowline/image`)),
   },
 } as const;
 

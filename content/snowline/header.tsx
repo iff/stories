@@ -5,7 +5,7 @@ export default function header() {
   return (
     <Header
       image={importImage("https://storage.googleapis.com/plog-imgix/baeretswil-wald/DSCF0335.jpg")}
-      title="Spring hike"
+      title="Riding the snow line"
     />
   );
 }
