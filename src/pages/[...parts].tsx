@@ -171,7 +171,7 @@ const stories = {
     Image: dynamic(() => import(`../../content/bergell/image`)),
   },
   snowline: {
-    meta: require("../../content/early-spring-hike/meta").default,
+    meta: require("../../content/snowline/meta").default,
     Header: dynamic(() => import(`../../content/snowline/header`)),
     Body: dynamic(() => import(`../../content/snowline/index.mdx`)),
     Image: dynamic(() => import(`../../content/snowline/image`)),
