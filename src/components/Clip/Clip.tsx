@@ -71,10 +71,7 @@ function Clip(props: Props) {
 
       <div className={classes.poster}>
         <NextImage src={posterImage.src} layout="fill" objectFit="cover" />
-        <div
-          className={classes.sqip}
-          style={{ opacity: loaded ? 0 : 1, backgroundImage: `url(${posterImage.sqip.src})` }}
-        />
+        <div className={classes.sqip} style={{ backgroundImage: `url(${posterImage.sqip.src})` }} />
       </div>
 
       <div className={classes.actions}>
@@ -125,14 +122,16 @@ const classes = {
 
   poster: css`
     transition: opacity 0.4s ease-out;
+
+    img {
+      z-index: 2;
+    }
   `,
 
   sqip: css`
     position: absolute;
     inset: 0;
     pointer-events: none;
-
-    transition: opacity 0.8s ease-out 1.5s;
 
     background-size: cover;
     background-position: 50% 50%;
