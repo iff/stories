@@ -86,10 +86,7 @@ function Image(props: Props) {
               layout={layout as any}
               objectFit={layout === "fill" ? "cover" : undefined}
             />
-            <div
-              className={classes.sqip}
-              style={{ opacity: loaded ? 0 : 1, backgroundImage: `url(${image.sqip.src})` }}
-            />
+            <div className={classes.sqip} style={{ backgroundImage: `url(${image.sqip.src})` }} />
           </a>
         </Link>
       </figure>
@@ -133,8 +130,6 @@ const classes = {
     bottom: 0;
     left: 0;
     pointer-events: none;
-
-    transition: opacity 0.8s ease-out 1.5s;
 
     background-size: cover;
     background-position: 50% 50%;
