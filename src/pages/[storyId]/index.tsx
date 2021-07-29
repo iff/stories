@@ -104,6 +104,11 @@ const stories = {
     Header: dynamic(() => import(`../../../content/one-more-rush/header`)),
     Body: dynamic(() => import(`../../../content/one-more-rush/body.mdx`)),
   },
+  "dreamers-wake": {
+    meta: require("../../../content/dreamers-wake/meta").default,
+    Header: dynamic(() => import(`../../../content/dreamers-wake/header`)),
+    Body: dynamic(() => import(`../../../content/dreamers-wake/body.mdx`)),
+  },
 } as const;
 
 export default function Page(props: Props) {
