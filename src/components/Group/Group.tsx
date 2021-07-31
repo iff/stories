@@ -70,6 +70,9 @@ const classes = {
     [`1`]: css`
       grid-column-end: span 1;
     `,
+    [`2`]: css`
+      grid-column-end: span 2;
+    `,
     [`3`]: css`
       grid-column-end: span 3;
     `,
@@ -104,6 +107,11 @@ const classes = {
     [`md:1`]: css`
       @media (min-width: 720px) {
         grid-column-end: span 1;
+      }
+    `,
+    [`md:2`]: css`
+      @media (min-width: 720px) {
+        grid-column-end: span 2;
       }
     `,
     [`md:3`]: css`
