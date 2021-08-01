@@ -1,6 +1,6 @@
 import * as React from "react";
 import { css, cx } from "@linaria/core";
-import { importImage } from "../../../image.macro";
+import { Image, importImage } from "../../../image.macro";
 import NextImage from "next/image";
 import * as Icons from "react-feather";
 
@@ -10,6 +10,7 @@ import * as Icons from "react-feather";
 const Root = "figure";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
+  poster?: Image;
   caption?: React.ReactNode;
 }
 
@@ -20,9 +21,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
  */
 
 function Clip(props: Props) {
-  const { caption, className, ...rest } = props;
-
-  const posterImage = importImage("https://storage.googleapis.com/stories.caurea.org/video-2.jpg");
+  const { poster, caption, className, ...rest } = props;
 
   const ref = React.useRef<null | HTMLDivElement>(null);
 
@@ -53,7 +52,7 @@ function Clip(props: Props) {
         // autoPlay
         // poster={posterImage.sqip.src}
         style={{
-          aspectRatio: `${posterImage.width / posterImage.height}`,
+          aspectRatio: `${poster.width / poster.height}`,
         }}
         onPause={() => {
           setPlaying(false);
@@ -70,8 +69,8 @@ function Clip(props: Props) {
       </video>
 
       <div className={classes.poster}>
-        <NextImage src={posterImage.src} layout="fill" objectFit="cover" />
-        <div className={classes.sqip} style={{ backgroundImage: `url(${posterImage.sqip.src})` }} />
+        <NextImage src={poster.src} layout="fill" objectFit="cover" />
+        <div className={classes.sqip} style={{ backgroundImage: `url(${poster.sqip.src})` }} />
       </div>
 
       <div className={classes.actions}>
