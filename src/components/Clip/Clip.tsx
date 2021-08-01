@@ -53,51 +53,51 @@ function Clip(props: Props) {
 
   return (
     <Root ref={ref} className={cx(classes.root, className)} {...rest}>
-      <video
-        className={classes.video}
-        playsInline
-        muted
-        // loop
-        // autoPlay
-        // poster={posterImage.sqip.src}
-        style={{
-          aspectRatio: `${clip.poster.width / clip.poster.height}`,
-        }}
-        onPause={() => {
-          setPlaying(false);
-          ref.current.querySelector<HTMLElement>(`.${classes.poster}`).style.opacity = "1";
-        }}
-        onPlaying={() => {
-          setPlaying(true);
-        }}
-        onEnded={() => {
-          setPlaying(false);
-        }}
-      >
-        <source src={clip.blob.url} type="video/mp4" />
-      </video>
-
-      <div className={classes.poster}>
-        <NextImage src={clip.poster.src} layout="fill" objectFit="cover" />
-        <div className={classes.sqip} style={{ backgroundImage: `url(${clip.poster.sqip.src})` }} />
-      </div>
-
-      <div className={classes.actions}>
-        <button
-          onClick={() => {
-            const videoElement = ref.current.querySelector("video");
-            if (videoElement.paused) {
-              videoElement.currentTime = 0;
-              videoElement.play();
-              ref.current.querySelector<HTMLElement>(`.${classes.poster}`).style.opacity = "0";
-            } else {
-              videoElement.pause();
-              ref.current.querySelector<HTMLElement>(`.${classes.poster}`).style.opacity = "1";
-            }
+      <div style={{ position: "relative", contain: "layout" }}>
+        <video
+          className={classes.video}
+          playsInline
+          muted
+          // poster={clip.poster.sqip.src}
+          style={{
+            aspectRatio: `${clip.poster.width / clip.poster.height}`,
+          }}
+          onPause={() => {
+            setPlaying(false);
+            ref.current.querySelector<HTMLElement>(`.${classes.poster}`).style.opacity = "1";
+          }}
+          onPlaying={() => {
+            setPlaying(true);
+          }}
+          onEnded={() => {
+            setPlaying(false);
           }}
         >
-          {playing ? <Icons.PauseCircle /> : <Icons.PlayCircle />}
-        </button>
+          <source src={clip.blob.url} type="video/mp4" />
+        </video>
+
+        <div className={classes.poster}>
+          <NextImage src={clip.poster.src} layout="fill" objectFit="cover" />
+          <div className={classes.sqip} style={{ backgroundImage: `url(${clip.poster.sqip.src})` }} />
+        </div>
+
+        <div className={classes.actions}>
+          <button
+            onClick={() => {
+              const videoElement = ref.current.querySelector("video");
+              if (videoElement.paused) {
+                videoElement.currentTime = 0;
+                videoElement.play();
+                ref.current.querySelector<HTMLElement>(`.${classes.poster}`).style.opacity = "0";
+              } else {
+                videoElement.pause();
+                ref.current.querySelector<HTMLElement>(`.${classes.poster}`).style.opacity = "1";
+              }
+            }}
+          >
+            {playing ? <Icons.PauseCircle /> : <Icons.PlayCircle />}
+          </button>
+        </div>
       </div>
 
       {caption && <figcaption className={classes.figcaption}>{caption}</figcaption>}
@@ -110,8 +110,6 @@ export default Clip;
 const classes = {
   root: css`
     margin: 0;
-    contain: layout;
-    position: relative;
   `,
 
   figcaption: css`

@@ -14,6 +14,7 @@ export default function Sample(props: Props) {
         },
         poster: importImage("https://storage.googleapis.com/stories.caurea.org/video-2.jpg"),
       }}
+      caption="Pod of dolphins midway between Madeira and Desertas Islands."
       {...props}
     />
   );
