@@ -88,7 +88,11 @@ function Clip(props: Props) {
         </div>
 
         <div className={classes.actions}>
-          <button
+          <svg
+            width={400}
+            height={200}
+            viewBox="-400 -200 400 200"
+            style={{ position: "absolute", bottom: 0, right: 0, zIndex: -1, cursor: "pointer" }}
             onClick={() => {
               const videoElement = ref.current.querySelector("video");
               if (videoElement.paused) {
@@ -101,8 +105,25 @@ function Clip(props: Props) {
               }
             }}
           >
-            {playing ? <Icons.PauseCircle /> : <Icons.PlayCircle />}
-          </button>
+            <path d="M0 0 L-250 0 L0 -80 Z" fill="black" />
+            <g
+              transform="translate(-90, -90) scale(3)"
+              fill="none"
+              stroke="white"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {playing ? (
+                <>
+                  <rect x="6" y="4" width="4" height="16" />
+                  <rect x="14" y="4" width="4" height="16" />
+                </>
+              ) : (
+                <polygon points="5 3 19 12 5 21 5 3" />
+              )}
+            </g>
+          </svg>
         </div>
       </div>
 
@@ -130,6 +151,7 @@ const classes = {
   video: css`
     display: block;
     width: 100%;
+    object-fit: fill;
   `,
 
   poster: css`
@@ -153,8 +175,8 @@ const classes = {
 
   actions: css`
     position: absolute;
-    bottom: 8px;
-    right: 8px;
+    bottom: 0;
+    right: 0;
     z-index: 2;
 
     & > button {
@@ -170,7 +192,7 @@ const classes = {
       cursor: pointer;
     }
 
-    svg {
+    button svg {
       display: block;
       width: 36px;
       height: 36px;
