@@ -1,3 +1,4 @@
+import { Clip } from "@/components/Clip";
 import { Content } from "@/components/Content";
 import { Group } from "@/components/Group";
 import { Header } from "@/components/Header";
@@ -75,6 +76,20 @@ const components = {
   },
   Group: (props: any) => {
     return <Group {...props} className={cx(props.className, "wp")} />;
+  },
+  Clip: (props: any) => {
+    return (
+      <Clip
+        {...props}
+        className={cx(
+          props.className,
+          "wp",
+          css`
+            margin: 2em 0;
+          `
+        )}
+      />
+    );
   },
   blockquote: (props: any) => {
     return (
