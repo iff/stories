@@ -1,8 +1,8 @@
-import * as React from "react";
 import { css, cx } from "@linaria/core";
-import { Image, importImage } from "../../../image.macro";
 import NextImage from "next/image";
-import * as Icons from "react-feather";
+import * as React from "react";
+import { useImmer } from "use-immer";
+import { Image } from "../../../image.macro";
 
 /**
  * The underlying DOM element which is rendered by this component.
@@ -57,10 +57,37 @@ function Clip(props: Props) {
 
   const [playing, setPlaying] = React.useState(false);
 
+  const videoRef = React.useRef<null | HTMLVideoElement>(null);
+
+  const progressRef = React.useRef<null | HTMLDivElement>(null);
+  React.useEffect(() => {
+    if (playing) {
+      let rafId: undefined | number = undefined;
+      const update = () => {
+        rafId = requestAnimationFrame(() => {
+          if (videoRef.current && progressRef.current) {
+            const video = videoRef.current;
+            const progress = video.currentTime / video.duration;
+            progressRef.current.style.width = `calc(${progress * 100}% - 10px)`;
+          }
+
+          update();
+        });
+      };
+
+      update();
+
+      return () => {
+        cancelAnimationFrame(rafId);
+      };
+    }
+  }, [playing]);
+
   return (
     <Root ref={ref} className={cx(classes.root, className)} {...rest}>
       <div style={{ position: "relative", contain: "layout" }}>
         <video
+          ref={videoRef}
           className={classes.video}
           playsInline
           muted
@@ -125,6 +152,8 @@ function Clip(props: Props) {
             </g>
           </svg>
         </div>
+
+        {playing && <div className={classes.progress} ref={progressRef} />}
       </div>
 
       {caption && <figcaption className={classes.figcaption}>{caption}</figcaption>}
@@ -199,5 +228,18 @@ const classes = {
       stroke: white;
       stroke-width: 1;
     }
+  `,
+
+  progress: css`
+    position: absolute;
+    bottom: 6px;
+    left: 5px;
+    height: 3px;
+    border-radius: 2px;
+    background: white;
+
+    z-index: 3;
+
+    transition: width 0.1s;
   `,
 };
