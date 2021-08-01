@@ -18,6 +18,12 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
     };
 
     poster: Image;
+
+    renditions?: Array<{
+      label: string;
+      height: number;
+      url: string;
+    }>;
   };
 
   caption?: React.ReactNode;
