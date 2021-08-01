@@ -10,7 +10,16 @@ import * as Icons from "react-feather";
 const Root = "figure";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
-  poster?: Image;
+  clip: {
+    id: string;
+
+    blob: {
+      url: string;
+    };
+
+    poster: Image;
+  };
+
   caption?: React.ReactNode;
 }
 
@@ -21,7 +30,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
  */
 
 function Clip(props: Props) {
-  const { poster, caption, className, ...rest } = props;
+  const { clip, caption, className, ...rest } = props;
 
   const ref = React.useRef<null | HTMLDivElement>(null);
 
@@ -52,7 +61,7 @@ function Clip(props: Props) {
         // autoPlay
         // poster={posterImage.sqip.src}
         style={{
-          aspectRatio: `${poster.width / poster.height}`,
+          aspectRatio: `${clip.poster.width / clip.poster.height}`,
         }}
         onPause={() => {
           setPlaying(false);
@@ -65,12 +74,12 @@ function Clip(props: Props) {
           setPlaying(false);
         }}
       >
-        <source src="https://storage.googleapis.com/stories.caurea.org/docs/video@720p.mp4" type="video/mp4" />
+        <source src={clip.blob.url} type="video/mp4" />
       </video>
 
       <div className={classes.poster}>
-        <NextImage src={poster.src} layout="fill" objectFit="cover" />
-        <div className={classes.sqip} style={{ backgroundImage: `url(${poster.sqip.src})` }} />
+        <NextImage src={clip.poster.src} layout="fill" objectFit="cover" />
+        <div className={classes.sqip} style={{ backgroundImage: `url(${clip.poster.sqip.src})` }} />
       </div>
 
       <div className={classes.actions}>

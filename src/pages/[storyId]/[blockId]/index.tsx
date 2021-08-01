@@ -1,3 +1,4 @@
+import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
 import { css } from "@linaria/core";
 import { GetStaticPaths, GetStaticProps } from "next";
@@ -23,12 +24,16 @@ interface Props {
   title?: string;
 }
 
-type Block = { __typename: "Image"; id: string; image: { src: string; sqip: { src: string } }; caption: null | string };
+type Block =
+  | { __typename: "Image"; id: string; image: { src: string; sqip: { src: string } }; caption: null | string }
+  | { __typename: "Clip"; id: string; clip: any; caption: null | string };
 
 export default function Page(props: Props) {
   const router = useRouter();
 
   const { storyId, blockId, block, next, prev, title } = props;
+
+  const image = block.__typename === "Image" ? block.image : block.clip.poster;
 
   return (
     <>
@@ -37,7 +42,7 @@ export default function Page(props: Props) {
 
         <meta property="og:title" content={title} />
         {block.caption && <meta property="og:description" content={block.caption} />}
-        <meta property="og:image" content={block.image.src} />
+        <meta property="og:image" content={image.src} />
 
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
@@ -51,7 +56,14 @@ export default function Page(props: Props) {
         prev={prev && { href: `/${storyId}/${prev}` }}
         next={next && { href: `/${storyId}/${next}` }}
       >
-        <Inner key={block.image.src} image={block.image} />
+        {(() => {
+          switch (block.__typename) {
+            case "Image":
+              return <Inner.Image key={block.id} image={image} />;
+            case "Clip":
+              return <Inner.Clip key={block.id} clip={block.clip} />;
+          }
+        })()}
       </Lightbox>
     </>
   );
@@ -68,7 +80,7 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
   const Body = require(`../../../../content/${params.storyId}/body.mdx`).default;
   const { children } = Body({}).props;
 
-  const blocks: Array<{ __typename: "Image"; id: string; image: any; caption: null | string }> = [];
+  const blocks: Array<Block> = [];
   React.Children.forEach(children, function go(child: any) {
     if (React.isValidElement(child)) {
       const props = child.props as any;
@@ -78,6 +90,13 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
           __typename: "Image",
           id: props.image.hash,
           image: props.image,
+          caption: props.caption,
+        });
+      } else if (props.mdxType === "Clip") {
+        blocks.push({
+          __typename: "Clip",
+          id: props.clip.poster.hash,
+          clip: props.clip,
           caption: props.caption,
         });
       }
@@ -106,59 +125,75 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
   };
 };
 
-function Inner({ image }: { image: { src: string; sqip: { src: string } } }) {
-  const ref = React.useRef<null | HTMLDivElement>(null);
+const Inner = {
+  Image: function ({ image }: { image: { src: string; sqip: { src: string } } }) {
+    const ref = React.useRef<null | HTMLDivElement>(null);
 
-  const [loaded, setLoaded] = React.useState(false);
-  React.useEffect(() => {
-    const img = ref.current?.querySelector('img[decoding="async"]') as HTMLImageElement;
-    if (img) {
-      const onLoad = () => {
-        if (!img.src.match(/data:image\/gif/)) {
-          setLoaded(true);
-          img.removeEventListener("load", onLoad);
-        }
-      };
+    const [loaded, setLoaded] = React.useState(false);
+    React.useEffect(() => {
+      const img = ref.current?.querySelector('img[decoding="async"]') as HTMLImageElement;
+      if (img) {
+        const onLoad = () => {
+          if (!img.src.match(/data:image\/gif/)) {
+            setLoaded(true);
+            img.removeEventListener("load", onLoad);
+          }
+        };
 
-      img.addEventListener("load", onLoad);
-    }
-  }, []);
+        img.addEventListener("load", onLoad);
+      }
+    }, []);
 
-  return (
-    <div ref={ref}>
-      <NextImage
-        src={image.src}
-        objectFit="contain"
-        layout="fill"
-        onError={(ev) => {
-          ev.currentTarget.style.visibility = "hidden";
-        }}
-        onLoad={(ev) => {
-          ev.currentTarget.style.visibility = "inherit";
-        }}
-      />
+    return (
+      <div ref={ref}>
+        <NextImage
+          src={image.src}
+          objectFit="contain"
+          layout="fill"
+          onError={(ev) => {
+            ev.currentTarget.style.visibility = "hidden";
+          }}
+          onLoad={(ev) => {
+            ev.currentTarget.style.visibility = "inherit";
+          }}
+        />
+        <div
+          className={css`
+            position: absolute;
+            z-index: 1;
+
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: 50% 50%;
+
+            transition: opacity 0.5s ease-out;
+            opacity: 1;
+
+            inset: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+          `}
+          style={{
+            opacity: loaded ? 0 : 1,
+            backgroundImage: `url(${image.sqip.src})`,
+          }}
+        />
+      </div>
+    );
+  },
+  Clip: function ({ clip }: { clip: any }) {
+    return (
       <div
         className={css`
-          position: absolute;
-          z-index: 1;
-
-          background-repeat: no-repeat;
-          background-size: contain;
-          background-position: 50% 50%;
-
-          transition: opacity 0.5s ease-out;
-          opacity: 1;
-
-          inset: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
+          height: 100%;
+          display: grid;
+          place-items: center;
+          margin: 0 80px;
         `}
-        style={{
-          opacity: loaded ? 0 : 1,
-          backgroundImage: `url(${image.sqip.src})`,
-        }}
-      />
-    </div>
-  );
-}
+      >
+        <Clip clip={clip} />
+      </div>
+    );
+  },
+} as const;
