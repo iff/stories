@@ -93,7 +93,7 @@ function Clip(props: Props) {
           muted
           // poster={clip.poster.sqip.src}
           style={{
-            aspectRatio: `${clip.poster.width / clip.poster.height}`,
+            // aspectRatio: `${clip.poster.width / clip.poster.height}`,
           }}
           onPause={() => {
             setPlaying(false);
