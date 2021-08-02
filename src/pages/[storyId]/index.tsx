@@ -78,9 +78,12 @@ const components = {
     return <Group {...props} className={cx(props.className, "wp")} />;
   },
   Clip: (props: any) => {
+    const router = useRouter();
+
     return (
       <Clip
         {...props}
+        id={props.clip.poster.hash}
         className={cx(
           props.className,
           "wp",
@@ -88,6 +91,9 @@ const components = {
             margin: 2em 0;
           `
         )}
+        onFocus={() => {
+          router.push(`/${router.query.storyId}/${props.clip.poster.hash}`);
+        }}
       />
     );
   },

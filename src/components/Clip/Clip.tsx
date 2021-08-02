@@ -27,6 +27,8 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   };
 
   caption?: React.ReactNode;
+
+  onFocus?: () => void;
 }
 
 /*
@@ -36,7 +38,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
  */
 
 function Clip(props: Props) {
-  const { clip, caption, className, ...rest } = props;
+  const { clip, caption, onFocus, className, ...rest } = props;
 
   const ref = React.useRef<null | HTMLDivElement>(null);
 
@@ -91,10 +93,6 @@ function Clip(props: Props) {
           className={classes.video}
           playsInline
           muted
-          // poster={clip.poster.sqip.src}
-          style={{
-            // aspectRatio: `${clip.poster.width / clip.poster.height}`,
-          }}
           onPause={() => {
             setPlaying(false);
             ref.current.querySelector<HTMLElement>(`.${classes.poster}`).style.opacity = "1";
@@ -112,6 +110,27 @@ function Clip(props: Props) {
         <div className={classes.poster}>
           <NextImage src={clip.poster.src} layout="fill" objectFit="cover" />
           <div className={classes.sqip} style={{ backgroundImage: `url(${clip.poster.sqip.src})` }} />
+        </div>
+
+        <div className={classes.focus} onClick={onFocus}>
+          <svg
+            width={400}
+            height={200}
+            viewBox="-400 0 400 200"
+            style={{ position: "absolute", top: 0, right: 0, zIndex: -1, cursor: "pointer" }}
+          >
+            <path d="M0 0 L-80 0 L0 100 Z" fill="black" />
+            <g
+              transform="translate(-37, 15) scale(1.1)"
+              fill="none"
+              stroke="white"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+            </g>
+          </svg>
         </div>
 
         <div className={classes.actions}>
@@ -200,6 +219,13 @@ const classes = {
     background-position: 50% 50%;
 
     z-index: 1;
+  `,
+
+  focus: css`
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
   `,
 
   actions: css`

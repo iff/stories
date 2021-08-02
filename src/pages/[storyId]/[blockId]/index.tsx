@@ -189,7 +189,6 @@ const Inner = {
           height: 100%;
           display: grid;
           place-items: center;
-          margin: 0 80px;
         `}
       >
         <Clip clip={clip} />
