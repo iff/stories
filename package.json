@@ -28,6 +28,7 @@
     "immer": "^9.0.5",
     "io-ts": "^2.2.16",
     "io-ts-types": "^0.5.16",
+    "nanoid": "^3.1.23",
     "next": "^10.2.3",
     "prism-react-renderer": "^1.2.1",
     "react": "^17.0.2",
