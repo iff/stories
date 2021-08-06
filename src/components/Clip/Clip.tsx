@@ -92,7 +92,6 @@ function Clip(props: Props) {
           ref={videoRef}
           className={classes.video}
           playsInline
-          muted
           onPause={() => {
             setPlaying(false);
             ref.current.querySelector<HTMLElement>(`.${classes.poster}`).style.opacity = "1";
