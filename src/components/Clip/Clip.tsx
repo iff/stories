@@ -63,8 +63,10 @@ function Clip(props: Props) {
 
   const progressRef = React.useRef<null | HTMLDivElement>(null);
   React.useEffect(() => {
+    // console.log("useEffect", playing);
+    let rafId: undefined | number = undefined;
+
     if (playing) {
-      let rafId: undefined | number = undefined;
       const update = () => {
         rafId = requestAnimationFrame(() => {
           if (videoRef.current && progressRef.current) {
@@ -78,11 +80,11 @@ function Clip(props: Props) {
       };
 
       update();
-
-      return () => {
-        cancelAnimationFrame(rafId);
-      };
     }
+
+    return () => {
+      cancelAnimationFrame(rafId);
+    };
   }, [playing]);
 
   return (
@@ -94,7 +96,6 @@ function Clip(props: Props) {
           playsInline
           onPause={() => {
             setPlaying(false);
-            ref.current.querySelector<HTMLElement>(`.${classes.poster}`).style.opacity = "1";
           }}
           onPlaying={() => {
             setPlaying(true);
@@ -106,7 +107,7 @@ function Clip(props: Props) {
           <source src={clip.blob.url} type="video/mp4" />
         </video>
 
-        <div className={classes.poster}>
+        <div className={classes.poster} style={{ opacity: playing ? 0 : 1 }}>
           <NextImage src={clip.poster.src} layout="fill" objectFit="cover" />
           <div className={classes.sqip} style={{ backgroundImage: `url(${clip.poster.sqip.src})` }} />
         </div>
@@ -264,7 +265,5 @@ const classes = {
     background: white;
 
     z-index: 3;
-
-    transition: width 0.1s;
   `,
 };
