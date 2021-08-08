@@ -28,4 +28,4 @@ const classes = {
   featuredStories: css``,
 };
 
-const featuredStories = ["one-more-rush", "where-i-was-meant-to-be"];
+const featuredStories = ["dreamers-wake", "one-more-rush", "where-i-was-meant-to-be"];

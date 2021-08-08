@@ -52,6 +52,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const stories = [
     {
+      id: "dreamers-wake",
+      title: "Dreamer's Wake",
+      publishedAt: new Date(Date.parse("2021-08-08")),
+      description: "Madeira wasn't my first choice where to go, but I'm glad the weather circumstances made me change my plans and go to this gorgeous island. I'll forever be grateful for the experience that I've had the chance to live through, and the people I've met.",
+    },
+    {
       id: "one-more-rush",
       title: "One More Rush",
       publishedAt: new Date(Date.parse("2021-05-18")),

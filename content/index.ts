@@ -15,4 +15,11 @@ export default {
     Body: dynamic(() => import(`./one-more-rush/body.mdx`)),
     Image: dynamic(() => import(`./one-more-rush/image`)),
   },
+  "dreamers-wake": {
+    Card: dynamic(() => import(`./dreamers-wake/card`)),
+    meta: require("./dreamers-wake/meta").default,
+    Header: dynamic(() => import(`./dreamers-wake/header`)),
+    Body: dynamic(() => import(`./dreamers-wake/body.mdx`)),
+    Image: dynamic(() => import(`./dreamers-wake/image`)),
+  },
 } as const;
