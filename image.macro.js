@@ -102,13 +102,14 @@ const loadMetadata = (() => {
 (async function main() {
   const input = await (async (sourceImage) => {
     if (sourceImage.startsWith("https://")) {
-      return new Promise((resolve) => {
-        const { get } = require("https");
-        const { createWriteStream } = require("fs");
-        get(sourceImage, res => {
-          const chunks = []
-          res.on('data', chunk => chunks.push(chunk))
-          res.on('end', () => resolve(Buffer.concat(chunks)))
+      return new Promise((resolve, reject) => {
+        const request = require("request");
+        request({ followAllRedirects: true, url: sourceImage, encoding: null }, (err, response, body) => {
+          if (err) {
+            reject(err)
+          } else {
+            resolve(body);
+          }
         });
       });
     } else {
