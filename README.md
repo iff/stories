@@ -24,10 +24,10 @@ Each story is stored in a separate folder under `content/`.
 
 Each story folder contains multiple files:
 
- - `body.mdx` – The story content.
- - `header.tsx` – The header element which is shown at the very top of the page.
- - `meta.ts` – Meta information of the story (title, description, …).
- - `image.tsx` – Renders the Open Graph image.
+- `body.mdx` – The story content.
+- `header.tsx` – The header element which is shown at the very top of the page.
+- `meta.ts` – Meta information of the story (title, description, …).
+- `image.tsx` – Renders the Open Graph image.
 
 Note that not all Markdown constructs are supported, use only paragraphs and headings.
 
@@ -45,3 +45,12 @@ This project was inspired by https://exposure.co.
 
 Initial work by [Yves Ineichen](https://github.com/iff), with contributions
 by [Tomas Carnecky](https://github.com/wereHamster).
+
+# macOS M1
+
+Needs to run this after `npm install`, otherwise sqip-plugin-primitive will
+complain that the tool is not available (assumes you have Rosetta 2 installed).
+
+```
+cp node_modules/sqip-plugin-primitive/vendor/primitive-darwin-x64 node_modules/sqip-plugin-primitive/vendor/primitive-darwin-arm64
+```
