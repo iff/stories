@@ -22,7 +22,9 @@ module.exports = withLinaria(
       cacheDirectory: "./.next/cache/linaria",
     },
 
-    webpack5: true,
+    typescript: {
+      ignoreBuildErrors: true,
+    },
 
     pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 
