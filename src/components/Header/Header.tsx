@@ -98,7 +98,7 @@ const classes = {
     }
 
     @media (min-width: 720px) {
-      & > div:first-child {
+      & > span:first-child {
         margin: 56px 0 56px 88px !important;
       }
 

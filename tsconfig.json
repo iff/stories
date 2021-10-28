@@ -19,10 +19,17 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["src/components/*"],
-      "@/hooks/*": ["src/hooks/*"],
-      "@/timvir/*": ["src/timvir/*"]
+      "@/components/*": [
+        "src/components/*"
+      ],
+      "@/hooks/*": [
+        "src/hooks/*"
+      ],
+      "@/timvir/*": [
+        "src/timvir/*"
+      ]
     },
+    "incremental": true
   },
   "exclude": [
     "node_modules"

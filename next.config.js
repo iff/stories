@@ -1,7 +1,6 @@
 const visit = require("unist-util-visit");
 const withLinaria = require("next-linaria");
 
-const withCSS = require("@zeit/next-css");
 const withMDX = require("@next/mdx")({
   extension: /\.mdx?$/,
   options: {
@@ -18,28 +17,26 @@ const withMDX = require("@next/mdx")({
 });
 
 module.exports = withLinaria(
-  withCSS(
-    withMDX({
-      linaria: {
-        cacheDirectory: "./.next/cache/linaria",
-      },
+  withMDX({
+    linaria: {
+      cacheDirectory: "./.next/cache/linaria",
+    },
 
-      webpack5: true,
+    webpack5: true,
 
-      pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+    pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 
-      images: {
-        domains: ["storage.googleapis.com"],
-      },
+    images: {
+      domains: ["storage.googleapis.com"],
+    },
 
-      async rewrites() {
-        return [
-          {
-            source: "/feed",
-            destination: "/api/feed",
-          },
-        ];
-      },
-    })
-  )
+    async rewrites() {
+      return [
+        {
+          source: "/feed",
+          destination: "/api/feed",
+        },
+      ];
+    },
+  })
 );
