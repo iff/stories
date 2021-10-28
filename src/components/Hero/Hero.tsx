@@ -2,7 +2,7 @@ import { Brandmark } from "@/components/Brandmark";
 import { css, cx } from "@linaria/core";
 import Image from "next/image";
 import * as React from "react";
-import { importImage } from "../../../image.macro";
+import { importBlob } from "../../../image.macro";
 
 /**
  * The underlying DOM element which is rendered by this component.
@@ -11,7 +11,7 @@ const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {}
 
-const image = importImage("https://storage.googleapis.com/stories.caurea.org/where-i-was-meant-to-be/DJI_0079.jpg");
+const image = importBlob("Cyg8Yxw9voUn3UtB7CQLFVi1Wfyj247GgGjtSCXXSo5M");
 
 function Hero(props: Props) {
   const { className, ...rest } = props;

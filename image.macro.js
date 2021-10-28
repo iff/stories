@@ -23,7 +23,6 @@ const metadataCacheDirectory = `${outputDirectory}/.cache`;
 mkdirp.sync(metadataCacheDirectory);
 
 module.exports = createMacro(({ references }) => {
-  
   const toValue = (referencePath, sourceImage /** @type string */) => {
     /*
      * The fingerprint is constructed entirely using just the 'sourceImage'
@@ -56,6 +55,45 @@ module.exports = createMacro(({ references }) => {
   if (references.importImage) {
     references.importImage.forEach((referencePath) => {
       const { value } = toValue(referencePath, referencePath.parent.arguments[0].value);
+
+      const replacement = parseExpression(`${JSON.stringify(value)}`);
+      referencePath.parentPath.replaceWith(replacement);
+    });
+  }
+
+  if (references.importBlob) {
+    references.importBlob.forEach((referencePath) => {
+      const blobId = referencePath.parent.arguments[0].value;
+
+      const response = JSON.parse(
+        execFileSync(process.execPath, [
+          "-e",
+          `
+            require("request")({
+              url: "https://web-4n62l3bdha-lz.a.run.app/api",
+              method: "POST",
+              json: {
+                query: "query { blob(id: \\"${blobId}\\") { name asImage { url dimensions { width height } placeholder { url } } } }"
+              }
+            }, (err, response, body) => {
+              process.stdout.write(JSON.stringify(body));
+            });
+          `,
+        ])
+      );
+
+      const blob = response.data.blob;
+
+      const value = {
+        hash: blob.name,
+
+        src: blob.asImage.url,
+
+        ...blob.asImage.dimensions,
+        sqip: {
+          src: blob.asImage.placeholder.url,
+        },
+      };
 
       const replacement = parseExpression(`${JSON.stringify(value)}`);
       referencePath.parentPath.replaceWith(replacement);
@@ -168,7 +206,12 @@ const loadMetadata = (() => {
       console.log(`Failed to load metadata for ${key}. Running script…`, e.message);
 
       console.log("loadMetadata", sourceImage, hash);
-      const metadata = JSON.parse(execFileSync(process.execPath, ["-e", script(sourceImage, referencePath.hub.file.opts.parserOpts.sourceFileName)]));
+      const metadata = JSON.parse(
+        execFileSync(process.execPath, [
+          "-e",
+          script(sourceImage, referencePath.hub.file.opts.parserOpts.sourceFileName),
+        ])
+      );
       inMemoryCache.set(key, metadata);
       fs.writeFileSync(cachePath, JSON.stringify(metadata));
       return metadata;

@@ -25,7 +25,7 @@ module.exports = withLinaria(
     pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 
     images: {
-      domains: ["storage.googleapis.com"],
+      domains: ["storage.googleapis.com", "web-4n62l3bdha-lz.a.run.app"],
     },
 
     async rewrites() {
