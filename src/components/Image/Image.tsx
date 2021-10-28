@@ -9,6 +9,8 @@ import Link, { LinkProps } from "next/link";
 const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
+  blobId?: string;
+
   image?: {
     src: string;
 
@@ -35,6 +37,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 
 function Image(props: Props) {
   const {
+    blobId,
     image,
     layout = "intrinsic",
     caption,
@@ -80,6 +83,7 @@ function Image(props: Props) {
         <Link passHref href={href}>
           <a>
             <NextImage
+            loader={blobId ? ({ src, width }) => `${src}?w=${width}` : undefined}
               src={image.src}
               width={layout === "fill" ? undefined : image.width}
               height={layout === "fill" ? undefined : image.height}

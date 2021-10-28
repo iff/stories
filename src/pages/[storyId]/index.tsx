@@ -18,25 +18,30 @@ export interface Query extends ParsedUrlQuery {
 
 interface Props {
   storyId: string;
+  blobs: Array<any>;
 }
+
+const Context = React.createContext<{ blobs: Array<any> }>({ blobs: [] });
 
 const components = {
   wrapper: ({ children }) => {
     return React.Children.map(children, (child) => {
       if (React.isValidElement(child)) {
         if ((child.props as any).mdxType === "Image") {
+          const props = child.props as any;
+
           return React.cloneElement(child as any, {
-            id: `${(child.props as any).image.hash}`,
+            id: `${props.blobId ?? props.image?.hash}`,
             className: cx(
-              (child.props as any).className,
+              props.className,
               {
                 full: "fw",
                 wide: "wp",
-              }[(child.props as any).size],
+              }[props.size],
               css`
                 margin: 2em auto;
               `,
-              (child.props as any).size === "narrow" &&
+              props.size === "narrow" &&
                 css`
                   max-width: 400px;
                 `
@@ -45,17 +50,20 @@ const components = {
         }
 
         if ((child.props as any).mdxType === "Group") {
+          const props = child.props as any;
+
           return React.cloneElement(child as any, {
             className: cx(
-              (child.props as any).className,
+              props.className,
               css`
                 margin: 2em 0;
               `
             ),
-            children: React.Children.map((child.props as any).children, (child) => {
+            children: React.Children.map(props.children, (child) => {
               if (React.isValidElement(child)) {
+                const props = child.props as any;
                 return React.cloneElement(child as any, {
-                  id: `${(child.props as any).image.hash}`,
+                  id: `${props.blobId ?? props.image?.hash}`,
                 });
               } else {
                 return child;
@@ -72,7 +80,30 @@ const components = {
   Header,
   Image: (props: any) => {
     const router = useRouter();
-    return <Image {...props} href={`/${router.query.storyId}/${props.id}`} />;
+    const { blobs } = React.useContext(Context);
+    const blob = blobs.find((x) => x.name === props.blobId);
+
+    return (
+      <Image
+        {...props}
+        href={`/${router.query.storyId}/${props.id}`}
+        {...(() => {
+          if (!blob) {
+            return {};
+          } else {
+            return {
+              image: {
+                src: blob.asImage.url,
+                ...blob.asImage.dimensions,
+                sqip: {
+                  src: blob.asImage.placeholder.url,
+                },
+              },
+            };
+          }
+        })()}
+      />
+    );
   },
   Group: (props: any) => {
     return <Group {...props} className={cx(props.className, "wp")} />;
@@ -133,33 +164,35 @@ const stories = {
 } as const;
 
 export default function Page(props: Props) {
-  const { storyId } = props;
+  const { storyId, blobs } = props;
   const { meta, Header, Body } = stories[storyId];
 
   return (
-    <MDXProvider components={components}>
-      <Head>
-        <title>{meta.title}</title>
+    <Context.Provider value={{ blobs }}>
+      <MDXProvider components={components}>
+        <Head>
+          <title>{meta.title}</title>
 
-        <meta property="og:title" content={meta.title} />
-        <meta
-          property="og:image"
-          content={`https://app-gcsszncmzq-lz.a.run.app/og/stories.caurea.org/${storyId}/og:image`}
-        />
+          <meta property="og:title" content={meta.title} />
+          <meta
+            property="og:image"
+            content={`https://app-gcsszncmzq-lz.a.run.app/og/stories.caurea.org/${storyId}/og:image`}
+          />
 
-        <meta name="twitter:card" content="summary_large_image" />
-      </Head>
+          <meta name="twitter:card" content="summary_large_image" />
+        </Head>
 
-      <div style={{ marginBottom: "10vh" }}>
-        <Header />
-      </div>
+        <div style={{ marginBottom: "10vh" }}>
+          <Header />
+        </div>
 
-      <Content>
-        <Body />
-      </Content>
+        <Content>
+          <Body />
+        </Content>
 
-      <div style={{ marginBottom: "10vh" }} />
-    </MDXProvider>
+        <div style={{ marginBottom: "10vh" }} />
+      </MDXProvider>
+    </Context.Provider>
   );
 }
 
@@ -171,5 +204,37 @@ export const getStaticPaths: GetStaticPaths<Query> = async () => {
 };
 
 export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) => {
-  return { props: { ...params } };
+  const Body = require(`../../../content/${params.storyId}/body.mdx`).default;
+  const { children } = Body({}).props;
+
+  const blobs: Array<Promise<any>> = [];
+  React.Children.forEach(children, function go(child: any) {
+    if (React.isValidElement(child)) {
+      const props = child.props as any;
+
+      if (props.mdxType === "Image" && props.blobId) {
+        blobs.push(
+          (async () => {
+            const res = await fetch("https://m.caurea.org/api/graphql", {
+              method: "POST",
+              headers: { ["Content-Type"]: "application/json" },
+              body: JSON.stringify({
+                query: `query { blob(id: "${props.blobId}") { name asImage { url dimensions { width height } placeholder { url } } } }`,
+              }),
+            });
+            return (await res.json()).data.blob;
+          })()
+        );
+      }
+
+      React.Children.forEach(props.children, go);
+    }
+  });
+
+  return {
+    props: {
+      ...params,
+      blobs: await Promise.all(blobs),
+    },
+  };
 };
