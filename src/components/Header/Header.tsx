@@ -9,6 +9,8 @@ import * as React from "react";
 const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
+  blobId?: string;
+
   image: {
     src: string;
 
@@ -24,7 +26,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 }
 
 function Header(props: Props) {
-  const { image, title, className, ...rest } = props;
+  const { blobId, image, title, className, ...rest } = props;
 
   const ref = React.useRef<null | HTMLDivElement>(null);
 
@@ -49,7 +51,12 @@ function Header(props: Props) {
       <Brandmark className={classes.brandmark} />
 
       <div className={classes.image}>
-        <Image src={image.src} layout="fill" objectFit="cover" />
+        <Image
+          loader={blobId ? ({ src, width }) => `${src}?w=${width}` : undefined}
+          src={image.src}
+          layout="fill"
+          objectFit="cover"
+        />
         <div
           className="sqip"
           style={{

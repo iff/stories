@@ -83,7 +83,7 @@ function Image(props: Props) {
         <Link passHref href={href}>
           <a>
             <NextImage
-            loader={blobId ? ({ src, width }) => `${src}?w=${width}` : undefined}
+              loader={blobId ? ({ src, width }) => `${src}?w=${width}` : undefined}
               src={image.src}
               width={layout === "fill" ? undefined : image.width}
               height={layout === "fill" ? undefined : image.height}
