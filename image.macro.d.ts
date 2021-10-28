@@ -1,6 +1,8 @@
 import * as React from "react";
 
 export interface Image {
+  name?: string;
+
   src: string;
 
   width: number;

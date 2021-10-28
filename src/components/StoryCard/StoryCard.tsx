@@ -12,6 +12,8 @@ const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   image: {
+    name?: string;
+
     src: string;
 
     width: number;
@@ -63,7 +65,12 @@ function StoryCard(props: Props) {
       <h2 className={classes.title}>{title}</h2>
 
       <div className={cx(classes.image)}>
-        <Image src={image.src} layout="fill" objectFit="cover" />
+        <Image
+          loader={image.name ? ({ src, width }) => `${src}?w=${width}` : undefined}
+          src={image.src}
+          layout="fill"
+          objectFit="cover"
+        />
         <div className="sqip" style={{ opacity: loaded ? 0 : 1, backgroundImage: `url(${image.sqip.src})` }} />
       </div>
 
@@ -131,7 +138,12 @@ function StoryCard(props: Props) {
       </div>
 
       <div className={cx(classes.image2)}>
-        <Image src={(blocks[0] ?? image).src} layout="fill" objectFit="cover" />
+        <Image
+          loader={(blocks[0] ?? image).name ? ({ src, width }) => `${src}?w=${width}` : undefined}
+          src={(blocks[0] ?? image).src}
+          layout="fill"
+          objectFit="cover"
+        />
         <div
           className="sqip"
           style={{ opacity: loaded ? 0 : 1, backgroundImage: `url(${(blocks[0] ?? image).sqip.src})` }}

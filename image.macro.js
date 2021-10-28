@@ -85,6 +85,7 @@ module.exports = createMacro(({ references }) => {
       const blob = response.data.blob;
 
       const value = {
+        name: blob.name,
         hash: blob.name,
 
         src: blob.asImage.url,
