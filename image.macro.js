@@ -104,7 +104,7 @@ const loadMetadata = (() => {
     if (sourceImage.startsWith("https://")) {
       return new Promise((resolve, reject) => {
         const request = require("request");
-        request({ followAllRedirects: true, url: sourceImage, encoding: null }, (err, response, body) => {
+        request({ followAllRedirects: true, url: sourceImage, encoding: null, headers: { accept: 'image/jpeg,*' } }, (err, response, body) => {
           if (err) {
             reject(err)
           } else {
