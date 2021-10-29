@@ -1,4 +1,3 @@
 export default {
-    title: "Dreamer's Wake",
-  };
-  
+  title: "Dreamer's Wake",
+};

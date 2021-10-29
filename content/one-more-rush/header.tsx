@@ -1,15 +1,12 @@
 import { Header } from "@/components/Header";
 import { css } from "@linaria/core";
 import * as React from "react";
-import { importImage } from "../../image.macro";
+import { importBlob } from "../../image.macro";
 
 export default function header() {
   return (
     <div>
-      <Header
-        image={importImage("https://storage.googleapis.com/stories.caurea.org/one-more-rush/IMG_4340.jpeg")}
-        title="One More Rush"
-      />
+      <Header image={importBlob("4zfWtmEUAz4bPvkAHZUVrdik83FJtWZkZ2eJ1cYkZ7Kc")} title="One More Rush" />
     </div>
   );
 }
