@@ -76,6 +76,7 @@ export default Header;
 const classes = {
   root: css`
     height: 100vh;
+    max-height: 1200px;
     position: relative;
   `,
 

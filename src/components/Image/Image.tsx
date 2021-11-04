@@ -117,7 +117,7 @@ const classes = {
       outline-offset: 2px;
     }
 
-    & a > div {
+    & a > span {
       display: block !important;
     }
 
@@ -146,7 +146,7 @@ const classes = {
     position: relative;
     margin: 0;
 
-    & > div {
+    & > span {
       display: block !important;
       z-index: -2;
     }

@@ -74,7 +74,7 @@ const classes = {
       grid-column: le / re;
     }
 
-    & > *:not(.wp):not(.fw) {
+    & > *:not(.wp):not(.fw):not(.noLayout) {
       grid-column: lc / rc;
     }
 

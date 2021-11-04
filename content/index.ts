@@ -1,6 +1,13 @@
 import dynamic from "next/dynamic";
 
 export default {
+  "blouson-noir": {
+    Card: dynamic(() => import(`./blouson-noir/card`)),
+    meta: require("./blouson-noir/meta").default,
+    Header: dynamic(() => import(`./blouson-noir/header`)),
+    Body: dynamic(() => import(`./blouson-noir/body.mdx`)),
+    Image: dynamic(() => import(`./blouson-noir/image`)),
+  },
   "where-i-was-meant-to-be": {
     Card: dynamic(() => import(`./where-i-was-meant-to-be/card`)),
     meta: require("./where-i-was-meant-to-be/meta").default,

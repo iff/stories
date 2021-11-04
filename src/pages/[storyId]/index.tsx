@@ -76,7 +76,36 @@ const components = {
       return child;
     });
   },
-  h1: (props: any) => <h2 {...props} />,
+  h1: (props: any) => {
+    return (
+      <div
+        className={cx(
+          "noLayout",
+          css`
+            grid-column: lex / rc;
+          `
+        )}
+      >
+        <h2
+          className={css`
+            display: inline-block;
+
+            margin: 2em 0 1em;
+            padding: 0.55em 0.7em 0.4em;
+
+            background: black;
+            color: white;
+
+            font-size: clamp(32px, 3.5vw, 80px);
+            line-height: 1.2;
+            font-weight: 900;
+            letter-spacing: 0.09em;
+          `}
+          {...props}
+        />
+      </div>
+    );
+  },
   Header,
   Image: (props: any) => {
     const router = useRouter();
@@ -160,6 +189,11 @@ const stories = {
     meta: require("../../../content/dreamers-wake/meta").default,
     Header: dynamic(() => import(`../../../content/dreamers-wake/header`)),
     Body: dynamic(() => import(`../../../content/dreamers-wake/body.mdx`)),
+  },
+  "blouson-noir": {
+    meta: require("../../../content/blouson-noir/meta").default,
+    Header: dynamic(() => import(`../../../content/blouson-noir/header`)),
+    Body: dynamic(() => import(`../../../content/blouson-noir/body.mdx`)),
   },
 } as const;
 
