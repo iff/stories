@@ -45,7 +45,7 @@
     "request": "^2.88.2",
     "sqip": "^1.0.0-alpha.34",
     "sqip-plugin-blur": "^1.0.0-alpha.33",
-    "sqip-plugin-data-uri": "^1.0.0-alpha.33",
+    "sqip-plugin-data-uri": "^1.0.0-alpha.35",
     "sqip-plugin-primitive": "^1.0.0-alpha.34",
     "sqip-plugin-svgo": "^1.0.0-alpha.33",
     "unist-util-visit": "^2.0.3",
