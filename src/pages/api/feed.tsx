@@ -52,6 +52,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const stories = [
     {
+      id: "blouson-noir",
+      title: "Blouson Noir",
+      publishedAt: new Date(Date.parse("2021-11-06")),
+      description: "A remote-work experiment from a small country in western asia. I spent four weeks in Armenia, traveled 2200km by car, living in a tent while working my 9to5 day job.",
+    },
+    {
       id: "dreamers-wake",
       title: "Dreamer's Wake",
       publishedAt: new Date(Date.parse("2021-08-08")),
