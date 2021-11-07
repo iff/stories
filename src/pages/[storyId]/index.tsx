@@ -249,7 +249,7 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
       if (props.mdxType === "Image" && props.blobId) {
         blobs.push(
           (async () => {
-            const res = await fetch("https://m.caurea.org/api/graphql", {
+            const res = await fetch("https://web-4n62l3bdha-lz.a.run.app/api", {
               method: "POST",
               headers: { ["Content-Type"]: "application/json" },
               body: JSON.stringify({
