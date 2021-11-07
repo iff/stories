@@ -241,34 +241,39 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
   const Body = require(`../../../content/${params.storyId}/body.mdx`).default;
   const { children } = Body({}).props;
 
-  const blobs: Array<Promise<any>> = [];
+  const blobIds: Array<string> = [];
   React.Children.forEach(children, function go(child: any) {
     if (React.isValidElement(child)) {
       const props = child.props as any;
 
       if (props.mdxType === "Image" && props.blobId) {
-        blobs.push(
-          (async () => {
-            const res = await fetch("https://web-4n62l3bdha-lz.a.run.app/api", {
-              method: "POST",
-              headers: { ["Content-Type"]: "application/json" },
-              body: JSON.stringify({
-                query: `query { blob(id: "${props.blobId}") { name asImage { url dimensions { width height } placeholder { url } } } }`,
-              }),
-            });
-            return (await res.json()).data.blob;
-          })()
-        );
+        blobIds.push(props.blobId);
       }
 
       React.Children.forEach(props.children, go);
     }
   });
 
+  const blobs = await (async () => {
+    const res = await fetch("https://web-4n62l3bdha-lz.a.run.app/api", {
+      method: "POST",
+      headers: { ["Content-Type"]: "application/json" },
+      body: JSON.stringify({
+        query: `query { ${blobIds.map(
+          (blobId) =>
+            `b${blobId}: blob(id: "${blobId}") { name asImage { url dimensions { width height } placeholder { url } } } `
+        )} }`,
+      }),
+    });
+    const json = await res.json();
+
+    return Object.values(json.data);
+  })();
+
   return {
     props: {
       ...params,
-      blobs: await Promise.all(blobs),
+      blobs,
     },
   };
 };
