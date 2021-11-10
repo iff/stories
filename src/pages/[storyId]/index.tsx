@@ -255,6 +255,10 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
   });
 
   const blobs = await (async () => {
+    if (blobIds.length === 0) {
+      return [];
+    }
+
     const res = await fetch("https://web-4n62l3bdha-lz.a.run.app/api", {
       method: "POST",
       headers: { ["Content-Type"]: "application/json" },
