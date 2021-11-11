@@ -18,6 +18,7 @@ interface Props {
   blockId: string;
 
   block: Block;
+
   next: null | string;
   prev: null | string;
 
@@ -27,8 +28,18 @@ interface Props {
 }
 
 type Block =
-  | { __typename: "Image"; id: string; image: { src: string; sqip: { src: string } }; caption: null | string }
-  | { __typename: "Clip"; id: string; clip: any; caption: null | string };
+  | {
+      __typename: "Image";
+      id: string;
+      image: { src: string; sqip: { src: string } };
+      caption: null | string;
+    }
+  | {
+      __typename: "Clip";
+      id: string;
+      clip: any;
+      caption: null | string;
+    };
 
 export default function Page(props: Props) {
   const router = useRouter();
@@ -79,62 +90,67 @@ export const getStaticPaths: GetStaticPaths<Query> = async () => {
 };
 
 export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) => {
-  const Body = require(`../../../../content/${params.storyId}/body.mdx`).default;
-  const { children } = Body({}).props;
+  const { storyId, blockId } = params;
 
-  const blocks: Array<Block> = [];
-  React.Children.forEach(children, function go(child: any) {
-    if (React.isValidElement(child)) {
-      const props = child.props as any;
+  /*
+   * Extract information from the story content:
+   *
+   *  - An ordered list of all blocks. This is required to determine the
+   *    previous and next block IDs.
+   *  - Informtion about the selected block fetched from the media distribution
+   *    system.
+   */
+  const { blocks, blob } = await (async () => {
+    const Body = require(`../../../../content/${storyId}/body.mdx`).default;
+    const { children } = Body({}).props;
 
-      if (props.mdxType === "Image") {
-        blocks.push({
-          __typename: "Image",
-          id: props.blobId ?? props.image?.hash ?? null,
-          image: props.image ?? null,
-          caption: props.caption,
-        });
-      } else if (props.mdxType === "Clip") {
-        blocks.push({
-          __typename: "Clip",
-          id: props.clip.poster.hash,
-          clip: props.clip,
-          caption: props.caption,
-        });
-      }
+    let blobP: Promise<any> = Promise.resolve({});
+    const blocks: Array<Block> = [];
 
-      React.Children.forEach(props.children, go);
-    }
-  });
+    React.Children.forEach(children, function go(child: any) {
+      if (React.isValidElement(child)) {
+        const props = child.props as any;
 
-  let blobP: Promise<any> = Promise.resolve({});
-  React.Children.forEach(children, function go(child: any) {
-    if (React.isValidElement(child)) {
-      const props = child.props as any;
-
-      if (props.mdxType === "Image" && props.blobId && props.blobId === params.blockId) {
-        blobP = (async () => {
-          const res = await fetch("https://web-4n62l3bdha-lz.a.run.app/api", {
-            method: "POST",
-            headers: { ["Content-Type"]: "application/json" },
-            body: JSON.stringify({
-              query: `query { blob(id: "${props.blobId}") { name asImage { url dimensions { width height } placeholder { url } } } }`,
-            }),
+        if (props.mdxType === "Image") {
+          blocks.push({
+            __typename: "Image",
+            id: props.blobId ?? props.image?.hash ?? null,
+            image: props.image ?? null,
+            caption: props.caption,
           });
-          return (await res.json()).data.blob;
-        })();
+        } else if (props.mdxType === "Clip") {
+          blocks.push({
+            __typename: "Clip",
+            id: props.clip.poster.hash,
+            clip: props.clip,
+            caption: props.caption,
+          });
+        }
+
+        if (props.mdxType === "Image" && props.blobId && props.blobId === blockId) {
+          blobP = (async () => {
+            const res = await fetch("https://web-4n62l3bdha-lz.a.run.app/api", {
+              method: "POST",
+              headers: { ["Content-Type"]: "application/json" },
+              body: JSON.stringify({
+                query: `query { blob(id: "${props.blobId}") { name asImage { url dimensions { width height } placeholder { url } } } }`,
+              }),
+            });
+            return (await res.json()).data.blob;
+          })();
+        }
+
+        React.Children.forEach(props.children, go);
       }
+    });
 
-      React.Children.forEach(props.children, go);
-    }
-  });
+    return { blocks, blob: await blobP };
+  })();
 
-  const block = blocks.find((x) => x.id === params.blockId);
+  const block = blocks.find((x) => x.id === blockId);
   const index = blocks.indexOf(block);
 
-  const { title } = require(`../../../../content/${params.storyId}/meta`).default;
-
-  const blob = await blobP;
+  const { title } = require(`../../../../content/${storyId}/meta`).default;
 
   return {
     props: {
@@ -161,7 +177,7 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
       prev: blocks[index - 1]?.id ?? null,
       next: blocks[index + 1]?.id ?? null,
 
-      title: `${params.blockId} - ${title}`,
+      title: `${blockId} - ${title}`,
 
       blob,
     },
