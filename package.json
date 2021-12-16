@@ -50,7 +50,7 @@
     "sqip-plugin-svgo": "^1.0.0-alpha.35",
     "unist-util-visit": "^2.0.3",
     "use-immer": "^0.6.0",
-    "webpack": "^5.61.0"
+    "webpack": "^5.65.0"
   },
   "devDependencies": {
     "@types/node": "^16.11.6",
