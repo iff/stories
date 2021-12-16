@@ -41,7 +41,7 @@
     "react-feather": "^2.0.9",
     "react-hotkeys-hook": "^3.4.4",
     "react-intersection-observer": "^8.33.1",
-    "react-intl": "^5.21.0",
+    "react-intl": "^5.23.0",
     "request": "^2.88.2",
     "sqip": "^1.0.0-alpha.34",
     "sqip-plugin-blur": "^1.0.0-alpha.35",
