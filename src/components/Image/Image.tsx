@@ -12,8 +12,18 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   blobId?: string;
 
   image?: {
-    src: string;
+    url?: string;
 
+    dimensions?: {
+      width: number;
+      height: number;
+    };
+
+    placeholder?: {
+      url: string;
+    };
+
+    src: string;
     width: number;
     height: number;
 
@@ -22,9 +32,16 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
     };
   };
 
+  /**
+   * @def "intrinsic"
+   */
   layout?: "intrinsic" | "fill";
 
   caption?: React.ReactNode;
+
+  /**
+   * @def "below"
+   */
   captionPlacement?: "below" | "overlay";
 
   span?: number | number[];
@@ -85,13 +102,16 @@ function Image(props: Props) {
         <a>
           <NextImage
             loader={blobId ? ({ src, width }) => `${src}?w=${width}` : undefined}
-            src={image.src}
-            width={layout === "fill" ? undefined : image.width}
-            height={layout === "fill" ? undefined : image.height}
+            src={image.url ?? image.src}
+            width={layout === "fill" ? undefined : image.dimensions?.width ?? image.width}
+            height={layout === "fill" ? undefined : image.dimensions?.height ?? image.height}
             layout={layout as any}
             objectFit={layout === "fill" ? "cover" : undefined}
           />
-          <div className={classes.sqip} style={{ backgroundImage: `url(${image.sqip.src})` }} />
+          <div
+            className={classes.placeholder}
+            style={{ backgroundImage: `url(${image.placeholder?.url ?? image.sqip.src})` }}
+          />
         </a>
       </Link>
 
@@ -132,7 +152,7 @@ const classes = {
     }
   `,
 
-  sqip: css`
+  placeholder: css`
     position: absolute;
     inset: 0;
     top: 0;

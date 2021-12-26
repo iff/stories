@@ -120,15 +120,7 @@ const components = {
           if (!blob) {
             return {};
           } else {
-            return {
-              image: {
-                src: blob.asImage.url,
-                ...blob.asImage.dimensions,
-                sqip: {
-                  src: blob.asImage.placeholder.url,
-                },
-              },
-            };
+            return { image: blob.asImage };
           }
         })()}
       />
