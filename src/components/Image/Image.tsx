@@ -1,12 +1,12 @@
-import * as React from "react";
-import NextImage from "next/image";
 import { css, cx } from "@linaria/core";
+import NextImage from "next/image";
 import Link, { LinkProps } from "next/link";
+import * as React from "react";
 
 /**
  * The underlying DOM element which is rendered by this component.
  */
-const Root = "div";
+const Root = "figure";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   blobId?: string;
@@ -51,18 +51,20 @@ function Image(props: Props) {
 
   const ref = React.useRef<null | HTMLDivElement>(null);
 
-  const [loaded, setLoaded] = React.useState(false);
   React.useEffect(() => {
-    const img = ref.current?.querySelector('img[decoding="async"]') as HTMLImageElement;
+    const img = ref.current?.querySelector<null | HTMLImageElement>('img[decoding="async"]');
     if (img) {
       const onLoad = () => {
         if (!img.src.match(/data:image\/gif/)) {
-          setLoaded(true);
           img.removeEventListener("load", onLoad);
         }
       };
 
       img.addEventListener("load", onLoad);
+
+      return () => {
+        img.removeEventListener("load", onLoad);
+      };
     }
   }, []);
 
@@ -79,21 +81,19 @@ function Image(props: Props) {
       className={cx(classes.root, className, classes.captionPlacement[captionPlacement])}
       {...rest}
     >
-      <figure className={classes.figure}>
-        <Link passHref href={href}>
-          <a>
-            <NextImage
-              loader={blobId ? ({ src, width }) => `${src}?w=${width}` : undefined}
-              src={image.src}
-              width={layout === "fill" ? undefined : image.width}
-              height={layout === "fill" ? undefined : image.height}
-              layout={layout as any}
-              objectFit={layout === "fill" ? "cover" : undefined}
-            />
-            <div className={classes.sqip} style={{ backgroundImage: `url(${image.sqip.src})` }} />
-          </a>
-        </Link>
-      </figure>
+      <Link passHref href={href}>
+        <a>
+          <NextImage
+            loader={blobId ? ({ src, width }) => `${src}?w=${width}` : undefined}
+            src={image.src}
+            width={layout === "fill" ? undefined : image.width}
+            height={layout === "fill" ? undefined : image.height}
+            layout={layout as any}
+            objectFit={layout === "fill" ? "cover" : undefined}
+          />
+          <div className={classes.sqip} style={{ backgroundImage: `url(${image.sqip.src})` }} />
+        </a>
+      </Link>
 
       {caption && <figcaption className={classes.figcaption}>{caption}</figcaption>}
     </Root>
@@ -104,15 +104,21 @@ export default Image;
 
 const classes = {
   root: css`
-    position: relative;
     contain: layout;
     display: grid;
 
+    margin: 0;
+
+    & > span {
+      display: block !important;
+      z-index: -2;
+    }
+
     & a {
+      position: relative;
       display: block;
       color: inherit;
       text-decoration: none;
-      height: 100%;
 
       outline-offset: 2px;
     }
@@ -141,17 +147,6 @@ const classes = {
     z-index: -1;
   `,
 
-  figure: css`
-    cursor: pointer;
-    position: relative;
-    margin: 0;
-
-    & > span {
-      display: block !important;
-      z-index: -2;
-    }
-  `,
-
   figcaption: css`
     text-align: center;
     margin: 8px 0;
@@ -163,7 +158,7 @@ const classes = {
 
   captionPlacement: {
     overlay: css`
-      & > figcaption {
+      & figcaption {
         position: absolute;
         margin: 0;
         left: 6px;
@@ -181,10 +176,10 @@ const classes = {
         box-shadow: 0 0 6px black;
       }
 
-      &:hover > figcaption {
+      &:hover figcaption {
         opacity: 1;
       }
-      &:focus-within > figcaption {
+      &:focus-within figcaption {
         opacity: 1;
       }
     `,
