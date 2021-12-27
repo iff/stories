@@ -33,9 +33,9 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   };
 
   /**
-   * @def "intrinsic"
+   * @def "responsive"
    */
-  layout?: "intrinsic" | "fill";
+  layout?: "responsive" | "fill";
 
   caption?: React.ReactNode;
 
@@ -56,7 +56,7 @@ function Image(props: Props) {
   const {
     blobId,
     image,
-    layout = "intrinsic",
+    layout = "responsive",
     caption,
     captionPlacement = "below",
     highlight,
@@ -126,6 +126,7 @@ const classes = {
   root: css`
     contain: layout;
     display: grid;
+    width: 100%;
 
     margin: 0;
 
