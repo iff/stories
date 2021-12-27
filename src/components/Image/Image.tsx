@@ -60,7 +60,6 @@ function Image(props: Props) {
     caption,
     captionPlacement = "below",
     highlight,
-    style,
     href,
     className,
     ...rest
@@ -92,12 +91,7 @@ function Image(props: Props) {
   }, [highlight]);
 
   return (
-    <Root
-      ref={ref}
-      style={style}
-      className={cx(classes.root, className, classes.captionPlacement[captionPlacement])}
-      {...rest}
-    >
+    <Root ref={ref} className={cx(classes.root, className, classes.captionPlacement[captionPlacement])} {...rest}>
       <Link passHref href={href}>
         <a>
           <NextImage
