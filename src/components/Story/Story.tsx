@@ -22,7 +22,7 @@ function Story(props: Props) {
   const { storyId, meta, Header, Body, blobs, ...rest } = props;
 
   return (
-    <Context.Provider value={{ blobs }}>
+    <Context.Provider value={{ storyId, blobs }}>
       <MDXProvider components={components}>
         <Head>
           <title>{meta.title}</title>

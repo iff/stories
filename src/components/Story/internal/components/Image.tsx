@@ -13,8 +13,7 @@ interface Props {
 }
 
 export default (props: Props) => {
-  const router = useRouter();
-  const { blobs } = React.useContext(Context);
+  const { storyId, blobs } = React.useContext(Context);
 
   const { blobId, image, size, className } = props;
   const blob = blobs.find((x) => x.name === blobId);
@@ -24,7 +23,7 @@ export default (props: Props) => {
   return (
     <Image
       {...props}
-      href={`/${router.query.storyId}/${id}`}
+      href={`/${storyId}/${id}`}
       {...(() => {
         if (!blob) {
           return {};
