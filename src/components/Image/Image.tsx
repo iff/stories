@@ -44,12 +44,20 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
    */
   captionPlacement?: "below" | "overlay";
 
-  span?: number | number[];
-  aspectRatio?: number;
-
   highlight?: boolean;
 
   href?: LinkProps["href"];
+
+  /*
+   * The 'span' and 'aspectRatio' props are not actually used by this component.
+   * But they are sometimes passed to the component when it's rendered inside a
+   * <Group>, and without adding them to the props here TypeScript would
+   * complain.
+   *
+   * XXX: There has to be a better way to support this.
+   */
+  span?: number | number[];
+  aspectRatio?: number;
 }
 
 function Image(props: Props) {
