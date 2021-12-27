@@ -1,14 +1,6 @@
-import { Clip } from "@/components/Clip";
-import { Content } from "@/components/Content";
-import { Group } from "@/components/Group";
-import { Header } from "@/components/Header";
-import { Image } from "@/components/Image";
-import { css, cx } from "@linaria/core";
-import { MDXProvider } from "@mdx-js/react";
+import { Story } from "@/components/Story";
 import { GetStaticPaths, GetStaticProps } from "next";
 import dynamic from "next/dynamic";
-import Head from "next/head";
-import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import * as React from "react";
 
@@ -20,151 +12,6 @@ interface Props {
   storyId: string;
   blobs: Array<any>;
 }
-
-const Context = React.createContext<{ blobs: Array<any> }>({ blobs: [] });
-
-const components = {
-  wrapper: ({ children }) => {
-    return React.Children.map(children, (child) => {
-      if (React.isValidElement(child)) {
-        if ((child.props as any).mdxType === "Image") {
-          const props = child.props as any;
-
-          return React.cloneElement(child as any, {
-            id: `${props.blobId ?? props.image?.hash}`,
-            className: cx(
-              props.className,
-              {
-                full: "fw",
-                wide: "wp",
-              }[props.size],
-              css`
-                margin: 2em auto;
-              `,
-              props.size === "narrow" &&
-                css`
-                  max-width: 400px;
-                `
-            ),
-          });
-        }
-
-        if ((child.props as any).mdxType === "Group") {
-          const props = child.props as any;
-
-          return React.cloneElement(child as any, {
-            className: cx(
-              props.className,
-              css`
-                margin: 2em 0;
-              `
-            ),
-            children: React.Children.map(props.children, (child) => {
-              if (React.isValidElement(child)) {
-                const props = child.props as any;
-                return React.cloneElement(child as any, {
-                  id: `${props.blobId ?? props.image?.hash}`,
-                });
-              } else {
-                return child;
-              }
-            }),
-          });
-        }
-      }
-
-      return child;
-    });
-  },
-  h1: (props: any) => {
-    return (
-      <div
-        className={cx(
-          "noLayout",
-          css`
-            grid-column: lex / rc;
-          `
-        )}
-      >
-        <h2
-          className={css`
-            display: inline-block;
-
-            margin: 2em 0 1em;
-            padding: 0.55em 0.7em 0.4em;
-
-            background: black;
-            color: white;
-
-            font-size: clamp(32px, 3.5vw, 80px);
-            line-height: 1.2;
-            font-weight: 900;
-            letter-spacing: 0.09em;
-          `}
-          {...props}
-        />
-      </div>
-    );
-  },
-  Header,
-  Image: (props: any) => {
-    const router = useRouter();
-    const { blobs } = React.useContext(Context);
-    const blob = blobs.find((x) => x.name === props.blobId);
-
-    return (
-      <Image
-        {...props}
-        href={`/${router.query.storyId}/${props.id}`}
-        {...(() => {
-          if (!blob) {
-            return {};
-          } else {
-            return { image: blob.asImage };
-          }
-        })()}
-      />
-    );
-  },
-  Group: (props: any) => {
-    return <Group {...props} className={cx(props.className, "wp")} />;
-  },
-  Clip: (props: any) => {
-    const router = useRouter();
-
-    return (
-      <Clip
-        {...props}
-        id={props.clip.poster.hash}
-        className={cx(
-          props.className,
-          "wp",
-          css`
-            margin: 2em 0;
-          `
-        )}
-        onFocus={() => {
-          router.push(`/${router.query.storyId}/${props.clip.poster.hash}`);
-        }}
-      />
-    );
-  },
-  blockquote: (props: any) => {
-    return (
-      <blockquote
-        className={css`
-          padding-left: 1em;
-          border-left: 2px solid #fe762a;
-
-          & > p {
-            margin: 0;
-          }
-        `}
-        {...props}
-      />
-    );
-  },
-};
 
 const stories = {
   "where-i-was-meant-to-be": {
@@ -191,35 +38,8 @@ const stories = {
 
 export default function Page(props: Props) {
   const { storyId, blobs } = props;
-  const { meta, Header, Body } = stories[storyId];
 
-  return (
-    <Context.Provider value={{ blobs }}>
-      <MDXProvider components={components}>
-        <Head>
-          <title>{meta.title}</title>
-
-          <meta property="og:title" content={meta.title} />
-          <meta
-            property="og:image"
-            content={`https://app-gcsszncmzq-lz.a.run.app/og/stories.caurea.org/${storyId}/og:image`}
-          />
-
-          <meta name="twitter:card" content="summary_large_image" />
-        </Head>
-
-        <div style={{ marginBottom: "10vh" }}>
-          <Header />
-        </div>
-
-        <Content>
-          <Body />
-        </Content>
-
-        <div style={{ marginBottom: "10vh" }} />
-      </MDXProvider>
-    </Context.Provider>
-  );
+  return <Story storyId={storyId} blobs={blobs} {...stories[storyId]} />;
 }
 
 export const getStaticPaths: GetStaticPaths<Query> = async () => {

@@ -12,6 +12,8 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   blobId?: string;
 
   image?: {
+    name?: string;
+
     url?: string;
 
     dimensions?: {

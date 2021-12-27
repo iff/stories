@@ -23,6 +23,7 @@ export default React.forwardRef(Content);
 const classes = {
   root: css`
     display: grid;
+    row-gap: 2em;
 
     /*
      * The width of the main (center) column. Choose so that lines
@@ -37,11 +38,11 @@ const classes = {
 
     grid-template-columns:
       [le]
-        max(1rem, env(safe-area-inset-left))
+      max(1rem, env(safe-area-inset-left))
       [lex lc]
-        1fr
+      1fr
       [rc rex]
-        max(1rem, env(safe-area-inset-right))
+      max(1rem, env(safe-area-inset-right))
       [re];
 
     /*
@@ -52,17 +53,17 @@ const classes = {
     @media (min-width: calc(36rem + 2rem)) {
       grid-template-columns:
         [le]
-          1fr
-          max(1rem, env(safe-area-inset-left))
+        1fr
+        max(1rem, env(safe-area-inset-left))
         [lex]
-          minmax(0, var(--extended-column))
+        minmax(0, var(--extended-column))
         [lc]
-          var(--center-column)
+        var(--center-column)
         [rc]
-          minmax(0, var(--extended-column))
+        minmax(0, var(--extended-column))
         [rex]
-          max(1rem, env(safe-area-inset-right))
-          1fr
+        max(1rem, env(safe-area-inset-right))
+        1fr
         [re];
     }
 
@@ -83,7 +84,7 @@ const classes = {
     }
 
     & > p {
-      margin: .5em 0;
+      margin: 0;
     }
   `,
 };
