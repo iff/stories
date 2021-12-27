@@ -4,5 +4,9 @@ import { Hero } from "..";
 type Props = Partial<React.ComponentPropsWithoutRef<typeof Hero>>;
 
 export default function Sample(props: Props) {
-  return <Hero {...props} />;
+  return (
+    <div style={{ minHeight: 600 }}>
+      <Hero {...props} />
+    </div>
+  );
 }
