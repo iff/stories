@@ -32,6 +32,7 @@ export default function Sample(props: Props) {
         ],
       }}
       caption="Pod of dolphins midway between Madeira and Desertas Islands."
+      onFocus={() => {}}
       {...props}
     />
   );

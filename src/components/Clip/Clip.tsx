@@ -28,6 +28,13 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 
   caption?: React.ReactNode;
 
+  /**
+   * Invoked when the user clicks on the arrow in the top right of the clip.
+   * Inside stories, this will open the clip in a Lightbox, on a separate URL.
+   *
+   * XXX: The name `onFocus` is misleading, and it overrides the default DOM
+   * `onFocus` event handler. Rename to something else. Ideas: `onOpen`.
+   */
   onFocus?: () => void;
 }
 
@@ -112,26 +119,29 @@ function Clip(props: Props) {
           <div className={classes.sqip} style={{ backgroundImage: `url(${clip.poster.sqip.src})` }} />
         </div>
 
-        <div className={classes.focus} onClick={onFocus}>
-          <svg
-            width={400}
-            height={200}
-            viewBox="-400 0 400 200"
-            style={{ position: "absolute", top: 0, right: 0, zIndex: -1, cursor: "pointer" }}
-          >
-            <path d="M0 0 L-80 0 L0 100 Z" fill="black" />
-            <g
-              transform="translate(-37, 15) scale(1.1)"
-              fill="none"
-              stroke="white"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+        {onFocus && (
+          <div className={classes.focus} onClick={onFocus}>
+            <svg
+              width={400}
+              height={200}
+              viewBox="-400 0 400 200"
+              style={{ position: "absolute", top: 0, right: 0, zIndex: -1, cursor: "pointer" }}
             >
-              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
-            </g>
-          </svg>
-        </div>
+              <path d="M0 0 L-80 0 L0 100 Z" fill="black" />
+              <g
+                transform="scale(1.5) translate(-28, 4)"
+                fill="none"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </g>
+            </svg>
+          </div>
+        )}
 
         <div className={classes.actions}>
           <svg

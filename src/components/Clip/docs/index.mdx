@@ -3,6 +3,25 @@ import { Sample } from "@timvir/macro";
 
 # Clip
 
+Clips are short video sequences (not more than roughly 20 seconds long).
+
+The `<Clip>` component does not provide controls to seek within the video, the
+user can only start and stop the video (hence the reason why clips should not be
+too long).
+
+When the clip is not playing, a **Poster Image** is shown (think of it like the
+custom YouTube thumbnail). The image supports a placeholder (like the
+[Image](/docs/components/Image) component).
+
+Semantically the `<Clip>` component renders a `<figure>`, with an optional
+`<figcaption>`. The video itself is a plain `<video>` element.
+
+The component does not support changing resolutions (quality). While it would be
+a nice feature to have, it's not worthwhile to implement for such short videos
+(an 18 second video in 720p is about 6 MB).
+
+## Sample
+
 <Exhibit bleed={8}>
   <Sample variant="basic" />
 </Exhibit>
