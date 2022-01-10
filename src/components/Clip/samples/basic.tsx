@@ -13,23 +13,6 @@ export default function Sample(props: Props) {
           url: "https://storage.googleapis.com/stories.caurea.org/docs/video@720p.mp4",
         },
         poster: importImage("https://storage.googleapis.com/stories.caurea.org/video-2.jpg"),
-        renditions: [
-          {
-            label: "2160p",
-            height: 2160,
-            url: "https://storage.googleapis.com/stories.caurea.org/docs/video@2160p.mp4",
-          },
-          {
-            label: "1080p",
-            height: 1080,
-            url: "https://storage.googleapis.com/stories.caurea.org/docs/video@1080p.mp4",
-          },
-          {
-            label: "720p",
-            height: 720,
-            url: "https://storage.googleapis.com/stories.caurea.org/docs/video@720p.mp4",
-          },
-        ],
       }}
       caption="Pod of dolphins midway between Madeira and Desertas Islands."
       onFocus={() => {}}

@@ -1,7 +1,6 @@
 import { css, cx } from "@linaria/core";
 import NextImage from "next/image";
 import * as React from "react";
-import { useImmer } from "use-immer";
 import { Image } from "../../../image.macro";
 
 /**
@@ -18,12 +17,6 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
     };
 
     poster: Image;
-
-    renditions?: Array<{
-      label: string;
-      height: number;
-      url: string;
-    }>;
   };
 
   caption?: React.ReactNode;
@@ -48,29 +41,12 @@ function Clip(props: Props) {
   const { clip, caption, onFocus, className, ...rest } = props;
 
   const ref = React.useRef<null | HTMLDivElement>(null);
-
-  const [loaded, setLoaded] = React.useState(false);
-  React.useEffect(() => {
-    const img = ref.current?.querySelector('img[decoding="async"]') as HTMLImageElement;
-    if (img) {
-      const onLoad = () => {
-        if (!img.src.match(/data:image\/gif/)) {
-          setLoaded(true);
-          img.removeEventListener("load", onLoad);
-        }
-      };
-
-      img.addEventListener("load", onLoad);
-    }
-  }, []);
+  const videoRef = React.useRef<null | HTMLVideoElement>(null);
 
   const [playing, setPlaying] = React.useState(false);
 
-  const videoRef = React.useRef<null | HTMLVideoElement>(null);
-
   const progressRef = React.useRef<null | HTMLDivElement>(null);
   React.useEffect(() => {
-    // console.log("useEffect", playing);
     let rafId: undefined | number = undefined;
 
     if (playing) {
