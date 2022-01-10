@@ -1,14 +1,11 @@
-import * as React from "react";
 import NextImage from "next/image";
+import * as React from "react";
+import { importBlob } from "../../image.macro";
 
 export default function Page() {
   return (
     <div style={{ width: "100vw", height: "100vh", display: "grid" }}>
-      <NextImage
-        src="https://storage.googleapis.com/stories.caurea.org/where-i-was-meant-to-be/vlcsnap-2021-01-14-22h08m34s340.png"
-        layout="fill"
-        objectFit="cover"
-      />
+      <NextImage src={importBlob("2ZfTSs9o51poWKLtqQ2X9Fo7jgKE7dK8g4CXKybZxQB2").src} layout="fill" objectFit="cover" />
     </div>
   );
 }
