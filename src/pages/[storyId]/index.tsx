@@ -77,7 +77,7 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
       body: JSON.stringify({
         query: `query { ${blobIds.map(
           (blobId) =>
-            `b${blobId}: blob(id: "${blobId}") { name asImage { url dimensions { width height } placeholder { url } } } `
+            `b${blobId}: blob(name: "${blobId}") { name asImage { url dimensions { width height } placeholder { url } } } `
         )} }`,
       }),
     });

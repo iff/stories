@@ -73,7 +73,7 @@ module.exports = createMacro(({ references }) => {
               url: "https://web-4n62l3bdha-lz.a.run.app/api",
               method: "POST",
               json: {
-                query: "query { blob(id: \\"${blobId}\\") { name asImage { url dimensions { width height } placeholder { url } } } }"
+                query: "query { blob(name: \\"${blobId}\\") { name asImage { url dimensions { width height } placeholder { url } } } }"
               }
             }, (err, response, body) => {
               process.stdout.write(JSON.stringify(body));

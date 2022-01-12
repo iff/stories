@@ -133,7 +133,7 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
               method: "POST",
               headers: { ["Content-Type"]: "application/json" },
               body: JSON.stringify({
-                query: `query { blob(id: "${props.blobId}") { name asImage { url dimensions { width height } placeholder { url } } } }`,
+                query: `query { blob(name: "${props.blobId}") { name asImage { url dimensions { width height } placeholder { url } } } }`,
               }),
             });
             return (await res.json()).data.blob;
