@@ -11,7 +11,7 @@ const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {}
 
-const image = importBlob("Cyg8Yxw9voUn3UtB7CQLFVi1Wfyj247GgGjtSCXXSo5M");
+const image = importBlob("DtmNcLbCUqzbXVfgQSowJeJZTTs9UztyYkupTzAQzbCf");
 
 function Hero(props: Props) {
   const { className, ...rest } = props;
