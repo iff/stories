@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <div style={{ width: "100vw", height: "100vh", display: "grid" }}>
       <NextImage
-        src="https://storage.googleapis.com/stories.caurea.org/dreamers-wake/IMG_6497.jpeg"
+        src="https://web-4n62l3bdha-lz.a.run.app/serve/9WcbszSHN5XjM9VW8BNK7V6iTGb253g6rJroBPxHj1hL"
         layout="fill"
         objectFit="cover"
       />
