@@ -1,14 +1,19 @@
+import NextImage from "next/image";
 import * as React from "react";
 import { Lightbox } from "..";
-import NextImage from "next/image";
+import { importBlob } from "../../../../image.macro";
 
 type Props = Partial<React.ComponentPropsWithoutRef<typeof Lightbox>>;
 
 export default function Sample(props: Props) {
   return (
-    <div style={{ height: '600px' }}>
+    <div style={{ height: "600px" }}>
       <Lightbox {...props}>
-        <NextImage src="https://storage.googleapis.com/caurea.org/stories/kyrgyzstan/DJI_0059.jpg" objectFit="contain" layout="fill" />    
+        <NextImage
+          src={importBlob("3c2f6pB3cuLRJp4wgf77c2vg4YX55GrnhvzL9eMc8yHC").src}
+          objectFit="contain"
+          layout="fill"
+        />
       </Lightbox>
     </div>
   );
