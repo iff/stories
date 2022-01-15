@@ -14,4 +14,4 @@ export interface Image {
 }
 
 export const importImage: (src: string) => Image;
-export const importBlob: (blobId: string) => Image;
+export const importBlob: (blobId: string) => Image | any;

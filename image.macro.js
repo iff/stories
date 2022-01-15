@@ -73,7 +73,7 @@ module.exports = createMacro(({ references }) => {
               url: "https://web-4n62l3bdha-lz.a.run.app/api",
               method: "POST",
               json: {
-                query: "query { blob(name: \\"${blobId}\\") { name asImage { url dimensions { width height } placeholder { url } } } }"
+                query: "query { blob(name: \\"${blobId}\\") { name asImage { url dimensions { width height } placeholder { url } } asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } } } }"
               }
             }, (err, response, body) => {
               process.stdout.write(JSON.stringify(body));
@@ -84,20 +84,25 @@ module.exports = createMacro(({ references }) => {
 
       const blob = response.data.blob;
 
-      const value = {
-        name: blob.name,
-        hash: blob.name,
+      if (blob.asVideo) {
+        const replacement = parseExpression(`${JSON.stringify(blob)}`);
+        referencePath.parentPath.replaceWith(replacement);
+      } else {
+        const value = {
+          name: blob.name,
+          hash: blob.name,
 
-        src: blob.asImage.url,
+          src: blob.asImage.url,
 
-        ...blob.asImage.dimensions,
-        sqip: {
-          src: blob.asImage.placeholder.url,
-        },
-      };
+          ...blob.asImage.dimensions,
+          sqip: {
+            src: blob.asImage.placeholder.url,
+          },
+        };
 
-      const replacement = parseExpression(`${JSON.stringify(value)}`);
-      referencePath.parentPath.replaceWith(replacement);
+        const replacement = parseExpression(`${JSON.stringify(value)}`);
+        referencePath.parentPath.replaceWith(replacement);
+      }
     });
   }
 });
