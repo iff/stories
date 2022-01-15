@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Clip } from "..";
-import { importBlob, importImage } from "../../../../image.macro";
+import { importBlob } from "../../../../image.macro";
 
 type Props = Partial<React.ComponentPropsWithoutRef<typeof Clip>>;
 

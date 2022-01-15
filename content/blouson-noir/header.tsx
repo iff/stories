@@ -1,7 +1,6 @@
 import { Header } from "@/components/Header";
-import { css } from "@linaria/core";
 import * as React from "react";
-import { importBlob, importImage } from "../../image.macro";
+import { importBlob } from "../../image.macro";
 
 export default function header() {
   return (

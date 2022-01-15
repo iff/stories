@@ -1,6 +1,6 @@
 import { StoryCard } from "@/components/StoryCard";
 import * as React from "react";
-import { importBlob, importImage } from "../../image.macro";
+import { importBlob } from "../../image.macro";
 
 export default function Component() {
   return (
