@@ -60,6 +60,8 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
 
       if (props.mdxType === "Image" && props.blobId) {
         blobIds.push(props.blobId);
+      } else if (props.mdxType === "Clip" && props.blobId) {
+        blobIds.push(props.blobId);
       }
 
       React.Children.forEach(props.children, go);
@@ -77,7 +79,11 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
       body: JSON.stringify({
         query: `query { ${blobIds.map(
           (blobId) =>
-            `b${blobId}: blob(name: "${blobId}") { name asImage { url dimensions { width height } placeholder { url } } } `
+            `b${blobId}: blob(name: "${blobId}") {
+              name
+              asImage { url dimensions { width height } placeholder { url } }
+              asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
+            }`
         )} }`,
       }),
     });

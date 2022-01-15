@@ -37,6 +37,7 @@ type Block =
   | {
       __typename: "Clip";
       id: string;
+      video?: any;
       clip: any;
       caption: null | string;
     };
@@ -46,7 +47,7 @@ export default function Page(props: Props) {
 
   const { storyId, blockId, block, next, prev, title, blob } = props;
 
-  const image = block.__typename === "Image" ? block.image : block.clip.poster;
+  const image = block.__typename === "Image" ? block.image : block.video?.poster ?? block.clip.poster;
 
   return (
     <>
@@ -74,7 +75,7 @@ export default function Page(props: Props) {
             case "Image":
               return <Inner.Image key={block.id} blobId={blob?.name} image={image} />;
             case "Clip":
-              return <Inner.Clip key={block.id} clip={block.clip} />;
+              return <Inner.Clip key={block.id} video={block.video} clip={block.clip} />;
           }
         })()}
       </Lightbox>
@@ -121,22 +122,31 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
         } else if (props.mdxType === "Clip") {
           blocks.push({
             __typename: "Clip",
-            id: props.clip.poster.hash,
-            clip: props.clip,
+            id: props.blobId ?? props.clip.poster.hash ?? null,
+            clip: props.clip ?? null,
             caption: props.caption,
           });
         }
 
-        if (props.mdxType === "Image" && props.blobId && props.blobId === blockId) {
+        if (props.blobId && props.blobId === blockId) {
           blobP = (async () => {
             const res = await fetch("https://web-4n62l3bdha-lz.a.run.app/api", {
               method: "POST",
               headers: { ["Content-Type"]: "application/json" },
               body: JSON.stringify({
-                query: `query { blob(name: "${props.blobId}") { name asImage { url dimensions { width height } placeholder { url } } } }`,
+                query: `query {
+                  blob(name: "${props.blobId}") {
+                    name
+                    asImage { url dimensions { width height } placeholder { url } }
+                    asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
+                  }
+                }`,
               }),
             });
-            return (await res.json()).data.blob;
+
+            const json = await res.json();
+
+            return json.data.blob;
           })();
         }
 
@@ -159,9 +169,7 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
         ...block,
         caption: block.caption ?? null,
         ...(() => {
-          if (!("asImage" in blob)) {
-            return {};
-          } else {
+          if ("asImage" in blob && blob.asImage) {
             return {
               image: {
                 src: blob.asImage.url,
@@ -172,6 +180,12 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
               },
             };
           }
+
+          if ("asVideo" in blob && blob.asVideo) {
+            return { video: blob.asVideo };
+          }
+
+          return {};
         })(),
       },
       prev: blocks[index - 1]?.id ?? null,
@@ -242,7 +256,7 @@ const Inner = {
       </div>
     );
   },
-  Clip: function ({ clip }: { clip: any }) {
+  Clip: function ({ video, clip }: { video: any; clip: any }) {
     return (
       <div
         className={css`
@@ -251,7 +265,7 @@ const Inner = {
           place-items: center;
         `}
       >
-        <Clip clip={clip} />
+        <Clip video={video} clip={clip} />
       </div>
     );
   },

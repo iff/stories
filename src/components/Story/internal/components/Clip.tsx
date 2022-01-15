@@ -5,23 +5,30 @@ import * as React from "react";
 import { Context } from "../../context";
 
 interface Props {
-  className?: string;
+  blobId?: string;
   clip: any;
+
+  className?: string;
 }
 
 export default (props: Props) => {
   const router = useRouter();
-  const { storyId } = React.useContext(Context);
+  const { storyId, blobs } = React.useContext(Context);
 
-  const { clip, className } = props;
+  const { blobId, clip, className } = props;
+  const blob = blobs.find((x) => x.name === blobId);
+
+  const id = blobId ?? clip.poster.hash;
 
   return (
     <Clip
       {...props}
-      id={clip.poster.hash}
+      id={id}
+      video={blob?.asVideo}
+      clip={props.clip}
       className={cx(className, "wp")}
       onFocus={() => {
-        router.push(`/${storyId}/${clip.poster.hash}`);
+        router.push(`/${storyId}/${id}`);
       }}
     />
   );
