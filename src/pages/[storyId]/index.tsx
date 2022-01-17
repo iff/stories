@@ -89,8 +89,6 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
     });
     const json = await res.json();
 
-    console.log(json.errors);
-
     return Object.values(json.data);
   })();
 

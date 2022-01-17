@@ -1,6 +1,5 @@
 import { Image } from "@/components/Image";
 import { css, cx } from "@linaria/core";
-import { useRouter } from "next/router";
 import * as React from "react";
 import { Context } from "../../context";
 
@@ -12,7 +11,7 @@ interface Props {
   className?: string;
 }
 
-export default (props: Props) => {
+function Image_(props: Props) {
   const { storyId, blobs } = React.useContext(Context);
 
   const { blobId, image, size, className } = props;
@@ -47,4 +46,6 @@ export default (props: Props) => {
       )}
     />
   );
-};
+}
+
+export default Image_;
