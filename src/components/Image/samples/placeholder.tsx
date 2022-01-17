@@ -10,7 +10,7 @@ export default function Sample(props: Props) {
       href="#"
       image={{
         ...importBlob("3c2f6pB3cuLRJp4wgf77c2vg4YX55GrnhvzL9eMc8yHC"),
-        src: "https://storage.googleapis.com",
+        src: "/404",
       }}
       {...props}
     />

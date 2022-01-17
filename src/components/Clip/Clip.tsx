@@ -57,7 +57,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
  */
 
 function Clip(props: Props) {
-  const { video, clip, caption, onFocus, className, ...rest } = props;
+  const { blobId, video, clip, caption, onFocus, className, ...rest } = props;
 
   const ref = React.useRef<null | HTMLDivElement>(null);
   const videoRef = React.useRef<null | HTMLVideoElement>(null);
