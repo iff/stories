@@ -11,7 +11,7 @@ interface Props {
   className?: string;
 }
 
-function Image_(props: Props) {
+export default function Image_(props: Props) {
   const { storyId, blobs } = React.useContext(Context);
 
   const { blobId, image, size, className } = props;
@@ -47,5 +47,3 @@ function Image_(props: Props) {
     />
   );
 }
-
-export default Image_;

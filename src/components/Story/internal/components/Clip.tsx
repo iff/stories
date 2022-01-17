@@ -11,7 +11,7 @@ interface Props {
   className?: string;
 }
 
-export default (props: Props) => {
+export default function Clip_(props: Props) {
   const router = useRouter();
   const { storyId, blobs } = React.useContext(Context);
 
@@ -32,4 +32,4 @@ export default (props: Props) => {
       }}
     />
   );
-};
+}

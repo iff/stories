@@ -5,7 +5,7 @@ interface Props {
   children?: React.ReactNode;
 }
 
-export default (props: Props) => {
+export default function Heading_(props: Props) {
   return (
     <div
       className={cx(
@@ -34,4 +34,4 @@ export default (props: Props) => {
       />
     </div>
   );
-};
+}

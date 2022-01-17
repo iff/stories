@@ -7,8 +7,8 @@ interface Props {
   children?: React.ReactNode;
 }
 
-export default (props: Props) => {
+export default function Group_(props: Props) {
   const { className } = props;
 
   return <Group {...props} className={cx(className, "wp")} />;
-};
+}
