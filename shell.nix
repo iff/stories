@@ -7,5 +7,7 @@ in pkgs.mkShell {
 
     pkgs.vips
     pkgs.pkg-config
+
+    pkgs.google-cloud-sdk
   ];
 }
