@@ -22,6 +22,7 @@ export default function Image_(props: Props) {
   return (
     <Image
       {...props}
+      id={id}
       href={`/${storyId}/${id}`}
       {...(() => {
         if (!blob) {
