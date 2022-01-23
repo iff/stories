@@ -43,11 +43,6 @@
     "react-intersection-observer": "^8.33.1",
     "react-intl": "^5.24.3",
     "request": "^2.88.2",
-    "sqip": "^1.0.0-alpha.35",
-    "sqip-plugin-blur": "^1.0.0-alpha.35",
-    "sqip-plugin-data-uri": "^1.0.0-alpha.36",
-    "sqip-plugin-primitive": "^1.0.0-alpha.36",
-    "sqip-plugin-svgo": "^1.0.0-alpha.37",
     "unist-util-visit": "^2.0.3",
     "use-immer": "^0.6.0",
     "webpack": "^5.66.0"
