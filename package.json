@@ -25,7 +25,7 @@
     "@zhif/components": "0.0.3",
     "blurhash": "^1.1.5",
     "feed": "^4.2.2",
-    "follow-redirects": "^1.14.8",
+    "follow-redirects": "^1.14.9",
     "fp-ts": "^2.11.8",
     "immer": "^9.0.12",
     "io-ts": "^2.2.16",
