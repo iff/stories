@@ -1,12 +1,10 @@
-const visit = require("unist-util-visit");
-const withLinaria = require("next-linaria");
+import withLinaria from "next-linaria";
+import withMDX from "@next/mdx";
 
-const withMDX = require("@next/mdx")({
-  extension: /\.mdx?$/,
-});
-
-module.exports = withLinaria(
+export default withLinaria(
   withMDX({
+    extension: /\.mdx?$/,
+  })({
     linaria: {
       cacheDirectory: "./.next/cache/linaria",
     },
