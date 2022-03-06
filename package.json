@@ -20,7 +20,7 @@
     "@timvir/blocks": "^0.1.26",
     "@timvir/core": "^0.1.26",
     "@timvir/macro": "^0.1.26",
-    "@types/react-dom": "^17.0.11",
+    "@types/react-dom": "^17.0.13",
     "@zeit/next-css": "^1.0.1",
     "@zhif/components": "0.0.3",
     "blurhash": "^1.1.5",
