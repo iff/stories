@@ -1,13 +1,16 @@
 import { css } from "@linaria/core";
+import { AppProps } from "next/app";
 import Head from "next/head";
 import { IntlProvider } from "react-intl";
 
-import "@timvir/core/styles.css";
 import "@timvir/blocks/styles.css";
+import "@timvir/core/styles.css";
 
 const baseUrl = process.env.NODE_ENV === "production" ? `https://stories.caurea.org` : "http://localhost:3000";
 
-function App({ Component, pageProps }) {
+function App(props: AppProps) {
+  const { Component, pageProps } = props
+
   return (
     <IntlProvider locale="en" defaultLocale="en">
       <Head>
