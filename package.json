@@ -41,7 +41,6 @@
     "react-intersection-observer": "^8.33.1",
     "react-intl": "^5.24.6",
     "request": "^2.88.2",
-    "unist-util-visit": "^2.0.3",
     "use-immer": "^0.6.0",
     "webpack": "^5.70.0"
   },
