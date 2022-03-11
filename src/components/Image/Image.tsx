@@ -38,8 +38,6 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
    */
   captionPlacement?: "below" | "overlay";
 
-  highlight?: boolean;
-
   href?: LinkProps["href"];
 
   /*
@@ -60,7 +58,6 @@ function Image(props: Props) {
     layout = "responsive",
     caption,
     captionPlacement = "below",
-    highlight,
     href,
     className,
     ...rest
@@ -85,27 +82,47 @@ function Image(props: Props) {
     }
   }, []);
 
-  React.useEffect(() => {
-    if (highlight) {
-      ref.current?.querySelector("a")?.focus();
-    }
-  }, [highlight]);
-
   return (
     <Root ref={ref} className={cx(classes.root, className, classes.captionPlacement[captionPlacement])} {...rest}>
-      <Link passHref href={href}>
-        <a>
-          <NextImage
-            loader={({ src, width }) => `${src}?w=${width}`}
-            src={blob.asImage.url}
-            width={layout === "fill" ? undefined : blob.asImage.dimensions.width}
-            height={layout === "fill" ? undefined : blob.asImage.dimensions.height}
-            layout={layout as any}
-            objectFit={layout === "fill" ? "cover" : undefined}
-          />
-          <div className={classes.placeholder} style={{ backgroundImage: `url(${blob.asImage.placeholder.url})` }} />
-        </a>
-      </Link>
+      {(() => {
+        if (href) {
+          return (
+            <Link passHref href={href}>
+              <a className={classes.image}>
+                <NextImage
+                  loader={({ src, width }) => `${src}?w=${width}`}
+                  src={blob.asImage.url}
+                  width={layout === "fill" ? undefined : blob.asImage.dimensions.width}
+                  height={layout === "fill" ? undefined : blob.asImage.dimensions.height}
+                  layout={layout as any}
+                  objectFit={layout === "fill" ? "cover" : undefined}
+                />
+                <div
+                  className={classes.placeholder}
+                  style={{ backgroundImage: `url(${blob.asImage.placeholder.url})` }}
+                />
+              </a>
+            </Link>
+          );
+        } else {
+          return (
+            <div className={classes.image}>
+              <NextImage
+                loader={({ src, width }) => `${src}?w=${width}`}
+                src={blob.asImage.url}
+                width={layout === "fill" ? undefined : blob.asImage.dimensions.width}
+                height={layout === "fill" ? undefined : blob.asImage.dimensions.height}
+                layout={layout as any}
+                objectFit={layout === "fill" ? "cover" : undefined}
+              />
+              <div
+                className={classes.placeholder}
+                style={{ backgroundImage: `url(${blob.asImage.placeholder.url})` }}
+              />
+            </div>
+          );
+        }
+      })()}
 
       {caption && <figcaption className={classes.figcaption}>{caption}</figcaption>}
     </Root>
@@ -127,21 +144,21 @@ const classes = {
       z-index: -2;
     }
 
-    & a {
-      position: relative;
-      display: block;
-      color: inherit;
-      text-decoration: none;
-
-      outline-offset: 2px;
-    }
-
-    & a > span {
-      display: block !important;
-    }
-
     & img {
       display: block;
+    }
+  `,
+
+  image: css`
+    position: relative;
+    display: block;
+    color: inherit;
+    text-decoration: none;
+
+    outline-offset: 2px;
+
+    & > span {
+      display: block !important;
     }
   `,
 

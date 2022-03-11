@@ -2,11 +2,12 @@ import { Grid, Exhibit } from "@timvir/blocks";
 
 # Image
 
-The `<Image>` component is a wrapper around the [next/image](https://nextjs.org/docs/api-reference/next/image) component and in addition
-to it provides the following features:
+The `<Image>` component is a wrapper around the [next/image] component and in
+addition to it provides the following features:
 
 - Shows a placeholder while the real image is loading.
 - Has the option to show the caption below the image or as an overlay over it.
+- Can be a link to another page.
 
 ## DOM
 
@@ -24,9 +25,10 @@ semantically it should hold up well. The DOM tree looks roughly as follows:
 
 ## Layout
 
-The image is displayed either in its intrinsict aspect ratio, or such that it fills the available
-space (equivalent to `object-fit: cover`). In the later case you need to make sure that the element
-is stretched vertically by placing it it inside a grid, using explict height, or similar techniques.
+The image is displayed either in its intrinsict aspect ratio, or such that it
+fills the available space (equivalent to `object-fit: cover`). In the later case
+you need to make sure that the element is stretched vertically by placing it it
+inside a grid, using explict height, or similar techniques.
 
 <Grid style={{ margin: "20px 0" }}>
   <Exhibit caption="Image in its intrinsic aspect ratio">
@@ -41,8 +43,9 @@ is stretched vertically by placing it it inside a grid, using explict height, or
 
 ## Placeholder
 
-As long as the image is not loaded yet, a placeholder image (generted by [SQIP]) is shown
-in its place. Once the image is loaded, the placeholder image is faded away.
+As long as the image is not loaded yet, a placeholder image (generted by [SQIP])
+is shown in its place. Once the image is loaded, the placeholder image is faded
+away.
 
 <Grid style={{ margin: "20px 0" }}>
   <Exhibit caption="Placeholder showing while image is loading.">
@@ -59,8 +62,8 @@ in its place. Once the image is loaded, the placeholder image is faded away.
 
 ## Caption
 
-The caption can be either placed below the image (default), or into an overlay which is visible
-on hover.
+The caption can be either placed below the image (default), or into an overlay
+which is visible on hover.
 
 <Grid style={{ margin: "20px 0" }}>
   <Exhibit>
@@ -71,14 +74,5 @@ on hover.
   </Exhibit>
 </Grid>
 
-## Highlight
-
-When the image is highlighted, a black outline is displayed around it.
-
-<Exhibit style={{ margin: "20px 0" }}>
-  <div style={{ display: "grid", height: 200 }}>
-    <Sample variant="basic" layout="fill" captionPlacement="overlay" highlight />
-  </div>
-</Exhibit>
-
 [sqip]: https://github.com/axe312ger/sqip
+[next/image]: https://nextjs.org/docs/api-reference/next/image
