@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -19,26 +15,13 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/components/*": [
-        "src/components/*"
-      ],
-      "@/hooks/*": [
-        "src/hooks/*"
-      ],
-      "@/timvir/*": [
-        "src/timvir/*"
-      ]
+      "@/cms": ["src/cms"],
+      "@/components/*": ["src/components/*"],
+      "@/hooks/*": ["src/hooks/*"],
+      "@/timvir/*": ["src/timvir/*"]
     },
     "incremental": true
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.md",
-    "**/*.mdx"
-  ]
+  "exclude": ["node_modules"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.md", "**/*.mdx"]
 }

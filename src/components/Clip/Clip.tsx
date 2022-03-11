@@ -28,16 +28,6 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
     renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
   };
 
-  clip?: {
-    id: string;
-
-    blob: {
-      url: string;
-    };
-
-    poster: Image;
-  };
-
   caption?: React.ReactNode;
 
   /**
@@ -57,7 +47,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
  */
 
 function Clip(props: Props) {
-  const { blobId, video, clip, caption, onFocus, className, ...rest } = props;
+  const { blobId, video, caption, onFocus, className, ...rest } = props;
 
   const ref = React.useRef<null | HTMLDivElement>(null);
   const videoRef = React.useRef<null | HTMLVideoElement>(null);
@@ -106,14 +96,14 @@ function Clip(props: Props) {
             setPlaying(false);
           }}
         >
-          <source src={video?.renditions?.[0]?.url ?? clip.blob.url} type="video/mp4" />
+          <source src={video?.renditions?.[0]?.url} type="video/mp4" />
         </video>
 
         <div className={classes.poster} style={{ opacity: playing ? 0 : 1 }}>
-          <NextImage src={video?.poster?.url ?? clip.poster.src} layout="fill" objectFit="cover" />
+          <NextImage src={video?.poster?.url} layout="fill" objectFit="cover" />
           <div
             className={classes.sqip}
-            style={{ backgroundImage: `url(${video?.poster?.placeholder?.url ?? clip.poster.sqip.src})` }}
+            style={{ backgroundImage: `url(${video?.poster?.placeholder?.url})` }}
           />
         </div>
 

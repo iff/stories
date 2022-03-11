@@ -5,9 +5,7 @@ import * as React from "react";
 import { Context } from "../../context";
 
 interface Props {
-  blobId?: string;
-  clip: any;
-
+  blobId: string;
   className?: string;
 }
 
@@ -15,20 +13,17 @@ export default function Clip_(props: Props) {
   const router = useRouter();
   const { storyId, blobs } = React.useContext(Context);
 
-  const { blobId, clip, className } = props;
+  const { blobId, className } = props;
   const blob = blobs.find((x) => x.name === blobId);
-
-  const id = blobId ?? clip.poster.hash;
 
   return (
     <Clip
       {...props}
-      id={id}
+      id={blobId}
       video={blob?.asVideo}
-      clip={props.clip}
       className={cx(className, "wp")}
       onFocus={() => {
-        router.push(`/${storyId}/${id}`);
+        router.push(`/${storyId}/${blobId}`);
       }}
     />
   );

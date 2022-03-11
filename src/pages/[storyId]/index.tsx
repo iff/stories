@@ -1,12 +1,10 @@
+import { extractBlocks } from "@/cms";
 import { Story } from "@/components/Story";
 import * as fs from "fs";
 import { GetStaticPaths, GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import { ParsedUrlQuery } from "querystring";
 import * as React from "react";
-import remarkMdx from "remark-mdx";
-import remarkParse from "remark-parse";
-import { unified } from "unified";
 
 export interface Query extends ParsedUrlQuery {
   storyId: string;
@@ -55,32 +53,10 @@ export const getStaticPaths: GetStaticPaths<Query> = async () => {
 
 export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) => {
   const body = await fs.promises.readFile(`./content/${params.storyId}/body.mdx`, { encoding: "utf8" });
-  const root = unified().use(remarkParse).use(remarkMdx).parse(body);
-
-  const blobIds: Array<string> = [];
-  function go(node) {
-    if (node.children) {
-      node.children.forEach(go);
-    }
-
-    if ((node.type === "mdxJsxFlowElement" || node.type === "mdxJsxTextElement") && node.name === "Image") {
-      const blobId = node.attributes.find((x) => x.type === "mdxJsxAttribute" && x.name === "blobId")?.value;
-      if (blobId) {
-        blobIds.push(blobId);
-      }
-    }
-    if ((node.type === "mdxJsxFlowElement" || node.type === "mdxJsxTextElement") && node.name === "Clip") {
-      const blobId = node.attributes.find((x) => x.type === "mdxJsxAttribute" && x.name === "blobId")?.value;
-      if (blobId) {
-        blobIds.push(blobId);
-      }
-    }
-  }
-
-  go(root);
+  const blocks = extractBlocks(body);
 
   const blobs = await (async () => {
-    if (blobIds.length === 0) {
+    if (blocks.length === 0) {
       return [];
     }
 
@@ -88,9 +64,9 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
       method: "POST",
       headers: { ["Content-Type"]: "application/json" },
       body: JSON.stringify({
-        query: `query { ${blobIds.map(
-          (blobId) =>
-            `b${blobId}: blob(name: "${blobId}") {
+        query: `query { ${blocks.map(
+          ({ id }) =>
+            `b${id}: blob(name: "${id}") {
               name
               asImage { url dimensions { width height } placeholder { url } }
               asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }

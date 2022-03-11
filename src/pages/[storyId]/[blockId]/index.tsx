@@ -1,3 +1,4 @@
+import { extractBlocks } from "@/cms";
 import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
 import { css } from "@linaria/core";
@@ -8,9 +9,6 @@ import NextImage from "next/image";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import * as React from "react";
-import remarkMdx from "remark-mdx";
-import remarkParse from "remark-parse";
-import { unified } from "unified";
 
 export interface Query extends ParsedUrlQuery {
   storyId: string;
@@ -41,8 +39,7 @@ type Block =
   | {
       __typename: "Clip";
       id: string;
-      video?: any;
-      clip: any;
+      video: any;
       caption: null | string;
     };
 
@@ -51,7 +48,7 @@ export default function Page(props: Props) {
 
   const { storyId, blockId, block, next, prev, title, blob } = props;
 
-  const image = block.__typename === "Image" ? block.image : block.video?.poster ?? block.clip.poster;
+  const image = block.__typename === "Image" ? block.image : block.video?.poster;
 
   return (
     <>
@@ -79,7 +76,7 @@ export default function Page(props: Props) {
             case "Image":
               return <Inner.Image key={block.id} blobId={blob?.name} image={image} />;
             case "Clip":
-              return <Inner.Clip key={block.id} video={block.video} clip={block.clip} />;
+              return <Inner.Clip key={block.id} video={block.video} />;
           }
         })()}
       </Lightbox>
@@ -107,71 +104,32 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
    */
   const { blocks, blob } = await (async () => {
     const body = await fs.promises.readFile(`./content/${params.storyId}/body.mdx`, { encoding: "utf8" });
-    const root = unified().use(remarkParse).use(remarkMdx).parse(body);
 
     let blobP: Promise<any> = Promise.resolve({});
-    const blocks: Array<Block> = [];
+    const blocks = extractBlocks(body);
 
-    function go(node) {
-      if (node.children) {
-        node.children.forEach(go);
-      }
-
-      let blobId;
-
-      if ((node.type === "mdxJsxFlowElement" || node.type === "mdxJsxTextElement") && node.name === "Image") {
-        blobId = node.attributes.find((x) => x.type === "mdxJsxAttribute" && x.name === "blobId")?.value;
-        const caption = node.attributes.find((x) => x.type === "mdxJsxAttribute" && x.name === "caption")?.value;
-
-        if (blobId) {
-          blocks.push({
-            __typename: "Image",
-            id: blobId,
-            image: null,
-            caption: caption ?? null,
-          });
-        }
-      }
-
-      if ((node.type === "mdxJsxFlowElement" || node.type === "mdxJsxTextElement") && node.name === "Clip") {
-        blobId = node.attributes.find((x) => x.type === "mdxJsxAttribute" && x.name === "blobId")?.value;
-        const caption = node.attributes.find((x) => x.type === "mdxJsxAttribute" && x.name === "caption")?.value;
-
-        if (blobId) {
-          blocks.push({
-            __typename: "Clip",
-            id: blobId,
-            clip: null,
-            video: null,
-            caption: caption ?? null,
-          });
-        }
-      }
-
-      if (blobId === blockId) {
-        blobP = (async () => {
-          const res = await fetch("https://web-4n62l3bdha-lz.a.run.app/api", {
-            method: "POST",
-            headers: { ["Content-Type"]: "application/json" },
-            body: JSON.stringify({
-              query: `query {
-                blob(name: "${blobId}") {
+    const block = blocks.find((x) => x.id === blockId);
+    if (block) {
+      blobP = (async () => {
+        const res = await fetch("https://web-4n62l3bdha-lz.a.run.app/api", {
+          method: "POST",
+          headers: { ["Content-Type"]: "application/json" },
+          body: JSON.stringify({
+            query: `query {
+                blob(name: "${block.id}") {
                   name
                   asImage { url dimensions { width height } placeholder { url } }
                   asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
                 }
               }`,
-            }),
-          });
+          }),
+        });
 
-          const json = await res.json();
+        const json = await res.json();
 
-          return json.data.blob;
-        })();
-      }
+        return json.data.blob;
+      })();
     }
-
-    go(root);
 
     return { blocks, blob: await blobP };
   })();
@@ -206,7 +164,7 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
 
           return {};
         })(),
-      },
+      } as Block,
       prev: blocks[index - 1]?.id ?? null,
       next: blocks[index + 1]?.id ?? null,
 
@@ -275,7 +233,7 @@ const Inner = {
       </div>
     );
   },
-  Clip: function ({ video, clip }: { video: any; clip: any }) {
+  Clip: function ({ video }: { video: any }) {
     return (
       <div
         className={css`
@@ -284,7 +242,7 @@ const Inner = {
           place-items: center;
         `}
       >
-        <Clip video={video} clip={clip} />
+        <Clip video={video} />
       </div>
     );
   },
