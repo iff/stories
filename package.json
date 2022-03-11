@@ -1,6 +1,5 @@
 {
   "name": "stories.caurea.org",
-  "type": "module",
   "private": true,
   "scripts": {
     "postinstall": "patch-package",
