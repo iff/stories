@@ -4,9 +4,9 @@ import * as React from "react";
 import { Context } from "../../context";
 
 interface Props {
-  blobId?: string;
-  image?: any;
-  size?: any;
+  blobId: string;
+
+  size?: "narrow" | "wp" | "fw";
 
   className?: string;
 }
@@ -14,23 +14,17 @@ interface Props {
 export default function Image_(props: Props) {
   const { storyId, blobs } = React.useContext(Context);
 
-  const { blobId, image, size, className } = props;
+  const { blobId, size, className, ...rest } = props;
   const blob = blobs.find((x) => x.name === blobId);
-
-  const id = blobId ?? image?.hash;
+  if (!blob) {
+    return <div>Image {blobId} not found!</div>;
+  }
 
   return (
     <Image
-      {...props}
-      id={id}
-      href={`/${storyId}/${id}`}
-      {...(() => {
-        if (!blob) {
-          return {};
-        } else {
-          return { image: blob.asImage };
-        }
-      })()}
+      id={blobId}
+      href={`/${storyId}/${blobId}`}
+      image={blob.asImage}
       className={cx(
         className,
         {
@@ -45,6 +39,7 @@ export default function Image_(props: Props) {
             max-width: 400px;
           `
       )}
+      {...rest}
     />
   );
 }

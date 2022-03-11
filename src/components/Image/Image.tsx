@@ -9,28 +9,19 @@ import * as React from "react";
 const Root = "figure";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
-  blobId?: string;
+  image: {
+    id: string;
+    name: string;
 
-  image?: {
-    name?: string;
+    url: string;
 
-    url?: string;
-
-    dimensions?: {
+    dimensions: {
       width: number;
       height: number;
     };
 
-    placeholder?: {
+    placeholder: {
       url: string;
-    };
-
-    src: string;
-    width: number;
-    height: number;
-
-    sqip: {
-      src: string;
     };
   };
 
@@ -64,7 +55,6 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 
 function Image(props: Props) {
   const {
-    blobId,
     image,
     layout = "responsive",
     caption,
@@ -105,17 +95,14 @@ function Image(props: Props) {
       <Link passHref href={href}>
         <a>
           <NextImage
-            loader={blobId ? ({ src, width }) => `${src}?w=${width}` : undefined}
-            src={image.url ?? image.src}
-            width={layout === "fill" ? undefined : image.dimensions?.width ?? image.width}
-            height={layout === "fill" ? undefined : image.dimensions?.height ?? image.height}
+            loader={({ src, width }) => `${src}?w=${width}`}
+            src={image.url}
+            width={layout === "fill" ? undefined : image.dimensions.width}
+            height={layout === "fill" ? undefined : image.dimensions.height}
             layout={layout as any}
             objectFit={layout === "fill" ? "cover" : undefined}
           />
-          <div
-            className={classes.placeholder}
-            style={{ backgroundImage: `url(${image.placeholder?.url ?? image.sqip.src})` }}
-          />
+          <div className={classes.placeholder} style={{ backgroundImage: `url(${image.placeholder.url})` }} />
         </a>
       </Link>
 
