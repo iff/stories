@@ -8,7 +8,7 @@ export default function Component() {
       story={{
         id: "where-i-was-meant-to-be",
       }}
-      image={importBlob("2ZfTSs9o51poWKLtqQ2X9Fo7jgKE7dK8g4CXKybZxQB2")}
+      blob={importBlob("2ZfTSs9o51poWKLtqQ2X9Fo7jgKE7dK8g4CXKybZxQB2")}
       blocks={[importBlob("4urziJ8cBEYCJxWdGWZriVDwi966AxQZRxYsVCT4hjjv")]}
       title="Where I was meant to be"
       teaser="I was going through a really fucking difficult time in my life and needed to get the fuck away from comfort."

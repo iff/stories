@@ -9,16 +9,20 @@ import * as React from "react";
 const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
-  image: {
-    name?: string;
+  blob: {
+    name: string;
 
-    src: string;
+    asImage: {
+      url: string;
 
-    width: number;
-    height: number;
+      dimensions: {
+        width: number;
+        height: number;
+      };
 
-    sqip: {
-      src: string;
+      placeholder: {
+        url: string;
+      };
     };
   };
 
@@ -26,7 +30,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 }
 
 function Header(props: Props) {
-  const { image, title, className, ...rest } = props;
+  const { blob, title, className, ...rest } = props;
 
   const ref = React.useRef<null | HTMLDivElement>(null);
 
@@ -52,8 +56,8 @@ function Header(props: Props) {
 
       <div className={classes.image}>
         <Image
-          loader={image.name ? ({ src, width }) => `${src}?w=${width}` : undefined}
-          src={image.src}
+          loader={({ src, width }) => `${src}?w=${width}`}
+          src={blob.asImage.url}
           layout="fill"
           objectFit="cover"
         />
@@ -61,7 +65,7 @@ function Header(props: Props) {
           className="sqip"
           style={{
             opacity: loaded ? 0 : 1,
-            backgroundImage: `url(${image.sqip.src})`,
+            backgroundImage: `url(${blob.asImage.placeholder.url})`,
           }}
         />
       </div>

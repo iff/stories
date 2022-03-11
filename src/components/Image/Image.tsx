@@ -9,19 +9,20 @@ import * as React from "react";
 const Root = "figure";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
-  image: {
-    id: string;
+  blob: {
     name: string;
 
-    url: string;
-
-    dimensions: {
-      width: number;
-      height: number;
-    };
-
-    placeholder: {
+    asImage: {
       url: string;
+
+      dimensions: {
+        width: number;
+        height: number;
+      };
+
+      placeholder: {
+        url: string;
+      };
     };
   };
 
@@ -55,7 +56,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 
 function Image(props: Props) {
   const {
-    image,
+    blob,
     layout = "responsive",
     caption,
     captionPlacement = "below",
@@ -96,13 +97,13 @@ function Image(props: Props) {
         <a>
           <NextImage
             loader={({ src, width }) => `${src}?w=${width}`}
-            src={image.url}
-            width={layout === "fill" ? undefined : image.dimensions.width}
-            height={layout === "fill" ? undefined : image.dimensions.height}
+            src={blob.asImage.url}
+            width={layout === "fill" ? undefined : blob.asImage.dimensions.width}
+            height={layout === "fill" ? undefined : blob.asImage.dimensions.height}
             layout={layout as any}
             objectFit={layout === "fill" ? "cover" : undefined}
           />
-          <div className={classes.placeholder} style={{ backgroundImage: `url(${image.placeholder.url})` }} />
+          <div className={classes.placeholder} style={{ backgroundImage: `url(${blob.asImage.placeholder.url})` }} />
         </a>
       </Link>
 

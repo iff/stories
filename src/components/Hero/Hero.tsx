@@ -11,7 +11,7 @@ const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {}
 
-const image = importBlob("DtmNcLbCUqzbXVfgQSowJeJZTTs9UztyYkupTzAQzbCf");
+const blob = importBlob("DtmNcLbCUqzbXVfgQSowJeJZTTs9UztyYkupTzAQzbCf");
 
 function Hero(props: Props) {
   const { className, ...rest } = props;
@@ -36,12 +36,12 @@ function Hero(props: Props) {
   return (
     <Root className={cx(classes.root, className)} {...rest}>
       <div ref={ref} className={classes.image}>
-        <Image src={image.src} layout="fill" objectFit="cover" />
+        <Image src={blob.asImage.url} layout="fill" objectFit="cover" />
         <div
           className="sqip"
           style={{
             opacity: loaded ? 0 : 1,
-            backgroundImage: `url(${image.sqip.src})`,
+            backgroundImage: `url(${blob.asImage.placeholder.url})`,
           }}
         />
       </div>

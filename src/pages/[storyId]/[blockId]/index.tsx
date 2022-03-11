@@ -9,6 +9,7 @@ import NextImage from "next/image";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import * as React from "react";
+import { Blob } from "../../../../image.macro";
 
 export interface Query extends ParsedUrlQuery {
   storyId: string;
@@ -74,7 +75,7 @@ export default function Page(props: Props) {
         {(() => {
           switch (block.__typename) {
             case "Image":
-              return <Inner.Image key={block.id} blobId={blob?.name} image={image} />;
+              return <Inner.Image key={block.id} blobId={blob?.name} blob={blob} />;
             case "Clip":
               return <Inner.Clip key={block.id} video={block.video} />;
           }
@@ -176,7 +177,7 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
 };
 
 const Inner = {
-  Image: function ({ blobId, image }: { blobId?: string; image: { src: string; sqip: { src: string } } }) {
+  Image: function ({ blobId, blob }: { blobId?: string; blob: Blob }) {
     const ref = React.useRef<null | HTMLDivElement>(null);
 
     const [loaded, setLoaded] = React.useState(false);
@@ -197,8 +198,8 @@ const Inner = {
     return (
       <div ref={ref}>
         <NextImage
-          loader={blobId ? ({ src, width }) => `${src}?w=${width}` : undefined}
-          src={image.src}
+          loader={({ src, width }) => `${src}?w=${width}`}
+          src={blob.asImage.url}
           objectFit="contain"
           layout="fill"
           onError={(ev) => {
@@ -227,7 +228,7 @@ const Inner = {
           `}
           style={{
             opacity: loaded ? 0 : 1,
-            backgroundImage: `url(${image.sqip.src})`,
+            backgroundImage: `url(${blob.asImage.placeholder.url})`,
           }}
         />
       </div>

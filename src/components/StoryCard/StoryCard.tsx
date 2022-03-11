@@ -11,16 +11,20 @@ import { FormattedDate, FormattedMessage } from "react-intl";
 const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
-  image: {
-    name?: string;
+  blob: {
+    name: string;
 
-    src: string;
+    asImage: {
+      url: string;
 
-    width: number;
-    height: number;
+      dimensions: {
+        width: number;
+        height: number;
+      };
 
-    sqip: {
-      src: string;
+      placeholder: {
+        url: string;
+      };
     };
   };
 
@@ -28,7 +32,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
     id: string;
   };
 
-  blocks?: Array<Props["image"]>;
+  blocks?: Array<Props["blob"]>;
 
   date?: Date | [Date, Date];
 
@@ -40,7 +44,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 }
 
 function StoryCard(props: Props) {
-  const { story, blocks = [], image, date, title, teaser, layout = "regular", ...rest } = props;
+  const { story, blocks = [], blob, date, title, teaser, layout = "regular", ...rest } = props;
 
   const ref = React.useRef<null | HTMLDivElement>(null);
 
@@ -66,12 +70,15 @@ function StoryCard(props: Props) {
 
       <div className={cx(classes.image)}>
         <Image
-          loader={image.name ? ({ src, width }) => `${src}?w=${width}` : undefined}
-          src={image.src}
+          loader={({ src, width }) => `${src}?w=${width}`}
+          src={blob.asImage.url}
           layout="fill"
           objectFit="cover"
         />
-        <div className="sqip" style={{ opacity: loaded ? 0 : 1, backgroundImage: `url(${image.sqip.src})` }} />
+        <div
+          className="sqip"
+          style={{ opacity: loaded ? 0 : 1, backgroundImage: `url(${blob.asImage.placeholder.url})` }}
+        />
       </div>
 
       <div className={classes.teaser}>
@@ -139,14 +146,14 @@ function StoryCard(props: Props) {
 
       <div className={cx(classes.image2)}>
         <Image
-          loader={(blocks[0] ?? image).name ? ({ src, width }) => `${src}?w=${width}` : undefined}
-          src={(blocks[0] ?? image).src}
+          loader={({ src, width }) => `${src}?w=${width}`}
+          src={(blocks[0] ?? blob).asImage.url}
           layout="fill"
           objectFit="cover"
         />
         <div
           className="sqip"
-          style={{ opacity: loaded ? 0 : 1, backgroundImage: `url(${(blocks[0] ?? image).sqip.src})` }}
+          style={{ opacity: loaded ? 0 : 1, backgroundImage: `url(${(blocks[0] ?? blob).asImage.placeholder.url})` }}
         />
       </div>
     </div>

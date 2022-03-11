@@ -1,16 +1,23 @@
 import * as React from "react";
 
-export interface Image {
-  name?: string;
+export interface Blob {
+  id: string;
+  name: string;
 
-  src: string;
+  url: string;
 
-  width: number;
-  height: number;
+  asImage: {
+    url: string;
 
-  sqip: {
-    src: string;
+    dimensions: {
+      width: number;
+      height: number;
+    };
+
+    placeholder: {
+      url: string;
+    };
   };
 }
 
-export const importBlob: (blobId: string) => Image | any;
+export const importBlob: (blobId: string) => Blob | any;

@@ -6,7 +6,7 @@ import { importBlob } from "../../image.macro";
 export default function header() {
   return (
     <div>
-      <Header image={importBlob("4zfWtmEUAz4bPvkAHZUVrdik83FJtWZkZ2eJ1cYkZ7Kc")} title="One More Rush" />
+      <Header blob={importBlob("4zfWtmEUAz4bPvkAHZUVrdik83FJtWZkZ2eJ1cYkZ7Kc")} title="One More Rush" />
     </div>
   );
 }

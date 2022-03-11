@@ -1,7 +1,6 @@
 import { css, cx } from "@linaria/core";
 import NextImage from "next/image";
 import * as React from "react";
-import { Image } from "../../../image.macro";
 
 /**
  * The underlying DOM element which is rendered by this component.

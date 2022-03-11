@@ -24,7 +24,7 @@ export default function Image_(props: Props) {
     <Image
       id={blobId}
       href={`/${storyId}/${blobId}`}
-      image={blob.asImage}
+      blob={blob}
       className={cx(
         className,
         {
