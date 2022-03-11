@@ -60,7 +60,7 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
       return [];
     }
 
-    const res = await fetch("https://web-4n62l3bdha-lz.a.run.app/api", {
+    const res = await fetch(`${process.env.API}/api`, {
       method: "POST",
       headers: { ["Content-Type"]: "application/json" },
       body: JSON.stringify({

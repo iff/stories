@@ -12,7 +12,7 @@ module.exports = createMacro(({ references }) => {
           "-e",
           `
             require("request")({
-              url: "https://web-4n62l3bdha-lz.a.run.app/api",
+              url: "${process.env.API}/api",
               method: "POST",
               json: {
                 query: "query { blob(name: \\"${blobId}\\") { name asImage { url dimensions { width height } placeholder { url } } asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } } } }"

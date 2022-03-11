@@ -20,6 +20,10 @@ export default withLinaria(
       domains: ["storage.googleapis.com", "web-4n62l3bdha-lz.a.run.app"],
     },
 
+    env: {
+      API: process.env.API,
+    },
+
     async rewrites() {
       return [
         {
