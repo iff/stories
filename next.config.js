@@ -14,6 +14,10 @@ export default withLinaria(
       cacheDirectory: "./.next/cache/linaria",
     },
 
+    experimental: {
+      esmExternals: true,
+    },
+
     pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 
     images: {
