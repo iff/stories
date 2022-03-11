@@ -8,10 +8,10 @@ import { Components } from "@mdx-js/react/lib/index";
 import { Code } from "@timvir/blocks";
 
 const mdxComponents: Components = {
-  // code: function code(props: any) {
-  //   const [, language = "markdown"] = (props.className || "").match(/^language-(.*)$/) || [];
-  //   return <Code language={language}>{props.children}</Code>;
-  // },
+  pre: function pre(props: any) {
+    const [, language = "markdown"] = (props.className || "").match(/^language-(.*)$/) || [];
+    return <Code language={language}>{props.children.props.children}</Code>;
+  },
 };
 
 export default function Wrapper({ children }: { children?: React.ReactNode }) {
