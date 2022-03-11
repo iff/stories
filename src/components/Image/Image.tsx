@@ -75,6 +75,10 @@ function Image(props: Props) {
     ...rest
   } = props;
 
+  if (!image) {
+    console.log(blobId, image);
+  }
+
   const ref = React.useRef<null | HTMLDivElement>(null);
 
   React.useEffect(() => {

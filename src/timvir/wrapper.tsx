@@ -3,15 +3,15 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import * as React from "react";
 import Head from "next/head";
-import toc from './toc'
-import { MDXProviderComponents } from "@mdx-js/react";
+import toc from "./toc";
+import { Components } from "@mdx-js/react/lib/index";
 import { Code } from "@timvir/blocks";
 
-const mdxComponents: MDXProviderComponents = {
-  code: function code(props: any) {
-    const [, language = "markdown"] = (props.className || "").match(/^language-(.*)$/) || [];
-    return <Code language={language}>{props.children}</Code>;
-  },
+const mdxComponents: Components = {
+  // code: function code(props: any) {
+  //   const [, language = "markdown"] = (props.className || "").match(/^language-(.*)$/) || [];
+  //   return <Code language={language}>{props.children}</Code>;
+  // },
 };
 
 export default function Wrapper({ children }: { children?: React.ReactNode }) {

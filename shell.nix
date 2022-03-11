@@ -5,9 +5,6 @@ in pkgs.mkShell {
   buildInputs = [
     pkgs.nodejs-16_x
 
-    pkgs.vips
-    pkgs.pkg-config
-
     pkgs.google-cloud-sdk
   ];
 }

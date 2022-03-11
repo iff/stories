@@ -1,8 +1,12 @@
 import { Story } from "@/components/Story";
+import * as fs from "fs";
 import { GetStaticPaths, GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import { ParsedUrlQuery } from "querystring";
 import * as React from "react";
+import remarkMdx from "remark-mdx";
+import remarkParse from "remark-parse";
+import { unified } from "unified";
 
 export interface Query extends ParsedUrlQuery {
   storyId: string;
@@ -50,23 +54,30 @@ export const getStaticPaths: GetStaticPaths<Query> = async () => {
 };
 
 export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) => {
-  const Body = require(`../../../content/${params.storyId}/body.mdx`).default;
-  const { children } = Body({}).props;
+  const body = await fs.promises.readFile(`./content/${params.storyId}/body.mdx`, { encoding: "utf8" });
+  const root = unified().use(remarkParse).use(remarkMdx).parse(body);
 
   const blobIds: Array<string> = [];
-  React.Children.forEach(children, function go(child: any) {
-    if (React.isValidElement(child)) {
-      const props = child.props as any;
-
-      if (props.mdxType === "Image" && props.blobId) {
-        blobIds.push(props.blobId);
-      } else if (props.mdxType === "Clip" && props.blobId) {
-        blobIds.push(props.blobId);
-      }
-
-      React.Children.forEach(props.children, go);
+  function go(node) {
+    if (node.children) {
+      node.children.forEach(go);
     }
-  });
+
+    if ((node.type === "mdxJsxFlowElement" || node.type === "mdxJsxTextElement") && node.name === "Image") {
+      const blobId = node.attributes.find((x) => x.type === "mdxJsxAttribute" && x.name === "blobId")?.value;
+      if (blobId) {
+        blobIds.push(blobId);
+      }
+    }
+    if ((node.type === "mdxJsxFlowElement" || node.type === "mdxJsxTextElement") && node.name === "Clip") {
+      const blobId = node.attributes.find((x) => x.type === "mdxJsxAttribute" && x.name === "blobId")?.value;
+      if (blobId) {
+        blobIds.push(blobId);
+      }
+    }
+  }
+
+  go(root);
 
   const blobs = await (async () => {
     if (blobIds.length === 0) {

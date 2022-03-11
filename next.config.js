@@ -1,9 +1,14 @@
 import withLinaria from "next-linaria";
 import withMDX from "@next/mdx";
+import { remarkPlugin } from "@timvir/mdx";
 
 export default withLinaria(
   withMDX({
     extension: /\.mdx?$/,
+    options: {
+      providerImportSource: "@mdx-js/react",
+      remarkPlugins: [remarkPlugin],
+    },
   })({
     linaria: {
       cacheDirectory: "./.next/cache/linaria",
