@@ -27,7 +27,7 @@
     "@zeit/next-css": "^1.0.1",
     "feed": "^4.2.2",
     "follow-redirects": "^1.14.9",
-    "fp-ts": "^2.11.8",
+    "fp-ts": "^2.11.9",
     "immer": "^9.0.12",
     "io-ts": "^2.2.16",
     "io-ts-types": "^0.5.16",
