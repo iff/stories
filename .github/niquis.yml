@@ -1,0 +1,4 @@
+version: v0
+collect:
+  - type: next.js
+  - type: npm
