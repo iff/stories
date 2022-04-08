@@ -47,7 +47,7 @@
     "request": "^2.88.2",
     "unified": "^10.1.2",
     "use-immer": "^0.6.0",
-    "webpack": "^5.70.0"
+    "webpack": "^5.72.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.21",
