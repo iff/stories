@@ -36,12 +36,29 @@ const stories = {
     Header: dynamic(() => import(`../../../content/blouson-noir/header`)),
     Body: dynamic(() => import(`../../../content/blouson-noir/body.mdx`)),
   },
+  "shivering-sense": {
+    meta: require("../../../content/shivering-sense/meta").default,
+    Header: dynamic(() => import(`../../../content/shivering-sense/header`)),
+    Body: dynamic(() => import(`../../../content/shivering-sense/body.mdx`)),
+  },
 } as const;
 
 export default function Page(props: Props) {
   const { storyId, blobs } = props;
 
-  return <Story storyId={storyId} blobs={blobs} {...stories[storyId]} />;
+  if (storyId in stories) {
+    return <Story storyId={storyId} blobs={blobs} {...stories[storyId]} />;
+  }
+
+  return (
+    <Story
+      storyId={storyId}
+      blobs={blobs}
+      meta={{}}
+      Header={dynamic(() => import(`../../../content/${storyId}/header`))}
+      Body={dynamic(() => import(`../../../content/${storyId}/body.mdx`))}
+    />
+  );
 }
 
 export const getStaticPaths: GetStaticPaths<Query> = async () => {

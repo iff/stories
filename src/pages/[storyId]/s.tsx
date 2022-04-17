@@ -1,5 +1,4 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
@@ -25,6 +24,9 @@ const stories = {
   },
   "blouson-noir": {
     meta: require("../../../content/blouson-noir/meta").default,
+  },
+  "shivering-sense": {
+    meta: require("../../../content/shivering-sense/meta").default,
   },
 } as const;
 

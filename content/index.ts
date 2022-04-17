@@ -1,6 +1,13 @@
 import dynamic from "next/dynamic";
 
 export default {
+  "shivering-sense": {
+    Card: dynamic(() => import(`./shivering-sense/card`)),
+    meta: require("./shivering-sense/meta").default,
+    Header: dynamic(() => import(`./shivering-sense/header`)),
+    Body: dynamic(() => import(`./shivering-sense/body.mdx`)),
+    Image: dynamic(() => import(`./shivering-sense/image`)),
+  },
   "blouson-noir": {
     Card: dynamic(() => import(`./blouson-noir/card`)),
     meta: require("./blouson-noir/meta").default,

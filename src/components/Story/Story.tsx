@@ -36,7 +36,7 @@ function Story(props: Props) {
           <meta name="twitter:card" content="summary_large_image" />
         </Head>
 
-        <div style={{ marginBottom: "10vh" }}>
+        <div style={{ marginBottom: "2em" }}>
           <Header />
         </div>
 
