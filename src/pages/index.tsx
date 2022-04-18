@@ -15,7 +15,7 @@ export default function Page() {
 
       <div className={classes.featuredStories}>
         {featuredStories.map((storyId) => (
-          <div key={storyId} style={{ margin: "30vh 0" }}>
+          <div key={storyId} style={{ margin: "2em 0 6em" }}>
             {React.createElement(stories[storyId].Card)}
           </div>
         ))}

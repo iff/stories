@@ -269,7 +269,6 @@ const classes = {
 
   image2: css`
     position: relative;
-    height: calc(100% - 32px + 10vh);
 
     margin: 32px;
 
