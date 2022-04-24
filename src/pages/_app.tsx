@@ -1,3 +1,4 @@
+import { mkTheme, themes } from "@/theme";
 import { css } from "@linaria/core";
 import { AppProps } from "next/app";
 import Head from "next/head";
@@ -56,6 +57,9 @@ css`
       font-size: 17px;
       line-height: 1.8;
 
+      color: var(--text-color);
+      background-color: var(--background-color);
+
       @media (min-width: 720px) {
         font-size: 19px;
         line-height: 1.7;
@@ -71,6 +75,18 @@ css`
     *::before,
     *::after {
       box-sizing: inherit;
+    }
+  }
+
+  :global() {
+    :root {
+      color-scheme: light;
+      ${mkTheme(themes.light)};
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      ${mkTheme(themes.dark)};
     }
   }
 `;

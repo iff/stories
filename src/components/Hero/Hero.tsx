@@ -62,6 +62,7 @@ const classes = {
     display: grid;
     place-items: center;
     justify-items: center;
+    isolation: isolate;
   `,
 
   box: css`

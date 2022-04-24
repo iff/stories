@@ -183,7 +183,7 @@ const classes = {
     font-size: 0.75em;
     line-height: 1.3;
     font-style: italic;
-    opacity: 0.7;
+    color: var(--secondary-text-color);
   `,
 
   captionPlacement: {

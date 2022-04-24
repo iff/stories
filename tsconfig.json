@@ -18,7 +18,8 @@
       "@/cms": ["src/cms"],
       "@/components/*": ["src/components/*"],
       "@/hooks/*": ["src/hooks/*"],
-      "@/timvir/*": ["src/timvir/*"]
+      "@/timvir/*": ["src/timvir/*"],
+      "@/theme": ["src/theme"]
     },
     "incremental": true
   },
