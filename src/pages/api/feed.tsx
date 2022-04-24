@@ -52,6 +52,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const stories = [
     {
+      id: "shivering-sense",
+      title: "Shivering Sense",
+      publishedAt: new Date(Date.parse("2022-04-24")),
+      description: "Escaping the freezing european winter weather and spending Christmas and New Years somplace warm.",
+    },
+    {
       id: "blouson-noir",
       title: "Blouson Noir",
       publishedAt: new Date(Date.parse("2021-11-06")),
