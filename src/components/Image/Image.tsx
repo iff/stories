@@ -195,7 +195,7 @@ const classes = {
         left: 6px;
         right: 6px;
         bottom: 6px;
-        background: rgba(0, 0, 0, 0.85);
+        background-color: #1f2023;
         color: #fefefe;
         padding: 8px 10px;
         text-align: left;
