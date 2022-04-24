@@ -295,6 +295,7 @@ const classes = {
     grid-area: title;
 
     :global(:root[data-theme="dark"]) & {
+      background: transparent;
       border-bottom: 5px solid #f3f8fe;
       padding-bottom: 0.2em;
     }
