@@ -9,7 +9,7 @@ import "@timvir/core/styles.css";
 const baseUrl = process.env.NODE_ENV === "production" ? `https://stories.caurea.org` : "http://localhost:3000";
 
 function App(props: AppProps) {
-  const { Component, pageProps } = props
+  const { Component, pageProps } = props;
 
   return (
     <IntlProvider locale="en" defaultLocale="en">
@@ -19,6 +19,8 @@ function App(props: AppProps) {
 
         {/* Feed */}
         <link rel="alternate" type="application/rss+xml" title="Stories by Tomáš Čarnecky" href={`${baseUrl}/feed`} />
+
+        <script dangerouslySetInnerHTML={{ __html: themeDetector }} />
       </Head>
 
       <Component {...pageProps} />
@@ -132,4 +134,30 @@ css`
       font-display: swap;
     }
   }
+`;
+
+const themeDetector = `
+function useTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+}
+
+const theme = (() => {
+  try {
+    const theme = localStorage.getItem("theme");
+    if (theme) {
+      return theme;
+    }
+  } catch {}
+
+  if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+    return "light";
+  }
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    return "dark";
+  }
+})()
+
+if (theme) {
+  useTheme(theme);
+}
 `;
