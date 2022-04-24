@@ -94,47 +94,47 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   for (const story of stories) {
     const url = `${baseUrl}/${story.id}`;
-    const body = await fs.promises.readFile(`./content/${story.id}/body.mdx`, { encoding: "utf8" });
-    const blocks = extractBlocks(body);
+    // const body = await fs.promises.readFile(`./content/${story.id}/body.mdx`, { encoding: "utf8" });
+    // const blocks = extractBlocks(body);
 
-    const blobs = await (async () => {
-      if (blocks.length === 0) {
-        return [];
-      }
+    // const blobs = await (async () => {
+    //   if (blocks.length === 0) {
+    //     return [];
+    //   }
 
-      const res = await fetch(`${process.env.API}/api`, {
-        method: "POST",
-        headers: { ["Content-Type"]: "application/json" },
-        body: JSON.stringify({
-          query: `query { ${blocks.map(
-            ({ id }) =>
-              `b${id}: blob(name: "${id}") {
-                name
-                asImage { url dimensions { width height } placeholder { url } }
-                asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
-              }`
-          )} }`,
-        }),
-      });
-      const json = await res.json();
+    //   const res = await fetch(`${process.env.API}/api`, {
+    //     method: "POST",
+    //     headers: { ["Content-Type"]: "application/json" },
+    //     body: JSON.stringify({
+    //       query: `query { ${blocks.map(
+    //         ({ id }) =>
+    //           `b${id}: blob(name: "${id}") {
+    //             name
+    //             asImage { url dimensions { width height } placeholder { url } }
+    //             asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
+    //           }`
+    //       )} }`,
+    //     }),
+    //   });
+    //   const json = await res.json();
 
-      return Object.values(json.data);
-    })();
+    //   return Object.values(json.data);
+    // })();
 
-    const Body = await require(`../../../content/${story.id}/body.mdx`);
+    // const Body = await require(`../../../content/${story.id}/body.mdx`);
 
     feed.addItem({
       title: story.title,
       id: url,
       link: url,
       description: story.description,
-      content: ReactDOMServer.renderToStaticMarkup(
-        <Context.Provider value={{ storyId: story.id, blobs }}>
-          <MDXProvider components={components}>
-            <Body.default />
-          </MDXProvider>
-        </Context.Provider>
-      ),
+      // content: ReactDOMServer.renderToStaticMarkup(
+      //   <Context.Provider value={{ storyId: story.id, blobs }}>
+      //     <MDXProvider components={components}>
+      //       <Body.default />
+      //     </MDXProvider>
+      //   </Context.Provider>
+      // ),
       author: [author],
       contributor: [author],
       date: story.publishedAt,
