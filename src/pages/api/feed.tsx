@@ -1,8 +1,13 @@
-import { Feed } from "feed";
-import { NextApiRequest, NextApiResponse } from "next";
+import { extractBlocks } from "@/cms";
+import { Context } from "@/components/Story/context";
+import { components } from "@/components/Story/internal";
 import { mediaType } from "@hapi/accept";
-import ReactDOMServer from "react-dom/server";
+import { MDXProvider } from "@mdx-js/react";
+import { Feed } from "feed";
+import * as fs from "fs";
+import { NextApiRequest, NextApiResponse } from "next";
 import * as React from "react";
+import ReactDOMServer from "react-dom/server";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { host } = req.headers;
@@ -61,13 +66,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       id: "blouson-noir",
       title: "Blouson Noir",
       publishedAt: new Date(Date.parse("2021-11-06")),
-      description: "A remote-work experiment from a small country in western asia. I spent four weeks in Armenia, traveled 2200km by car, living in a tent while working my 9to5 day job.",
+      description:
+        "A remote-work experiment from a small country in western asia. I spent four weeks in Armenia, traveled 2200km by car, living in a tent while working my 9to5 day job.",
     },
     {
       id: "dreamers-wake",
       title: "Dreamer's Wake",
       publishedAt: new Date(Date.parse("2021-08-08")),
-      description: "Madeira wasn't my first choice where to go, but I'm glad the weather circumstances made me change my plans and go to this gorgeous island. I'll forever be grateful for the experience that I've had the chance to live through, and the people I've met.",
+      description:
+        "Madeira wasn't my first choice where to go, but I'm glad the weather circumstances made me change my plans and go to this gorgeous island. I'll forever be grateful for the experience that I've had the chance to live through, and the people I've met.",
     },
     {
       id: "one-more-rush",
@@ -85,21 +92,54 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     },
   ];
 
-  stories.forEach((story) => {
+  for (const story of stories) {
     const url = `${baseUrl}/${story.id}`;
-    const Body = require(`../../../content/${story.id}/body.mdx`).default;
+    const body = await fs.promises.readFile(`./content/${story.id}/body.mdx`, { encoding: "utf8" });
+    const blocks = extractBlocks(body);
+
+    const blobs = await (async () => {
+      if (blocks.length === 0) {
+        return [];
+      }
+
+      const res = await fetch(`${process.env.API}/api`, {
+        method: "POST",
+        headers: { ["Content-Type"]: "application/json" },
+        body: JSON.stringify({
+          query: `query { ${blocks.map(
+            ({ id }) =>
+              `b${id}: blob(name: "${id}") {
+                name
+                asImage { url dimensions { width height } placeholder { url } }
+                asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
+              }`
+          )} }`,
+        }),
+      });
+      const json = await res.json();
+
+      return Object.values(json.data);
+    })();
+
+    const Body = await require(`../../../content/${story.id}/body.mdx`);
 
     feed.addItem({
       title: story.title,
       id: url,
       link: url,
       description: story.description,
-      content: ReactDOMServer.renderToStaticMarkup(<Body />),
+      content: ReactDOMServer.renderToStaticMarkup(
+        <Context.Provider value={{ storyId: story.id, blobs }}>
+          <MDXProvider components={components}>
+            <Body.default />
+          </MDXProvider>
+        </Context.Provider>
+      ),
       author: [author],
       contributor: [author],
       date: story.publishedAt,
     });
-  });
+  }
 
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/rss+xml");
