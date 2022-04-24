@@ -79,7 +79,7 @@ const classes = {
   `,
 
   lead: css`
-    background: black;
+    background: #18191b;
     color: white;
     text-align: center;
 

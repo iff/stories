@@ -35,7 +35,7 @@ const classes = {
 
     padding: 0.5em 0.7em;
 
-    background: black;
+    background: #18191b;
     color: white;
 
     & > *:first-child {

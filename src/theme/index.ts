@@ -7,7 +7,7 @@ export const themes = {
     secondaryTextColor: "rgba(0 0 0 / 0.66)",
   },
   dark: {
-    backgroundColor: "#1f2023",
+    backgroundColor: "#18191b",
     textColor: "rgba(255 255 255 / 0.86)",
     secondaryTextColor: "rgba(255 255 255 / 0.56)",
   },

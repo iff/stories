@@ -289,10 +289,15 @@ const classes = {
     margin: 0 0 var(--gap) 0;
     padding: 0.5em 0.7em 0.4em;
 
-    background: black;
-    color: white;
+    background: #18191b;
+    color: rgba(255 255 255 / 0.96);
 
     grid-area: title;
+
+    :global(:root[data-theme="dark"]) & {
+      border-bottom: 5px solid #f3f8fe;
+      padding-bottom: 0.2em;
+    }
   `,
 
   teaser: css`
@@ -302,10 +307,15 @@ const classes = {
     margin: var(--gap) 0 0 0;
 
     & > div {
-      background: black;
+      background: #18191b;
       color: white;
 
       padding: 24px 24px;
+    }
+
+    :global(:root[data-theme="dark"]) & > div {
+      background: #f6fbff;
+      color: #18191b;
     }
 
     grid-area: teaser;

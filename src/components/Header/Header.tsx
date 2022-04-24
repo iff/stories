@@ -133,7 +133,7 @@ const classes = {
     margin: 0;
     padding: 0.55em 0.7em 0.4em;
 
-    background: black;
+    background: #18191b;
     color: white;
 
     font-size: clamp(32px, 3.5vw, 80px);
