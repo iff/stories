@@ -4,9 +4,6 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import { IntlProvider } from "react-intl";
 
-import "@timvir/blocks/styles.css";
-import "@timvir/core/styles.css";
-
 const baseUrl = process.env.NODE_ENV === "production" ? `https://stories.caurea.org` : "http://localhost:3000";
 
 function App(props: AppProps) {
@@ -155,6 +152,7 @@ css`
 const themeDetector = `
 function useTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
+  document.documentElement.setAttribute("data-timvir-theme", theme);
 }
 
 const theme = (() => {
