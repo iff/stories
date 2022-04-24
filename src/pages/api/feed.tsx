@@ -21,7 +21,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { accept, ["user-agent"]: userAgent } = req.headers;
 
-  const acceptedContentType = mediaType(accept, ["application/rss+xml"]);
+  const acceptedContentType = mediaType(accept, ["application/atom+xml"]);
   // console.log({ host, accept, userAgent, contentType: acceptedContentType });
 
   if (!acceptedContentType) {
@@ -44,7 +44,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   };
 
   const feed = new Feed({
-    title: `Stories by Tomáš Čarnecký`,
+    title: `Stories`,
     description: "…for nothing remains of us but the vibrations we leave behind.",
     id: baseUrl,
     link: baseUrl,
@@ -94,54 +94,84 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   for (const story of stories) {
     const url = `${baseUrl}/${story.id}`;
-    // const body = await fs.promises.readFile(`./content/${story.id}/body.mdx`, { encoding: "utf8" });
-    // const blocks = extractBlocks(body);
+    const body = await fs.promises.readFile(`./content/${story.id}/body.mdx`, { encoding: "utf8" });
+    const blocks = extractBlocks(body);
 
-    // const blobs = await (async () => {
-    //   if (blocks.length === 0) {
-    //     return [];
-    //   }
+    const blobs = await (async () => {
+      if (blocks.length === 0) {
+        return [];
+      }
 
-    //   const res = await fetch(`${process.env.API}/api`, {
-    //     method: "POST",
-    //     headers: { ["Content-Type"]: "application/json" },
-    //     body: JSON.stringify({
-    //       query: `query { ${blocks.map(
-    //         ({ id }) =>
-    //           `b${id}: blob(name: "${id}") {
-    //             name
-    //             asImage { url dimensions { width height } placeholder { url } }
-    //             asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
-    //           }`
-    //       )} }`,
-    //     }),
-    //   });
-    //   const json = await res.json();
+      const res = await fetch(`${process.env.API}/api`, {
+        method: "POST",
+        headers: { ["Content-Type"]: "application/json" },
+        body: JSON.stringify({
+          query: `query { ${blocks.map(
+            ({ id }) =>
+              `b${id}: blob(name: "${id}") {
+                name
+                asImage { url dimensions { width height } }
+                asVideo { poster { url dimensions { width height } } renditions { url } }
+              }`
+          )} }`,
+        }),
+      });
+      const json = await res.json();
 
-    //   return Object.values(json.data);
-    // })();
+      return Object.values(json.data);
+    })();
 
-    // const Body = await require(`../../../content/${story.id}/body.mdx`);
+    const Body = await require(`../../../content/${story.id}/body.mdx`);
 
     feed.addItem({
       title: story.title,
       id: url,
       link: url,
       description: story.description,
-      // content: ReactDOMServer.renderToStaticMarkup(
-      //   <Context.Provider value={{ storyId: story.id, blobs }}>
-      //     <MDXProvider components={components}>
-      //       <Body.default />
-      //     </MDXProvider>
-      //   </Context.Provider>
-      // ),
+      content: ReactDOMServer.renderToStaticMarkup(
+        <Context.Provider value={{ storyId: story.id, blobs }}>
+          <MDXProvider components={{ ...components, Image, Clip, Group }}>
+            <Body.default />
+          </MDXProvider>
+        </Context.Provider>
+      ),
       author: [author],
       contributor: [author],
-      date: story.publishedAt,
+      date: new Date(),
+      published: story.publishedAt,
     });
   }
 
   res.statusCode = 200;
-  res.setHeader("Content-Type", "application/rss+xml");
-  res.end(feed.rss2());
+  res.setHeader("Content-Type", "application/atom+xml");
+  res.end(feed.atom1());
 };
+
+function Image(props: any) {
+  const { storyId, blobs } = React.useContext(Context);
+
+  const { blobId, size, className, ...rest } = props;
+  const blob = blobs.find((x) => x.name === blobId);
+  if (!blob) {
+    return <div>Image {blobId} not found!</div>;
+  }
+
+  return <img src={blob.asImage.url} />;
+}
+
+function Clip(props: any) {
+  const { storyId, blobs } = React.useContext(Context);
+
+  const { blobId, size, className, ...rest } = props;
+  const blob = blobs.find((x) => x.name === blobId);
+
+  return (
+    <video>
+      <source src={blob.asVideo.renditions[0].url} type="video/mp4" />
+    </video>
+  );
+}
+
+function Group(props: any) {
+  return <>{props.children}</>;
+}
