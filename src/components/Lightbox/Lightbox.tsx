@@ -94,7 +94,7 @@ const classes = {
     right: 0;
     bottom: 0;
     left: 0;
-    background: black;
+    background: #1f2023;
     color: white;
     display: flex;
     flex-direction: column;
