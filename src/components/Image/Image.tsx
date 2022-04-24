@@ -136,6 +136,7 @@ const classes = {
     contain: layout;
     display: grid;
     width: 100%;
+    isolation: isolate;
 
     margin: 0;
 
