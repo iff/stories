@@ -148,7 +148,7 @@ function StoryCard(props: Props) {
         <Image
           loader={({ src, width }) => `${src}?w=${width}`}
           src={(blocks[0] ?? blob).asImage.url}
-          layout="fill"
+          {...(blocks[0] ?? blob).asImage.dimensions}
           objectFit="cover"
         />
         <div
