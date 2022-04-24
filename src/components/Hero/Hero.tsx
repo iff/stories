@@ -59,6 +59,7 @@ export default Hero;
 const classes = {
   root: css`
     height: 100vh;
+    height: 100svh;
     display: grid;
     place-items: center;
     justify-items: center;
@@ -97,6 +98,7 @@ const classes = {
     z-index: -1;
     width: 100vw;
     height: 100vh;
+    height: 100svh;
 
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
@@ -130,6 +132,7 @@ const classes = {
     @media (min-width: 720px) {
       width: calc(100vw - 176px);
       height: calc(100vh - 140px);
+      height: calc(100svh - 140px);
     }
   `,
 };
