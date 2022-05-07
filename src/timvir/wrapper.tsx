@@ -21,7 +21,7 @@ export default function Wrapper({ children }: { children?: React.ReactNode }) {
         <link href="https://unpkg.com/timvir@0.1.44/styles.css" rel="stylesheet" />
       </Head>
 
-      <Page location={useRouter()} Link={Link} toc={toc} mdxComponents={mdxComponents}>
+      <Page location={useRouter()} Link={Link as any} toc={toc} mdxComponents={mdxComponents}>
         {children}
       </Page>
     </>
