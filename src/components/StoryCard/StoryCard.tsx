@@ -178,7 +178,6 @@ const classes = {
   root: css`
     display: grid;
 
-    color: black;
     text-decoration: none;
 
     --gap: 16px;
@@ -296,7 +295,7 @@ const classes = {
 
     :global(:root[data-theme="dark"]) & {
       background: transparent;
-      border-bottom: 5px solid #f3f8fe;
+      border-bottom: 5px solid currentColor;
       padding-bottom: 0.2em;
     }
   `,
@@ -306,14 +305,6 @@ const classes = {
     line-height: 1.4;
 
     margin: var(--gap) 0 0 0;
-
-    & > div {
-      color: #18191b;
-    }
-
-    :global(:root[data-theme="dark"]) & > div {
-      color: white;
-    }
 
     grid-area: teaser;
 
