@@ -18,7 +18,7 @@ function App(props: AppProps) {
         {/* Feed */}
         <link rel="alternate" type="application/rss+xml" title="Stories by Tomáš Čarnecky" href={`${baseUrl}/feed`} />
 
-        <script dangerouslySetInnerHTML={{ __html: themeDetector }} />
+        <script type="module" dangerouslySetInnerHTML={{ __html: themeDetector }} />
       </Head>
 
       <Component {...pageProps} />
@@ -150,12 +150,26 @@ css`
 `;
 
 const themeDetector = `
-function useTheme(theme) {
-  document.documentElement.setAttribute("data-theme", theme);
-  document.documentElement.setAttribute("data-timvir-theme", theme);
+const mqls = Object.fromEntries(
+  ["light", "dark"].map((colorScheme) => [
+    colorScheme,
+    (() => {
+      const mql = window.matchMedia(\`(prefers-color-scheme: \${colorScheme})\`);
+      mql.addEventListener("change", applyTheme);
+      return mql;
+    })(),
+  ])
+);
+
+applyTheme();
+function applyTheme() {
+  const theme = detectTheme();
+  if (theme) {
+    useTheme(theme);
+  }
 }
 
-const theme = (() => {
+function detectTheme() {
   try {
     const theme = localStorage.getItem("theme");
     if (theme) {
@@ -163,15 +177,15 @@ const theme = (() => {
     }
   } catch {}
 
-  if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-    return "light";
+  for (const [colorScheme, mql] of Object.entries(mqls)) {
+    if (mql.matches) {
+      return colorScheme;
+    }
   }
-  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    return "dark";
-  }
-})()
+}
 
-if (theme) {
-  useTheme(theme);
+function useTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  document.documentElement.setAttribute("data-timvir-theme", theme);
 }
 `;
