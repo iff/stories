@@ -308,15 +308,11 @@ const classes = {
     margin: var(--gap) 0 0 0;
 
     & > div {
-      background: #18191b;
-      color: white;
-
-      padding: 24px 24px;
+      color: #18191b;
     }
 
     :global(:root[data-theme="dark"]) & > div {
-      background: #f6fbff;
-      color: #18191b;
+      color: white;
     }
 
     grid-area: teaser;
