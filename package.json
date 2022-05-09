@@ -42,7 +42,7 @@
     "remark-mdx": "^2.1.1",
     "remark-parse": "^10.0.1",
     "request": "^2.88.2",
-    "timvir": "^0.1.44",
+    "timvir": "^0.1.46",
     "unified": "^10.1.2",
     "use-immer": "^0.7.0",
     "webpack": "^5.72.0"
