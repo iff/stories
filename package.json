@@ -21,7 +21,7 @@
     "@timvir/mdx": "^0.1.46",
     "@types/mdx": "^2.0.1",
     "@types/react-dom": "^18.0.3",
-    "espree": "^9.3.1",
+    "espree": "^9.3.2",
     "feed": "^4.2.2",
     "follow-redirects": "^1.15.0",
     "fp-ts": "^2.12.1",
