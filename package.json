@@ -45,7 +45,7 @@
     "timvir": "^0.1.46",
     "unified": "^10.1.2",
     "use-immer": "^0.7.0",
-    "webpack": "^5.72.0"
+    "webpack": "^5.72.1"
   },
   "devDependencies": {
     "@types/node": "^17.0.32",
