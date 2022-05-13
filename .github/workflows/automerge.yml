@@ -15,19 +15,19 @@ jobs:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 
       - if: ${{ contains(steps.metadata.outputs.dependency-names, 'typescript') }}
-        run: gh pr merge --auto --merge "$PULL_REQUEST_URL"
+        run: gh pr merge --auto --squash "$PULL_REQUEST_URL"
         env:
           PULL_REQUEST_URL: ${{ github.event.pull_request.html_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - if: ${{ contains(steps.metadata.outputs.dependency-names, '@types/') }}
-        run: gh pr merge --auto --merge "$PULL_REQUEST_URL"
+        run: gh pr merge --auto --squash "$PULL_REQUEST_URL"
         env:
           PULL_REQUEST_URL: ${{ github.event.pull_request.html_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - if: ${{ contains(steps.metadata.outputs.dependency-names, 'eslint') }}
-        run: gh pr merge --auto --merge "$PULL_REQUEST_URL"
+        run: gh pr merge --auto --squash "$PULL_REQUEST_URL"
         env:
           PULL_REQUEST_URL: ${{ github.event.pull_request.html_url }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
