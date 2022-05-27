@@ -42,7 +42,7 @@ const classes = {
     display: grid;
 
     grid-template-columns: repeat(12, 1fr);
-    grid-gap: 8px;
+    grid-gap: 1rem;
 
     justify-items: stretch;
     align-items: stretch;
