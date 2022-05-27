@@ -212,19 +212,20 @@ const Inner = {
         <div
           className={css`
             position: absolute;
-            z-index: 1;
+            inset: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            pointer-events: none;
 
             background-repeat: no-repeat;
             background-size: contain;
             background-position: 50% 50%;
 
             transition: opacity 0.5s ease-out;
-            opacity: 1;
 
-            inset: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
+            z-index: 1;
           `}
           style={{
             opacity: loaded ? 0 : 1,

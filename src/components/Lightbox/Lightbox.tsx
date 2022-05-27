@@ -122,7 +122,6 @@ const classes = {
   center: css`
     flex-grow: 1;
     position: relative;
-    user-select: none;
   `,
 
   prev: css`
