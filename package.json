@@ -2,7 +2,6 @@
   "name": "stories.caurea.org",
   "private": true,
   "scripts": {
-    "postinstall": "patch-package",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
@@ -31,7 +30,6 @@
     "nanoid": "^3.3.4",
     "next": "^12.1.6",
     "next-linaria": "^1.0.1-beta",
-    "patch-package": "^6.4.7",
     "prism-react-renderer": "^1.3.3",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
