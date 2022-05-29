@@ -4,11 +4,12 @@ let
   banner = pkgs.writeShellScriptBin "banner" ''
     clear
 
-    ${pkgs.figlet}/bin/figlet -c stories
+    ${pkgs.figlet}/bin/figlet stories
+    echo " … for nothing remains of us but the vibrations we leave behind."
   '';
 
   dev = pkgs.writeShellScriptBin "dev" ''
-    npm run dev
+    ./node_modules/.bin/next dev
   '';
 
 in pkgs.mkShell {
