@@ -9,16 +9,20 @@ module.exports = createMacro(({ references }) => {
 
       const response = JSON.parse(
         execFileSync(process.execPath, [
+          "--input-type=module",
           "-e",
           `
-            require("request")({
-              url: "${process.env.API}/api",
+            import fetch from "node-fetch"
+            fetch("${process.env.API}/api", {
               method: "POST",
-              json: {
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
                 query: "query { blob(name: \\"${blobId}\\") { id name asImage { url dimensions { width height } placeholder { url } } asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } } } }"
-              }
-            }, (err, response, body) => {
-              process.stdout.write(JSON.stringify(body));
+              })
+            }).then(res => res.json()).then(json => {
+              process.stdout.write(JSON.stringify(json));
             });
           `,
         ])
