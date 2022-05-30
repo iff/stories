@@ -18,7 +18,7 @@
     "@mdx-js/loader": "^2.1.1",
     "@mdx-js/react": "^2.1.1",
     "@next/mdx": "^12.1.6",
-    "@timvir/mdx": "^0.1.47",
+    "@timvir/mdx": "^0.2.1",
     "@types/mdx": "^2.0.2",
     "@types/react-dom": "^18.0.5",
     "espree": "^9.3.2",
