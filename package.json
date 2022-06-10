@@ -12,7 +12,7 @@
     "@hapi/accept": "^6.0.0",
     "@linaria/babel-preset": "^3.0.0-beta.13",
     "@linaria/core": "^3.0.0-beta.21",
-    "@linaria/react": "^3.0.0-beta.20",
+    "@linaria/react": "^3.0.0-beta.21",
     "@linaria/shaker": "^3.0.0-beta.21",
     "@linaria/webpack-loader": "^3.0.0-beta.16",
     "@mdx-js/loader": "^2.1.1",
