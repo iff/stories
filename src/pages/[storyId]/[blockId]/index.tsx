@@ -75,7 +75,7 @@ export default function Page(props: Props) {
         {(() => {
           switch (block.__typename) {
             case "Image":
-              return <Inner.Image key={block.id} blobId={blob?.name} blob={blob} />;
+              return <Inner.Image key={block.id} blob={blob} />;
             case "Clip":
               return <Inner.Clip key={block.id} video={block.video} />;
           }
@@ -177,23 +177,8 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
 };
 
 const Inner = {
-  Image: function ({ blobId, blob }: { blobId?: string; blob: Blob }) {
+  Image: function ({ blob }: { blob: Blob }) {
     const ref = React.useRef<null | HTMLDivElement>(null);
-
-    const [loaded, setLoaded] = React.useState(false);
-    React.useEffect(() => {
-      const img = ref.current?.querySelector('img[decoding="async"]') as HTMLImageElement;
-      if (img) {
-        const onLoad = () => {
-          if (!img.src.match(/data:image\/gif/)) {
-            setLoaded(true);
-            img.removeEventListener("load", onLoad);
-          }
-        };
-
-        img.addEventListener("load", onLoad);
-      }
-    }, []);
 
     return (
       <div ref={ref}>
@@ -202,12 +187,6 @@ const Inner = {
           src={blob.asImage.url}
           objectFit="contain"
           layout="fill"
-          onError={(ev) => {
-            ev.currentTarget.style.visibility = "hidden";
-          }}
-          onLoad={(ev) => {
-            ev.currentTarget.style.visibility = "inherit";
-          }}
         />
         <div
           className={css`
@@ -223,12 +202,9 @@ const Inner = {
             background-size: contain;
             background-position: 50% 50%;
 
-            transition: opacity 0.5s ease-out;
-
-            z-index: 1;
+            z-index: -1;
           `}
           style={{
-            opacity: loaded ? 0 : 1,
             backgroundImage: `url(${blob.asImage.placeholder.url})`,
           }}
         />

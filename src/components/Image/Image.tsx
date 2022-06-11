@@ -65,23 +65,6 @@ function Image(props: Props) {
 
   const ref = React.useRef<null | HTMLDivElement>(null);
 
-  React.useEffect(() => {
-    const img = ref.current?.querySelector<null | HTMLImageElement>('img[decoding="async"]');
-    if (img) {
-      const onLoad = () => {
-        if (!img.src.match(/data:image\/gif/)) {
-          img.removeEventListener("load", onLoad);
-        }
-      };
-
-      img.addEventListener("load", onLoad);
-
-      return () => {
-        img.removeEventListener("load", onLoad);
-      };
-    }
-  }, []);
-
   return (
     <Root ref={ref} className={cx(classes.root, className, classes.captionPlacement[captionPlacement])} {...rest}>
       {(() => {
