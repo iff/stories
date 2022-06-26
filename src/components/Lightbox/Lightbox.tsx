@@ -30,6 +30,7 @@ function Lightbox(props: Props, ref: React.ForwardedRef<React.ElementRef<typeof 
   React.useEffect(() => {
     function onKeyDown(ev: KeyboardEvent) {
       if (ev.key === "Escape") {
+        ev.preventDefault();
         onClose?.();
       } else if (ev.key === "ArrowLeft") {
         if (typeof prev === "function") {
