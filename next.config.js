@@ -10,6 +10,8 @@ export default withLinaria(
       remarkPlugins: [remarkPlugin],
     },
   })({
+    reactStrictMode: true,
+
     linaria: {
       cacheDirectory: "./.next/cache/linaria",
     },
