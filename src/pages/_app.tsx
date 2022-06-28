@@ -17,8 +17,6 @@ function App(props: AppProps) {
 
         {/* Feed */}
         <link rel="alternate" type="application/rss+xml" title="Stories by Tomáš Čarnecky" href={`${baseUrl}/feed`} />
-
-        <script type="module" dangerouslySetInnerHTML={{ __html: themeDetector }} />
       </Head>
 
       <Component {...pageProps} />
@@ -147,45 +145,4 @@ css`
       font-display: swap;
     }
   }
-`;
-
-const themeDetector = `
-const mqls = Object.fromEntries(
-  ["light", "dark"].map((colorScheme) => [
-    colorScheme,
-    (() => {
-      const mql = window.matchMedia(\`(prefers-color-scheme: \${colorScheme})\`);
-      mql.addEventListener("change", applyTheme);
-      return mql;
-    })(),
-  ])
-);
-
-applyTheme();
-function applyTheme() {
-  const theme = detectTheme();
-  if (theme) {
-    useTheme(theme);
-  }
-}
-
-function detectTheme() {
-  try {
-    const theme = localStorage.getItem("theme");
-    if (theme) {
-      return theme;
-    }
-  } catch {}
-
-  for (const [colorScheme, mql] of Object.entries(mqls)) {
-    if (mql.matches) {
-      return colorScheme;
-    }
-  }
-}
-
-function useTheme(theme) {
-  document.documentElement.setAttribute("data-theme", theme);
-  document.documentElement.setAttribute("data-timvir-theme", theme);
-}
 `;
