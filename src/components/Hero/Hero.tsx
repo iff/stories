@@ -36,7 +36,12 @@ function Hero(props: Props) {
   return (
     <Root className={cx(classes.root, className)} {...rest}>
       <div ref={ref} className={classes.image}>
-        <Image src={blob.asImage.url} layout="fill" objectFit="cover" />
+        <Image
+          src={blob.asImage.url}
+          loader={({ src, width }) => `${src}?w=${width}`}
+          layout="fill"
+          objectFit="cover"
+        />
         <div
           className="sqip"
           style={{
