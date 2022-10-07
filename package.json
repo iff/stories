@@ -45,9 +45,7 @@
     "timvir": "^0.2.2",
     "unified": "^10.1.2",
     "use-immer": "^0.7.0",
-    "webpack": "^5.74.0"
-  },
-  "devDependencies": {
+    "webpack": "^5.74.0",
     "@types/node": "^18.8.3",
     "@types/react": "^18.0.21",
     "babel-plugin-macros": "^3.1.0",
