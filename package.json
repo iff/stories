@@ -42,7 +42,7 @@
     "react-intl": "^6.2.1",
     "remark-mdx": "^2.1.5",
     "remark-parse": "^10.0.1",
-    "timvir": "^0.2.2",
+    "timvir": "^0.2.3",
     "unified": "^10.1.2",
     "use-immer": "^0.7.0",
     "webpack": "^5.74.0",
