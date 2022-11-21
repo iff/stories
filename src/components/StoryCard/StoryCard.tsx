@@ -136,7 +136,7 @@ function StoryCard(props: Props) {
 
           {teaser}
 
-          <Link href={`/${story.id}`}>
+          <Link href={`/${story.id}`} passHref legacyBehavior>
             <a className={classes.read}>
               <Icons.ArrowRight size={"1.1em"} /> read this story
             </a>

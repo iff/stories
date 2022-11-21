@@ -70,7 +70,7 @@ function Image(props: Props) {
       {(() => {
         if (href) {
           return (
-            <Link passHref href={href}>
+            <Link passHref href={href} legacyBehavior>
               <a className={classes.image}>
                 <NextImage
                   alt=""

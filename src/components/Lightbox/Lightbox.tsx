@@ -180,7 +180,7 @@ function Nav(props: { action?: LinkProps | (() => void); className?: string; chi
     return <div onClick={action} {...rest} />;
   } else {
     return (
-      <Link {...action}>
+      <Link {...action} passHref legacyBehavior>
         <a {...rest} />
       </Link>
     );

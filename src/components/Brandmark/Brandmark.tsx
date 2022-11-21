@@ -13,7 +13,7 @@ function Brandmark(props: Props, ref: React.ForwardedRef<React.ElementRef<typeof
   const { className, ...rest } = props;
 
   return (
-    <Link href="/" passHref>
+    <Link href="/" passHref legacyBehavior>
       <Root ref={ref} className={cx(classes.root, className)} {...rest}>
         <div>Stories</div>
         <div>by Tomáš Čarnecký</div>
