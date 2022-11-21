@@ -37,6 +37,7 @@ function Hero(props: Props) {
     <Root className={cx(classes.root, className)} {...rest}>
       <div ref={ref} className={classes.image}>
         <Image
+          alt=""
           src={blob.asImage.url}
           loader={({ src, width }) => `${src}?w=${width}`}
           layout="fill"
