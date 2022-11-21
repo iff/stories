@@ -56,6 +56,7 @@ function Header(props: Props) {
 
       <div className={classes.image}>
         <Image
+          alt=""
           loader={({ src, width }) => `${src}?w=${width}`}
           src={blob.asImage.url}
           layout="fill"
