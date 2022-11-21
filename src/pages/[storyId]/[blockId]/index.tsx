@@ -5,7 +5,7 @@ import { css } from "@linaria/core";
 import * as fs from "fs";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import * as React from "react";

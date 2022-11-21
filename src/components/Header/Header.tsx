@@ -1,6 +1,6 @@
 import { Brandmark } from "@/components/Brandmark";
 import { css, cx } from "@linaria/core";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import * as React from "react";
 
 /**

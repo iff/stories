@@ -1,5 +1,5 @@
 import * as React from "react";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 
 export default function Page() {
   return (

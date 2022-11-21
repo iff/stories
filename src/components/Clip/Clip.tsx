@@ -1,5 +1,5 @@
 import { css, cx } from "@linaria/core";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import * as React from "react";
 
 /**

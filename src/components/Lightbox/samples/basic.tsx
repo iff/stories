@@ -1,4 +1,4 @@
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import * as React from "react";
 import { Lightbox } from "..";
 import { importBlob } from "../../../../image.macro";
