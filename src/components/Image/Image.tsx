@@ -73,6 +73,7 @@ function Image(props: Props) {
             <Link passHref href={href}>
               <a className={classes.image}>
                 <NextImage
+                  alt=""
                   loader={({ src, width }) => `${src}?w=${width}`}
                   src={blob.asImage.url}
                   width={layout === "fill" ? undefined : blob.asImage.dimensions.width}
@@ -91,6 +92,7 @@ function Image(props: Props) {
           return (
             <div className={classes.image}>
               <NextImage
+                alt=""
                 loader={({ src, width }) => `${src}?w=${width}`}
                 src={blob.asImage.url}
                 width={layout === "fill" ? undefined : blob.asImage.dimensions.width}

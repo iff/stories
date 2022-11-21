@@ -27,7 +27,7 @@ export default function Page(props: Props) {
         display: grid;
       `}
     >
-      <NextImage src={block.image.src} layout="fill" objectFit="cover" />
+      <NextImage alt="" src={block.image.src} layout="fill" objectFit="cover" />
     </div>
   );
 }

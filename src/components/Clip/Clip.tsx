@@ -99,7 +99,7 @@ function Clip(props: Props) {
         </video>
 
         <div className={classes.poster} style={{ opacity: playing ? 0 : 1 }}>
-          <NextImage src={video?.poster?.url} layout="fill" objectFit="cover" />
+          <NextImage alt="" src={video?.poster?.url} layout="fill" objectFit="cover" />
           <div
             className={classes.sqip}
             style={{ backgroundImage: `url(${video?.poster?.placeholder?.url})` }}
