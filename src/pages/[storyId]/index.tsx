@@ -4,7 +4,7 @@ import * as fs from "fs";
 import { GetStaticPaths, GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import { ParsedUrlQuery } from "querystring";
-import * as React from "react";
+import stories from "../../../content";
 
 export interface Query extends ParsedUrlQuery {
   storyId: string;
@@ -14,34 +14,6 @@ interface Props {
   storyId: string;
   blobs: Array<any>;
 }
-
-const stories = {
-  "where-i-was-meant-to-be": {
-    meta: require("../../../content/where-i-was-meant-to-be/meta").default,
-    Header: dynamic(() => import(`../../../content/where-i-was-meant-to-be/header`)),
-    Body: dynamic(() => import(`../../../content/where-i-was-meant-to-be/body.mdx`)),
-  },
-  "one-more-rush": {
-    meta: require("../../../content/one-more-rush/meta").default,
-    Header: dynamic(() => import(`../../../content/one-more-rush/header`)),
-    Body: dynamic(() => import(`../../../content/one-more-rush/body.mdx`)),
-  },
-  "dreamers-wake": {
-    meta: require("../../../content/dreamers-wake/meta").default,
-    Header: dynamic(() => import(`../../../content/dreamers-wake/header`)),
-    Body: dynamic(() => import(`../../../content/dreamers-wake/body.mdx`)),
-  },
-  "blouson-noir": {
-    meta: require("../../../content/blouson-noir/meta").default,
-    Header: dynamic(() => import(`../../../content/blouson-noir/header`)),
-    Body: dynamic(() => import(`../../../content/blouson-noir/body.mdx`)),
-  },
-  "shivering-sense": {
-    meta: require("../../../content/shivering-sense/meta").default,
-    Header: dynamic(() => import(`../../../content/shivering-sense/header`)),
-    Body: dynamic(() => import(`../../../content/shivering-sense/body.mdx`)),
-  },
-} as const;
 
 export default function Page(props: Props) {
   const { storyId, blobs } = props;
