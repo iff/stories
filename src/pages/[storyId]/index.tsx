@@ -41,6 +41,12 @@ export const getStaticPaths: GetStaticPaths<Query> = async () => {
 };
 
 export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) => {
+  if (!fs.existsSync(`./content/${params.storyId}/body.mdx`)) {
+    return {
+      notFound: true,
+    };
+  }
+
   const body = await fs.promises.readFile(`./content/${params.storyId}/body.mdx`, { encoding: "utf8" });
   const blocks = extractBlocks(body);
 
