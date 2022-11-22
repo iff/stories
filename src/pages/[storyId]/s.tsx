@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import * as React from "react";
+import stories from "../../../content";
 
 export interface Query extends ParsedUrlQuery {
   storyId: string;
@@ -11,24 +12,6 @@ export interface Query extends ParsedUrlQuery {
 interface Props {
   storyId: string;
 }
-
-const stories = {
-  "where-i-was-meant-to-be": {
-    meta: require("../../../content/where-i-was-meant-to-be/meta").default,
-  },
-  "one-more-rush": {
-    meta: require("../../../content/one-more-rush/meta").default,
-  },
-  "dreamers-wake": {
-    meta: require("../../../content/dreamers-wake/meta").default,
-  },
-  "blouson-noir": {
-    meta: require("../../../content/blouson-noir/meta").default,
-  },
-  "shivering-sense": {
-    meta: require("../../../content/shivering-sense/meta").default,
-  },
-} as const;
 
 function Page(props: Props) {
   const router = useRouter();
