@@ -1,4 +1,3 @@
 export default {
-    title: "No End in Sight",
-  };
-  
+  title: "No End in Sight",
+};
