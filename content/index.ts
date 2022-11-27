@@ -1,6 +1,13 @@
 import dynamic from "next/dynamic";
 
 export default {
+  "no-end-in-sight": {
+    // Card: dynamic(() => import(`./no-end-in-sight/card`)),
+    meta: require("./no-end-in-sight/meta").default,
+    Header: dynamic(() => import(`./no-end-in-sight/header`)),
+    Body: dynamic(() => import(`./no-end-in-sight/body.mdx`)),
+    // Image: dynamic(() => import(`./no-end-in-sight/image`)),
+  },
   "shivering-sense": {
     Card: dynamic(() => import(`./shivering-sense/card`)),
     meta: require("./shivering-sense/meta").default,
