@@ -26,7 +26,7 @@ function Group(props: Props, ref: React.ForwardedRef<React.ElementRef<typeof Roo
             {React.createElement<any>(child.type, {
               ...props,
               captionPlacement: "overlay",
-              layout: "fill",
+              fill: true,
             })}
           </div>
         );

@@ -67,8 +67,8 @@ function Image(props: Props) {
                 alt=""
                 loader={({ src, width }) => `${src}?w=${width}`}
                 src={blob.asImage.url}
-                width={blob.asImage.dimensions.width}
-                height={blob.asImage.dimensions.height}
+                width={fill ? undefined : blob.asImage.dimensions.width}
+                height={fill ? undefined : blob.asImage.dimensions.height}
                 fill={fill}
                 style={{ objectFit: fill ? "cover" : undefined }}
               />
@@ -85,8 +85,8 @@ function Image(props: Props) {
                 alt=""
                 loader={({ src, width }) => `${src}?w=${width}`}
                 src={blob.asImage.url}
-                width={blob.asImage.dimensions.width}
-                height={blob.asImage.dimensions.height}
+                width={fill ? undefined : blob.asImage.dimensions.width}
+                height={fill ? undefined : blob.asImage.dimensions.height}
                 fill={fill}
                 style={{ objectFit: fill ? "cover" : undefined }}
               />
