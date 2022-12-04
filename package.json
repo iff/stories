@@ -14,7 +14,7 @@
     "@linaria/core": "^4.2.3",
     "@linaria/react": "^4.1.2",
     "@linaria/shaker": "^4.2.5",
-    "@linaria/webpack5-loader": "^4.1.8",
+    "@linaria/webpack5-loader": "^4.1.9",
     "@mdx-js/loader": "^2.1.5",
     "@mdx-js/react": "^2.1.5",
     "@next/mdx": "^13.0.6",
