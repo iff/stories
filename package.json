@@ -10,7 +10,7 @@
   "dependencies": {
     "@babel/core": "^7.20.5",
     "@hapi/accept": "^6.0.0",
-    "@linaria/babel-preset": "^4.1.2",
+    "@linaria/babel-preset": "^4.3.2",
     "@linaria/core": "^4.2.4",
     "@linaria/react": "^4.3.2",
     "@linaria/shaker": "^4.2.6",
