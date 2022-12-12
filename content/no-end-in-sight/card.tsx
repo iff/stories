@@ -5,6 +5,7 @@ import { importBlob } from "../../image.macro";
 export default function Component() {
   return (
     <StoryCard
+      layout="inverted"
       story={{
         id: "no-end-in-sight",
       }}
