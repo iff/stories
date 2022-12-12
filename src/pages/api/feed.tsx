@@ -57,6 +57,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const stories = [
     {
+      id: "no-end-in-sight",
+      title: "No End in Sight",
+      publishedAt: new Date(Date.parse("2022-12-12")),
+      description: "Exploring North Macedonia's cities, mountains, and lakes during the last warm autumn days of 2022.",
+    },
+    {
       id: "shivering-sense",
       title: "Shivering Sense",
       publishedAt: new Date(Date.parse("2022-04-24")),

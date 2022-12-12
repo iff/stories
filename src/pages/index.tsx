@@ -29,6 +29,7 @@ const classes = {
 };
 
 const featuredStories = [
+  "no-end-in-sight",
   "shivering-sense",
   "blouson-noir",
   "dreamers-wake",
