@@ -27,7 +27,7 @@
     "babel-plugin-macros": "^3.1.0",
     "feed": "^4.2.2",
     "fp-ts": "^2.13.1",
-    "immer": "^9.0.16",
+    "immer": "^9.0.17",
     "io-ts": "^2.2.20",
     "io-ts-types": "^0.5.19",
     "monocle-ts": "^2.3.13",
