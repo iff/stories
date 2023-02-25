@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.20.12",
-    "@hapi/accept": "^6.0.0",
+    "@hapi/accept": "^6.0.1",
     "@linaria/babel-preset": "^4.4.3",
     "@linaria/core": "^4.2.8",
     "@linaria/react": "^4.3.6",
