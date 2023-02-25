@@ -9,10 +9,8 @@ module.exports = createMacro(({ references }) => {
 
       const response = JSON.parse(
         execFileSync(process.execPath, [
-          "--input-type=module",
           "-e",
           `
-            import fetch from "node-fetch"
             fetch("${process.env.API}/api", {
               method: "POST",
               headers: {
