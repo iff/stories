@@ -21,6 +21,8 @@ export default withPlugins(plugins, {
 
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 
+  transpilePackages: ["timvir"],
+
   images: {
     domains: ["storage.googleapis.com", "web-4n62l3bdha-lz.a.run.app"],
   },
