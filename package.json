@@ -19,7 +19,7 @@
     "@mdx-js/react": "^2.3.0",
     "@next/mdx": "^13.2.4",
     "@timvir/mdx": "^0.2.8",
-    "@types/mdx": "^2.0.3",
+    "@types/mdx": "^2.0.4",
     "@types/node": "^18.15.3",
     "@types/react": "^18.0.29",
     "@types/react-dom": "^18.0.11",
