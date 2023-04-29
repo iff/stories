@@ -99,7 +99,7 @@ dependencies:
     version: 4.4.0(react-dom@18.2.0)(react@18.2.0)
   react-intl:
     specifier: ^6.4.1
-    version: 6.4.1(react@18.2.0)(typescript@4.9.5)
+    version: 6.4.1(react@18.2.0)(typescript@5.0.4)
   remark-mdx:
     specifier: ^2.3.0
     version: 2.3.0
@@ -110,8 +110,8 @@ dependencies:
     specifier: ^0.2.10
     version: 0.2.10(@mdx-js/react@2.3.0)(react-dom@18.2.0)(react-hotkeys-hook@4.4.0)(react@18.2.0)
   typescript:
-    specifier: ^4.9.5
-    version: 4.9.5
+    specifier: ^5.0.4
+    version: 5.0.4
   unified:
     specifier: ^10.1.2
     version: 10.1.2
@@ -1348,7 +1348,7 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /@formatjs/intl@2.7.1(typescript@4.9.5):
+  /@formatjs/intl@2.7.1(typescript@5.0.4):
     resolution: {integrity: sha512-se6vxidsN3PCmzqTsDd3YDT4IX9ZySPy39LYhF7x2ssNvlGMOuW3umkrIhKkXB7ZskqsJGY53LVCdiHsSwhGng==}
     peerDependencies:
       typescript: ^4.7 || 5
@@ -1363,7 +1363,7 @@ packages:
       '@formatjs/intl-listformat': 7.2.1
       intl-messageformat: 10.3.4
       tslib: 2.4.0
-      typescript: 4.9.5
+      typescript: 5.0.4
     dev: false
 
   /@hapi/accept@6.0.1:
@@ -3318,7 +3318,7 @@ packages:
       html-element-attributes: 1.3.1
     dev: false
 
-  /react-intl@6.4.1(react@18.2.0)(typescript@4.9.5):
+  /react-intl@6.4.1(react@18.2.0)(typescript@5.0.4):
     resolution: {integrity: sha512-/aT5595AEMZ+Pjmt8W2R5/ZkYJmyyd6jTzHzqhJ1LnfeG36+N5huBtykxYhHqLc1BrIRQ1fTX1orYC0Ej5ojtg==}
     peerDependencies:
       react: ^16.6.0 || 17 || 18
@@ -3329,7 +3329,7 @@ packages:
     dependencies:
       '@formatjs/ecma402-abstract': 1.14.3
       '@formatjs/icu-messageformat-parser': 2.3.1
-      '@formatjs/intl': 2.7.1(typescript@4.9.5)
+      '@formatjs/intl': 2.7.1(typescript@5.0.4)
       '@formatjs/intl-displaynames': 6.3.1
       '@formatjs/intl-listformat': 7.2.1
       '@types/hoist-non-react-statics': 3.3.1
@@ -3338,7 +3338,7 @@ packages:
       intl-messageformat: 10.3.4
       react: 18.2.0
       tslib: 2.4.0
-      typescript: 4.9.5
+      typescript: 5.0.4
     dev: false
 
   /react-is@16.8.6:
@@ -3651,9 +3651,9 @@ packages:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
     dev: false
 
-  /typescript@4.9.5:
-    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
-    engines: {node: '>=4.2.0'}
+  /typescript@5.0.4:
+    resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
+    engines: {node: '>=12.20'}
     hasBin: true
     dev: false
 
