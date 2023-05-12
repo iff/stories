@@ -59,8 +59,8 @@ dependencies:
     specifier: ^2.15.0
     version: 2.15.0
   immer:
-    specifier: ^10.0.1
-    version: 10.0.1
+    specifier: ^10.0.2
+    version: 10.0.2
   io-ts:
     specifier: ^2.2.20
     version: 2.2.20(fp-ts@2.15.0)
@@ -114,7 +114,7 @@ dependencies:
     version: 10.1.2
   use-immer:
     specifier: ^0.9.0
-    version: 0.9.0(immer@10.0.1)(react@18.2.0)
+    version: 0.9.0(immer@10.0.2)(react@18.2.0)
   webpack:
     specifier: ^5.79.0
     version: 5.79.0
@@ -2466,8 +2466,8 @@ packages:
     resolution: {integrity: sha512-UrRKgp5sQmRnDy4TEwAUsu14XBUlzKB8U3hjIYDjcZ3Hbp86Jtftzxfgrv6E/ii/h78tsaZwAnAE8HwnHr0dPA==}
     dev: false
 
-  /immer@10.0.1:
-    resolution: {integrity: sha512-zg++jJLsKKTwXGeSYIw0HgChSYQGtu0UDTnbKx5aGLYgte4CwTmH9eJDYyQ6FheyUtBe+lQW9FrGxya1G+Dtmg==}
+  /immer@10.0.2:
+    resolution: {integrity: sha512-Rx3CqeqQ19sxUtYV9CU911Vhy8/721wRFnJv3REVGWUmoAcIwzifTsdmJte/MV+0/XpM35LZdQMBGkRIoLPwQA==}
     dev: false
 
   /import-fresh@3.3.0:
@@ -3630,13 +3630,13 @@ packages:
       bytestring: 1.0.0
       downshift: 7.0.1(react@18.2.0)
       fuzzaldrin-plus: 0.6.0
-      immer: 10.0.1
+      immer: 10.0.2
       prism-react-renderer: 2.0.3(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-feather: 2.0.10(react@18.2.0)
       react-hotkeys-hook: 4.4.0(react-dom@18.2.0)(react@18.2.0)
-      use-immer: 0.9.0(immer@10.0.1)(react@18.2.0)
+      use-immer: 0.9.0(immer@10.0.2)(react@18.2.0)
       wonka: 6.1.0
     dev: false
 
@@ -3785,13 +3785,13 @@ packages:
       punycode: 2.1.1
     dev: false
 
-  /use-immer@0.9.0(immer@10.0.1)(react@18.2.0):
+  /use-immer@0.9.0(immer@10.0.2)(react@18.2.0):
     resolution: {integrity: sha512-/L+enLi0nvuZ6j4WlyK0US9/ECUtV5v9RUbtxnn5+WbtaXYUaOBoKHDNL9I5AETdurQ4rIFIj/s+Z5X80ATyKw==}
     peerDependencies:
       immer: '>=2.0.0'
       react: ^16.8.0 || ^17.0.1 || ^18.0.0
     dependencies:
-      immer: 10.0.1
+      immer: 10.0.2
       react: 18.2.0
     dev: false
 
