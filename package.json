@@ -41,7 +41,7 @@
     "react-hotkeys-hook": "^4.4.0",
     "react-intl": "^6.4.2",
     "remark-mdx": "^2.3.0",
-    "remark-parse": "^10.0.1",
+    "remark-parse": "^10.0.2",
     "timvir": "^0.2.11",
     "typescript": "^5.0.4",
     "unified": "^10.1.2",
