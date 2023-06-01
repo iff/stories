@@ -43,7 +43,7 @@
     "remark-mdx": "^2.3.0",
     "remark-parse": "^10.0.2",
     "timvir": "^0.2.11",
-    "typescript": "^5.0.4",
+    "typescript": "^5.1.3",
     "unified": "^10.1.2",
     "use-immer": "^0.9.0",
     "webpack": "^5.83.1"
