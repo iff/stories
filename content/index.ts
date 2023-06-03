@@ -1,6 +1,13 @@
 import dynamic from "next/dynamic";
 
 export default {
+  "rebirth": {
+    Card: dynamic(() => import(`./rebirth/card`)),
+    meta: require("./rebirth/meta").default,
+    Header: dynamic(() => import(`./rebirth/header`)),
+    Body: dynamic(() => import(`./rebirth/body.mdx`)),
+    Image: dynamic(() => import(`./rebirth/image`)),
+  },
   "no-end-in-sight": {
     Card: dynamic(() => import(`./no-end-in-sight/card`)),
     meta: require("./no-end-in-sight/meta").default,
