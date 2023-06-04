@@ -1,5 +1,4 @@
 import { Hero } from "@/components/Hero";
-import { css } from "@linaria/core";
 import Head from "next/head";
 import * as React from "react";
 import stories from "../../content";
@@ -13,7 +12,7 @@ export default function Page() {
 
       <Hero />
 
-      <div className={classes.featuredStories}>
+      <div>
         {featuredStories.map((storyId) => (
           <div key={storyId} style={{ margin: "2em 0 6em" }}>
             {React.createElement(stories[storyId].Card)}
@@ -23,10 +22,6 @@ export default function Page() {
     </>
   );
 }
-
-const classes = {
-  featuredStories: css``,
-};
 
 const featuredStories = [
   "rebirth",
