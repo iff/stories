@@ -57,6 +57,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const stories = [
     {
+      id: "rebirth",
+      title: "Rebirth",
+      publishedAt: new Date(Date.parse("2023-06-07")),
+      description: "A second opportunity presented itself for me to spend a few weeks in Morocco. I celebrated christmas in a dasert camp, and summitted the highest mountain of north africa on new years eve.",
+    },
+    {
       id: "no-end-in-sight",
       title: "No End in Sight",
       publishedAt: new Date(Date.parse("2022-12-12")),
