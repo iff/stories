@@ -99,8 +99,8 @@ dependencies:
     specifier: ^4.4.0
     version: 4.4.0(react-dom@18.2.0)(react@18.2.0)
   react-intl:
-    specifier: ^6.4.2
-    version: 6.4.2(react@18.2.0)(typescript@5.1.3)
+    specifier: ^6.4.3
+    version: 6.4.3(react@18.2.0)(typescript@5.1.3)
   remark-mdx:
     specifier: ^2.3.0
     version: 2.3.0
@@ -1299,70 +1299,70 @@ packages:
     resolution: {integrity: sha512-G/YwXTkv7Den9mXDO7AhLWkE3q+I92B+VqAE+dYG4NGPaHZGvt3G8Q0p9vmE+sq7rTGphUbAvmQ9YpbfMQGGlA==}
     dev: false
 
-  /@formatjs/ecma402-abstract@1.15.0:
-    resolution: {integrity: sha512-7bAYAv0w4AIao9DNg0avfOLTCPE9woAgs6SpXuMq11IN3A+l+cq8ghczwqSZBM11myvPSJA7vLn72q0rJ0QK6Q==}
+  /@formatjs/ecma402-abstract@1.16.0:
+    resolution: {integrity: sha512-qIH2cmG/oHGrVdApbqDf6/YR+B2A4NdkBjKLeq369OMVkqMFsC5oPSP1xpiyL1cAn+PbNEZHxwOVMYD/C76c6g==}
     dependencies:
-      '@formatjs/intl-localematcher': 0.2.32
+      '@formatjs/intl-localematcher': 0.3.0
       tslib: 2.4.0
     dev: false
 
-  /@formatjs/fast-memoize@2.0.1:
-    resolution: {integrity: sha512-M2GgV+qJn5WJQAYewz7q2Cdl6fobQa69S1AzSM2y0P68ZDbK5cWrJIcPCO395Of1ksftGZoOt4LYCO/j9BKBSA==}
-    dependencies:
-      tslib: 2.4.0
-    dev: false
-
-  /@formatjs/icu-messageformat-parser@2.4.0:
-    resolution: {integrity: sha512-6Dh5Z/gp4F/HovXXu/vmd0If5NbYLB5dZrmhWVNb+BOGOEU3wt7Z/83KY1dtd7IDhAnYHasbmKE1RbTE0J+3hw==}
-    dependencies:
-      '@formatjs/ecma402-abstract': 1.15.0
-      '@formatjs/icu-skeleton-parser': 1.4.0
-      tslib: 2.4.0
-    dev: false
-
-  /@formatjs/icu-skeleton-parser@1.4.0:
-    resolution: {integrity: sha512-Qq347VM616rVLkvN6QsKJELazRyNlbCiN47LdH0Mc5U7E2xV0vatiVhGqd3KFgbc055BvtnUXR7XX60dCGFuWg==}
-    dependencies:
-      '@formatjs/ecma402-abstract': 1.15.0
-      tslib: 2.4.0
-    dev: false
-
-  /@formatjs/intl-displaynames@6.3.2:
-    resolution: {integrity: sha512-kBOh0O7QYKLUqaZujLSEF2+au017plPp63R6Hrokl+oDtLyTt9y9pEuCTbOKh/P8CC9THnDLKRKgeVWZw5Ek8A==}
-    dependencies:
-      '@formatjs/ecma402-abstract': 1.15.0
-      '@formatjs/intl-localematcher': 0.2.32
-      tslib: 2.4.0
-    dev: false
-
-  /@formatjs/intl-listformat@7.2.2:
-    resolution: {integrity: sha512-YIruRGwUrmgVOXjWi6VbwPcRNBkEfgK2DFjyyqopCmpfJ+39vnl46oLpVchErnuXs6kkARy5GcGaGV7xRsH4lw==}
-    dependencies:
-      '@formatjs/ecma402-abstract': 1.15.0
-      '@formatjs/intl-localematcher': 0.2.32
-      tslib: 2.4.0
-    dev: false
-
-  /@formatjs/intl-localematcher@0.2.32:
-    resolution: {integrity: sha512-k/MEBstff4sttohyEpXxCmC3MqbUn9VvHGlZ8fauLzkbwXmVrEeyzS+4uhrvAk9DWU9/7otYWxyDox4nT/KVLQ==}
+  /@formatjs/fast-memoize@2.1.0:
+    resolution: {integrity: sha512-w7IzF6Okx2tQXRVlT/cXI4dfS0bvKHhWE5Kn7ajqDVYH4nksUFOMU21Yd4zDENxZ8mFb7IBu7bOopnB2VxZQeA==}
     dependencies:
       tslib: 2.4.0
     dev: false
 
-  /@formatjs/intl@2.7.2(typescript@5.1.3):
-    resolution: {integrity: sha512-ziiQfnXwY0/rXhtohSAmYMqDjRsihoMKdl8H2aA+FvxG9638E0XrvfBFCb+1HhimNiuqRz5fTY7F/bZtsJxsjA==}
+  /@formatjs/icu-messageformat-parser@2.5.0:
+    resolution: {integrity: sha512-8AwKRkVIZzVlvZwio1TcLVvUbJw0up1joa8//JIxKVeflqKiZwfzCGAelZt/4hHCEQf9NECose//nODnmBEkNQ==}
+    dependencies:
+      '@formatjs/ecma402-abstract': 1.16.0
+      '@formatjs/icu-skeleton-parser': 1.5.0
+      tslib: 2.4.0
+    dev: false
+
+  /@formatjs/icu-skeleton-parser@1.5.0:
+    resolution: {integrity: sha512-R/wOg/hxh3JWNB4LHYfNtIe8PC39mkzplh6gtrqCY33EqYeUFEGOYTWJrkXNcoRXlZWQtfrH6REch5r57tAyMQ==}
+    dependencies:
+      '@formatjs/ecma402-abstract': 1.16.0
+      tslib: 2.4.0
+    dev: false
+
+  /@formatjs/intl-displaynames@6.4.0:
+    resolution: {integrity: sha512-5M4ok7tY5UI/Qzq2jULVrl17PZqyOgcSRW/7VXfVXyD0FG76TlmhuIKENiIYkFn5z3FlB+XMiQczvwqK+9ORJw==}
+    dependencies:
+      '@formatjs/ecma402-abstract': 1.16.0
+      '@formatjs/intl-localematcher': 0.3.0
+      tslib: 2.4.0
+    dev: false
+
+  /@formatjs/intl-listformat@7.3.0:
+    resolution: {integrity: sha512-HWSST1TBcKi5frneeDi9O6YYp9NWb7HNrDSbCgnBLmz/9rpGycdp9c5bTKJqYFN6apw3E/kIo+kZHjVeiFITRQ==}
+    dependencies:
+      '@formatjs/ecma402-abstract': 1.16.0
+      '@formatjs/intl-localematcher': 0.3.0
+      tslib: 2.4.0
+    dev: false
+
+  /@formatjs/intl-localematcher@0.3.0:
+    resolution: {integrity: sha512-NFoxXX3dtZ6B53NlCErq181NxN/noMZOWKHfcEPQRNfV0a19THxyjxu2RTSNS3532wGm6fOdid5qsBQWg0Rhtw==}
+    dependencies:
+      tslib: 2.4.0
+    dev: false
+
+  /@formatjs/intl@2.8.0(typescript@5.1.3):
+    resolution: {integrity: sha512-RRp4BMG9v7vBegbX1UuDMfoBOQljDjcx1clY1XV8D5qn6m5w4gyJFCJ/iiG6eaBBRNAJrqGdszi0Ry6UNiWDsQ==}
     peerDependencies:
       typescript: ^4.7 || 5
     peerDependenciesMeta:
       typescript:
         optional: true
     dependencies:
-      '@formatjs/ecma402-abstract': 1.15.0
-      '@formatjs/fast-memoize': 2.0.1
-      '@formatjs/icu-messageformat-parser': 2.4.0
-      '@formatjs/intl-displaynames': 6.3.2
-      '@formatjs/intl-listformat': 7.2.2
-      intl-messageformat: 10.3.5
+      '@formatjs/ecma402-abstract': 1.16.0
+      '@formatjs/fast-memoize': 2.1.0
+      '@formatjs/icu-messageformat-parser': 2.5.0
+      '@formatjs/intl-displaynames': 6.4.0
+      '@formatjs/intl-listformat': 7.3.0
+      intl-messageformat: 10.4.0
       tslib: 2.4.0
       typescript: 5.1.3
     dev: false
@@ -2486,12 +2486,12 @@ packages:
     resolution: {integrity: sha512-7NXolsK4CAS5+xvdj5OMMbI962hU/wvwoxk+LWR9Ek9bVtyuuYScDN6eS0rUm6TxApFpw7CX1o4uJzcd4AyD3Q==}
     dev: false
 
-  /intl-messageformat@10.3.5:
-    resolution: {integrity: sha512-6kPkftF8Jg3XJCkGKa5OD+nYQ+qcSxF4ZkuDdXZ6KGG0VXn+iblJqRFyDdm9VvKcMyC0Km2+JlVQffFM52D0YA==}
+  /intl-messageformat@10.4.0:
+    resolution: {integrity: sha512-WKmvL2ATvsTJ0CMkO1Hs6f87QlOYZ10opvOJtj0+I3RAQCBxrY8xA3QvVJPJHTS2ru0B7q/kCDyJE1oiiElgyA==}
     dependencies:
-      '@formatjs/ecma402-abstract': 1.15.0
-      '@formatjs/fast-memoize': 2.0.1
-      '@formatjs/icu-messageformat-parser': 2.4.0
+      '@formatjs/ecma402-abstract': 1.16.0
+      '@formatjs/fast-memoize': 2.1.0
+      '@formatjs/icu-messageformat-parser': 2.5.0
       tslib: 2.4.0
     dev: false
 
@@ -3328,8 +3328,8 @@ packages:
       html-element-attributes: 1.3.1
     dev: false
 
-  /react-intl@6.4.2(react@18.2.0)(typescript@5.1.3):
-    resolution: {integrity: sha512-q8QyLZfbyqV3Ifa7vtjRrgfSQPGTR6Fi+u9tP/CuzhUPl9DJEPIrvUFhlBryKtRW2qNASqchaP/79Obip+h6oA==}
+  /react-intl@6.4.3(react@18.2.0)(typescript@5.1.3):
+    resolution: {integrity: sha512-Zt9fxbEETlxUOtC9ZP5lP84o4tY+B4EgLfqqXIrobNqJjRRonusKt3r4S+vnyfeZD0oCrkXfvUGJaKJnNYhNSQ==}
     peerDependencies:
       react: ^16.6.0 || 17 || 18
       typescript: ^4.7 || 5
@@ -3337,15 +3337,15 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@formatjs/ecma402-abstract': 1.15.0
-      '@formatjs/icu-messageformat-parser': 2.4.0
-      '@formatjs/intl': 2.7.2(typescript@5.1.3)
-      '@formatjs/intl-displaynames': 6.3.2
-      '@formatjs/intl-listformat': 7.2.2
+      '@formatjs/ecma402-abstract': 1.16.0
+      '@formatjs/icu-messageformat-parser': 2.5.0
+      '@formatjs/intl': 2.8.0(typescript@5.1.3)
+      '@formatjs/intl-displaynames': 6.4.0
+      '@formatjs/intl-listformat': 7.3.0
       '@types/hoist-non-react-statics': 3.3.1
       '@types/react': 18.2.9
       hoist-non-react-statics: 3.3.2
-      intl-messageformat: 10.3.5
+      intl-messageformat: 10.4.0
       react: 18.2.0
       tslib: 2.4.0
       typescript: 5.1.3
