@@ -9,8 +9,8 @@ dependencies:
     specifier: ^7.22.8
     version: 7.22.8
   '@hapi/accept':
-    specifier: ^6.0.1
-    version: 6.0.1
+    specifier: ^6.0.2
+    version: 6.0.2
   '@linaria/babel-preset':
     specifier: ^4.4.5
     version: 4.4.5
@@ -1367,8 +1367,8 @@ packages:
       typescript: 5.1.6
     dev: false
 
-  /@hapi/accept@6.0.1:
-    resolution: {integrity: sha512-aLkYj7zzgC3CSlEVOs84eBOEE3i9xZK2tdQEP+TOj2OFzMWCi9zjkRet82V3GGjecE//zFrCLKIykuaE0uM4bg==}
+  /@hapi/accept@6.0.2:
+    resolution: {integrity: sha512-xaTLf29Zeph/B32hekmgxLFsEPuX1xQYyZu0gJ4ZCHKU6nXmBRXfBymtWNEK0souOJcX2XHWUaZU6JzccuuMpg==}
     dependencies:
       '@hapi/boom': 10.0.1
       '@hapi/hoek': 11.0.2
