@@ -24,6 +24,7 @@ export default function Page() {
 }
 
 const featuredStories = [
+  "where-the-roads-collide",
   "rebirth",
   "no-end-in-sight",
   "shivering-sense",

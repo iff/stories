@@ -50,4 +50,11 @@ export default {
     Body: dynamic(() => import(`./dreamers-wake/body.mdx`)),
     Image: dynamic(() => import(`./dreamers-wake/image`)),
   },
+  "where-the-roads-collide": {
+    Card: dynamic(() => import(`./where-the-roads-collide/card`)),
+    meta: require("./where-the-roads-collide/meta").default,
+    Header: dynamic(() => import(`./where-the-roads-collide/header`)),
+    Body: dynamic(() => import(`./where-the-roads-collide/body.mdx`)),
+    Image: dynamic(() => import(`./where-the-roads-collide/image`)),
+  },
 } as const;
