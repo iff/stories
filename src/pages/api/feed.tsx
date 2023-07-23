@@ -57,6 +57,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const stories = [
     {
+      id: "where-the-roads-collide",
+      title: "Where the Roads Collide",
+      publishedAt: new Date(Date.parse("2023-07-23")),
+      description: "Checking another country in the Western Balkans off my bucket list.",
+    },
+    {
       id: "rebirth",
       title: "Rebirth",
       publishedAt: new Date(Date.parse("2023-06-07")),
