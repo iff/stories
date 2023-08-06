@@ -152,7 +152,6 @@ const classes = {
     margin: 8px 0;
     font-size: 0.75em;
     line-height: 1.3;
-    font-style: italic;
     color: var(--secondary-text-color);
   `,
 
@@ -161,19 +160,16 @@ const classes = {
       & figcaption {
         position: absolute;
         margin: 0;
-        left: 6px;
-        right: 6px;
-        bottom: 6px;
+        left: 2px;
+        right: 2px;
+        bottom: 2px;
         background-color: #18191b;
         color: #fefefe;
-        padding: 8px 10px;
+        padding: 8px 10px 6px;
         text-align: left;
         pointer-events: none;
         opacity: 0;
         transition: opacity 0.4s;
-        border-radius: 3px;
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        box-shadow: 0 0 6px black;
       }
 
       &:hover figcaption {
