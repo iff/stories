@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@babel/core": "^7.22.11",
+    "@babel/core": "^7.22.20",
     "@hapi/accept": "^6.0.2",
     "@linaria/babel-preset": "^4.5.4",
     "@linaria/core": "^4.5.4",
