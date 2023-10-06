@@ -12,20 +12,20 @@ dependencies:
     specifier: ^6.0.2
     version: 6.0.2
   '@linaria/babel-preset':
+    specifier: ^5.0.3
+    version: 5.0.3
+  '@linaria/core':
     specifier: ^5.0.2
     version: 5.0.2
-  '@linaria/core':
-    specifier: ^5.0.1
-    version: 5.0.1
   '@linaria/react':
-    specifier: ^5.0.1
-    version: 5.0.1(react@18.2.0)
+    specifier: ^5.0.3
+    version: 5.0.3(react@18.2.0)
   '@linaria/shaker':
-    specifier: ^5.0.1
-    version: 5.0.1
-  '@linaria/webpack5-loader':
     specifier: ^5.0.2
-    version: 5.0.2(webpack@5.88.2)
+    version: 5.0.2
+  '@linaria/webpack5-loader':
+    specifier: ^5.0.3
+    version: 5.0.3(webpack@5.88.2)
   '@mdx-js/loader':
     specifier: ^2.3.0
     version: 2.3.0(webpack@5.88.2)
@@ -1444,8 +1444,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: false
 
-  /@linaria/babel-preset@5.0.2:
-    resolution: {integrity: sha512-QBDHii/tS5xs4oi8KFU/pxnsicv/kjuI95dlRzPUJc/yJUyPQGjFYWHV7OEw2h8p9Em5HOmY+//lyA4g+U5JOg==}
+  /@linaria/babel-preset@5.0.3:
+    resolution: {integrity: sha512-La6QPqR2gemDbpbyN9yOGOfVSSOSdzE6WvWJDIN65dA92LlBTx3nIhxB9FDziD4dD3GKgkA1cOhVpu+bOUavLQ==}
     engines: {node: '>=16.0.0'}
     dependencies:
       '@babel/core': 7.22.20
@@ -1454,11 +1454,11 @@ packages:
       '@babel/template': 7.22.15
       '@babel/traverse': 7.22.20
       '@babel/types': 7.22.19
-      '@linaria/core': 5.0.1
+      '@linaria/core': 5.0.2
       '@linaria/logger': 5.0.0
-      '@linaria/shaker': 5.0.1
-      '@linaria/tags': 5.0.1
-      '@linaria/utils': 5.0.1
+      '@linaria/shaker': 5.0.2
+      '@linaria/tags': 5.0.2
+      '@linaria/utils': 5.0.2
       cosmiconfig: 8.1.3
       happy-dom: 10.8.0
       source-map: 0.7.4
@@ -1468,13 +1468,13 @@ packages:
       - supports-color
     dev: false
 
-  /@linaria/core@5.0.1:
-    resolution: {integrity: sha512-1gOabdJZ0ARluqVSD6wbFylRFyAZKc7bVHHBeWk4F4tkJ/fsT9IMlkUaPHJFvoP5sDPUwhQt6A2yvLQX67WCUA==}
+  /@linaria/core@5.0.2:
+    resolution: {integrity: sha512-l5jQq7w9kDvonfr/0MBF47Dagx9Y9f/o5Q8j3zv7GepwG/yHQdbjKr0tq07rx2fSDDX7Nbqlxk6k9Ymir/NGpg==}
     engines: {node: '>=16.0.0'}
     dependencies:
       '@linaria/logger': 5.0.0
-      '@linaria/tags': 5.0.1
-      '@linaria/utils': 5.0.1
+      '@linaria/tags': 5.0.2
+      '@linaria/utils': 5.0.2
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -1489,16 +1489,16 @@ packages:
       - supports-color
     dev: false
 
-  /@linaria/react@5.0.1(react@18.2.0):
-    resolution: {integrity: sha512-FMdGp6Y5b/bbj03QydDIiEbk3KW24o+4dk2LpEhm9fI+Oistev+QMvbPozFwFhJsAg5TA6C0IHNG7bGXdqC6lw==}
+  /@linaria/react@5.0.3(react@18.2.0):
+    resolution: {integrity: sha512-faTQHnUlrAz0Lodu+rr6Yx59rX0nqFOrZ5/IdlfQcTRz9VebyVL4vtA3AOecmn1YFZjMpqjopT0OzNz6GknQSg==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       react: '>=16'
     dependencies:
       '@emotion/is-prop-valid': 1.2.0
-      '@linaria/core': 5.0.1
-      '@linaria/tags': 5.0.1
-      '@linaria/utils': 5.0.1
+      '@linaria/core': 5.0.2
+      '@linaria/tags': 5.0.2
+      '@linaria/utils': 5.0.2
       minimatch: 9.0.3
       react: 18.2.0
       react-html-attributes: 1.4.6
@@ -1507,8 +1507,8 @@ packages:
       - supports-color
     dev: false
 
-  /@linaria/shaker@5.0.1:
-    resolution: {integrity: sha512-5ONQltie7fKeKVvU7FIAs7Tto+nwNu/MpbNs75C9HeYjkccPzn+75PqyJj5gAQE/lpuwRXmNuj/R6BrAO6M5oQ==}
+  /@linaria/shaker@5.0.2:
+    resolution: {integrity: sha512-Zapqygn///hmTXI8RDcYjvkkKXcncZEl54kLpM8WS8I2VCPw8LNOyt/A0sM631qh78EOHAEXlIaPCROBLj21lg==}
     engines: {node: '>=16.0.0'}
     dependencies:
       '@babel/core': 7.22.20
@@ -1518,26 +1518,26 @@ packages:
       '@babel/plugin-transform-template-literals': 7.22.5(@babel/core@7.22.20)
       '@babel/preset-env': 7.22.20(@babel/core@7.22.20)
       '@linaria/logger': 5.0.0
-      '@linaria/utils': 5.0.1
+      '@linaria/utils': 5.0.2
       babel-plugin-transform-react-remove-prop-types: 0.4.24
       ts-invariant: 0.10.3
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@linaria/tags@5.0.1:
-    resolution: {integrity: sha512-gZX7q0o3FgHtvwmpn70QI0fJ6Rr61pvMHhGkY42Td3MfhzU9lgBLxYQ2ohc9WsbyQrTT00W1M9lwihoVyIac6g==}
+  /@linaria/tags@5.0.2:
+    resolution: {integrity: sha512-opcORl2sA6WkBjTNLHTgpet97dNKnwPRX/QGGZMykBsvGH3AsnEg/bT31cKBMBhL+YBGQsCdBmolxvCkWPOXQw==}
     engines: {node: '>=16.0.0'}
     dependencies:
       '@babel/generator': 7.22.15
       '@linaria/logger': 5.0.0
-      '@linaria/utils': 5.0.1
+      '@linaria/utils': 5.0.2
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@linaria/utils@5.0.1:
-    resolution: {integrity: sha512-+lHW72uJIDU3SS7qFGCmq2KfAI8JdEQBPxkTpJHQLaj1EAqxWkq/rKa1WGaIfukg5v6/qWaT/j85E68nP8As7A==}
+  /@linaria/utils@5.0.2:
+    resolution: {integrity: sha512-ZL8Yz4IIr9A8a5+o5LRnEpgdzIkyj4yKJrhw5Zv8wwvL+d/MHUK0q+l/KvxBmuYdcF+YYVHZ9eeBHTQBSL7r/w==}
     engines: {node: '>=16.0.0'}
     dependencies:
       '@babel/core': 7.22.20
@@ -1554,15 +1554,15 @@ packages:
       - supports-color
     dev: false
 
-  /@linaria/webpack5-loader@5.0.2(webpack@5.88.2):
-    resolution: {integrity: sha512-br88/CwY3J0UzYvvb6O2AwSoDh1xXmgnijcM4nMB2YscdzlhTjT3HKShtkyRXV2obFsP7REPx5MIq0Fmi8kjCw==}
+  /@linaria/webpack5-loader@5.0.3(webpack@5.88.2):
+    resolution: {integrity: sha512-ROnHxg27VhThyQCq1r9uLp2TfPsFro1kZf2gFXgL9UlQxpsmzR0Zl4SyrWoa8ihQaxWBqycjC8vatWEqkQnX2g==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      '@linaria/babel-preset': 5.0.2
+      '@linaria/babel-preset': 5.0.3
       '@linaria/logger': 5.0.0
-      '@linaria/utils': 5.0.1
+      '@linaria/utils': 5.0.2
       enhanced-resolve: 5.15.0
       mkdirp: 0.5.6
       webpack: 5.88.2
