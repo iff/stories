@@ -9,7 +9,6 @@ import NextImage from "next/legacy/image";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import * as React from "react";
-import { Blob } from "../../../../image.macro";
 
 export interface Query extends ParsedUrlQuery {
   storyId: string;
@@ -177,7 +176,7 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
 };
 
 const Inner = {
-  Image: function ({ blob }: { blob: Blob }) {
+  Image: function ({ blob }: { blob: any }) {
     const ref = React.useRef<null | HTMLDivElement>(null);
 
     return (
