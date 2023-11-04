@@ -167,7 +167,6 @@ const classes = {
     padding: 24px 0 max(24px, env(safe-area-inset-bottom));
     text-align: center;
     width: 100%;
-    color: var(--secondary-text-color);
     font-size: 0.9em;
     font-style: italic;
   `,
