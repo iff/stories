@@ -1,3 +1,5 @@
+"use client";
+
 import { Brandmark } from "@/components/Brandmark";
 import { css, cx } from "@linaria/core";
 import Image from "next/legacy/image";

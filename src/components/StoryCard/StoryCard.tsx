@@ -1,3 +1,5 @@
+"use client";
+
 import { css, cx } from "@linaria/core";
 import Image from "next/legacy/image";
 import Link from "next/link";

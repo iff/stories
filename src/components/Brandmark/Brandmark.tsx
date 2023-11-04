@@ -1,3 +1,5 @@
+"use client";
+
 import { css, cx } from "@linaria/core";
 import Link from "next/link";
 import * as React from "react";

@@ -1,3 +1,5 @@
+"use client";
+
 import { css, cx } from "@linaria/core";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";

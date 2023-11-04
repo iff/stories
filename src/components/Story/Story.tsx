@@ -1,3 +1,5 @@
+"use client";
+
 import { Content } from "@/components/Content";
 import { MDXProvider } from "@mdx-js/react";
 import Head from "next/head";
