@@ -21,8 +21,13 @@
       "@/timvir/*": ["src/timvir/*"],
       "@/theme": ["src/theme"]
     },
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.md", "**/*.mdx"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.md", "**/*.mdx", ".next/types/**/*.ts"]
 }
