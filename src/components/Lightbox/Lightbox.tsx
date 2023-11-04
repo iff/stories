@@ -13,7 +13,7 @@ import * as Icons from "react-feather";
 const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
-  onClose?: () => void;
+  onClose?: LinkProps | (() => void);
 
   caption?: React.ReactNode;
 
@@ -33,7 +33,11 @@ function Lightbox(props: Props, ref: React.ForwardedRef<React.ElementRef<typeof 
     function onKeyDown(ev: KeyboardEvent) {
       if (ev.key === "Escape") {
         ev.preventDefault();
-        onClose?.();
+        if (typeof onClose === "function") {
+          onClose();
+        } else if (onClose) {
+          router.push(onClose.href);
+        }
       } else if (ev.key === "ArrowLeft") {
         if (typeof prev === "function") {
           prev();
@@ -59,9 +63,9 @@ function Lightbox(props: Props, ref: React.ForwardedRef<React.ElementRef<typeof 
   const el = (
     <Root ref={ref} className={cx(className, classes.root)} {...rest}>
       <div className={classes.top}>
-        <div className={classes.close} onClick={onClose}>
+        <Nav className={classes.close} action={onClose}>
           <Icons.X />
-        </div>
+        </Nav>
       </div>
 
       <div className={classes.center}>
@@ -116,6 +120,7 @@ const classes = {
   close: css`
     padding: 12px;
     cursor: pointer;
+    color: inherit;
 
     svg {
       display: block;
