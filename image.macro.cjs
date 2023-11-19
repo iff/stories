@@ -11,7 +11,7 @@ module.exports = createMacro(({ references }) => {
         execFileSync(process.execPath, [
           "-e",
           `
-            fetch("${process.env.API}/api", {
+            fetch("${process.env.API}/graphql", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

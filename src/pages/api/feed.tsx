@@ -120,7 +120,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return [];
       }
 
-      const res = await fetch(`${process.env.API}/api`, {
+      const res = await fetch(`${process.env.API}/graphql`, {
         method: "POST",
         headers: { ["Content-Type"]: "application/json" },
         body: JSON.stringify({
