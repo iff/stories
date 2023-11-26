@@ -68,8 +68,8 @@ export default function Page(props: Props) {
           document.getElementById(blockId)?.scrollIntoView({ block: "center", inline: "center" });
         }}
         caption={block.caption}
-        prev={prev && { href: `/${storyId}/${prev}` }}
-        next={next && { href: `/${storyId}/${next}` }}
+        prev={prev ? { href: `/${storyId}/${prev}` } : undefined}
+        next={next ? { href: `/${storyId}/${next}` } : undefined}
       >
         {(() => {
           switch (block.__typename) {
@@ -92,7 +92,7 @@ export const getStaticPaths: GetStaticPaths<Query> = async () => {
 };
 
 export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) => {
-  const { storyId, blockId } = params;
+  const { storyId, blockId } = params as { storyId: string, blockId: string };
 
   /*
    * Extract information from the story content:
@@ -103,7 +103,7 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
    *    system.
    */
   const { blocks, blob } = await (async () => {
-    const body = await fs.promises.readFile(`./content/${params.storyId}/body.mdx`, { encoding: "utf8" });
+    const body = await fs.promises.readFile(`./content/${storyId}/body.mdx`, { encoding: "utf8" });
 
     let blobP: Promise<any> = Promise.resolve({});
     const blocks = extractBlocks(body);
@@ -135,16 +135,16 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
   })();
 
   const block = blocks.find((x) => x.id === blockId);
-  const index = blocks.indexOf(block);
+  const index = blocks.indexOf(block!);
 
   const { title } = require(`../../../../content/${storyId}/meta`).default;
 
   return {
     props: {
-      ...params,
+      ...params!,
       block: {
         ...block,
-        caption: block.caption ?? null,
+        caption: block!.caption ?? null,
         ...(() => {
           if ("asImage" in blob && blob.asImage) {
             return {

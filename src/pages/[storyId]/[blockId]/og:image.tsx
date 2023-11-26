@@ -65,10 +65,10 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      ...params,
+      ...params!,
       block: {
         ...block,
-        caption: block.caption ?? null,
+        caption: block!.caption ?? null,
       },
     },
   };

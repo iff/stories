@@ -76,7 +76,10 @@ function Clip(props: Props) {
     }
 
     return () => {
-      cancelAnimationFrame(rafId);
+      if (rafId !== undefined) {
+        cancelAnimationFrame(rafId);
+        rafId = undefined
+      }
     };
   }, [playing]);
 
@@ -101,7 +104,7 @@ function Clip(props: Props) {
         </video>
 
         <div className={classes.poster} style={{ opacity: playing ? 0 : 1 }}>
-          <NextImage alt="" src={video?.poster?.url} layout="fill" objectFit="cover" />
+          {video?.poster?.url && <NextImage alt="" src={video?.poster?.url} layout="fill" objectFit="cover" />}
           <div
             className={classes.sqip}
             style={{ backgroundImage: `url(${video?.poster?.placeholder?.url})` }}
@@ -139,14 +142,19 @@ function Clip(props: Props) {
             viewBox="-400 -200 400 200"
             style={{ position: "absolute", bottom: 0, right: 0, zIndex: -1, cursor: "pointer" }}
             onClick={() => {
-              const videoElement = ref.current.querySelector("video");
+              const videoElement = ref.current?.querySelector("video");
+              const posterElement = ref.current?.querySelector<HTMLElement>(`.${classes.poster}`)
+              if (!videoElement || !posterElement) {
+                return;
+              }
+
               if (videoElement.paused) {
                 videoElement.currentTime = 0;
                 videoElement.play();
-                ref.current.querySelector<HTMLElement>(`.${classes.poster}`).style.opacity = "0";
+                posterElement.style.opacity = "0";
               } else {
                 videoElement.pause();
-                ref.current.querySelector<HTMLElement>(`.${classes.poster}`).style.opacity = "1";
+                posterElement.style.opacity = "1";
               }
             }}
           >
