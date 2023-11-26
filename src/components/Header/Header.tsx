@@ -60,7 +60,6 @@ function Header(props: Props) {
         <span>
           <Image
             alt=""
-            loader={({ src, width }) => `${src}?w=${width}`}
             src={blob.asImage.url}
             fill
             sizes="100vw"

@@ -73,7 +73,6 @@ function StoryCard(props: Props) {
       <div className={cx(classes.image)}>
         <Image
           alt=""
-          loader={({ src, width }) => `${src}?w=${width}`}
           src={blob.asImage.url}
           fill
           sizes="100vw"
@@ -153,7 +152,6 @@ function StoryCard(props: Props) {
       <div className={cx(classes.image2)}>
         <Image
           alt=""
-          loader={({ src, width }) => `${src}?w=${width}`}
           src={(blocks[0] ?? blob).asImage.url}
           {...(blocks[0] ?? blob).asImage.dimensions}
           style={{

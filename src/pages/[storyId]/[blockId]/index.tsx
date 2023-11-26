@@ -183,7 +183,6 @@ const Inner = {
       <div ref={ref}>
         <NextImage
           alt=""
-          loader={({ src, width }) => `${src}?w=${width}`}
           src={blob.asImage.url}
           fill
           sizes="100vw"

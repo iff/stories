@@ -41,7 +41,6 @@ function Hero(props: Props) {
         <Image
           alt=""
           src={blob.asImage.url}
-          loader={({ src, width }) => `${src}?w=${width}`}
           fill
           sizes="100vw"
           style={{
