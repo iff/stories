@@ -2,7 +2,7 @@
 
 import { css, cx } from "@linaria/core";
 import Link, { LinkProps } from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as Icons from "react-feather";
@@ -13,12 +13,12 @@ import * as Icons from "react-feather";
 const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
-  onClose?: LinkProps | (() => void);
+  onClose?: { href: string } | (() => void);
 
   caption?: React.ReactNode;
 
-  prev?: LinkProps | (() => void);
-  next?: LinkProps | (() => void);
+  prev?: { href: string } | (() => void);
+  next?: { href: string } | (() => void);
 }
 
 function Lightbox(props: Props, ref: React.ForwardedRef<React.ElementRef<typeof Root>>) {

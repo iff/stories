@@ -3,10 +3,8 @@ import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
 import { css } from "@linaria/core";
 import * as fs from "fs";
-import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import NextImage from "next/image";
-import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import * as React from "react";
 
@@ -16,9 +14,13 @@ export interface Query extends ParsedUrlQuery {
 }
 
 interface Props {
-  storyId: string;
-  blockId: string;
+  params: {
+    storyId: string;
+    blockId: string;
+  };
+}
 
+interface Data {
   block: Block;
 
   next: null | string;
@@ -43,10 +45,9 @@ type Block =
       caption: null | string;
     };
 
-export default function Page(props: Props) {
-  const router = useRouter();
-
-  const { storyId, blockId, block, next, prev, title, blob } = props;
+export default async function Page(props: Props) {
+  const { storyId } = props.params;
+  const { block, next, prev, title, blob } = await data(props.params);
 
   const image = block.__typename === "Image" ? block.image : block.video?.poster;
 
@@ -63,10 +64,7 @@ export default function Page(props: Props) {
       </Head>
 
       <Lightbox
-        onClose={async () => {
-          await router.replace(`/${storyId}`);
-          document.getElementById(blockId)?.scrollIntoView({ block: "center", inline: "center" });
-        }}
+        onClose={{ href: `/${storyId}` }}
         caption={block.caption}
         prev={prev ? { href: `/${storyId}/${prev}` } : undefined}
         next={next ? { href: `/${storyId}/${next}` } : undefined}
@@ -84,16 +82,7 @@ export default function Page(props: Props) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths<Query> = async () => {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) => {
-  const { storyId, blockId } = params as { storyId: string; blockId: string };
-
+async function data({ storyId, blockId }: { storyId: string; blockId: string }): Promise<Data> {
   /*
    * Extract information from the story content:
    *
@@ -103,7 +92,8 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
    *    system.
    */
   const { blocks, blob } = await (async () => {
-    const body = await fs.promises.readFile(`./content/${storyId}/body.mdx`, { encoding: "utf8" });
+    await import(`../../../../content/${storyId}/body.mdx`);
+    const body = await fs.promises.readFile(`content/${storyId}/body.mdx`, { encoding: "utf8" });
 
     let blobP: Promise<any> = Promise.resolve({});
     const blocks = extractBlocks(body);
@@ -140,47 +130,43 @@ export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) =
   const { title } = require(`../../../../content/${storyId}/meta`).default;
 
   return {
-    props: {
-      ...params!,
-      block: {
-        ...block,
-        caption: block!.caption ?? null,
-        ...(() => {
-          if ("asImage" in blob && blob.asImage) {
-            return {
-              image: {
-                src: blob.asImage.url,
-                ...blob.asImage.dimensions,
-                sqip: {
-                  src: blob.asImage.placeholder.url,
-                },
+    block: {
+      ...block,
+      caption: block!.caption ?? null,
+      ...(() => {
+        if ("asImage" in blob && blob.asImage) {
+          return {
+            image: {
+              src: blob.asImage.url,
+              ...blob.asImage.dimensions,
+              sqip: {
+                src: blob.asImage.placeholder.url,
               },
-            };
-          }
+            },
+          };
+        }
 
-          if ("asVideo" in blob && blob.asVideo) {
-            return { video: blob.asVideo };
-          }
+        if ("asVideo" in blob && blob.asVideo) {
+          return { video: blob.asVideo };
+        }
 
-          return {};
-        })(),
-      } as Block,
-      prev: blocks[index - 1]?.id ?? null,
-      next: blocks[index + 1]?.id ?? null,
+        return {};
+      })(),
+    } as Block,
 
-      title: `${blockId} - ${title}`,
+    prev: blocks[index - 1]?.id ?? null,
+    next: blocks[index + 1]?.id ?? null,
 
-      blob,
-    },
+    title: `${blockId} - ${title}`,
+
+    blob,
   };
-};
+}
 
 const Inner = {
   Image: function ({ blob }: { blob: any }) {
-    const ref = React.useRef<null | HTMLDivElement>(null);
-
     return (
-      <div ref={ref}>
+      <div>
         <NextImage
           alt=""
           src={blob.asImage.url}
