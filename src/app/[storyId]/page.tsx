@@ -22,7 +22,6 @@ export default async function Page(props: Props) {
 }
 
 async function data({ storyId }): Promise<Array<any>> {
-  await import(`../../../content/${storyId}/body.mdx`);
   if (!fs.existsSync(`./content/${storyId}/body.mdx`)) {
     return notFound();
   }
