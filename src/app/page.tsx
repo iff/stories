@@ -3,7 +3,7 @@ import Head from "next/head";
 import * as React from "react";
 import stories from "../../content";
 
-export default function Page() {
+export default async function Page() {
   return (
     <>
       <Head>
