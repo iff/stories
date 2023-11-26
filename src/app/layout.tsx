@@ -1,4 +1,17 @@
+import type { Metadata, Viewport } from "next";
+
 import "../style.linaria.global";
+
+export const metadata: Metadata = {
+  title: "Stories by Tomáš Čarnecky",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  height: "device-height",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
