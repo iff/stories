@@ -1,12 +1,10 @@
 import withMDX from "@next/mdx";
 import { remarkPlugin } from "@timvir/mdx";
 import withPlugins from "next-compose-plugins";
-import { withLinaria } from "./next/withLinaria.js";
+import withLinaria from "next-with-linaria";
 
 const plugins = [
-  withLinaria({
-    cacheDirectory: "./.next/cache/linaria",
-  }),
+  withLinaria,
   withMDX({
     extension: /\.mdx?$/,
     options: {
