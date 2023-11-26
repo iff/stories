@@ -1,0 +1,82 @@
+import { extractBlocks } from "@/cms";
+import { css } from "@linaria/core";
+import NextImage from "next/image";
+import { ParsedUrlQuery } from "querystring";
+import * as React from "react";
+import * as fs from "fs";
+
+export interface Query extends ParsedUrlQuery {
+  storyId: string;
+  blockId: string;
+}
+
+interface Props {
+  params: {
+    storyId: string;
+    blockId: string;
+  };
+}
+
+export default async function Page(props: Props) {
+  const { storyId, blockId } = props.params;
+  const block = await data({ storyId, blockId });
+
+  return (
+    <div
+      className={css`
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+      `}
+    >
+      <NextImage
+        alt=""
+        src={block.image.src}
+        fill
+        sizes="100vw"
+        style={{
+          objectFit: "cover",
+        }}
+      />
+    </div>
+  );
+}
+
+type Block = { __typename: "Image"; id: string; image: { src: string; sqip: { src: string } }; caption: null | string };
+
+async function data({ storyId, blockId }): Promise<Block> {
+  await import(`../../../../../content/${storyId}/body.mdx`);
+  const body = await fs.promises.readFile(`content/${storyId}/body.mdx`, { encoding: "utf8" });
+
+  const blocks = extractBlocks(body);
+  const block = blocks.find((x) => x.id === blockId)!;
+
+  const blob = await (async () => {
+    const res = await fetch(`${process.env.API}/graphql`, {
+      method: "POST",
+      headers: { ["Content-Type"]: "application/json" },
+      body: JSON.stringify({
+        query: `query {
+            blob(name: "${blockId}") {
+              name
+              asImage { url dimensions { width height } placeholder { url } }
+            }
+          }`,
+      }),
+    });
+
+    const json = await res.json();
+
+    return json.data.blob;
+  })();
+
+  return {
+    __typename: "Image",
+    id: blockId,
+    image: {
+      src: blob.asImage.url,
+      sqip: blob.asImage.placeholder.url,
+    },
+    caption: null,
+  } as Block;
+}
