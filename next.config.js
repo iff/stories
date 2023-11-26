@@ -24,7 +24,7 @@ export default withPlugins(plugins, {
   transpilePackages: ["timvir"],
 
   images: {
-    domains: ["storage.googleapis.com", "web-4n62l3bdha-lz.a.run.app"],
+    domains: ["storage.googleapis.com", "web-4n62l3bdha-lz.a.run.app", "api.m.caurea.org"],
   },
 
   env: {
