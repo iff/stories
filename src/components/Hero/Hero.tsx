@@ -1,8 +1,8 @@
+import { importBlob } from "@/cms";
 import { Brandmark } from "@/components/Brandmark";
 import { css, cx } from "@linaria/core";
 import Image from "next/image";
 import * as React from "react";
-import { importBlob } from "../../../image.macro";
 
 /**
  * The underlying DOM element which is rendered by this component.
@@ -11,10 +11,10 @@ const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {}
 
-const blob = importBlob("DtmNcLbCUqzbXVfgQSowJeJZTTs9UztyYkupTzAQzbCf");
-
-function Hero(props: Props) {
+async function Hero(props: Props) {
   const { className, ...rest } = props;
+
+  const blob = await importBlob("DtmNcLbCUqzbXVfgQSowJeJZTTs9UztyYkupTzAQzbCf");
 
   return (
     <Root className={cx(classes.root, className)} {...rest}>

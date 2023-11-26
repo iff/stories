@@ -54,3 +54,17 @@ export function extractBlocks(mdx: string): Array<Block> {
 
   return blocks;
 }
+
+export async function importBlob(name: string) {
+  const res = await fetch(`${process.env.API}/graphql`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `query { blob(name: "${name}") { id name asImage { url dimensions { width height } placeholder { url } } asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } } } }`,
+    }),
+  });
+  const json = await res.json();
+  return json.data.blob;
+}
