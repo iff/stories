@@ -21,6 +21,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <script type="module" dangerouslySetInnerHTML={{ __html: themeDetector }} />
 
+        <link rel="icon" href="/favicon.png" />
         <link rel="alternate" type="application/rss+xml" title="Stories by Tomáš Čarnecky" href={`${baseUrl}/feed`} />
       </head>
 
