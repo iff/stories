@@ -1,11 +1,11 @@
+import { importBlob } from "@/cms";
 import { Header } from "@/components/Header";
 import * as React from "react";
-import { importBlob } from "../../image.macro";
 
-export default function header() {
+export default async function header() {
   return (
     <div>
-      <Header blob={importBlob("CbAA5a6fa9Qdb7E6gCnfNVx5UXbAxwLXGxAP5PDDMqYV")} title="Blouson Noir" />
+      <Header blob={await importBlob("CbAA5a6fa9Qdb7E6gCnfNVx5UXbAxwLXGxAP5PDDMqYV")} title="Blouson Noir" />
     </div>
   );
 }

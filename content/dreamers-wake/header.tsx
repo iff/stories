@@ -1,12 +1,12 @@
+import { importBlob } from "@/cms";
 import { Header } from "@/components/Header";
 import { css } from "@linaria/core";
 import * as React from "react";
-import { importBlob } from "../../image.macro";
 
-export default function header() {
+export default async function header() {
   return (
     <div>
-      <Header blob={importBlob("EQ9L1yjAsYBaJqmmmU5iNsrx4ws2ysECSxpoFQXa51oo")} title="Dreamer's Wake" />
+      <Header blob={await importBlob("EQ9L1yjAsYBaJqmmmU5iNsrx4ws2ysECSxpoFQXa51oo")} title="Dreamer's Wake" />
     </div>
   );
 }
