@@ -1,5 +1,3 @@
-"use client";
-
 import { Brandmark } from "@/components/Brandmark";
 import { css, cx } from "@linaria/core";
 import Image from "next/image";
@@ -18,26 +16,9 @@ const blob = importBlob("DtmNcLbCUqzbXVfgQSowJeJZTTs9UztyYkupTzAQzbCf");
 function Hero(props: Props) {
   const { className, ...rest } = props;
 
-  const ref = React.useRef<null | HTMLDivElement>(null);
-  const [loaded, setLoaded] = React.useState(false);
-  React.useEffect(() => {
-    const img = ref.current?.querySelector('img[decoding="async"]');
-    if (img) {
-      {
-        img.addEventListener(
-          "load",
-          () => {
-            setLoaded(true);
-          },
-          { once: true }
-        );
-      }
-    }
-  }, []);
-
   return (
     <Root className={cx(classes.root, className)} {...rest}>
-      <div ref={ref} className={classes.image}>
+      <div className={classes.image}>
         <Image
           alt=""
           src={blob.asImage.url}
@@ -50,7 +31,6 @@ function Hero(props: Props) {
         <div
           className="sqip"
           style={{
-            opacity: loaded ? 0 : 1,
             backgroundImage: `url(${blob.asImage.placeholder.url})`,
           }}
         />
@@ -137,6 +117,10 @@ const classes = {
       background-position: 50% 50%;
 
       z-index: 1;
+    }
+
+    & img {
+      z-index: 2;
     }
 
     @media (min-width: 720px) {

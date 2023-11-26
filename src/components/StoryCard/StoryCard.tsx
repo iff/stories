@@ -1,11 +1,11 @@
-"use client";
-
+import { defineMessage } from "@formatjs/intl";
 import { css, cx } from "@linaria/core";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import * as React from "react";
 import * as Icons from "react-feather";
-import { FormattedDate, FormattedMessage } from "react-intl";
+import imageLoader from "src/imageLoader";
+import { getIntl } from "src/intl";
 
 /**
  * The underlying DOM element which is rendered by this component.
@@ -45,41 +45,19 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   layout?: "regular" | "inverted";
 }
 
-function StoryCard(props: Props) {
+async function StoryCard(props: Props) {
+  const intl = await getIntl("en");
+
   const { story, blocks = [], blob, date, title, teaser, layout = "regular", ...rest } = props;
 
-  const ref = React.useRef<null | HTMLDivElement>(null);
-
-  const [loaded, setLoaded] = React.useState(false);
-  React.useEffect(() => {
-    const img = ref.current?.querySelector('img[decoding="async"]');
-    if (img) {
-      {
-        img.addEventListener(
-          "load",
-          () => {
-            setLoaded(true);
-          },
-          { once: true }
-        );
-      }
-    }
-  }, []);
+  const loaded = false;
 
   return (
-    <div ref={ref as any} {...rest} className={cx(classes.root, tweaks[layout])}>
+    <div {...rest} className={cx(classes.root, tweaks[layout])}>
       <h2 className={classes.title}>{title}</h2>
 
       <div className={cx(classes.image)}>
-        <Image
-          alt=""
-          src={blob.asImage.url}
-          fill
-          sizes="100vw"
-          style={{
-            objectFit: "cover",
-          }}
-        />
+        <Image alt="" src={blob.asImage.url} loader={imageLoader} layout="fill" objectFit="cover" />
         <div
           className="sqip"
           style={{ opacity: loaded ? 0 : 1, backgroundImage: `url(${blob.asImage.placeholder.url})` }}
@@ -96,44 +74,44 @@ function StoryCard(props: Props) {
 
                   if (from.getUTCFullYear() === to.getUTCFullYear()) {
                     if (from.getUTCMonth() === to.getUTCMonth()) {
-                      return (
-                        <FormattedMessage
-                          id="hQR6Zk3"
-                          defaultMessage="{month} {from} – {to}, {year}"
-                          values={{
-                            month: <FormattedDate value={from} month="long" />,
-                            from: <FormattedDate value={from} day="numeric" />,
-                            to: <FormattedDate value={to} day="numeric" />,
-                            year: <FormattedDate value={to} year="numeric" />,
-                          }}
-                        />
+                      return intl.formatMessage(
+                        defineMessage({
+                          id: "hQR6Zk3",
+                          defaultMessage: "{month} {from} – {to}, {year}",
+                        }),
+                        {
+                          month: intl.formatDate(from, { month: "long" }),
+                          from: intl.formatDate(from, { day: "numeric" }),
+                          to: intl.formatDate(from, { day: "numeric" }),
+                          year: intl.formatDate(to, { year: "numeric" }),
+                        }
                       );
                     } else {
-                      return (
-                        <FormattedMessage
-                          id="xo4t6Jj"
-                          defaultMessage="{from} – {to}"
-                          values={{
-                            from: <FormattedDate value={from} month="long" day="numeric" />,
-                            to: <FormattedDate value={to} month="long" day="numeric" year="numeric" />,
-                          }}
-                        />
+                      return intl.formatMessage(
+                        defineMessage({
+                          id: "xo4t6Jj",
+                          defaultMessage: "{from} – {to}",
+                        }),
+                        {
+                          from: intl.formatDate(from, { month: "long", day: "numeric" }),
+                          to: intl.formatDate(to, { month: "long", day: "numeric", year: "numeric" }),
+                        }
                       );
                     }
                   } else {
-                    return (
-                      <FormattedMessage
-                        id="pakxPSK"
-                        defaultMessage="{from} – {to}"
-                        values={{
-                          from: <FormattedDate value={from} month="long" day="numeric" year="numeric" />,
-                          to: <FormattedDate value={to} month="long" day="numeric" year="numeric" />,
-                        }}
-                      />
+                    return intl.formatMessage(
+                      defineMessage({
+                        id: "pakxPSK",
+                        defaultMessage: "{from} – {to}",
+                      }),
+                      {
+                        from: intl.formatDate(from, { month: "long", day: "numeric", year: "numeric" }),
+                        to: intl.formatDate(to, { month: "long", day: "numeric", year: "numeric" }),
+                      }
                     );
                   }
                 } else {
-                  return <FormattedDate value={date} />;
+                  return intl.formatDate(date);
                 }
               })()}
             </div>
@@ -153,12 +131,9 @@ function StoryCard(props: Props) {
         <Image
           alt=""
           src={(blocks[0] ?? blob).asImage.url}
+          loader={imageLoader}
           {...(blocks[0] ?? blob).asImage.dimensions}
-          style={{
-            maxWidth: "100%",
-            height: "auto",
-            objectFit: "cover",
-          }}
+          objectFit="cover"
         />
         <div
           className="sqip"
@@ -273,6 +248,10 @@ const classes = {
     @media (min-width: 720px) {
       padding-bottom: calc((11 / 16) * 100%);
     }
+
+    img {
+      z-index: 2;
+    }
   `,
 
   image2: css`
@@ -285,6 +264,10 @@ const classes = {
     display: none;
     @media (min-width: 720px) {
       display: block;
+    }
+
+    img {
+      z-index: 2;
     }
   `,
 
