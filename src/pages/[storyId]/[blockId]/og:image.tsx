@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import NextImage from "next/legacy/image";
+import NextImage from "next/image";
 import { ParsedUrlQuery } from "querystring";
 import * as React from "react";
 
@@ -27,7 +27,15 @@ export default function Page(props: Props) {
         display: grid;
       `}
     >
-      <NextImage alt="" src={block.image.src} layout="fill" objectFit="cover" />
+      <NextImage
+        alt=""
+        src={block.image.src}
+        fill
+        sizes="100vw"
+        style={{
+          objectFit: "cover",
+        }}
+      />
     </div>
   );
 }

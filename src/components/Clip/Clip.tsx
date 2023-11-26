@@ -1,7 +1,7 @@
 "use client";
 
 import { css, cx } from "@linaria/core";
-import NextImage from "next/legacy/image";
+import NextImage from "next/image";
 import * as React from "react";
 
 /**
@@ -78,7 +78,7 @@ function Clip(props: Props) {
     return () => {
       if (rafId !== undefined) {
         cancelAnimationFrame(rafId);
-        rafId = undefined
+        rafId = undefined;
       }
     };
   }, [playing]);
@@ -104,11 +104,18 @@ function Clip(props: Props) {
         </video>
 
         <div className={classes.poster} style={{ opacity: playing ? 0 : 1 }}>
-          {video?.poster?.url && <NextImage alt="" src={video?.poster?.url} layout="fill" objectFit="cover" />}
-          <div
-            className={classes.sqip}
-            style={{ backgroundImage: `url(${video?.poster?.placeholder?.url})` }}
-          />
+          {video?.poster?.url && (
+            <NextImage
+              alt=""
+              src={video?.poster?.url}
+              fill
+              sizes="100vw"
+              style={{
+                objectFit: "cover",
+              }}
+            />
+          )}
+          <div className={classes.sqip} style={{ backgroundImage: `url(${video?.poster?.placeholder?.url})` }} />
         </div>
 
         {onFocus && (
@@ -143,7 +150,7 @@ function Clip(props: Props) {
             style={{ position: "absolute", bottom: 0, right: 0, zIndex: -1, cursor: "pointer" }}
             onClick={() => {
               const videoElement = ref.current?.querySelector("video");
-              const posterElement = ref.current?.querySelector<HTMLElement>(`.${classes.poster}`)
+              const posterElement = ref.current?.querySelector<HTMLElement>(`.${classes.poster}`);
               if (!videoElement || !posterElement) {
                 return;
               }

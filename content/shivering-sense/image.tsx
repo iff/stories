@@ -1,5 +1,5 @@
 import * as React from "react";
-import NextImage from "next/legacy/image";
+import NextImage from "next/image";
 
 export default function Page() {
   return (
@@ -7,8 +7,11 @@ export default function Page() {
       <NextImage
         alt=""
         src={`${process.env.API}/serve/BefU8tziWMjkR6YWg5Tt5187xsdkkXp2ro5zSA6FYTWW`}
-        layout="fill"
-        objectFit="cover"
+        fill
+        sizes="100vw"
+        style={{
+          objectFit: "cover",
+        }}
       />
     </div>
   );

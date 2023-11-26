@@ -5,7 +5,7 @@ import { css } from "@linaria/core";
 import * as fs from "fs";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
-import NextImage from "next/legacy/image";
+import NextImage from "next/image";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "querystring";
 import * as React from "react";
@@ -92,7 +92,7 @@ export const getStaticPaths: GetStaticPaths<Query> = async () => {
 };
 
 export const getStaticProps: GetStaticProps<Props, Query> = async ({ params }) => {
-  const { storyId, blockId } = params as { storyId: string, blockId: string };
+  const { storyId, blockId } = params as { storyId: string; blockId: string };
 
   /*
    * Extract information from the story content:
@@ -185,8 +185,11 @@ const Inner = {
           alt=""
           loader={({ src, width }) => `${src}?w=${width}`}
           src={blob.asImage.url}
-          objectFit="contain"
-          layout="fill"
+          fill
+          sizes="100vw"
+          style={{
+            objectFit: "contain",
+          }}
         />
         <div
           className={css`

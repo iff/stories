@@ -2,7 +2,7 @@
 
 import { Brandmark } from "@/components/Brandmark";
 import { css, cx } from "@linaria/core";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import * as React from "react";
 
 /**
@@ -46,7 +46,7 @@ function Header(props: Props) {
           () => {
             setLoaded(true);
           },
-          { once: true }
+          { once: true },
         );
       }
     }
@@ -57,13 +57,18 @@ function Header(props: Props) {
       <Brandmark className={classes.brandmark} />
 
       <div className={classes.image}>
-        <Image
-          alt=""
-          loader={({ src, width }) => `${src}?w=${width}`}
-          src={blob.asImage.url}
-          layout="fill"
-          objectFit="cover"
-        />
+        <span>
+          <Image
+            alt=""
+            loader={({ src, width }) => `${src}?w=${width}`}
+            src={blob.asImage.url}
+            fill
+            sizes="100vw"
+            style={{
+              objectFit: "cover",
+            }}
+          />
+        </span>
         <div
           className="sqip"
           style={{
@@ -116,6 +121,21 @@ const classes = {
     @media (min-width: 720px) {
       & > span:first-child {
         margin: 56px 0 56px 88px !important;
+
+        box-sizing: border-box;
+        display: block;
+        overflow: hidden;
+        width: initial;
+        height: initial;
+        background: none;
+        opacity: 1;
+        border: 0;
+        padding: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
       }
 
       .sqip {

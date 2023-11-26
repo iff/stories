@@ -1,7 +1,7 @@
 "use client";
 
 import { css, cx } from "@linaria/core";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 import * as Icons from "react-feather";
@@ -75,8 +75,11 @@ function StoryCard(props: Props) {
           alt=""
           loader={({ src, width }) => `${src}?w=${width}`}
           src={blob.asImage.url}
-          layout="fill"
-          objectFit="cover"
+          fill
+          sizes="100vw"
+          style={{
+            objectFit: "cover",
+          }}
         />
         <div
           className="sqip"
@@ -153,7 +156,11 @@ function StoryCard(props: Props) {
           loader={({ src, width }) => `${src}?w=${width}`}
           src={(blocks[0] ?? blob).asImage.url}
           {...(blocks[0] ?? blob).asImage.dimensions}
-          objectFit="cover"
+          style={{
+            maxWidth: "100%",
+            height: "auto",
+            objectFit: "cover",
+          }}
         />
         <div
           className="sqip"

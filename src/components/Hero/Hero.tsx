@@ -2,7 +2,7 @@
 
 import { Brandmark } from "@/components/Brandmark";
 import { css, cx } from "@linaria/core";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import * as React from "react";
 import { importBlob } from "../../../image.macro";
 
@@ -42,8 +42,11 @@ function Hero(props: Props) {
           alt=""
           src={blob.asImage.url}
           loader={({ src, width }) => `${src}?w=${width}`}
-          layout="fill"
-          objectFit="cover"
+          fill
+          sizes="100vw"
+          style={{
+            objectFit: "cover",
+          }}
         />
         <div
           className="sqip"
