@@ -4,6 +4,7 @@ import NextImage from "next/image";
 import { ParsedUrlQuery } from "querystring";
 import * as React from "react";
 import * as fs from "fs";
+import { notFound } from "next/navigation";
 
 export interface Query extends ParsedUrlQuery {
   storyId: string;
@@ -49,7 +50,10 @@ async function data({ storyId, blockId }): Promise<Block> {
   const body = await fs.promises.readFile(`content/${storyId}/body.mdx`, { encoding: "utf8" });
 
   const blocks = extractBlocks(body);
-  const block = blocks.find((x) => x.id === blockId)!;
+  const block = blocks.find((x) => x.id === blockId);
+  if (!block) {
+    return notFound();
+  }
 
   const blob = await (async () => {
     const res = await fetch(`${process.env.API}/graphql`, {

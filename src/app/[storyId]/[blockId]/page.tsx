@@ -5,6 +5,7 @@ import { css } from "@linaria/core";
 import * as fs from "fs";
 import Head from "next/head";
 import NextImage from "next/image";
+import { notFound } from "next/navigation";
 import { ParsedUrlQuery } from "querystring";
 import * as React from "react";
 
@@ -125,7 +126,11 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
   })();
 
   const block = blocks.find((x) => x.id === blockId);
-  const index = blocks.indexOf(block!);
+  if (!block) {
+    return notFound();
+  }
+
+  const index = blocks.indexOf(block);
 
   const { title } = require(`../../../../content/${storyId}/meta`).default;
 
