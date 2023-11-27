@@ -1,5 +1,3 @@
-"use client";
-
 import { css, cx } from "@linaria/core";
 import NextImage from "next/image";
 import Link, { LinkProps } from "next/link";
@@ -57,10 +55,8 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 function Image(props: Props) {
   const { blob, fill = false, caption, captionPlacement = "below", href, className, ...rest } = props;
 
-  const ref = React.useRef<null | HTMLDivElement>(null);
-
   return (
-    <Root ref={ref} className={cx(classes.root, className, classes.captionPlacement[captionPlacement])} {...rest}>
+    <Root className={cx(classes.root, className, classes.captionPlacement[captionPlacement])} {...rest}>
       {(() => {
         if (href) {
           return (
