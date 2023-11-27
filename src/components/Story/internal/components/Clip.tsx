@@ -1,6 +1,6 @@
 import { Clip } from "@/components/Clip";
 import { cx } from "@linaria/core";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 import { Context } from "../../context";
 
