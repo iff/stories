@@ -1,15 +1,10 @@
 import { Hero } from "@/components/Hero";
-import Head from "next/head";
 import * as React from "react";
 import stories from "../../content";
 
 export default async function Page() {
   return (
     <>
-      <Head>
-        <title>Stories by Tomáš Čarnecky</title>
-      </Head>
-
       <Hero />
 
       <div>
