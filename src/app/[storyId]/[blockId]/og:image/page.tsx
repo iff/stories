@@ -46,7 +46,6 @@ export default async function Page(props: Props) {
 type Block = { __typename: "Image"; id: string; image: { src: string; sqip: { src: string } }; caption: null | string };
 
 async function data({ storyId, blockId }): Promise<Block> {
-  await import(`../../../../../content/${storyId}/body.mdx`);
   const body = await fs.promises.readFile(`content/${storyId}/body.mdx`, { encoding: "utf8" });
 
   const blocks = extractBlocks(body);

@@ -93,7 +93,6 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
    *    system.
    */
   const { blocks, blob } = await (async () => {
-    await import(`../../../../content/${storyId}/body.mdx`);
     const body = await fs.promises.readFile(`content/${storyId}/body.mdx`, { encoding: "utf8" });
 
     let blobP: Promise<any> = Promise.resolve({});
