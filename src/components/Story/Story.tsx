@@ -2,7 +2,6 @@
 
 import { Content } from "@/components/Content";
 import { MDXProvider } from "@mdx-js/react";
-import Head from "next/head";
 import * as React from "react";
 import { Context } from "./context";
 import { components } from "./internal";
@@ -26,18 +25,6 @@ function Story(props: Props) {
   return (
     <Context.Provider value={{ storyId, blobs }}>
       <MDXProvider components={components}>
-        <Head>
-          <title>{meta.title}</title>
-
-          <meta property="og:title" content={meta.title} />
-          <meta
-            property="og:image"
-            content={`https://app-gcsszncmzq-lz.a.run.app/og/stories.caurea.org/${storyId}/og:image`}
-          />
-
-          <meta name="twitter:card" content="summary_large_image" />
-        </Head>
-
         <div style={{ marginBottom: "2em" }}>
           <Header />
         </div>

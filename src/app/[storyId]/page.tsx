@@ -3,6 +3,21 @@ import { StoryById } from "@/components/Story";
 import * as fs from "fs";
 import { ParsedUrlQuery } from "querystring";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { default: { title } } = await import(`../../../content/${params.storyId}/meta.ts`)
+
+  return {
+    title,
+    openGraph: {
+      images: `https://app-gcsszncmzq-lz.a.run.app/og/stories.caurea.org/${params.storyId}/og:image`
+    },
+    twitter: {
+      card: "summary_large_image",
+    },
+  };
+}
 
 export interface Query extends ParsedUrlQuery {
   storyId: string;
