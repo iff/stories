@@ -10,7 +10,7 @@ dependencies:
     version: 7.23.5
   '@formatjs/intl':
     specifier: ^2.9.9
-    version: 2.9.9(typescript@5.3.2)
+    version: 2.9.9(typescript@5.3.3)
   '@hapi/accept':
     specifier: ^6.0.3
     version: 6.0.3
@@ -103,7 +103,7 @@ dependencies:
     version: 4.4.1(react-dom@18.2.0)(react@18.2.0)
   react-intl:
     specifier: ^6.5.5
-    version: 6.5.5(react@18.2.0)(typescript@5.3.2)
+    version: 6.5.5(react@18.2.0)(typescript@5.3.3)
   remark-mdx:
     specifier: ^3.0.0
     version: 3.0.0
@@ -114,8 +114,8 @@ dependencies:
     specifier: ^0.2.12
     version: 0.2.12(@mdx-js/react@3.0.0)(react-dom@18.2.0)(react-hotkeys-hook@4.4.1)(react@18.2.0)
   typescript:
-    specifier: ^5.3.2
-    version: 5.3.2
+    specifier: ^5.3.3
+    version: 5.3.3
   unified:
     specifier: ^11.0.4
     version: 11.0.4
@@ -1367,7 +1367,7 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /@formatjs/intl@2.9.9(typescript@5.3.2):
+  /@formatjs/intl@2.9.9(typescript@5.3.3):
     resolution: {integrity: sha512-JI3CNgL2Zdg5lv9ncT2sYKqbAj2RGrCbdzaCckIxMPxn4QuHuOVvYUGmBAXVusBmfG/0sxLmMrnwnBioz+QKdA==}
     peerDependencies:
       typescript: '5'
@@ -1382,7 +1382,7 @@ packages:
       '@formatjs/intl-listformat': 7.5.3
       intl-messageformat: 10.5.8
       tslib: 2.4.0
-      typescript: 5.3.2
+      typescript: 5.3.3
     dev: false
 
   /@hapi/accept@6.0.3:
@@ -3750,7 +3750,7 @@ packages:
       html-element-attributes: 1.3.1
     dev: false
 
-  /react-intl@6.5.5(react@18.2.0)(typescript@5.3.2):
+  /react-intl@6.5.5(react@18.2.0)(typescript@5.3.3):
     resolution: {integrity: sha512-cI5UKvBh4tc1zxLIziHBYGMX3dhYWDEFlvUDVN6NfT2i96zTXz/zH2AmM8+2waqgOhwkFUzd+7kK1G9q7fiC2g==}
     peerDependencies:
       react: ^16.6.0 || 17 || 18
@@ -3761,7 +3761,7 @@ packages:
     dependencies:
       '@formatjs/ecma402-abstract': 1.18.0
       '@formatjs/icu-messageformat-parser': 2.7.3
-      '@formatjs/intl': 2.9.9(typescript@5.3.2)
+      '@formatjs/intl': 2.9.9(typescript@5.3.3)
       '@formatjs/intl-displaynames': 6.6.4
       '@formatjs/intl-listformat': 7.5.3
       '@types/hoist-non-react-statics': 3.3.1
@@ -3770,7 +3770,7 @@ packages:
       intl-messageformat: 10.5.8
       react: 18.2.0
       tslib: 2.4.0
-      typescript: 5.3.2
+      typescript: 5.3.3
     dev: false
 
   /react-is@16.8.6:
@@ -4098,8 +4098,8 @@ packages:
       ts-toolbelt: 9.6.0
     dev: false
 
-  /typescript@5.3.2:
-    resolution: {integrity: sha512-6l+RyNy7oAHDfxC4FzSJcz9vnjTKxrLpDG5M2Vu4SHRVNg6xzqZp6LYSR9zjqQTu8DU/f5xwxUdADOkbrIX2gQ==}
+  /typescript@5.3.3:
+    resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: false
