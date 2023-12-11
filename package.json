@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@babel/core": "^7.23.5",
+    "@babel/core": "^7.23.6",
     "@formatjs/intl": "^2.9.9",
     "@hapi/accept": "^6.0.3",
     "@linaria/babel-preset": "^5.0.4",
