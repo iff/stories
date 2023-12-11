@@ -34,26 +34,8 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 function Header(props: Props) {
   const { blob, title, className, ...rest } = props;
 
-  const ref = React.useRef<null | HTMLDivElement>(null);
-
-  const [loaded, setLoaded] = React.useState(false);
-  React.useEffect(() => {
-    const img = ref.current?.querySelector('img[decoding="async"]');
-    if (img) {
-      {
-        img.addEventListener(
-          "load",
-          () => {
-            setLoaded(true);
-          },
-          { once: true },
-        );
-      }
-    }
-  }, []);
-
   return (
-    <Root ref={ref} className={cx(className, classes.root)} {...rest}>
+    <Root className={cx(className, classes.root)} {...rest}>
       <Brandmark className={classes.brandmark} />
 
       <div className={classes.image}>
@@ -71,7 +53,6 @@ function Header(props: Props) {
         <div
           className="sqip"
           style={{
-            opacity: loaded ? 0 : 1,
             backgroundImage: `url(${blob.asImage.placeholder.url})`,
           }}
         />
@@ -142,6 +123,7 @@ const classes = {
         right: 0;
         bottom: 56px;
         left: 88px;
+        z-index: -1;
       }
     }
   `,
