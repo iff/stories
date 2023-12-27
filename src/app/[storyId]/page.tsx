@@ -53,7 +53,7 @@ async function data({ storyId }): Promise<Array<any>> {
       method: "POST",
       headers: { ["Content-Type"]: "application/json" },
       body: JSON.stringify({
-        query: `query { ${blocks.map(
+        query: `query Story { ${blocks.map(
           ({ id }) =>
             `b${id}: blob(name: "${id}") {
               name

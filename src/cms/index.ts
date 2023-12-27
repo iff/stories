@@ -62,7 +62,7 @@ export async function importBlob(name: string) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      query: `query { blob(name: "${name}") { id name asImage { url dimensions { width height } placeholder { url } } asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } } } }`,
+      query: `query Blob { blob(name: "${name}") { id name asImage { url dimensions { width height } placeholder { url } } asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } } } }`,
     }),
   });
   const json = await res.json();

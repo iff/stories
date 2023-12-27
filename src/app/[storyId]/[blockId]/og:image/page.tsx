@@ -59,7 +59,7 @@ async function data({ storyId, blockId }): Promise<Block> {
       method: "POST",
       headers: { ["Content-Type"]: "application/json" },
       body: JSON.stringify({
-        query: `query {
+        query: `query OpenGraphImage {
             blob(name: "${blockId}") {
               name
               asImage { url dimensions { width height } placeholder { url } }

@@ -124,7 +124,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         method: "POST",
         headers: { ["Content-Type"]: "application/json" },
         body: JSON.stringify({
-          query: `query { ${blocks.map(
+          query: `query Feed { ${blocks.map(
             ({ id }) =>
               `b${id}: blob(name: "${id}") {
                 name
