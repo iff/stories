@@ -25,10 +25,6 @@ function Story(props: Props) {
   return (
     <Context.Provider value={{ storyId, blobs }}>
       <MDXProvider components={components}>
-        <div style={{ marginBottom: "2em" }}>
-          <Header />
-        </div>
-
         <Content>
           <Body />
         </Content>

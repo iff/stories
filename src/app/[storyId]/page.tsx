@@ -33,7 +33,17 @@ export default async function Page(props: Props) {
   const { storyId } = props.params;
   const blobs = await data({ storyId });
 
-  return <StoryById storyId={storyId} blobs={blobs} />;
+  const { default: Header } = await import(`../../../content/${storyId}/header`);
+
+  return (
+    <>
+      <div style={{ marginBottom: "2em" }}>
+        <Header />
+      </div>
+
+      <StoryById storyId={storyId} blobs={blobs} />
+    </>
+  );
 }
 
 async function data({ storyId }): Promise<Array<any>> {
