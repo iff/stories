@@ -60,26 +60,26 @@ dependencies:
     specifier: ^4.2.2
     version: 4.2.2
   fp-ts:
-    specifier: ^2.16.1
-    version: 2.16.1
+    specifier: ^2.16.2
+    version: 2.16.2
   immer:
     specifier: ^10.0.3
     version: 10.0.3
   io-ts:
     specifier: ^2.2.21
-    version: 2.2.21(fp-ts@2.16.1)
+    version: 2.2.21(fp-ts@2.16.2)
   io-ts-types:
     specifier: ^0.5.19
-    version: 0.5.19(fp-ts@2.16.1)(io-ts@2.2.21)(monocle-ts@2.3.13)(newtype-ts@0.3.5)
+    version: 0.5.19(fp-ts@2.16.2)(io-ts@2.2.21)(monocle-ts@2.3.13)(newtype-ts@0.3.5)
   monocle-ts:
     specifier: ^2.3.13
-    version: 2.3.13(fp-ts@2.16.1)
+    version: 2.3.13(fp-ts@2.16.2)
   nanoid:
     specifier: ^5.0.4
     version: 5.0.4
   newtype-ts:
     specifier: ^0.3.5
-    version: 0.3.5(fp-ts@2.16.1)(monocle-ts@2.3.13)
+    version: 0.3.5(fp-ts@2.16.2)(monocle-ts@2.3.13)
   next:
     specifier: ^14.0.4
     version: 14.0.4(@babel/core@7.23.6)(react-dom@18.2.0)(react@18.2.0)
@@ -2475,8 +2475,8 @@ packages:
       path-exists: 4.0.0
     dev: false
 
-  /fp-ts@2.16.1:
-    resolution: {integrity: sha512-by7U5W8dkIzcvDofUcO42yl9JbnHTEDBrzu3pt5fKT+Z4Oy85I21K80EYJYdjQGC2qum4Vo55Ag57iiIK4FYuA==}
+  /fp-ts@2.16.2:
+    resolution: {integrity: sha512-CkqAjnIKFqvo3sCyoBTqgJvF+bHrSik584S9nhTjtBESLx26cbtVMR/T9a6ApChOcSDAaM3JydDmWDUn4EEXng==}
     dev: false
 
   /fs-extra@11.1.1:
@@ -2627,7 +2627,7 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /io-ts-types@0.5.19(fp-ts@2.16.1)(io-ts@2.2.21)(monocle-ts@2.3.13)(newtype-ts@0.3.5):
+  /io-ts-types@0.5.19(fp-ts@2.16.2)(io-ts@2.2.21)(monocle-ts@2.3.13)(newtype-ts@0.3.5):
     resolution: {integrity: sha512-kQOYYDZG5vKre+INIDZbLeDJe+oM+4zLpUkjXyTMyUfoCpjJNyi29ZLkuEAwcPufaYo3yu/BsemZtbdD+NtRfQ==}
     peerDependencies:
       fp-ts: ^2.0.0
@@ -2635,18 +2635,18 @@ packages:
       monocle-ts: ^2.0.0
       newtype-ts: ^0.3.2
     dependencies:
-      fp-ts: 2.16.1
-      io-ts: 2.2.21(fp-ts@2.16.1)
-      monocle-ts: 2.3.13(fp-ts@2.16.1)
-      newtype-ts: 0.3.5(fp-ts@2.16.1)(monocle-ts@2.3.13)
+      fp-ts: 2.16.2
+      io-ts: 2.2.21(fp-ts@2.16.2)
+      monocle-ts: 2.3.13(fp-ts@2.16.2)
+      newtype-ts: 0.3.5(fp-ts@2.16.2)(monocle-ts@2.3.13)
     dev: false
 
-  /io-ts@2.2.21(fp-ts@2.16.1):
+  /io-ts@2.2.21(fp-ts@2.16.2):
     resolution: {integrity: sha512-zz2Z69v9ZIC3mMLYWIeoUcwWD6f+O7yP92FMVVaXEOSZH1jnVBmET/urd/uoarD1WGBY4rCj8TAyMPzsGNzMFQ==}
     peerDependencies:
       fp-ts: ^2.5.0
     dependencies:
-      fp-ts: 2.16.1
+      fp-ts: 2.16.2
     dev: false
 
   /is-alphabetical@2.0.1:
@@ -3482,12 +3482,12 @@ packages:
       minimist: 1.2.7
     dev: false
 
-  /monocle-ts@2.3.13(fp-ts@2.16.1):
+  /monocle-ts@2.3.13(fp-ts@2.16.2):
     resolution: {integrity: sha512-D5Ygd3oulEoAm3KuGO0eeJIrhFf1jlQIoEVV2DYsZUMz42j4tGxgct97Aq68+F8w4w4geEnwFa8HayTS/7lpKQ==}
     peerDependencies:
       fp-ts: ^2.5.0
     dependencies:
-      fp-ts: 2.16.1
+      fp-ts: 2.16.2
     dev: false
 
   /mri@1.2.0:
@@ -3515,14 +3515,14 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: false
 
-  /newtype-ts@0.3.5(fp-ts@2.16.1)(monocle-ts@2.3.13):
+  /newtype-ts@0.3.5(fp-ts@2.16.2)(monocle-ts@2.3.13):
     resolution: {integrity: sha512-v83UEQMlVR75yf1OUdoSFssjitxzjZlqBAjiGQ4WJaML8Jdc68LJ+BaSAXUmKY4bNzp7hygkKLYTsDi14PxI2g==}
     peerDependencies:
       fp-ts: ^2.0.0
       monocle-ts: ^2.0.0
     dependencies:
-      fp-ts: 2.16.1
-      monocle-ts: 2.3.13(fp-ts@2.16.1)
+      fp-ts: 2.16.2
+      monocle-ts: 2.3.13(fp-ts@2.16.2)
     dev: false
 
   /next-compose-plugins@2.2.1:
