@@ -22,13 +22,30 @@ function StoryById(props: Props) {
 
   const focus = searchParams?.get("focus");
   React.useEffect(() => {
-    if (pathname && focus) {
-      const el = document.getElementById(focus);
-      if (el) {
-        router.replace(pathname, { scroll: false });
+    let rafHandle: undefined | number = undefined
 
-        el.scrollIntoView({ behavior: "instant", block: "center" });
-        el.querySelector("a")?.focus();
+    if (pathname && focus) {
+      const go = () => {
+        rafHandle = undefined
+
+        const el = document.getElementById(focus);
+        if (el) {
+          router.replace(pathname, { scroll: false });
+
+          el.scrollIntoView({ behavior: "instant", block: "center" });
+          el.querySelector("a")?.focus();
+
+        } else {
+          rafHandle = requestAnimationFrame(go);
+        }
+      };
+
+      go();
+    }
+
+    return () => {
+      if (rafHandle !== undefined) {
+        cancelAnimationFrame(rafHandle)
       }
     }
   }, [router, pathname, focus]);
