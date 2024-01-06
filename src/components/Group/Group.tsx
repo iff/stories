@@ -29,6 +29,14 @@ function Group(props: Props, ref: React.ForwardedRef<React.ElementRef<typeof Roo
               ...props,
               captionPlacement: "overlay",
               fill: true,
+              sizes: (() => {
+                if (span.length === 0) {
+                  return ["100vw"];
+                } else {
+                  const toValue = (s: number): string => `${Math.round((100 * s) / 12)}vw`;
+                  return [`(min-width: 720px) ${toValue(span[1] ?? span[0] ?? 12)}`, `${toValue(span[0] ?? 12)}`];
+                }
+              })().join(", "),
             })}
           </div>
         );

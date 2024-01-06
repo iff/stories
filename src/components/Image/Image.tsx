@@ -31,6 +31,8 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
    */
   fill?: boolean;
 
+  sizes?: string;
+
   caption?: React.ReactNode;
 
   /**
@@ -53,7 +55,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 }
 
 function Image(props: Props) {
-  const { blob, fill = false, caption, captionPlacement = "below", href, className, ...rest } = props;
+  const { blob, fill = false, sizes, caption, captionPlacement = "below", href, className, ...rest } = props;
 
   return (
     <Root className={cx(classes.root, className, classes.captionPlacement[captionPlacement])} {...rest}>
@@ -68,6 +70,7 @@ function Image(props: Props) {
                 height={fill ? undefined : blob.asImage.dimensions.height}
                 fill={fill}
                 style={{ objectFit: fill ? "cover" : undefined }}
+                sizes={sizes}
               />
               <div
                 className={classes.placeholder}
@@ -85,6 +88,7 @@ function Image(props: Props) {
                 height={fill ? undefined : blob.asImage.dimensions.height}
                 fill={fill}
                 style={{ objectFit: fill ? "cover" : undefined }}
+                sizes={sizes}
               />
               <div
                 className={classes.placeholder}
