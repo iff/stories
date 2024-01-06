@@ -185,6 +185,6 @@ function Nav(props: { action?: LinkProps | (() => void); className?: string; chi
   } else if (typeof action === "function") {
     return <div onClick={action} {...rest} />;
   } else {
-    return <Link {...action} {...rest} />;
+    return <Link prefetch {...action} {...rest} />;
   }
 }
