@@ -13,6 +13,7 @@ export const components = {
   blockquote: (props: any) => (
     <blockquote
       className={css`
+        margin: 1em 0;
         padding-left: 1em;
         border-left: 2px solid #fe762a;
 

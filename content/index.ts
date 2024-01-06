@@ -57,4 +57,11 @@ export default {
     Body: dynamic(() => import(`./where-the-roads-collide/body.mdx`)),
     Image: dynamic(() => import(`./where-the-roads-collide/image`)),
   },
+  "kindest-regards": {
+    Card: dynamic(() => import(`./kindest-regards/card`)),
+    meta: require("./kindest-regards/meta").default,
+    Header: dynamic(() => import(`./kindest-regards/header`)),
+    Body: dynamic(() => import(`./kindest-regards/body.mdx`)),
+    Image: dynamic(() => import(`./kindest-regards/image`)),
+  },
 } as const;
