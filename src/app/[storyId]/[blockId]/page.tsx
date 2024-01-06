@@ -47,7 +47,7 @@ type Block =
     };
 
 export default async function Page(props: Props) {
-  const { storyId } = props.params;
+  const { storyId, blockId } = props.params;
   const { block, next, prev, title, blob } = await data(props.params);
 
   const image = block.__typename === "Image" ? block.image : block.video?.poster;
@@ -65,7 +65,7 @@ export default async function Page(props: Props) {
       </Head>
 
       <Lightbox
-        onClose={{ href: `/${storyId}` }}
+        onClose={{ href: `/${storyId}?focus=${blockId}` }}
         caption={block.caption}
         prev={prev ? { href: `/${storyId}/${prev}` } : undefined}
         next={next ? { href: `/${storyId}/${next}` } : undefined}
