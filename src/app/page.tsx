@@ -19,6 +19,7 @@ export default async function Page() {
 }
 
 const featuredStories = [
+  "kindest-regards",
   "where-the-roads-collide",
   "rebirth",
   "no-end-in-sight",
