@@ -170,7 +170,7 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
 const Inner = {
   Image: function ({ blob }: { blob: any }) {
     return (
-      <div>
+      <>
         <NextImage
           alt=""
           src={blob.asImage.url}
@@ -179,6 +179,7 @@ const Inner = {
           style={{
             objectFit: "contain",
           }}
+          priority
         />
         <div
           className={css`
@@ -200,7 +201,7 @@ const Inner = {
             backgroundImage: `url(${blob.asImage.placeholder.url})`,
           }}
         />
-      </div>
+      </>
     );
   },
   Clip: function ({ video }: { video: any }) {
