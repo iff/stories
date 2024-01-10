@@ -28,6 +28,10 @@
     {
       "matchPackageNames": ["timvir", "@timvir/mdx"],
       "groupName": "Timvir"
+    },
+    {
+      "matchPackagePatterns": ["^@types/"],
+      "automerge": true
     }
   ]
 }
