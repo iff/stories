@@ -77,12 +77,22 @@ const classes = {
     position: absolute;
     top: 24px;
     left: 24px;
-    z-index: 2;
+    z-index: 3;
   `,
 
   image: css`
     position: relative;
     height: 100%;
+
+    & > span:first-child {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+
+      z-index: 2;
+    }
 
     .sqip {
       position: absolute;
@@ -111,11 +121,6 @@ const classes = {
         opacity: 1;
         border: 0;
         padding: 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
       }
 
       .sqip {
@@ -123,14 +128,13 @@ const classes = {
         right: 0;
         bottom: 56px;
         left: 88px;
-        z-index: -1;
       }
     }
   `,
 
   title: css`
     position: absolute;
-    z-index: 2;
+    z-index: 3;
 
     bottom: 24px;
     left: 24px;
