@@ -41,9 +41,11 @@ css`
       color-scheme: light;
       ${mkTheme(themes.light)};
     }
-    :root[data-theme="dark"] {
-      color-scheme: dark;
-      ${mkTheme(themes.dark)};
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        ${mkTheme(themes.dark)};
+      }
     }
   }
   :global() {

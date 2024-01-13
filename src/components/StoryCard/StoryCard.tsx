@@ -283,7 +283,7 @@ const classes = {
 
     grid-area: title;
 
-    :global(:root[data-theme="dark"]) & {
+    @media (prefers-color-scheme: dark) {
       background: transparent;
       border-bottom: 5px solid currentColor;
       padding-bottom: 0.2em;

@@ -38,12 +38,15 @@ body {
   --text-color: #000;
   --secondary-text-color: rgba(0, 0, 0, 0.66);
 }
-:root[data-theme="dark"] {
-  color-scheme: dark;
 
-  --background-color: #18191b;
-  --text-color: hsla(0, 0%, 100%, 0.86);
-  --secondary-text-color: hsla(0, 0%, 100%, 0.56);
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --background-color: #18191b;
+    --text-color: hsla(0, 0%, 100%, 0.86);
+    --secondary-text-color: hsla(0, 0%, 100%, 0.56);
+  }
 }
 
 /* Tuna Light */
