@@ -27,10 +27,12 @@ export default function Image_(props: Props) {
       blob={blob}
       className={cx(
         className,
-        size ? {
-          full: "fw",
-          wide: "wp",
-        }[size] : "",
+        size
+          ? {
+              full: "fw",
+              wide: "wp",
+            }[size]
+          : "",
         css`
           margin: 0 auto;
         `,

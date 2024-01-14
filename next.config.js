@@ -25,8 +25,8 @@ export default withPlugins(plugins, {
   transpilePackages: ["timvir"],
 
   images: {
-    loader: 'custom',
-    loaderFile: './src/imageLoader.ts',
+    loader: "custom",
+    loaderFile: "./src/imageLoader.ts",
   },
 
   env: {

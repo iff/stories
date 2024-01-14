@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface Props {
-  params: { storyId: string; }
+  params: { storyId: string };
 }
 
 export default async function Page(props: Props) {

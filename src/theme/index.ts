@@ -13,11 +13,9 @@ export const themes = {
   },
 } as const;
 
-css`
-  
-`;
+css``;
 
-export function mkTheme(config: typeof themes[keyof typeof themes]) {
+export function mkTheme(config: (typeof themes)[keyof typeof themes]) {
   return `
     --background-color: ${config.backgroundColor};
     --text-color: ${config.textColor};

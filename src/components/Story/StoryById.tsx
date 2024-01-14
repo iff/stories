@@ -22,11 +22,11 @@ function StoryById(props: Props) {
 
   const focus = searchParams?.get("focus");
   React.useEffect(() => {
-    let rafHandle: undefined | number = undefined
+    let rafHandle: undefined | number = undefined;
 
     if (pathname && focus) {
       const go = () => {
-        rafHandle = undefined
+        rafHandle = undefined;
 
         const el = document.getElementById(focus);
         if (el) {
@@ -34,7 +34,6 @@ function StoryById(props: Props) {
 
           el.scrollIntoView({ behavior: "instant", block: "center" });
           el.querySelector("a")?.focus();
-
         } else {
           rafHandle = requestAnimationFrame(go);
         }
@@ -45,9 +44,9 @@ function StoryById(props: Props) {
 
     return () => {
       if (rafHandle !== undefined) {
-        cancelAnimationFrame(rafHandle)
+        cancelAnimationFrame(rafHandle);
       }
-    }
+    };
   }, [router, pathname, focus]);
 
   return <Story {...props} {...stories[props.storyId]} />;

@@ -6,12 +6,14 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { default: { title } } = await import(`../../../content/${params.storyId}/meta.ts`)
+  const {
+    default: { title },
+  } = await import(`../../../content/${params.storyId}/meta.ts`);
 
   return {
     title,
     openGraph: {
-      images: `https://app-gcsszncmzq-lz.a.run.app/og/stories.caurea.org/${params.storyId}/og:image`
+      images: `https://app-gcsszncmzq-lz.a.run.app/og/stories.caurea.org/${params.storyId}/og:image`,
     },
     twitter: {
       card: "summary_large_image",
@@ -69,7 +71,7 @@ async function data({ storyId }): Promise<Array<any>> {
               name
               asImage { url dimensions { width height } placeholder { url } }
               asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
-            }`,
+            }`
         )} }`,
       }),
     });
