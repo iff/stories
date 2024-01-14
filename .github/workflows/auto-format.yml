@@ -1,0 +1,38 @@
+# This workflow auto formats code changes in pull requests. It does so
+# by checking if any of the touched projects are not formatted correctly,
+# and if so creates a new pull request that applies the correct formatting.
+#
+# It is the responsibility of the person who opened the original pull
+# request to verify if they want to apply formatting changes.
+
+name: Auto Format
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  auto-format:
+    name: Auto Format
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - run: pnpm install
+      - run: ./node_modules/.bin/prettier --write .
+
+      - uses: peter-evans/create-pull-request@v5
+        with:
+          title: "Auto Format #${{ github.event.pull_request.number }}"
+          branch: auto-format-${{ github.event.pull_request.number }}
+          commit-message: "format:write"
+          base: ${{ github.event.pull_request.head.ref }}
