@@ -1,7 +1,10 @@
 import withMDX from "@next/mdx";
 import { remarkPlugin } from "@timvir/mdx";
-import withPlugins from "next-compose-plugins";
 import withLinaria from "next-with-linaria";
+
+function withPlugins(plugins, config) {
+  return plugins.reduce((a, f) => f(a), config);
+}
 
 const plugins = [
   withLinaria,
