@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.23.7",
-    "@formatjs/intl": "^2.9.9",
+    "@formatjs/intl": "^2.9.11",
     "@hapi/accept": "^6.0.3",
     "@linaria/babel-preset": "^5.0.4",
     "@linaria/core": "^5.0.2",
@@ -39,7 +39,7 @@
     "react-dom": "^18.2.0",
     "react-feather": "^2.0.10",
     "react-hotkeys-hook": "^4.4.4",
-    "react-intl": "^6.5.5",
+    "react-intl": "^6.6.1",
     "remark-mdx": "^3.0.0",
     "remark-parse": "^11.0.0",
     "timvir": "^0.2.12",
