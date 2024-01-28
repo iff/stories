@@ -2,6 +2,7 @@ import { extractBlocks } from "@/cms";
 import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
 import { css } from "@linaria/core";
+import { stories } from "content";
 import * as fs from "fs";
 import Head from "next/head";
 import NextImage from "next/image";
@@ -131,7 +132,7 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
 
   const index = blocks.indexOf(block);
 
-  const { title } = require(`../../../../content/${storyId}/meta`).default;
+  const story = stories.find((x) => x.id === storyId);
 
   return {
     block: {
@@ -161,7 +162,7 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
     prev: blocks[index - 1]?.id ?? null,
     next: blocks[index + 1]?.id ?? null,
 
-    title: `${blockId} - ${title}`,
+    title: `${blockId} - ${story?.title}`,
 
     blob,
   };

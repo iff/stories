@@ -3,6 +3,7 @@ import { Context } from "@/components/Story/context";
 import { components } from "@/components/Story/internal";
 import { mediaType } from "@hapi/accept";
 import { MDXProvider } from "@mdx-js/react";
+import { site, stories } from "content";
 import { Feed } from "feed";
 import * as fs from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -38,86 +39,33 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const date = new Date();
 
   const author = {
-    name: "Tomáš Čarnecký",
-    email: "tomc@caurea.org",
-    link: "https://caurea.org",
+    name: site.author.name,
+    email: site.author.email,
   };
 
   const feed = new Feed({
-    title: `Stories`,
-    description: "…for nothing remains of us but the vibrations we leave behind.",
+    title: site.title,
+    description: site.byline,
     id: baseUrl,
     link: baseUrl,
     language: "en",
     favicon: `${baseUrl}/favicon.png`,
-    copyright: `All rights reserved ${date.getFullYear()}, Tomáš Čarnecký`,
+    copyright: `All rights reserved ${date.getFullYear()}, ${site.author.name}`,
     updated: date,
     author,
   });
 
-  const stories = [
-    {
-      id: "kindest-regards",
-      title: "Kindest Regards",
-      publishedAt: new Date(Date.parse("2024-01-06")),
-      description: "Fying over 9000 kilometers just to attend a 3 day workshop is wasteful. Why not stay a bit longer?",
-    },
-    {
-      id: "where-the-roads-collide",
-      title: "Where the Roads Collide",
-      publishedAt: new Date(Date.parse("2023-07-23")),
-      description: "Checking another country in the Western Balkans off my bucket list.",
-    },
-    {
-      id: "rebirth",
-      title: "Rebirth",
-      publishedAt: new Date(Date.parse("2023-06-07")),
-      description:
-        "A second opportunity presented itself for me to spend a few weeks in Morocco. I celebrated christmas in a dasert camp, and summitted the highest mountain of north africa on new years eve.",
-    },
-    {
-      id: "no-end-in-sight",
-      title: "No End in Sight",
-      publishedAt: new Date(Date.parse("2022-12-12")),
-      description: "Exploring North Macedonia's cities, mountains, and lakes during the last warm autumn days of 2022.",
-    },
-    {
-      id: "shivering-sense",
-      title: "Shivering Sense",
-      publishedAt: new Date(Date.parse("2022-04-24")),
-      description: "Escaping the freezing european winter weather and spending Christmas and New Years somplace warm.",
-    },
-    {
-      id: "blouson-noir",
-      title: "Blouson Noir",
-      publishedAt: new Date(Date.parse("2021-11-06")),
-      description:
-        "A remote-work experiment from a small country in western asia. I spent four weeks in Armenia, traveled 2200km by car, living in a tent while working my 9to5 day job.",
-    },
-    {
-      id: "dreamers-wake",
-      title: "Dreamer's Wake",
-      publishedAt: new Date(Date.parse("2021-08-08")),
-      description:
-        "Madeira wasn't my first choice where to go, but I'm glad the weather circumstances made me change my plans and go to this gorgeous island. I'll forever be grateful for the experience that I've had the chance to live through, and the people I've met.",
-    },
-    {
-      id: "one-more-rush",
-      title: "One More Rush",
-      publishedAt: new Date(Date.parse("2021-05-18")),
-      description:
-        "I’m fortunate enough that I can work from wherever there is good internet. That covers a lot of this earths surface – and airspace.",
-    },
-    {
-      id: "where-i-was-meant-to-be",
-      title: "Where I was meant to be",
-      publishedAt: new Date(Date.parse("2021-01-22")),
-      description:
-        "I was going through a really fucking difficult time in my life and needed to get the fuck away from comfort.",
-    },
-  ];
+  const storiesForFeed = stories
+    .flatMap((x) => {
+      if (x.visibility === "PUBLIC" && x.publishedAt !== null) {
+        return [{ ...x, publishedAt: x.publishedAt }];
+      } else {
+        return [];
+      }
+    })
+    .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
 
-  for (const story of stories) {
+  for (const story of storiesForFeed) {
     const url = `${baseUrl}/${story.id}`;
     const body = await fs.promises.readFile(`./content/${story.id}/body.mdx`, { encoding: "utf8" });
     const blocks = extractBlocks(body);
@@ -152,7 +100,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       title: story.title,
       id: url,
       link: url,
-      description: story.description,
+      description: story.teaser.text,
       content: ReactDOMServer.renderToStaticMarkup(
         <Context.Provider value={{ storyId: story.id, blobs }}>
           <MDXProvider components={{ ...components, Image, Clip, Group }}>

@@ -13,14 +13,12 @@ const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   storyId: string;
-  meta: any;
-  Header: any;
   Body: any;
   blobs: Array<any>;
 }
 
 function Story(props: Props) {
-  const { storyId, meta, Header, Body, blobs, ...rest } = props;
+  const { storyId, Body, blobs, ...rest } = props;
 
   return (
     <Context.Provider value={{ storyId, blobs }}>
