@@ -30,7 +30,7 @@ jobs:
       - run: pnpm install
       - run: ./node_modules/.bin/prettier --write .
 
-      - uses: peter-evans/create-pull-request@v5
+      - uses: peter-evans/create-pull-request@v6
         with:
           title: "Auto Format #${{ github.event.pull_request.number }}"
           branch: auto-format-${{ github.event.pull_request.number }}
