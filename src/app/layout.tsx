@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import "../style.linaria.global";
 
@@ -24,6 +25,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </head>
 
       <body>{children}</body>
+
+      <SpeedInsights />
     </html>
   );
 }
