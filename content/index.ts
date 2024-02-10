@@ -51,6 +51,29 @@ interface Story {
 
 export const stories: Story[] = [
   {
+    id: "hawaii",
+
+    visibility: "PUBLIC",
+    publishedAt: new Date(Date.parse("2020-01-01")),
+
+    title: "Hawaii",
+    date: [new Date(Date.parse("2016-11-15")), new Date(Date.parse("2016-12-01"))],
+
+    image: "GzkGi2tBqxRFQ3efnr5Kxa64tX56hb4fbnK5tTWM5a9k",
+
+    teaser: {
+      text: "oasis",
+      images: ["GNm6m1gnH9TiRwYrrgsmg3HdVRjEWDZTW1xAYmoJuHNR"],
+    },
+
+    body: {
+      /**
+       * A React component that renders the story body.
+       */
+      Component: dynamic(() => import(`./hawaii/body.mdx`)),
+    },
+  },
+  {
     id: "amsterdam",
 
     visibility: "PUBLIC",
