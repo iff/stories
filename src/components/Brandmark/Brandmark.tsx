@@ -18,7 +18,6 @@ function Brandmark(props: Props, ref: React.ForwardedRef<React.ElementRef<typeof
     <Link href="/" passHref legacyBehavior>
       <Root ref={ref} className={cx(classes.root, className)} {...rest}>
         <div>Stories</div>
-        <div>by Tomáš Čarnecký</div>
       </Root>
     </Link>
   );
@@ -28,7 +27,7 @@ export default React.forwardRef(Brandmark);
 
 const classes = {
   root: css`
-    display: block;
+    display: none;
     text-decoration: none;
     text-align: center;
 
