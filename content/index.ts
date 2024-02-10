@@ -73,4 +73,27 @@ export const stories: Story[] = [
       Component: dynamic(() => import(`./amsterdam/body.mdx`)),
     },
   },
+  {
+    id: "marocco",
+
+    visibility: "PUBLIC",
+    publishedAt: new Date(Date.parse("2020-01-01")),
+
+    title: "Marocco",
+    date: [new Date(Date.parse("2019-01-31")), new Date(Date.parse("2019-02-10"))],
+
+    image: "6hkdp7oJ9g8qqzGcP9AAXrv9xk6S9GTUPB42J1YAYXeX",
+
+    teaser: {
+      text: "unimaginable colors",
+      images: ["2XeYAL9caXND6XJB1988dfnS4ZWVkc94aFM5SSNoeyYw"],
+    },
+
+    body: {
+      /**
+       * A React component that renders the story body.
+       */
+      Component: dynamic(() => import(`./marokko/body.mdx`)),
+    },
+  },
 ];
