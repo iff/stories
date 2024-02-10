@@ -93,7 +93,7 @@ export const stories: Story[] = [
       /**
        * A React component that renders the story body.
        */
-      Component: dynamic(() => import(`./marokko/body.mdx`)),
+      Component: dynamic(() => import(`./marocco/body.mdx`)),
     },
   },
 ];
