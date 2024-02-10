@@ -38,7 +38,7 @@ async function Hero(props: Props) {
 
       <div className={classes.box}>
         <Brandmark className={classes.brandmark} />
-        <div className={classes.lead}>exploring reality with a lense attached to a camera</div>
+        <div className={classes.lead}>framing the kaleidoscope of perception through my camera's lens, capturing the ever-shifting hues of existence</div>
       </div>
     </Root>
   );
