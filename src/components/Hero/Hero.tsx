@@ -14,7 +14,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {}
 async function Hero(props: Props) {
   const { className, ...rest } = props;
 
-  const blob = await importBlob("DtmNcLbCUqzbXVfgQSowJeJZTTs9UztyYkupTzAQzbCf");
+  const blob = await importBlob("CoRgR7AozPqTDa8MmfpkV2HDEo5Ji97wZtuEZRQsGN4W");
 
   return (
     <Root className={cx(classes.root, className)} {...rest}>
@@ -38,7 +38,7 @@ async function Hero(props: Props) {
 
       <div className={classes.box}>
         <Brandmark className={classes.brandmark} />
-        <div className={classes.lead}>…for nothing remains of us but the vibrations we leave behind.</div>
+        <div className={classes.lead}>exploring reality with a lense attached to a camera</div>
       </div>
     </Root>
   );
