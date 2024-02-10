@@ -7,7 +7,7 @@ export const site = {
 
   author: {
     name: "Yves Ineichen",
-    email: "",
+    email: "y@y.io",
   },
 };
 
@@ -54,7 +54,7 @@ export const stories: Story[] = [
     id: "amsterdam",
 
     visibility: "PUBLIC",
-    publishedAt: new Date(Date.parse("2021-01-22")),
+    publishedAt: new Date(Date.parse("2020-01-01")),
 
     title: "Amsterdam",
     date: [new Date(Date.parse("2017-05-20")), new Date(Date.parse("2017-06-01"))],
@@ -63,7 +63,7 @@ export const stories: Story[] = [
 
     teaser: {
       text: "smombie life",
-      images: ["47xXYVZEjAVVyEqYs7TpphRpE52WKZ7nVXoqJPT67iX3"],
+      images: ["Gh83ou9cqktKK9PBZLukuDviJ7Dvfqf1ep5zcZ3KA5kn"],
     },
 
     body: {
