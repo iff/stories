@@ -120,6 +120,29 @@ export const stories: Story[] = [
     },
   },
   {
+    id: "snowline",
+
+    visibility: "PUBLIC",
+    publishedAt: new Date(Date.parse("2020-01-01")),
+
+    title: "Snowline",
+    date: [new Date(Date.parse("2021-03-06")), new Date(Date.parse("2021-03-06"))],
+
+    image: "C673XbvFp8M5k899he4QNmj919yu5uMsBbckNfNyUVqT",
+
+    teaser: {
+      text: "unexpected separation",
+      images: ["9ECapbRAJzBu2BoZ6UG47EzRxDJFgAdr9xiTPF5VTcst"],
+    },
+
+    body: {
+      /**
+       * A React component that renders the story body.
+       */
+      Component: dynamic(() => import(`./snowline/body.mdx`)),
+    },
+  },
+  {
     id: "bavona",
 
     visibility: "PUBLIC",
