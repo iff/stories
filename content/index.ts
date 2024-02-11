@@ -62,7 +62,7 @@ export const stories: Story[] = [
     image: "GzkGi2tBqxRFQ3efnr5Kxa64tX56hb4fbnK5tTWM5a9k",
 
     teaser: {
-      text: "oasis",
+      text: "fairytale island",
       images: ["GNm6m1gnH9TiRwYrrgsmg3HdVRjEWDZTW1xAYmoJuHNR"],
     },
 
@@ -108,7 +108,7 @@ export const stories: Story[] = [
     image: "6hkdp7oJ9g8qqzGcP9AAXrv9xk6S9GTUPB42J1YAYXeX",
 
     teaser: {
-      text: "unimaginable colors",
+      text: "colorful remoteness",
       images: ["2XeYAL9caXND6XJB1988dfnS4ZWVkc94aFM5SSNoeyYw"],
     },
 
