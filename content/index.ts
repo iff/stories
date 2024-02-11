@@ -119,4 +119,27 @@ export const stories: Story[] = [
       Component: dynamic(() => import(`./marocco/body.mdx`)),
     },
   },
+  {
+    id: "bavona",
+
+    visibility: "PUBLIC",
+    publishedAt: new Date(Date.parse("2020-01-01")),
+
+    title: "Bavona",
+    date: [new Date(Date.parse("2020-01-01")), new Date(Date.parse("2024-02-10"))],
+
+    image: "HMzyN2b5oADqoKsK29WZjxebYWWUWhZ7PZQ3HQyzn8WV",
+
+    teaser: {
+      text: "second home",
+      images: ["BGthNqJjncN8r8kqddsKU9rzcRGvSJfY3iXFc8cpNFge"],
+    },
+
+    body: {
+      /**
+       * A React component that renders the story body.
+       */
+      Component: dynamic(() => import(`./bavona/body.mdx`)),
+    },
+  },
 ];
