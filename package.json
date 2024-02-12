@@ -41,7 +41,7 @@
     "react-feather": "^2.0.10",
     "react-hotkeys-hook": "^4.5.0",
     "react-intl": "^6.6.2",
-    "remark-mdx": "^3.0.0",
+    "remark-mdx": "^3.0.1",
     "remark-parse": "^11.0.0",
     "timvir": "^0.2.12",
     "typescript": "^5.3.3",
