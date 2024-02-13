@@ -30,14 +30,14 @@ dependencies:
     specifier: ^5.0.4
     version: 5.0.4(webpack@5.90.1)
   '@mdx-js/loader':
-    specifier: ^3.0.0
-    version: 3.0.0(webpack@5.90.1)
+    specifier: ^3.0.1
+    version: 3.0.1(webpack@5.90.1)
   '@mdx-js/react':
-    specifier: ^3.0.0
-    version: 3.0.0(@types/react@18.2.55)(react@18.2.0)
+    specifier: ^3.0.1
+    version: 3.0.1(@types/react@18.2.55)(react@18.2.0)
   '@next/mdx':
     specifier: ^14.1.0
-    version: 14.1.0(@mdx-js/loader@3.0.0)(@mdx-js/react@3.0.0)
+    version: 14.1.0(@mdx-js/loader@3.0.1)(@mdx-js/react@3.0.1)
   '@timvir/mdx':
     specifier: ^0.2.12
     version: 0.2.12
@@ -112,7 +112,7 @@ dependencies:
     version: 11.0.0
   timvir:
     specifier: ^0.2.12
-    version: 0.2.12(@mdx-js/react@3.0.0)(react-dom@18.2.0)(react-hotkeys-hook@4.5.0)(react@18.2.0)
+    version: 0.2.12(@mdx-js/react@3.0.1)(react-dom@18.2.0)(react-hotkeys-hook@4.5.0)(react@18.2.0)
   typescript:
     specifier: ^5.3.3
     version: 5.3.3
@@ -1573,8 +1573,8 @@ packages:
       - supports-color
     dev: false
 
-  /@mdx-js/loader@3.0.0(webpack@5.90.1):
-    resolution: {integrity: sha512-9kLv83YtgxpoXVYHaf0ygx1dmhCffo0MQCv6KtNG67jy/JlBK/2Q0dSWfuuyStP3jnZKABHfbjv8zsiT1buu6A==}
+  /@mdx-js/loader@3.0.1(webpack@5.90.1):
+    resolution: {integrity: sha512-YbYUt7YyEOdFxhyuCWmLKf5vKhID/hJAojEUnheJk4D8iYVLFQw+BAoBWru/dHGch1omtmZOPstsmKPyBF68Tw==}
     peerDependencies:
       webpack: '>=5'
     dependencies:
@@ -1615,8 +1615,8 @@ packages:
       - supports-color
     dev: false
 
-  /@mdx-js/react@3.0.0(@types/react@18.2.55)(react@18.2.0):
-    resolution: {integrity: sha512-nDctevR9KyYFyV+m+/+S4cpzCWHqj+iHDHq3QrsWezcC+B17uZdIWgCguESUkwFhM3n/56KxWVE3V6EokrmONQ==}
+  /@mdx-js/react@3.0.1(@types/react@18.2.55)(react@18.2.0):
+    resolution: {integrity: sha512-9ZrPIU4MGf6et1m1ov3zKf+q9+deetI51zprKB1D/z3NOb+rUxxtEl3mCjW5wTGh6VhRdwPueh1oRzi6ezkA8A==}
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
@@ -1630,7 +1630,7 @@ packages:
     resolution: {integrity: sha512-Py8zIo+02ht82brwwhTg36iogzFqGLPXlRGKQw5s+qP/kMNc4MAyDeEwBKDijk6zTIbegEgu8Qy7C1LboslQAw==}
     dev: false
 
-  /@next/mdx@14.1.0(@mdx-js/loader@3.0.0)(@mdx-js/react@3.0.0):
+  /@next/mdx@14.1.0(@mdx-js/loader@3.0.1)(@mdx-js/react@3.0.1):
     resolution: {integrity: sha512-YLYsViq91+H8+3oCtK1iuMWdeN14K70Hy6/tYScY+nfo5bQ84A/A+vA6UdNC9MkbWQ/373hQubx2p4JvUjlb2Q==}
     peerDependencies:
       '@mdx-js/loader': '>=0.15.0'
@@ -1641,8 +1641,8 @@ packages:
       '@mdx-js/react':
         optional: true
     dependencies:
-      '@mdx-js/loader': 3.0.0(webpack@5.90.1)
-      '@mdx-js/react': 3.0.0(@types/react@18.2.55)(react@18.2.0)
+      '@mdx-js/loader': 3.0.1(webpack@5.90.1)
+      '@mdx-js/react': 3.0.1(@types/react@18.2.55)(react@18.2.0)
       source-map: 0.7.4
     dev: false
 
@@ -4067,7 +4067,7 @@ packages:
       source-map-support: 0.5.21
     dev: false
 
-  /timvir@0.2.12(@mdx-js/react@3.0.0)(react-dom@18.2.0)(react-hotkeys-hook@4.5.0)(react@18.2.0):
+  /timvir@0.2.12(@mdx-js/react@3.0.1)(react-dom@18.2.0)(react-hotkeys-hook@4.5.0)(react@18.2.0):
     resolution: {integrity: sha512-WnzhbPKpheU3sGLflLs2DroAckgfXzqN8KWcSuFs74R10X6IA7gP6pdQoSEFtRF55jgfFWnIzZp1qrgyZYbtbA==}
     peerDependencies:
       '@mdx-js/react': ^2 || ^3
@@ -4075,7 +4075,7 @@ packages:
       react-dom: ^17 || ^18
       react-hotkeys-hook: ^4
     dependencies:
-      '@mdx-js/react': 3.0.0(@types/react@18.2.55)(react@18.2.0)
+      '@mdx-js/react': 3.0.1(@types/react@18.2.55)(react@18.2.0)
       bytestring: 1.0.0
       downshift: 7.0.1(react@18.2.0)
       fuzzaldrin-plus: 0.6.0
