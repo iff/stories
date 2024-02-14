@@ -120,6 +120,29 @@ export const stories: Story[] = [
     },
   },
   {
+    id: "louvre",
+
+    visibility: "PUBLIC",
+    publishedAt: new Date(Date.parse("2020-01-01")),
+
+    title: "Louvre",
+    date: [new Date(Date.parse("2019-05-02")), new Date(Date.parse("2019-05-02"))],
+
+    image: "57EDbon52VehFxFwSc8wdAamHbwmt1EsPyHifoaqYuwG",
+
+    teaser: {
+      text: "museum of tourists",
+      images: ["6K5A8zf2cZFh1S7JUoTwJVycS7mn4TFun9S9cgrcfgZB"],
+    },
+
+    body: {
+      /**
+       * A React component that renders the story body.
+       */
+      Component: dynamic(() => import(`./louvre/body.mdx`)),
+    },
+  },
+  {
     id: "snowline",
 
     visibility: "PUBLIC",
