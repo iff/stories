@@ -165,6 +165,50 @@ export const stories: Story[] = [
       Component: dynamic(() => import(`./bavona/body.mdx`)),
     },
   },
-  // bergell -> BCctiLtVp3AheJNa1RqSZ32eMAtjRvJ6ppYMESJ845x8
-  // nz -> 8Cfadtq1pQ2XgLn55skdb2CoawepiJF1kF9HwUZW8T3r
+  {
+    id: "bergell",
+
+    visibility: "HIDDEN",
+    publishedAt: new Date(Date.parse("2020-01-01")),
+
+    title: "Bergell",
+    date: [new Date(Date.parse("2020-01-01")), new Date(Date.parse("2024-02-10"))],
+
+    image: "BCctiLtVp3AheJNa1RqSZ32eMAtjRvJ6ppYMESJ845x8",
+
+    teaser: {
+      text: "escaping lockdown",
+      images: [""],
+    },
+
+    body: {
+      /**
+       * A React component that renders the story body.
+       */
+      Component: dynamic(() => import(`./bergell/body.mdx`)),
+    },
+  },
+  {
+    id: "nz",
+
+    visibility: "HIDDEN",
+    publishedAt: new Date(Date.parse("2020-01-01")),
+
+    title: "New Zealand",
+    date: [new Date(Date.parse("2020-01-01")), new Date(Date.parse("2024-02-10"))],
+
+    image: "8Cfadtq1pQ2XgLn55skdb2CoawepiJF1kF9HwUZW8T3r",
+
+    teaser: {
+      text: "escaping lockdown",
+      images: [""],
+    },
+
+    body: {
+      /**
+       * A React component that renders the story body.
+       */
+      Component: dynamic(() => import(`./nz/body.mdx`)),
+    },
+  },
 ];
