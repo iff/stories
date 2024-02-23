@@ -155,7 +155,7 @@ export const stories: Story[] = [
 
     teaser: {
       text: "second home",
-      images: ["BGthNqJjncN8r8kqddsKU9rzcRGvSJfY3iXFc8cpNFge"],
+      images: ["DK7FoWh3M9J1Nwk7GFGjcYoCMwpsDcJzZo8DZtK9wMwV"],
     },
 
     body: {
