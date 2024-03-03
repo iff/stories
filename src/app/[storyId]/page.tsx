@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: story.title,
     openGraph: {
-      images: `https://app-gcsszncmzq-lz.a.run.app/og/stories.caurea.org/${params.storyId}/og:image`,
+      images: `https://app-gcsszncmzq-lz.a.run.app/og/${process.env.VERCEL_URL}/${params.storyId}/og:image`,
     },
     twitter: {
       card: "summary_large_image",
