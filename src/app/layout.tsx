@@ -24,9 +24,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <link rel="alternate" type="application/rss+xml" title="Stories by Tomáš Čarnecky" href={`${baseUrl}/feed`} />
       </head>
 
-      <body>{children}</body>
-
-      <SpeedInsights />
+      <body>
+        {children}
+        <SpeedInsights />
+      </body>
     </html>
   );
 }
