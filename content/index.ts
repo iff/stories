@@ -241,5 +241,26 @@ export const stories: Story[] = [
     body: {
       Component: dynamic(() => import(`./kindest-regards/body.mdx`)),
     },
+  },
+
+  {
+    id: "safe",
+
+    visibility: "PUBLIC",
+    publishedAt: new Date(Date.parse("2024-03-05")),
+
+    title: "Safe",
+    date: [new Date(Date.parse("2023-12-19")), new Date(Date.parse("2024-01-14"))],
+
+    image: "52AiaqkiyZeScySiUdDq2PwKdHovwX7SHbzMzAGaL9V7",
+
+    teaser: {
+      text: "I wanted to escape into deep Georgian winter. Instead, I was celebrating New Year’s Eve stuck in my car in the middle of the mountains, and strolling though Batumi during balmy summer weather.",
+      images: ["3NSmDSaXPc8Np3C3GQonevnvCL5w5jGY8Fqybn4GJnHP"],
+    },
+
+    body: {
+      Component: dynamic(() => import(`./safe/body.mdx`)),
+    },
   }
 ]
