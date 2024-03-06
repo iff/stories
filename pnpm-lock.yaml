@@ -34,7 +34,7 @@ dependencies:
     version: 3.0.1(webpack@5.90.2)
   '@mdx-js/react':
     specifier: ^3.0.1
-    version: 3.0.1(@types/react@18.2.63)(react@18.2.0)
+    version: 3.0.1(@types/react@18.2.64)(react@18.2.0)
   '@next/mdx':
     specifier: ^14.1.2
     version: 14.1.2(@mdx-js/loader@3.0.1)(@mdx-js/react@3.0.1)
@@ -48,8 +48,8 @@ dependencies:
     specifier: ^20.11.25
     version: 20.11.25
   '@types/react':
-    specifier: ^18.2.63
-    version: 18.2.63
+    specifier: ^18.2.64
+    version: 18.2.64
   '@types/react-dom':
     specifier: ^18.2.20
     version: 18.2.20
@@ -1615,14 +1615,14 @@ packages:
       - supports-color
     dev: false
 
-  /@mdx-js/react@3.0.1(@types/react@18.2.63)(react@18.2.0):
+  /@mdx-js/react@3.0.1(@types/react@18.2.64)(react@18.2.0):
     resolution: {integrity: sha512-9ZrPIU4MGf6et1m1ov3zKf+q9+deetI51zprKB1D/z3NOb+rUxxtEl3mCjW5wTGh6VhRdwPueh1oRzi6ezkA8A==}
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
     dependencies:
       '@types/mdx': 2.0.11
-      '@types/react': 18.2.63
+      '@types/react': 18.2.64
       react: 18.2.0
     dev: false
 
@@ -1642,7 +1642,7 @@ packages:
         optional: true
     dependencies:
       '@mdx-js/loader': 3.0.1(webpack@5.90.2)
-      '@mdx-js/react': 3.0.1(@types/react@18.2.63)(react@18.2.0)
+      '@mdx-js/react': 3.0.1(@types/react@18.2.64)(react@18.2.0)
       source-map: 0.7.4
     dev: false
 
@@ -1813,7 +1813,7 @@ packages:
   /@types/hoist-non-react-statics@3.3.1:
     resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}
     dependencies:
-      '@types/react': 18.2.63
+      '@types/react': 18.2.64
       hoist-non-react-statics: 3.3.2
     dev: false
 
@@ -1870,11 +1870,11 @@ packages:
   /@types/react-dom@18.2.20:
     resolution: {integrity: sha512-HXN/biJY8nv20Cn9ZbCFq3liERd4CozVZmKbaiZ9KiKTrWqsP7eoGDO6OOGvJQwoVFuiXaiJ7nBBjiFFbRmQMQ==}
     dependencies:
-      '@types/react': 18.2.63
+      '@types/react': 18.2.64
     dev: false
 
-  /@types/react@18.2.63:
-    resolution: {integrity: sha512-ppaqODhs15PYL2nGUOaOu2RSCCB4Difu4UFrP4I3NHLloXC/ESQzQMi9nvjfT1+rudd0d2L3fQPJxRSey+rGlQ==}
+  /@types/react@18.2.64:
+    resolution: {integrity: sha512-MlmPvHgjj2p3vZaxbQgFUQFvD8QiZwACfGqEdDSWou5yISWxDQ4/74nCAwsUiX7UFLKZz3BbVSPj+YxeoGGCfg==}
     dependencies:
       '@types/prop-types': 15.7.4
       '@types/scheduler': 0.16.2
@@ -3790,7 +3790,7 @@ packages:
       '@formatjs/intl-displaynames': 6.6.6
       '@formatjs/intl-listformat': 7.5.5
       '@types/hoist-non-react-statics': 3.3.1
-      '@types/react': 18.2.63
+      '@types/react': 18.2.64
       hoist-non-react-statics: 3.3.2
       intl-messageformat: 10.5.11
       react: 18.2.0
@@ -4075,7 +4075,7 @@ packages:
       react-dom: ^17 || ^18
       react-hotkeys-hook: ^4
     dependencies:
-      '@mdx-js/react': 3.0.1(@types/react@18.2.63)(react@18.2.0)
+      '@mdx-js/react': 3.0.1(@types/react@18.2.64)(react@18.2.0)
       bytestring: 1.0.0
       downshift: 7.0.1(react@18.2.0)
       fuzzaldrin-plus: 0.6.0
