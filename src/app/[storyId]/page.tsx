@@ -75,7 +75,7 @@ async function data({ storyId }): Promise<Array<any>> {
           ({ id }) =>
             `b${id}: blob(name: "${id}") {
               name
-              asImage { url dimensions { width height } placeholder { url } }
+              asImage { url dimensions { width height } }
               asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
             }`
         )} }`,
