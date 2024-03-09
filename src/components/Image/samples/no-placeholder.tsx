@@ -10,6 +10,7 @@ export default async function Sample(props: Props) {
       blob={await (async () => {
         const blob = await importBlob("3c2f6pB3cuLRJp4wgf77c2vg4YX55GrnhvzL9eMc8yHC");
         blob.asImage.url = "";
+        blob.asImage.placeholder = null;
         return blob;
       })()}
       {...props}

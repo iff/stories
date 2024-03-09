@@ -43,12 +43,17 @@ inside a grid, using explict height, or similar techniques.
 
 ## Placeholder
 
-As long as the image is not loaded yet, a placeholder image (generted by [SQIP])
-is shown in its place. Once the image is loaded, the placeholder image is faded
-away.
+As long as the image is not loaded yet, a placeholder image is shown in its place.
+Once the image is loaded, the placeholder image is faded away.
+If the image has no placeholder, a black background is used in its place.
 
 <Grid style={{ margin: "20px 0" }}>
-  <Exhibit caption="Placeholder showing while image is loading.">
+  <Exhibit caption="Image that has no placeholder.">
+    <div style={{ display: "grid", height: 200 }}>
+      <Sample variant="no-placeholder" fill />
+    </div>
+  </Exhibit>
+  <Exhibit caption="Placehonlder generated using SQIP.">
     <div style={{ display: "grid", height: 200 }}>
       <Sample variant="placeholder" fill />
     </div>
@@ -73,6 +78,16 @@ which is visible on hover.
     <Sample variant="basic" caption="Caption shown in overlay on hover" captionPlacement="overlay" />
   </Exhibit>
 </Grid>
+
+## Link
+
+The image can be optionally wrapped in a link.
+
+<Exhibit caption="An image that is also a link.">
+  <div style={{ display: "grid", height: 200 }}>
+    <Sample variant="link" caption={undefined} fill />
+  </div>
+</Exhibit>
 
 [sqip]: https://github.com/axe312ger/sqip
 [next/image]: https://nextjs.org/docs/api-reference/next/image

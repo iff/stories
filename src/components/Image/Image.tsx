@@ -20,7 +20,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
         height: number;
       };
 
-      placeholder: {
+      placeholder?: {
         url: string;
       };
     };
@@ -57,45 +57,35 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 function Image(props: Props) {
   const { blob, fill = false, sizes, caption, captionPlacement = "below", href, className, ...rest } = props;
 
+  const image = (
+    <>
+      <div
+        className={classes.placeholder}
+        style={blob.asImage.placeholder && { backgroundImage: `url(${blob.asImage.placeholder.url})` }}
+      />
+      <NextImage
+        alt=""
+        src={blob.asImage.url}
+        width={fill ? undefined : blob.asImage.dimensions.width}
+        height={fill ? undefined : blob.asImage.dimensions.height}
+        fill={fill}
+        style={{ objectFit: fill ? "cover" : undefined, display: blob.asImage.url ? "block" : "none" }}
+        sizes={sizes}
+      />
+    </>
+  );
+
   return (
     <Root className={cx(classes.root, className, classes.captionPlacement[captionPlacement])} {...rest}>
       {(() => {
         if (href) {
           return (
-            <Link passHref href={href} className={classes.image}>
-              <NextImage
-                alt=""
-                src={blob.asImage.url}
-                width={fill ? undefined : blob.asImage.dimensions.width}
-                height={fill ? undefined : blob.asImage.dimensions.height}
-                fill={fill}
-                style={{ objectFit: fill ? "cover" : undefined }}
-                sizes={sizes}
-              />
-              <div
-                className={classes.placeholder}
-                style={{ backgroundImage: `url(${blob.asImage.placeholder.url})` }}
-              />
+            <Link href={href} className={classes.image}>
+              {image}
             </Link>
           );
         } else {
-          return (
-            <div className={classes.image}>
-              <NextImage
-                alt=""
-                src={blob.asImage.url}
-                width={fill ? undefined : blob.asImage.dimensions.width}
-                height={fill ? undefined : blob.asImage.dimensions.height}
-                fill={fill}
-                style={{ objectFit: fill ? "cover" : undefined }}
-                sizes={sizes}
-              />
-              <div
-                className={classes.placeholder}
-                style={{ backgroundImage: `url(${blob.asImage.placeholder.url})` }}
-              />
-            </div>
-          );
+          return <div className={classes.image}>{image}</div>;
         }
       })()}
 
@@ -114,6 +104,10 @@ const classes = {
     isolation: isolate;
 
     margin: 0;
+
+    & a {
+      display: block;
+    }
 
     & img {
       display: block;
@@ -143,6 +137,7 @@ const classes = {
 
     background-size: cover;
     background-position: 50% 50%;
+    background-color: black;
 
     z-index: -1;
   `,
