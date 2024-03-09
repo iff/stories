@@ -89,5 +89,17 @@ The image can be optionally wrapped in a link.
   </div>
 </Exhibit>
 
+## Known Defects
+
+An image with caption and `fill` mode will not render correctly.
+The image does not stretch to fill in all available space.
+Instead, the image and caption share a roughly equal space (making the image much smaller than it should be).
+
+<Exhibit>
+  <div style={{ display: "grid", height: 200 }}>
+    <Sample variant="basic" fill />
+  </div>
+</Exhibit>
+
 [sqip]: https://github.com/axe312ger/sqip
 [next/image]: https://nextjs.org/docs/api-reference/next/image

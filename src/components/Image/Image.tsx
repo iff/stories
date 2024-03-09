@@ -64,12 +64,13 @@ function Image(props: Props) {
         style={blob.asImage.placeholder && { backgroundImage: `url(${blob.asImage.placeholder.url})` }}
       />
       <NextImage
+        className={classes.img}
         alt=""
         src={blob.asImage.url}
         width={fill ? undefined : blob.asImage.dimensions.width}
         height={fill ? undefined : blob.asImage.dimensions.height}
         fill={fill}
-        style={{ objectFit: fill ? "cover" : undefined, display: blob.asImage.url ? "block" : "none" }}
+        style={{ objectFit: fill ? "cover" : undefined, display: blob.asImage.url ? undefined : "none" }}
         sizes={sizes}
       />
     </>
@@ -104,17 +105,6 @@ const classes = {
     isolation: isolate;
 
     margin: 0;
-
-    & a {
-      display: block;
-    }
-
-    & img {
-      display: block;
-
-      max-width: 100%;
-      height: 100%;
-    }
   `,
 
   image: css`
@@ -124,6 +114,11 @@ const classes = {
     text-decoration: none;
 
     outline-offset: 2px;
+  `,
+
+  img: css`
+    max-width: 100%;
+    height: 100%;
   `,
 
   placeholder: css`
