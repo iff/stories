@@ -124,7 +124,7 @@ function Clip(props: Props) {
               width={400}
               height={200}
               viewBox="-400 0 400 200"
-              style={{ position: "absolute", top: 0, right: 0, zIndex: -1, cursor: "pointer" }}
+              style={{ position: "absolute", top: -1, right: -1, cursor: "pointer" }}
             >
               <path d="M0 0 L-80 0 L0 100 Z" fill="black" />
               <g
@@ -147,7 +147,7 @@ function Clip(props: Props) {
             width={400}
             height={200}
             viewBox="-400 -200 400 200"
-            style={{ position: "absolute", bottom: 0, right: 0, zIndex: -1, cursor: "pointer" }}
+            style={{ position: "absolute", bottom: -1, right: -1, cursor: "pointer" }}
             onClick={() => {
               const videoElement = ref.current?.querySelector("video");
               const posterElement = ref.current?.querySelector<HTMLElement>(`.${classes.poster}`);
