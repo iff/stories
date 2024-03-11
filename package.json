@@ -27,7 +27,7 @@
     "@types/unist": "^3.0.2",
     "@vercel/speed-insights": "^1.0.10",
     "feed": "^4.2.2",
-    "fp-ts": "^2.16.2",
+    "fp-ts": "^2.16.3",
     "immer": "^10.0.4",
     "io-ts": "^2.2.21",
     "io-ts-types": "^0.5.19",
