@@ -22,7 +22,7 @@ dependencies:
     version: 5.0.2
   '@linaria/react':
     specifier: ^5.0.3
-    version: 5.0.3(react@18.3.0)
+    version: 5.0.3(react@18.3.1)
   '@linaria/shaker':
     specifier: ^5.0.3
     version: 5.0.3
@@ -34,7 +34,7 @@ dependencies:
     version: 3.0.1(webpack@5.91.0)
   '@mdx-js/react':
     specifier: ^3.0.1
-    version: 3.0.1(@types/react@18.3.1)(react@18.3.0)
+    version: 3.0.1(@types/react@18.3.1)(react@18.3.1)
   '@next/mdx':
     specifier: ^14.1.4
     version: 14.1.4(@mdx-js/loader@3.0.1)(@mdx-js/react@3.0.1)
@@ -58,7 +58,7 @@ dependencies:
     version: 3.0.2
   '@vercel/speed-insights':
     specifier: ^1.0.10
-    version: 1.0.10(next@14.1.4)(react@18.3.0)
+    version: 1.0.10(next@14.1.4)(react@18.3.1)
   feed:
     specifier: ^4.2.2
     version: 4.2.2
@@ -85,25 +85,25 @@ dependencies:
     version: 0.3.5(fp-ts@2.16.5)(monocle-ts@2.3.13)
   next:
     specifier: ^14.1.4
-    version: 14.1.4(@babel/core@7.24.4)(react-dom@18.3.0)(react@18.3.0)
+    version: 14.1.4(@babel/core@7.24.4)(react-dom@18.3.1)(react@18.3.1)
   next-with-linaria:
     specifier: ^0.6.0
     version: 0.6.0(@babel/runtime@7.15.4)(@linaria/babel-preset@5.0.4)
   react:
-    specifier: ^18.3.0
-    version: 18.3.0
+    specifier: ^18.3.1
+    version: 18.3.1
   react-dom:
-    specifier: ^18.3.0
-    version: 18.3.0(react@18.3.0)
+    specifier: ^18.3.1
+    version: 18.3.1(react@18.3.1)
   react-feather:
     specifier: ^2.0.10
-    version: 2.0.10(react@18.3.0)
+    version: 2.0.10(react@18.3.1)
   react-hotkeys-hook:
     specifier: ^4.5.0
-    version: 4.5.0(react-dom@18.3.0)(react@18.3.0)
+    version: 4.5.0(react-dom@18.3.1)(react@18.3.1)
   react-intl:
     specifier: ^6.6.5
-    version: 6.6.5(react@18.3.0)(typescript@5.4.5)
+    version: 6.6.5(react@18.3.1)(typescript@5.4.5)
   remark-mdx:
     specifier: ^3.0.1
     version: 3.0.1
@@ -112,7 +112,7 @@ dependencies:
     version: 11.0.0
   timvir:
     specifier: ^0.2.15
-    version: 0.2.15(@mdx-js/react@3.0.1)(react-dom@18.3.0)(react-hotkeys-hook@4.5.0)(react@18.3.0)
+    version: 0.2.15(@mdx-js/react@3.0.1)(react-dom@18.3.1)(react-hotkeys-hook@4.5.0)(react@18.3.1)
   typescript:
     specifier: ^5.4.5
     version: 5.4.5
@@ -121,7 +121,7 @@ dependencies:
     version: 11.0.4
   use-immer:
     specifier: ^0.9.0
-    version: 0.9.0(immer@10.1.1)(react@18.3.0)
+    version: 0.9.0(immer@10.1.1)(react@18.3.1)
   webpack:
     specifier: ^5.91.0
     version: 5.91.0
@@ -1493,7 +1493,7 @@ packages:
       - supports-color
     dev: false
 
-  /@linaria/react@5.0.3(react@18.3.0):
+  /@linaria/react@5.0.3(react@18.3.1):
     resolution: {integrity: sha512-faTQHnUlrAz0Lodu+rr6Yx59rX0nqFOrZ5/IdlfQcTRz9VebyVL4vtA3AOecmn1YFZjMpqjopT0OzNz6GknQSg==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -1504,7 +1504,7 @@ packages:
       '@linaria/tags': 5.0.2
       '@linaria/utils': 5.0.2
       minimatch: 9.0.3
-      react: 18.3.0
+      react: 18.3.1
       react-html-attributes: 1.4.6
       ts-invariant: 0.10.3
     transitivePeerDependencies:
@@ -1616,7 +1616,7 @@ packages:
       - supports-color
     dev: false
 
-  /@mdx-js/react@3.0.1(@types/react@18.3.1)(react@18.3.0):
+  /@mdx-js/react@3.0.1(@types/react@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-9ZrPIU4MGf6et1m1ov3zKf+q9+deetI51zprKB1D/z3NOb+rUxxtEl3mCjW5wTGh6VhRdwPueh1oRzi6ezkA8A==}
     peerDependencies:
       '@types/react': '>=16'
@@ -1624,7 +1624,7 @@ packages:
     dependencies:
       '@types/mdx': 2.0.13
       '@types/react': 18.3.1
-      react: 18.3.0
+      react: 18.3.1
     dev: false
 
   /@next/env@14.1.4:
@@ -1643,7 +1643,7 @@ packages:
         optional: true
     dependencies:
       '@mdx-js/loader': 3.0.1(webpack@5.91.0)
-      '@mdx-js/react': 3.0.1(@types/react@18.3.1)(react@18.3.0)
+      '@mdx-js/react': 3.0.1(@types/react@18.3.1)(react@18.3.1)
       source-map: 0.7.4
     dev: false
 
@@ -1893,7 +1893,7 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: false
 
-  /@vercel/speed-insights@1.0.10(next@14.1.4)(react@18.3.0):
+  /@vercel/speed-insights@1.0.10(next@14.1.4)(react@18.3.1):
     resolution: {integrity: sha512-4uzdKB0RW6Ff2FkzshzjZ+RlJfLPxgm/00i0XXgxfMPhwnnsk92YgtqsxT9OcPLdJUyVU1DqFlSWWjIQMPkh0g==}
     requiresBuild: true
     peerDependencies:
@@ -1917,8 +1917,8 @@ packages:
       vue-router:
         optional: true
     dependencies:
-      next: 14.1.4(@babel/core@7.24.4)(react-dom@18.3.0)(react@18.3.0)
-      react: 18.3.0
+      next: 14.1.4(@babel/core@7.24.4)(react-dom@18.3.1)(react@18.3.1)
+      react: 18.3.1
     dev: false
 
   /@webassemblyjs/ast@1.12.1:
@@ -2321,7 +2321,7 @@ packages:
     engines: {node: '>=0.3.1'}
     dev: false
 
-  /downshift@7.0.1(react@18.3.0):
+  /downshift@7.0.1(react@18.3.1):
     resolution: {integrity: sha512-AdFU8qJjUg9WZaLKzh7xAPfEwAB0dSqDGb7/Gnx/teldUXcNlaZrxhymOWedzDV+62xphMVustttAngmG33pXw==}
     peerDependencies:
       react: '>=16.12.0'
@@ -2329,7 +2329,7 @@ packages:
       '@babel/runtime': 7.15.4
       compute-scroll-into-view: 1.0.17
       prop-types: 15.7.2
-      react: 18.3.0
+      react: 18.3.1
       react-is: 17.0.2
       tslib: 2.4.0
     dev: false
@@ -3555,7 +3555,7 @@ packages:
       file-system-cache: 2.4.4
     dev: false
 
-  /next@14.1.4(@babel/core@7.24.4)(react-dom@18.3.0)(react@18.3.0):
+  /next@14.1.4(@babel/core@7.24.4)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-1WTaXeSrUwlz/XcnhGTY7+8eiaFvdet5z9u3V2jb+Ek1vFo0VhHKSAIJvDWfQpttWjnyw14kBeq28TPq7bTeEQ==}
     engines: {node: '>=18.17.0'}
     hasBin: true
@@ -3576,9 +3576,9 @@ packages:
       caniuse-lite: 1.0.30001579
       graceful-fs: 4.2.11
       postcss: 8.4.31
-      react: 18.3.0
-      react-dom: 18.3.0(react@18.3.0)
-      styled-jsx: 5.1.1(@babel/core@7.24.4)(react@18.3.0)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      styled-jsx: 5.1.1(@babel/core@7.24.4)(react@18.3.1)
     optionalDependencies:
       '@next/swc-darwin-arm64': 14.1.4
       '@next/swc-darwin-x64': 14.1.4
@@ -3721,33 +3721,33 @@ packages:
       safe-buffer: 5.1.2
     dev: false
 
-  /react-dom@18.3.0(react@18.3.0):
-    resolution: {integrity: sha512-zaKdLBftQJnvb7FtDIpZtsAIb2MZU087RM8bRDZU8LVCCFYjPTsDZJNFUWPcVz3HFSN1n/caxi0ca4B/aaVQGQ==}
+  /react-dom@18.3.1(react@18.3.1):
+    resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
     peerDependencies:
-      react: ^18.3.0
+      react: ^18.3.1
     dependencies:
       loose-envify: 1.4.0
-      react: 18.3.0
-      scheduler: 0.23.1
+      react: 18.3.1
+      scheduler: 0.23.2
     dev: false
 
-  /react-feather@2.0.10(react@18.3.0):
+  /react-feather@2.0.10(react@18.3.1):
     resolution: {integrity: sha512-BLhukwJ+Z92Nmdcs+EMw6dy1Z/VLiJTzEQACDUEnWMClhYnFykJCGWQx+NmwP/qQHGX/5CzQ+TGi8ofg2+HzVQ==}
     peerDependencies:
       react: '>=16.8.6'
     dependencies:
       prop-types: 15.7.2
-      react: 18.3.0
+      react: 18.3.1
     dev: false
 
-  /react-hotkeys-hook@4.5.0(react-dom@18.3.0)(react@18.3.0):
+  /react-hotkeys-hook@4.5.0(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-Samb85GSgAWFQNvVt3PS90LPPGSf9mkH/r4au81ZP1yOIFayLC3QAvqTgGtJ8YEDMXtPmaVBs6NgipHO6h4Mug==}
     peerDependencies:
       react: '>=16.8.1'
       react-dom: '>=16.8.1'
     dependencies:
-      react: 18.3.0
-      react-dom: 18.3.0(react@18.3.0)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
   /react-html-attributes@1.4.6:
@@ -3756,7 +3756,7 @@ packages:
       html-element-attributes: 1.3.1
     dev: false
 
-  /react-intl@6.6.5(react@18.3.0)(typescript@5.4.5):
+  /react-intl@6.6.5(react@18.3.1)(typescript@5.4.5):
     resolution: {integrity: sha512-OErDPbGqus0QKVj77MGCC9Plbnys3CDQrq6Lw41c60pmeTdn41AhoS1SIzXG6SUlyF7qNN2AVqfrrIvHUgSyLQ==}
     peerDependencies:
       react: ^16.6.0 || 17 || 18
@@ -3774,7 +3774,7 @@ packages:
       '@types/react': 18.3.1
       hoist-non-react-statics: 3.3.2
       intl-messageformat: 10.5.11
-      react: 18.3.0
+      react: 18.3.1
       tslib: 2.4.0
       typescript: 5.4.5
     dev: false
@@ -3787,8 +3787,8 @@ packages:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
     dev: false
 
-  /react@18.3.0:
-    resolution: {integrity: sha512-RPutkJftSAldDibyrjuku7q11d3oy6wKOyPe5K1HA/HwwrXcEqBdHsLypkC2FFYjP7bPUa6gbzSBhw4sY2JcDg==}
+  /react@18.3.1:
+    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
@@ -3897,8 +3897,8 @@ packages:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
     dev: false
 
-  /scheduler@0.23.1:
-    resolution: {integrity: sha512-5GKS5JGfiah1O38Vfa9srZE4s3wdHbwjlCrvIookrg2FO9aIwKLOJXuJQFlEfNcVSOXuaL2hzDeY20uVXcUtrw==}
+  /scheduler@0.23.2:
+    resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
     dependencies:
       loose-envify: 1.4.0
     dev: false
@@ -3973,7 +3973,7 @@ packages:
       inline-style-parser: 0.1.1
     dev: false
 
-  /styled-jsx@5.1.1(@babel/core@7.24.4)(react@18.3.0):
+  /styled-jsx@5.1.1(@babel/core@7.24.4)(react@18.3.1):
     resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
     engines: {node: '>= 12.0.0'}
     peerDependencies:
@@ -3988,7 +3988,7 @@ packages:
     dependencies:
       '@babel/core': 7.24.4
       client-only: 0.0.1
-      react: 18.3.0
+      react: 18.3.1
     dev: false
 
   /stylis@3.5.4:
@@ -4054,7 +4054,7 @@ packages:
       source-map-support: 0.5.21
     dev: false
 
-  /timvir@0.2.15(@mdx-js/react@3.0.1)(react-dom@18.3.0)(react-hotkeys-hook@4.5.0)(react@18.3.0):
+  /timvir@0.2.15(@mdx-js/react@3.0.1)(react-dom@18.3.1)(react-hotkeys-hook@4.5.0)(react@18.3.1):
     resolution: {integrity: sha512-9W9vzdp66OBFItXbWWTC+5NlIPCF37eogBibwiW2xU9yArilY4kSHHNslsjbQRj4DxcajENGGlw5exZapDvpGg==}
     peerDependencies:
       '@mdx-js/react': ^2 || ^3
@@ -4062,17 +4062,17 @@ packages:
       react-dom: ^17 || ^18
       react-hotkeys-hook: ^4
     dependencies:
-      '@mdx-js/react': 3.0.1(@types/react@18.3.1)(react@18.3.0)
+      '@mdx-js/react': 3.0.1(@types/react@18.3.1)(react@18.3.1)
       bytestring: 1.0.0
-      downshift: 7.0.1(react@18.3.0)
+      downshift: 7.0.1(react@18.3.1)
       fuzzaldrin-plus: 0.6.0
       immer: 10.1.1
-      react: 18.3.0
-      react-dom: 18.3.0(react@18.3.0)
-      react-feather: 2.0.10(react@18.3.0)
-      react-hotkeys-hook: 4.5.0(react-dom@18.3.0)(react@18.3.0)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-feather: 2.0.10(react@18.3.1)
+      react-hotkeys-hook: 4.5.0(react-dom@18.3.1)(react@18.3.1)
       shiki: 1.1.7
-      use-immer: 0.9.0(immer@10.1.1)(react@18.3.0)
+      use-immer: 0.9.0(immer@10.1.1)(react@18.3.1)
       wonka: 6.1.0
     dev: false
 
@@ -4255,14 +4255,14 @@ packages:
       punycode: 2.1.1
     dev: false
 
-  /use-immer@0.9.0(immer@10.1.1)(react@18.3.0):
+  /use-immer@0.9.0(immer@10.1.1)(react@18.3.1):
     resolution: {integrity: sha512-/L+enLi0nvuZ6j4WlyK0US9/ECUtV5v9RUbtxnn5+WbtaXYUaOBoKHDNL9I5AETdurQ4rIFIj/s+Z5X80ATyKw==}
     peerDependencies:
       immer: '>=2.0.0'
       react: ^16.8.0 || ^17.0.1 || ^18.0.0
     dependencies:
       immer: 10.1.1
-      react: 18.3.0
+      react: 18.3.1
     dev: false
 
   /uvu@0.5.3:
