@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@babel/core':
-    specifier: ^7.24.5
-    version: 7.24.5
   '@formatjs/intl':
     specifier: ^2.10.4
     version: 2.10.4(typescript@5.4.5)
