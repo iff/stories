@@ -36,9 +36,7 @@
             ];
 
             shellHook = ''
-              if [ -n "$PS1" ]; then
-                ${banner}/bin/banner
-              fi
+              ${banner}/bin/banner
             '';
           };
         }
