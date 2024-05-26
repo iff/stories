@@ -10,17 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@v10
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - run: pnpm install
-      - run: pnpm run build
+      - run: nix develop --command bash -c 'pnpm install'
+      - run: nix develop --command bash -c 'pnpm run build'
 
       - uses: niquis/action@master
         env:
