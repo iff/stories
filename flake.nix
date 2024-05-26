@@ -19,7 +19,7 @@
             echo " … for nothing remains of us but the vibrations we leave behind."
           '';
 
-          node = pkgs.nodejs-18_x;
+          node = pkgs.nodejs_20;
 
           scripts = {
             dev = pkgs.writeShellScriptBin "dev" ''
