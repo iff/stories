@@ -1725,8 +1725,8 @@ packages:
     dev: false
     optional: true
 
-  /@shikijs/core@1.1.7:
-    resolution: {integrity: sha512-gTYLUIuD1UbZp/11qozD3fWpUTuMqPSf3svDMMrL0UmlGU7D9dPw/V1FonwAorCUJBltaaESxq90jrSjQyGixg==}
+  /@shikijs/core@1.6.0:
+    resolution: {integrity: sha512-NIEAi5U5R7BLkbW1pG/ZKu3eb1lzc3/+jD0lFsuxMT7zjaf9bbNwdNyMr7zh/Zl8EXQtQ+MYBAt5G+JLu+5DlA==}
     dev: false
 
   /@swc/helpers@0.5.2:
@@ -2247,8 +2247,8 @@ packages:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
     dev: false
 
-  /compute-scroll-into-view@1.0.17:
-    resolution: {integrity: sha512-j4dx+Fb0URmzbwwMUrhqWM2BEWHdFGx+qZ9qqASHRPqvTYdqvWnHg0H1hIbcyLnvgnoNAVMlwkepyqM3DaIFUg==}
+  /compute-scroll-into-view@2.0.4:
+    resolution: {integrity: sha512-y/ZA3BGnxoM/QHHQ2Uy49CLtnWPbt4tTPpEEZiEmmiWBFKjej7nEyH8Ryz54jH0MLXflUYA3Er2zUxPSJu5R+g==}
     dev: false
 
   /convert-source-map@2.0.0:
@@ -2318,13 +2318,13 @@ packages:
     engines: {node: '>=0.3.1'}
     dev: false
 
-  /downshift@7.0.1(react@18.3.1):
-    resolution: {integrity: sha512-AdFU8qJjUg9WZaLKzh7xAPfEwAB0dSqDGb7/Gnx/teldUXcNlaZrxhymOWedzDV+62xphMVustttAngmG33pXw==}
+  /downshift@7.6.2(react@18.3.1):
+    resolution: {integrity: sha512-iOv+E1Hyt3JDdL9yYcOgW7nZ7GQ2Uz6YbggwXvKUSleetYhU2nXD482Rz6CzvM4lvI1At34BYruKAL4swRGxaA==}
     peerDependencies:
       react: '>=16.12.0'
     dependencies:
       '@babel/runtime': 7.15.4
-      compute-scroll-into-view: 1.0.17
+      compute-scroll-into-view: 2.0.4
       prop-types: 15.7.2
       react: 18.3.1
       react-is: 17.0.2
@@ -3920,10 +3920,10 @@ packages:
       randombytes: 2.1.0
     dev: false
 
-  /shiki@1.1.7:
-    resolution: {integrity: sha512-9kUTMjZtcPH3i7vHunA6EraTPpPOITYTdA5uMrvsJRexktqP0s7P3s9HVK80b4pP42FRVe03D7fT3NmJv2yYhw==}
+  /shiki@1.6.0:
+    resolution: {integrity: sha512-P31ROeXcVgW/k3Z+vUUErcxoTah7ZRaimctOpzGuqAntqnnSmx1HOsvnbAB8Z2qfXPRhw61yptAzCsuKOhTHwQ==}
     dependencies:
-      '@shikijs/core': 1.1.7
+      '@shikijs/core': 1.6.0
     dev: false
 
   /source-map-js@1.0.2:
@@ -4061,16 +4061,16 @@ packages:
     dependencies:
       '@mdx-js/react': 3.0.1(@types/react@18.3.3)(react@18.3.1)
       bytestring: 1.0.0
-      downshift: 7.0.1(react@18.3.1)
+      downshift: 7.6.2(react@18.3.1)
       fuzzaldrin-plus: 0.6.0
       immer: 10.1.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-feather: 2.0.10(react@18.3.1)
       react-hotkeys-hook: 4.5.0(react-dom@18.3.1)(react@18.3.1)
-      shiki: 1.1.7
+      shiki: 1.6.0
       use-immer: 0.9.0(immer@10.1.1)(react@18.3.1)
-      wonka: 6.1.0
+      wonka: 6.3.4
     dev: false
 
   /to-fast-properties@2.0.0:
@@ -4365,8 +4365,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /wonka@6.1.0:
-    resolution: {integrity: sha512-VgiMCz7BXOiDbgpVhf5iNhK7hurteY5Jv0fDJewUkY0s4fbxQD2iKqfGxNXNTwp2v3bgT8QVu2l5H7YdkZ5WIA==}
+  /wonka@6.3.4:
+    resolution: {integrity: sha512-CjpbqNtBGNAeyNS/9W6q3kSkKE52+FjIj7AkFlLr11s/VWGUu6a2CdYSdGxocIhIVjaW/zchesBQUKPVU69Cqg==}
     dev: false
 
   /xml-js@1.6.11:
