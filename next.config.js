@@ -18,6 +18,10 @@ const plugins = [
 ];
 
 export default withPlugins(plugins, {
+  experimental: {
+    optimizePackageImports: ["shiki"],
+  },
+
   reactStrictMode: true,
 
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
