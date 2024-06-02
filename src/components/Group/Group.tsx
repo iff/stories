@@ -63,6 +63,7 @@ const classes = {
     & > * {
       grid-area: 1 / 1 / 1 / 1;
       place-self: stretch;
+      min-width: 0;
     }
   `,
 
