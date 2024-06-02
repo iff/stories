@@ -29,32 +29,32 @@ const classes = {
      * The width of the main (center) column. Choose so that lines
      * of text are neither too long nor too short.
      */
-    --center-column: 36rem;
+    --center-column: 36em;
 
     /*
      * The (max) width of the extended columns
      */
-    --extended-column: 12rem;
+    --extended-column: 12em;
 
     grid-template-columns:
       [le]
-      max(1rem, env(safe-area-inset-left))
+      max(1em, env(safe-area-inset-left))
       [lex lc]
       1fr
       [rc rex]
-      max(1rem, env(safe-area-inset-right))
+      max(1em, env(safe-area-inset-right))
       [re];
 
     /*
      * Can't use var() nor env() in media queries :(
      *
-     * > (min-width: calc(var(--center-column) + max(1rem, env(safe-area-inset-left)) + max(1rem, env(safe-area-inset-right))))
+     * > (min-width: calc(var(--center-column) + max(1em, env(safe-area-inset-left)) + max(1em, env(safe-area-inset-right))))
      */
-    @media (min-width: calc(36rem + 2rem)) {
+    @media (min-width: calc(36em + 2em)) {
       grid-template-columns:
         [le]
         1fr
-        max(1rem, env(safe-area-inset-left))
+        max(1em, env(safe-area-inset-left))
         [lex]
         minmax(0, var(--extended-column))
         [lc]
@@ -62,7 +62,7 @@ const classes = {
         [rc]
         minmax(0, var(--extended-column))
         [rex]
-        max(1rem, env(safe-area-inset-right))
+        max(1em, env(safe-area-inset-right))
         1fr
         [re];
     }

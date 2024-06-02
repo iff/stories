@@ -12,6 +12,8 @@ css`
       margin: 0;
       box-sizing: border-box;
       overscroll-behavior: none;
+    }
+    body {
       font-family: "Tuna", system-ui, sans-serif;
       /*
        * Font size goes from 17px to 21px, changes
