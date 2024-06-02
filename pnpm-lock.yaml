@@ -36,8 +36,8 @@ dependencies:
     specifier: ^14.2.3
     version: 14.2.3(@mdx-js/loader@3.0.1)(@mdx-js/react@3.0.1)
   '@timvir/mdx':
-    specifier: ^0.2.16
-    version: 0.2.16
+    specifier: ^0.2.18
+    version: 0.2.18
   '@types/mdx':
     specifier: ^2.0.13
     version: 2.0.13
@@ -108,8 +108,8 @@ dependencies:
     specifier: ^11.0.0
     version: 11.0.0
   timvir:
-    specifier: ^0.2.16
-    version: 0.2.16(@mdx-js/react@3.0.1)(react-dom@18.3.1)(react-hotkeys-hook@4.5.0)(react@18.3.1)
+    specifier: ^0.2.18
+    version: 0.2.18(@mdx-js/react@3.0.1)(react-dom@18.3.1)(react-hotkeys-hook@4.5.0)(react@18.3.1)
   typescript:
     specifier: ^5.4.5
     version: 5.4.5
@@ -1740,8 +1740,8 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /@timvir/mdx@0.2.16:
-    resolution: {integrity: sha512-JvbdQofepcLYzbaOaaHT13rW9tD+8ccosXba+9PguWodzARF0+Y8jceiHfQBJLeDzcvbyutkKfKT84l7Az+z9A==}
+  /@timvir/mdx@0.2.18:
+    resolution: {integrity: sha512-sp8RV3llCp2Nck328K78tkojdOyXuQSwyd5vhg4YFB1bH/zAUECjFXmy63F7nIRQPozd80LQ5TzbDwtVFmWwIA==}
     dependencies:
       '@babel/generator': 7.24.5
       '@babel/parser': 7.24.5
@@ -3757,8 +3757,8 @@ packages:
       source-map-support: 0.5.21
     dev: false
 
-  /timvir@0.2.16(@mdx-js/react@3.0.1)(react-dom@18.3.1)(react-hotkeys-hook@4.5.0)(react@18.3.1):
-    resolution: {integrity: sha512-+NLM+G/5bG08FYbHQutSeKHaoji94vx/gQ4dew8iMzKscFPRng+YiXD+B5icUXRp3PnXlCfpVBfrGfYlhqkBpA==}
+  /timvir@0.2.18(@mdx-js/react@3.0.1)(react-dom@18.3.1)(react-hotkeys-hook@4.5.0)(react@18.3.1):
+    resolution: {integrity: sha512-Foav+fXMggQwOt3ZQzy63/5mTcVmJbKKcdOrQs037TZe8QYA+TQsp9CYz8jl8AyNV9Y4ZxuvdpOy2Q9e57Y/UQ==}
     peerDependencies:
       '@mdx-js/react': ^2 || ^3
       react: ^17 || ^18
