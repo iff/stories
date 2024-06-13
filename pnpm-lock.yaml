@@ -117,8 +117,8 @@ dependencies:
     specifier: ^11.0.4
     version: 11.0.4
   use-immer:
-    specifier: ^0.9.0
-    version: 0.9.0(immer@10.1.1)(react@18.3.1)
+    specifier: ^0.10.0
+    version: 0.10.0(immer@10.1.1)(react@18.3.1)
   webpack:
     specifier: ^5.91.0
     version: 5.91.0
@@ -3924,6 +3924,16 @@ packages:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
     dependencies:
       punycode: 2.1.1
+    dev: false
+
+  /use-immer@0.10.0(immer@10.1.1)(react@18.3.1):
+    resolution: {integrity: sha512-/eVwNR4TG9Tm/dd+aHYLLaI0FLfYKlkTqKMkn78Ah/EYVzWd/zJIgpkdoFEKbhQJOGo8XN7/mWrTx0exp1c+Ug==}
+    peerDependencies:
+      immer: '>=8.0.0'
+      react: ^16.8.0 || ^17.0.1 || ^18.0.0
+    dependencies:
+      immer: 10.1.1
+      react: 18.3.1
     dev: false
 
   /use-immer@0.9.0(immer@10.1.1)(react@18.3.1):
