@@ -44,7 +44,7 @@
     "remark-parse": "^11.0.0",
     "timvir": "^0.2.20",
     "typescript": "^5.4.5",
-    "unified": "^11.0.4",
+    "unified": "^11.0.5",
     "use-immer": "^0.10.0",
     "webpack": "^5.92.0"
   }
