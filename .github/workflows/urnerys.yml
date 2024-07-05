@@ -45,7 +45,7 @@ jobs:
       - uses: urnerys/action/checkBuild@main
 
   baseline:
-    needs: take-snapshots
+    needs: check
     if: github.event.deployment_status.environment == 'Production'
     runs-on: ubuntu-latest
     steps:
