@@ -1,0 +1,52 @@
+name: Urnerys
+
+on: deployment_status
+
+env:
+  URNERYS: vrrrt.caurea.org
+
+jobs:
+  setup:
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: urnerys/action/createBuild@main
+
+  take-snapshots:
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2, 3, 4]
+        shardTotal: [4]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 8
+
+      - run: pnpm install
+      - run: ./node_modules/.bin/playwright install --with-deps chromium
+
+      - run: ./node_modules/.bin/playwright test --retries 3 --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        env:
+          URL: ${{ github.event.deployment_status.target_url }}
+
+  check:
+    needs: take-snapshots
+    runs-on: ubuntu-latest
+    steps:
+      - uses: urnerys/action/checkBuild@main
+
+  baseline:
+    needs: take-snapshots
+    if: github.event.deployment_status.environment == 'Production'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: urnerys/action/setBaseline@main
