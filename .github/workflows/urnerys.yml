@@ -47,7 +47,7 @@ jobs:
       - uses: urnerys/action/checkBuild@main
 
   # If the deployment was done in the production environment, we move the
-  # baseline, so that any future runs compare against this snapshots in this
+  # baseline, so that any future runs are compared against snapshots in this
   # build.
   move-baseline:
     needs: create-snapshots
