@@ -6,12 +6,20 @@ env:
   URNERYS: vrrrt.caurea.org
 
 jobs:
+
+  # This whole workflow only runs when the deployment was successful. The first
+  # thing we do is to create a Build. The action uses the current GITHUB_RUN_ID
+  # as the unique build identifier.
   setup:
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: urnerys/action/createBuild@main
 
+  # After the setup is completed, we take all the snapshots. Because we can have
+  # hundreds (or thousands) of snapshots, the job distributes the work across
+  # multiple machines (see strategy.matrix). Each machine takes a subset of the
+  # snapshots.
   take-snapshots:
     needs: setup
     runs-on: ubuntu-latest
@@ -38,12 +46,18 @@ jobs:
         env:
           URL: ${{ github.event.deployment_status.target_url }}
 
+  # When all the snapshots are taken, we instruct Urnerys to check the build
+  # against the baseline. This will also report the result as a git commit
+  # status back to GitHub.
   check:
     needs: take-snapshots
     runs-on: ubuntu-latest
     steps:
       - uses: urnerys/action/checkBuild@main
 
+  # If the deployment was done in the production environment, we update the
+  # baseline, so that any future runs compare against this snapshots in this
+  # build.
   baseline:
     needs: check
     if: github.event.deployment_status.environment == 'Production'
