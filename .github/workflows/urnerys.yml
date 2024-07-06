@@ -8,7 +8,7 @@ env:
 jobs:
 
   # This whole workflow only runs when the deployment was successful. The first
-  # thing we do is to create a Build. The action uses the current GITHUB_RUN_ID
+  # thing we do is to create a build. The action uses the current GITHUB_RUN_ID
   # as the unique build identifier.
   setup:
     if: github.event.deployment_status.state == 'success'
@@ -16,18 +16,10 @@ jobs:
     steps:
       - uses: urnerys/action/createBuild@main
 
-  # After the setup is completed, we take all the snapshots. Because we can have
-  # hundreds (or thousands) of snapshots, the job distributes the work across
-  # multiple machines (see strategy.matrix). Each machine takes a subset of the
-  # snapshots.
-  take-snapshots:
+  # After the setup is completed, we take the snapshots.
+  create-snapshots:
     needs: setup
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        shardIndex: [1, 2, 3, 4]
-        shardTotal: [4]
     steps:
       - uses: actions/checkout@v4
 
@@ -42,25 +34,24 @@ jobs:
       - run: pnpm install
       - run: ./node_modules/.bin/playwright install --with-deps chromium
 
-      - run: ./node_modules/.bin/playwright test --retries 3 --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+      - run: ./node_modules/.bin/playwright test --retries 3
         env:
           URL: ${{ github.event.deployment_status.target_url }}
 
-  # When all the snapshots are taken, we instruct Urnerys to check the build
-  # against the baseline. This will also report the result as a git commit
-  # status back to GitHub.
-  check:
-    needs: take-snapshots
+  # If this was a preview deployment, we compare the snapshots against the baseline.
+  check-build:
+    needs: create-snapshots
+    if: github.event.deployment_status.environment != 'Production'
     runs-on: ubuntu-latest
     steps:
       - uses: urnerys/action/checkBuild@main
 
-  # If the deployment was done in the production environment, we update the
+  # If the deployment was done in the production environment, we move the
   # baseline, so that any future runs compare against this snapshots in this
   # build.
-  baseline:
-    needs: check
+  move-baseline:
+    needs: create-snapshots
     if: github.event.deployment_status.environment == 'Production'
     runs-on: ubuntu-latest
     steps:
-      - uses: urnerys/action/setBaseline@main
+      - uses: urnerys/action/moveBaseline@main
