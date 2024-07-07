@@ -6,7 +6,6 @@ env:
   URNERYS: vrrrt.caurea.org
 
 jobs:
-
   # This whole workflow only runs when the deployment was successful. The first
   # thing we do is to create a build. The action uses the current GITHUB_RUN_ID
   # as the unique build identifier.
