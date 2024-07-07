@@ -1,6 +1,6 @@
 export function sanitizeTitle(s: string): string {
   return s
-    .replaceAll(/[\/:*\?"<>|\s]+/g, "-")
+    .replaceAll(/[\/:*\?"<>|\s\.\(\)]+/g, "-")
     .replace(/-+$/g, "")
     .replace(/^-/, "")
     .replace(/-$/, "")
