@@ -10,10 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@v12
+        with:
+          fetch-depth: 0
+          clean: false
 
-      - run: nix develop --command bash -c 'pnpm install'
-      - run: nix develop --command bash -c 'pnpm run build'
+      - uses: DeterminateSystems/nix-installer-action@v12
+      - run: nix run github:nicknovitski/nix-develop .#workflow
+
+      - run: pnpm run build
 
       - uses: niquis/action@master
         env:

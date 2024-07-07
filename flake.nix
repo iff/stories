@@ -39,6 +39,17 @@
               ${banner}/bin/banner
             '';
           };
+
+          devShells.workflow = pkgs.mkShell {
+            buildInputs = [
+              node
+              node.pkgs.pnpm
+            ];
+
+            shellHook = ''
+              pnpm install >/dev/null 2>&1
+            '';
+          };
         }
       );
 }
