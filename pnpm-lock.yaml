@@ -25,10 +25,10 @@ dependencies:
     version: 5.0.3
   '@linaria/webpack5-loader':
     specifier: ^5.0.4
-    version: 5.0.4(webpack@5.92.1)
+    version: 5.0.4(webpack@5.93.0)
   '@mdx-js/loader':
     specifier: ^3.0.1
-    version: 3.0.1(webpack@5.92.1)
+    version: 3.0.1(webpack@5.93.0)
   '@mdx-js/react':
     specifier: ^3.0.1
     version: 3.0.1(@types/react@18.3.3)(react@18.3.1)
@@ -123,8 +123,8 @@ dependencies:
     specifier: ^0.10.0
     version: 0.10.0(immer@10.1.1)(react@18.3.1)
   webpack:
-    specifier: ^5.92.1
-    version: 5.92.1
+    specifier: ^5.93.0
+    version: 5.93.0
 
 packages:
 
@@ -1558,7 +1558,7 @@ packages:
       - supports-color
     dev: false
 
-  /@linaria/webpack5-loader@5.0.4(webpack@5.92.1):
+  /@linaria/webpack5-loader@5.0.4(webpack@5.93.0):
     resolution: {integrity: sha512-yqUijEhA+QJZBtBDS8FCJbP3KZ8H2QSz87CaPt/SCQ069XcZoUbJeMqM41oGU6yx6c9m3dovrV+KvTj6QEgEIg==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -1569,19 +1569,19 @@ packages:
       '@linaria/utils': 5.0.2
       enhanced-resolve: 5.17.0
       mkdirp: 0.5.6
-      webpack: 5.92.1
+      webpack: 5.93.0
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@mdx-js/loader@3.0.1(webpack@5.92.1):
+  /@mdx-js/loader@3.0.1(webpack@5.93.0):
     resolution: {integrity: sha512-YbYUt7YyEOdFxhyuCWmLKf5vKhID/hJAojEUnheJk4D8iYVLFQw+BAoBWru/dHGch1omtmZOPstsmKPyBF68Tw==}
     peerDependencies:
       webpack: '>=5'
     dependencies:
       '@mdx-js/mdx': 3.0.0
       source-map: 0.7.4
-      webpack: 5.92.1
+      webpack: 5.93.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -1642,7 +1642,7 @@ packages:
       '@mdx-js/react':
         optional: true
     dependencies:
-      '@mdx-js/loader': 3.0.1(webpack@5.92.1)
+      '@mdx-js/loader': 3.0.1(webpack@5.93.0)
       '@mdx-js/react': 3.0.1(@types/react@18.3.3)(react@18.3.1)
       source-map: 0.7.4
     dev: false
@@ -3758,7 +3758,7 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
-  /terser-webpack-plugin@5.3.10(webpack@5.92.1):
+  /terser-webpack-plugin@5.3.10(webpack@5.93.0):
     resolution: {integrity: sha512-BKFPWlPDndPs+NGGCr1U59t0XScL5317Y0UReNrHaw9/FwhPENlq6bfgs+4yPfyP51vqC1bQ4rp1EfXW5ZSH9w==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
@@ -3779,7 +3779,7 @@ packages:
       schema-utils: 3.3.0
       serialize-javascript: 6.0.1
       terser: 5.27.0
-      webpack: 5.92.1
+      webpack: 5.93.0
     dev: false
 
   /terser@5.27.0:
@@ -4005,8 +4005,8 @@ packages:
     engines: {node: '>=10.13.0'}
     dev: false
 
-  /webpack@5.92.1:
-    resolution: {integrity: sha512-JECQ7IwJb+7fgUFBlrJzbyu3GEuNBcdqr1LD7IbSzwkSmIevTm8PF+wej3Oxuz/JFBUZ6O1o43zsPkwm1C4TmA==}
+  /webpack@5.93.0:
+    resolution: {integrity: sha512-Y0m5oEY1LRuwly578VqluorkXbvXKh7U3rLoQCEO04M97ScRr44afGVkI0FQFsXzysk5OgFAxjZAb9rsGQVihA==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     peerDependencies:
@@ -4036,7 +4036,7 @@ packages:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(webpack@5.92.1)
+      terser-webpack-plugin: 5.3.10(webpack@5.93.0)
       watchpack: 2.4.1
       webpack-sources: 3.2.3
     transitivePeerDependencies:
