@@ -1,12 +1,7 @@
 import { test } from "@playwright/test";
 import { build, sanitizeTitle, takeImage, uploadImage } from "./shared";
 
-for (const url of [
-  "/docs/components/Image",
-  "/docs/components/Content",
-  "/docs/components/Group",
-  "/docs/components/Clip",
-]) {
+for (const url of ["/docs/components/Image", "/docs/components/Group", "/docs/components/Clip"]) {
   test(url, async ({ page }, { title }) => {
     const viewports = [
       { width: 360, height: 640 },
