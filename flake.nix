@@ -30,7 +30,7 @@
           devShells.default = pkgs.mkShell {
             buildInputs = [
               node
-              (pkgs.nodePackages.pnpm.override { inherit node; })
+              node.pkgs.pnpm
 
               scripts.dev
             ];
