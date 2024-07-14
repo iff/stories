@@ -29,6 +29,7 @@ jobs:
 
       - uses: peter-evans/create-pull-request@v6
         with:
+          token: ${{ secrets.CREATE_PULL_REQUEST_TOKEN }}
           branch: update-nix-flake
           title: Update Nix Flake
           body: "${{ steps.commit.outputs.message }}"
