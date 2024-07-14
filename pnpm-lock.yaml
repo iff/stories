@@ -88,7 +88,7 @@ dependencies:
     version: 14.2.5(@babel/core@7.24.5)(@playwright/test@1.45.1)(react-dom@18.3.1)(react@18.3.1)
   next-with-linaria:
     specifier: ^0.6.0
-    version: 0.6.0(@babel/runtime@7.24.7)(@linaria/babel-preset@5.0.4)
+    version: 0.6.0(@babel/runtime@7.24.8)(@linaria/babel-preset@5.0.4)
   react:
     specifier: ^18.3.1
     version: 18.3.1
@@ -1265,8 +1265,8 @@ packages:
     resolution: {integrity: sha512-x/rqGMdzj+fWZvCOYForTghzbtqPDZ5gPwaoNGHdgDfF2QA/XZbCBp4Moo5scrkAMPhB7z26XM/AaHuIJdgauA==}
     dev: false
 
-  /@babel/runtime@7.24.7:
-    resolution: {integrity: sha512-UwgBRMjJP+xv857DCngvqXI3Iq6J4v0wXmwc6sapg+zyhbwmQX67LUEFrkK5tbyJ30jGuG3ZvWpBiB9LCy1kWw==}
+  /@babel/runtime@7.24.8:
+    resolution: {integrity: sha512-5F7SDGs1T72ZczbRwbGO9lQi0NLjQxzl6i4lJxLxfW9U5UluCSyEJeniWvnhl3/euNiqQVbo8zruhsDfid0esA==}
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.1
@@ -2155,7 +2155,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001640
+      caniuse-lite: 1.0.30001642
       electron-to-chromium: 1.4.609
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.22.2)
@@ -2181,8 +2181,8 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
-  /caniuse-lite@1.0.30001640:
-    resolution: {integrity: sha512-lA4VMpW0PSUrFnkmVuEKBUovSWKhj7puyCg8StBChgu298N1AtuF1sKWEvfDuimSEDbhlb/KqPKC3fs1HbuQUA==}
+  /caniuse-lite@1.0.30001642:
+    resolution: {integrity: sha512-3XQ0DoRgLijXJErLSl+bLnJ+Et4KqV1PY6JJBGAFlsNsz31zeAIncyeZfLCabHK/jtSh+671RM9YMldxjUPZtA==}
     dev: false
 
   /ccount@2.0.1:
@@ -2316,7 +2316,7 @@ packages:
     peerDependencies:
       react: '>=16.12.0'
     dependencies:
-      '@babel/runtime': 7.24.7
+      '@babel/runtime': 7.24.8
       compute-scroll-into-view: 2.0.4
       prop-types: 15.7.2
       react: 18.3.1
@@ -3270,13 +3270,13 @@ packages:
       monocle-ts: 2.3.13(fp-ts@2.16.8)
     dev: false
 
-  /next-with-linaria@0.6.0(@babel/runtime@7.24.7)(@linaria/babel-preset@5.0.4):
+  /next-with-linaria@0.6.0(@babel/runtime@7.24.8)(@linaria/babel-preset@5.0.4):
     resolution: {integrity: sha512-S6SZa+L8PIDyWmjYQGavkLGzheO4I970KVpqd3xYUOtDpJrTod4cGH0mJglTmXfzanbsbtj7MujJzRjh1u2qjw==}
     peerDependencies:
       '@babel/runtime': 7.x
       '@linaria/babel-preset': 5.x
     dependencies:
-      '@babel/runtime': 7.24.7
+      '@babel/runtime': 7.24.8
       '@linaria/babel-preset': 5.0.4
       file-system-cache: 2.4.4
     dev: false
@@ -3303,7 +3303,7 @@ packages:
       '@playwright/test': 1.45.1
       '@swc/helpers': 0.5.5
       busboy: 1.6.0
-      caniuse-lite: 1.0.30001640
+      caniuse-lite: 1.0.30001642
       graceful-fs: 4.2.11
       postcss: 8.4.31
       react: 18.3.1
@@ -3558,7 +3558,7 @@ packages:
   /regenerator-transform@0.15.2:
     resolution: {integrity: sha512-hfMp2BoF0qOk3uc5V20ALGDS2ddjQaLrdl7xrGXvAIow7qeWRM2VA2HuCHkUKk9slq3VwEwLNK3DFBqDfPGYtg==}
     dependencies:
-      '@babel/runtime': 7.24.7
+      '@babel/runtime': 7.24.8
     dev: false
 
   /regexpu-core@5.3.2:
