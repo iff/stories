@@ -37,10 +37,10 @@ importers:
         version: 3.0.1(@types/react@18.3.3)(react@18.3.1)
       '@next/mdx':
         specifier: ^14.2.5
-        version: 14.2.5(@mdx-js/loader@3.0.1)(@mdx-js/react@3.0.1)
+        version: 14.2.5(@mdx-js/loader@3.0.1(webpack@5.93.0))(@mdx-js/react@3.0.1(@types/react@18.3.3)(react@18.3.1))
       '@playwright/test':
-        specifier: ^1.45.1
-        version: 1.45.1
+        specifier: ^1.45.2
+        version: 1.45.2
       '@timvir/mdx':
         specifier: ^0.2.22
         version: 0.2.22
@@ -61,7 +61,7 @@ importers:
         version: 3.0.2
       '@vercel/speed-insights':
         specifier: ^1.0.12
-        version: 1.0.12(next@14.2.5)(react@18.3.1)
+        version: 1.0.12(next@14.2.5(@babel/core@7.24.5)(@playwright/test@1.45.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       feed:
         specifier: ^4.2.2
         version: 4.2.2
@@ -76,7 +76,7 @@ importers:
         version: 2.2.21(fp-ts@2.16.8)
       io-ts-types:
         specifier: ^0.5.19
-        version: 0.5.19(fp-ts@2.16.8)(io-ts@2.2.21)(monocle-ts@2.3.13)(newtype-ts@0.3.5)
+        version: 0.5.19(fp-ts@2.16.8)(io-ts@2.2.21(fp-ts@2.16.8))(monocle-ts@2.3.13(fp-ts@2.16.8))(newtype-ts@0.3.5(fp-ts@2.16.8)(monocle-ts@2.3.13(fp-ts@2.16.8)))
       monocle-ts:
         specifier: ^2.3.13
         version: 2.3.13(fp-ts@2.16.8)
@@ -85,10 +85,10 @@ importers:
         version: 5.0.7
       newtype-ts:
         specifier: ^0.3.5
-        version: 0.3.5(fp-ts@2.16.8)(monocle-ts@2.3.13)
+        version: 0.3.5(fp-ts@2.16.8)(monocle-ts@2.3.13(fp-ts@2.16.8))
       next:
         specifier: ^14.2.5
-        version: 14.2.5(@babel/core@7.24.5)(@playwright/test@1.45.1)(react-dom@18.3.1)(react@18.3.1)
+        version: 14.2.5(@babel/core@7.24.5)(@playwright/test@1.45.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-with-linaria:
         specifier: ^0.6.0
         version: 0.6.0(@babel/runtime@7.24.8)(@linaria/babel-preset@5.0.4)
@@ -103,7 +103,7 @@ importers:
         version: 2.0.10(react@18.3.1)
       react-hotkeys-hook:
         specifier: ^4.5.0
-        version: 4.5.0(react-dom@18.3.1)(react@18.3.1)
+        version: 4.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-intl:
         specifier: ^6.6.8
         version: 6.6.8(react@18.3.1)(typescript@5.5.3)
@@ -115,7 +115,7 @@ importers:
         version: 11.0.0
       timvir:
         specifier: ^0.2.22
-        version: 0.2.22(@mdx-js/react@3.0.1)(react-dom@18.3.1)(react-hotkeys-hook@4.5.0)(react@18.3.1)
+        version: 0.2.22(@mdx-js/react@3.0.1(@types/react@18.3.3)(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-hotkeys-hook@4.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       typescript:
         specifier: ^5.5.3
         version: 5.5.3
@@ -892,8 +892,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@playwright/test@1.45.1':
-    resolution: {integrity: sha512-Wo1bWTzQvGA7LyKGIZc8nFSTFf2TkthGIFBR+QVNilvwouGzFd4PYukZe3rvf5PSqjHi1+1NyKSDZKcQWETzaA==}
+  '@playwright/test@1.45.2':
+    resolution: {integrity: sha512-JxG9eq92ET75EbVi3s+4sYbcG7q72ECeZNbdBlaMkGcNbiDQ4cAi8U2QP5oKkOx+1gpaiL1LDStmzCaEM1Z6fQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -1743,13 +1743,13 @@ packages:
   picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
 
-  playwright-core@1.45.1:
-    resolution: {integrity: sha512-LF4CUUtrUu2TCpDw4mcrAIuYrEjVDfT1cHbJMfwnE2+1b8PZcFzPNgvZCvq2JfQ4aTjRCCHw5EJ2tmr2NSzdPg==}
+  playwright-core@1.45.2:
+    resolution: {integrity: sha512-ha175tAWb0dTK0X4orvBIqi3jGEt701SMxMhyujxNrgd8K0Uy5wMSwwcQHtyB4om7INUkfndx02XnQ2p6dvLDw==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.45.1:
-    resolution: {integrity: sha512-Hjrgae4kpSQBr98nhCj3IScxVeVUixqj+5oyif8TdIn2opTCPEzqAqNMeK42i3cWDCVu9MI+ZsGWw+gVR4ISBg==}
+  playwright@1.45.2:
+    resolution: {integrity: sha512-ReywF2t/0teRvNBpfIgh5e4wnrI/8Su8ssdo5XsQKpjxJj+jspm00jSoz9BTg91TT0c9HRjXO7LBNVrgYj9X0g==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -2879,6 +2879,7 @@ snapshots:
       '@formatjs/intl-listformat': 7.5.7
       intl-messageformat: 10.5.14
       tslib: 2.4.0
+    optionalDependencies:
       typescript: 5.5.3
 
   '@hapi/accept@6.0.3':
@@ -3061,11 +3062,12 @@ snapshots:
 
   '@next/env@14.2.5': {}
 
-  '@next/mdx@14.2.5(@mdx-js/loader@3.0.1)(@mdx-js/react@3.0.1)':
+  '@next/mdx@14.2.5(@mdx-js/loader@3.0.1(webpack@5.93.0))(@mdx-js/react@3.0.1(@types/react@18.3.3)(react@18.3.1))':
     dependencies:
+      source-map: 0.7.4
+    optionalDependencies:
       '@mdx-js/loader': 3.0.1(webpack@5.93.0)
       '@mdx-js/react': 3.0.1(@types/react@18.3.3)(react@18.3.1)
-      source-map: 0.7.4
 
   '@next/swc-darwin-arm64@14.2.5':
     optional: true
@@ -3094,9 +3096,9 @@ snapshots:
   '@next/swc-win32-x64-msvc@14.2.5':
     optional: true
 
-  '@playwright/test@1.45.1':
+  '@playwright/test@1.45.2':
     dependencies:
-      playwright: 1.45.1
+      playwright: 1.45.2
 
   '@shikijs/core@1.6.0': {}
 
@@ -3198,9 +3200,9 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vercel/speed-insights@1.0.12(next@14.2.5)(react@18.3.1)':
-    dependencies:
-      next: 14.2.5(@babel/core@7.24.5)(@playwright/test@1.45.1)(react-dom@18.3.1)(react@18.3.1)
+  '@vercel/speed-insights@1.0.12(next@14.2.5(@babel/core@7.24.5)(@playwright/test@1.45.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+    optionalDependencies:
+      next: 14.2.5(@babel/core@7.24.5)(@playwright/test@1.45.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
 
   '@webassemblyjs/ast@1.12.1':
@@ -3642,12 +3644,12 @@ snapshots:
       '@formatjs/icu-messageformat-parser': 2.7.8
       tslib: 2.4.0
 
-  io-ts-types@0.5.19(fp-ts@2.16.8)(io-ts@2.2.21)(monocle-ts@2.3.13)(newtype-ts@0.3.5):
+  io-ts-types@0.5.19(fp-ts@2.16.8)(io-ts@2.2.21(fp-ts@2.16.8))(monocle-ts@2.3.13(fp-ts@2.16.8))(newtype-ts@0.3.5(fp-ts@2.16.8)(monocle-ts@2.3.13(fp-ts@2.16.8))):
     dependencies:
       fp-ts: 2.16.8
       io-ts: 2.2.21(fp-ts@2.16.8)
       monocle-ts: 2.3.13(fp-ts@2.16.8)
-      newtype-ts: 0.3.5(fp-ts@2.16.8)(monocle-ts@2.3.13)
+      newtype-ts: 0.3.5(fp-ts@2.16.8)(monocle-ts@2.3.13(fp-ts@2.16.8))
 
   io-ts@2.2.21(fp-ts@2.16.8):
     dependencies:
@@ -4070,7 +4072,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  newtype-ts@0.3.5(fp-ts@2.16.8)(monocle-ts@2.3.13):
+  newtype-ts@0.3.5(fp-ts@2.16.8)(monocle-ts@2.3.13(fp-ts@2.16.8)):
     dependencies:
       fp-ts: 2.16.8
       monocle-ts: 2.3.13(fp-ts@2.16.8)
@@ -4081,10 +4083,9 @@ snapshots:
       '@linaria/babel-preset': 5.0.4
       file-system-cache: 2.4.4
 
-  next@14.2.5(@babel/core@7.24.5)(@playwright/test@1.45.1)(react-dom@18.3.1)(react@18.3.1):
+  next@14.2.5(@babel/core@7.24.5)(@playwright/test@1.45.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@next/env': 14.2.5
-      '@playwright/test': 1.45.1
       '@swc/helpers': 0.5.5
       busboy: 1.6.0
       caniuse-lite: 1.0.30001642
@@ -4103,6 +4104,7 @@ snapshots:
       '@next/swc-win32-arm64-msvc': 14.2.5
       '@next/swc-win32-ia32-msvc': 14.2.5
       '@next/swc-win32-x64-msvc': 14.2.5
+      '@playwright/test': 1.45.2
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
@@ -4158,11 +4160,11 @@ snapshots:
 
   picocolors@1.0.0: {}
 
-  playwright-core@1.45.1: {}
+  playwright-core@1.45.2: {}
 
-  playwright@1.45.1:
+  playwright@1.45.2:
     dependencies:
-      playwright-core: 1.45.1
+      playwright-core: 1.45.2
     optionalDependencies:
       fsevents: 2.3.2
 
@@ -4201,7 +4203,7 @@ snapshots:
       prop-types: 15.7.2
       react: 18.3.1
 
-  react-hotkeys-hook@4.5.0(react-dom@18.3.1)(react@18.3.1):
+  react-hotkeys-hook@4.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -4223,6 +4225,7 @@ snapshots:
       intl-messageformat: 10.5.14
       react: 18.3.1
       tslib: 2.4.0
+    optionalDependencies:
       typescript: 5.5.3
 
   react-is@16.8.6: {}
@@ -4342,9 +4345,10 @@ snapshots:
 
   styled-jsx@5.1.1(@babel/core@7.24.5)(react@18.3.1):
     dependencies:
-      '@babel/core': 7.24.5
       client-only: 0.0.1
       react: 18.3.1
+    optionalDependencies:
+      '@babel/core': 7.24.5
 
   stylis@3.5.4: {}
 
@@ -4376,7 +4380,7 @@ snapshots:
       commander: 2.20.3
       source-map-support: 0.5.21
 
-  timvir@0.2.22(@mdx-js/react@3.0.1)(react-dom@18.3.1)(react-hotkeys-hook@4.5.0)(react@18.3.1):
+  timvir@0.2.22(@mdx-js/react@3.0.1(@types/react@18.3.3)(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-hotkeys-hook@4.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
     dependencies:
       '@mdx-js/react': 3.0.1(@types/react@18.3.3)(react@18.3.1)
       bytestring: 1.0.0
@@ -4386,7 +4390,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-feather: 2.0.10(react@18.3.1)
-      react-hotkeys-hook: 4.5.0(react-dom@18.3.1)(react@18.3.1)
+      react-hotkeys-hook: 4.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       shiki: 1.6.0
       use-immer: 0.10.0(immer@10.1.1)(react@18.3.1)
       wonka: 6.3.4
