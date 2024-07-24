@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@formatjs/intl':
         specifier: ^2.10.4
-        version: 2.10.4(typescript@5.5.3)
+        version: 2.10.4(typescript@5.5.4)
       '@hapi/accept':
         specifier: ^6.0.3
         version: 6.0.3
@@ -106,7 +106,7 @@ importers:
         version: 4.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-intl:
         specifier: ^6.6.8
-        version: 6.6.8(react@18.3.1)(typescript@5.5.3)
+        version: 6.6.8(react@18.3.1)(typescript@5.5.4)
       remark-mdx:
         specifier: ^3.0.1
         version: 3.0.1
@@ -117,8 +117,8 @@ importers:
         specifier: ^0.2.22
         version: 0.2.22(@mdx-js/react@3.0.1(@types/react@18.3.3)(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-hotkeys-hook@4.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       typescript:
-        specifier: ^5.5.3
-        version: 5.5.3
+        specifier: ^5.5.4
+        version: 5.5.4
       unified:
         specifier: ^11.0.5
         version: 11.0.5
@@ -1992,8 +1992,8 @@ packages:
   types-ramda@0.29.6:
     resolution: {integrity: sha512-VJoOk1uYNh9ZguGd3eZvqkdhD4hTGtnjRBUx5Zc0U9ftmnCgiWcSj/lsahzKunbiwRje1MxxNkEy1UdcXRCpYw==}
 
-  typescript@5.5.3:
-    resolution: {integrity: sha512-/hreyEujaB0w76zKo6717l3L0o/qEUtRgdvUBvlkhoWeOVMjMuHNHk0BRBzikzuGDqNmPQbg5ifMEqsHLiIUcQ==}
+  typescript@5.5.4:
+    resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -2870,7 +2870,7 @@ snapshots:
     dependencies:
       tslib: 2.4.0
 
-  '@formatjs/intl@2.10.4(typescript@5.5.3)':
+  '@formatjs/intl@2.10.4(typescript@5.5.4)':
     dependencies:
       '@formatjs/ecma402-abstract': 2.0.0
       '@formatjs/fast-memoize': 2.2.0
@@ -2880,7 +2880,7 @@ snapshots:
       intl-messageformat: 10.5.14
       tslib: 2.4.0
     optionalDependencies:
-      typescript: 5.5.3
+      typescript: 5.5.4
 
   '@hapi/accept@6.0.3':
     dependencies:
@@ -4212,11 +4212,11 @@ snapshots:
     dependencies:
       html-element-attributes: 1.3.1
 
-  react-intl@6.6.8(react@18.3.1)(typescript@5.5.3):
+  react-intl@6.6.8(react@18.3.1)(typescript@5.5.4):
     dependencies:
       '@formatjs/ecma402-abstract': 2.0.0
       '@formatjs/icu-messageformat-parser': 2.7.8
-      '@formatjs/intl': 2.10.4(typescript@5.5.3)
+      '@formatjs/intl': 2.10.4(typescript@5.5.4)
       '@formatjs/intl-displaynames': 6.6.8
       '@formatjs/intl-listformat': 7.5.7
       '@types/hoist-non-react-statics': 3.3.1
@@ -4226,7 +4226,7 @@ snapshots:
       react: 18.3.1
       tslib: 2.4.0
     optionalDependencies:
-      typescript: 5.5.3
+      typescript: 5.5.4
 
   react-is@16.8.6: {}
 
@@ -4413,7 +4413,7 @@ snapshots:
     dependencies:
       ts-toolbelt: 9.6.0
 
-  typescript@5.5.3: {}
+  typescript@5.5.4: {}
 
   undici-types@5.26.5: {}
 
