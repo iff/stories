@@ -66,26 +66,26 @@ importers:
         specifier: ^4.2.2
         version: 4.2.2
       fp-ts:
-        specifier: ^2.16.8
-        version: 2.16.8
+        specifier: ^2.16.9
+        version: 2.16.9
       immer:
         specifier: ^10.1.1
         version: 10.1.1
       io-ts:
         specifier: ^2.2.21
-        version: 2.2.21(fp-ts@2.16.8)
+        version: 2.2.21(fp-ts@2.16.9)
       io-ts-types:
         specifier: ^0.5.19
-        version: 0.5.19(fp-ts@2.16.8)(io-ts@2.2.21(fp-ts@2.16.8))(monocle-ts@2.3.13(fp-ts@2.16.8))(newtype-ts@0.3.5(fp-ts@2.16.8)(monocle-ts@2.3.13(fp-ts@2.16.8)))
+        version: 0.5.19(fp-ts@2.16.9)(io-ts@2.2.21(fp-ts@2.16.9))(monocle-ts@2.3.13(fp-ts@2.16.9))(newtype-ts@0.3.5(fp-ts@2.16.9)(monocle-ts@2.3.13(fp-ts@2.16.9)))
       monocle-ts:
         specifier: ^2.3.13
-        version: 2.3.13(fp-ts@2.16.8)
+        version: 2.3.13(fp-ts@2.16.9)
       nanoid:
         specifier: ^5.0.7
         version: 5.0.7
       newtype-ts:
         specifier: ^0.3.5
-        version: 0.3.5(fp-ts@2.16.8)(monocle-ts@2.3.13(fp-ts@2.16.8))
+        version: 0.3.5(fp-ts@2.16.9)(monocle-ts@2.3.13(fp-ts@2.16.9))
       next:
         specifier: ^14.2.5
         version: 14.2.5(@babel/core@7.24.5)(@playwright/test@1.45.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1321,8 +1321,8 @@ packages:
     resolution: {integrity: sha512-78/PXT1wlLLDgTzDs7sjq9hzz0vXD+zn+7wypEe4fXQxCmdmqfGsEPQxmiCSQI3ajFV91bVSsvNtrJRiW6nGng==}
     engines: {node: '>=10'}
 
-  fp-ts@2.16.8:
-    resolution: {integrity: sha512-nmDtNqmMZkOxu0M5hkrS9YA15/KPkYkILb6Axg9XBAoUoYEtzg+LFmVWqZrl9FNttsW0qIUpx9RCA9INbv+Bxw==}
+  fp-ts@2.16.9:
+    resolution: {integrity: sha512-+I2+FnVB+tVaxcYyQkHUq7ZdKScaBlX53A41mxQtpIccsfyv8PzdzP7fzp2AY832T4aoK6UZ5WRX/ebGd8uZuQ==}
 
   fs-extra@11.1.1:
     resolution: {integrity: sha512-MGIE4HOvQCeUCzmlHs0vXpih4ysz4wg9qiSAu6cd42lVwPbTM1TjV7RusoyQqMmk/95gdQZX72u+YW+c3eEpFQ==}
@@ -3541,7 +3541,7 @@ snapshots:
       locate-path: 6.0.0
       path-exists: 4.0.0
 
-  fp-ts@2.16.8: {}
+  fp-ts@2.16.9: {}
 
   fs-extra@11.1.1:
     dependencies:
@@ -3644,16 +3644,16 @@ snapshots:
       '@formatjs/icu-messageformat-parser': 2.7.8
       tslib: 2.4.0
 
-  io-ts-types@0.5.19(fp-ts@2.16.8)(io-ts@2.2.21(fp-ts@2.16.8))(monocle-ts@2.3.13(fp-ts@2.16.8))(newtype-ts@0.3.5(fp-ts@2.16.8)(monocle-ts@2.3.13(fp-ts@2.16.8))):
+  io-ts-types@0.5.19(fp-ts@2.16.9)(io-ts@2.2.21(fp-ts@2.16.9))(monocle-ts@2.3.13(fp-ts@2.16.9))(newtype-ts@0.3.5(fp-ts@2.16.9)(monocle-ts@2.3.13(fp-ts@2.16.9))):
     dependencies:
-      fp-ts: 2.16.8
-      io-ts: 2.2.21(fp-ts@2.16.8)
-      monocle-ts: 2.3.13(fp-ts@2.16.8)
-      newtype-ts: 0.3.5(fp-ts@2.16.8)(monocle-ts@2.3.13(fp-ts@2.16.8))
+      fp-ts: 2.16.9
+      io-ts: 2.2.21(fp-ts@2.16.9)
+      monocle-ts: 2.3.13(fp-ts@2.16.9)
+      newtype-ts: 0.3.5(fp-ts@2.16.9)(monocle-ts@2.3.13(fp-ts@2.16.9))
 
-  io-ts@2.2.21(fp-ts@2.16.8):
+  io-ts@2.2.21(fp-ts@2.16.9):
     dependencies:
-      fp-ts: 2.16.8
+      fp-ts: 2.16.9
 
   is-alphabetical@2.0.1: {}
 
@@ -4060,9 +4060,9 @@ snapshots:
     dependencies:
       minimist: 1.2.7
 
-  monocle-ts@2.3.13(fp-ts@2.16.8):
+  monocle-ts@2.3.13(fp-ts@2.16.9):
     dependencies:
-      fp-ts: 2.16.8
+      fp-ts: 2.16.9
 
   ms@2.1.2: {}
 
@@ -4072,10 +4072,10 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  newtype-ts@0.3.5(fp-ts@2.16.8)(monocle-ts@2.3.13(fp-ts@2.16.8)):
+  newtype-ts@0.3.5(fp-ts@2.16.9)(monocle-ts@2.3.13(fp-ts@2.16.9)):
     dependencies:
-      fp-ts: 2.16.8
-      monocle-ts: 2.3.13(fp-ts@2.16.8)
+      fp-ts: 2.16.9
+      monocle-ts: 2.3.13(fp-ts@2.16.9)
 
   next-with-linaria@0.6.0(@babel/runtime@7.24.8)(@linaria/babel-preset@5.0.4):
     dependencies:
