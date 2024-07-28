@@ -3,7 +3,7 @@ name: Update Browserslist Database
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "38 5 * * *"
+    - cron: "38 5 * * 2"
 
 jobs:
   update-browserslist-database:

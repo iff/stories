@@ -3,7 +3,7 @@ name: Urnerys
 on: deployment_status
 
 env:
-  URNERYS: vrrrt.caurea.org
+  URNERYS: urnerys.dev
 
 jobs:
   # This whole workflow only runs when the deployment was successful. The first
