@@ -18,7 +18,7 @@
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
     "@next/mdx": "^14.2.5",
-    "@playwright/test": "^1.45.3",
+    "@playwright/test": "^1.46.0",
     "@timvir/mdx": "^0.2.22",
     "@types/mdx": "^2.0.13",
     "@types/node": "^20.14.15",
