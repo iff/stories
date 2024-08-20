@@ -34,10 +34,10 @@ importers:
         version: 3.0.1(webpack@5.93.0)
       '@mdx-js/react':
         specifier: ^3.0.1
-        version: 3.0.1(@types/react@18.3.3)(react@18.3.1)
+        version: 3.0.1(@types/react@18.3.4)(react@18.3.1)
       '@next/mdx':
         specifier: ^14.2.5
-        version: 14.2.5(@mdx-js/loader@3.0.1(webpack@5.93.0))(@mdx-js/react@3.0.1(@types/react@18.3.3)(react@18.3.1))
+        version: 14.2.5(@mdx-js/loader@3.0.1(webpack@5.93.0))(@mdx-js/react@3.0.1(@types/react@18.3.4)(react@18.3.1))
       '@playwright/test':
         specifier: ^1.46.0
         version: 1.46.0
@@ -51,8 +51,8 @@ importers:
         specifier: ^20.16.0
         version: 20.16.0
       '@types/react':
-        specifier: ^18.3.3
-        version: 18.3.3
+        specifier: ^18.3.4
+        version: 18.3.4
       '@types/react-dom':
         specifier: ^18.3.0
         version: 18.3.0
@@ -115,7 +115,7 @@ importers:
         version: 11.0.0
       timvir:
         specifier: ^0.2.22
-        version: 0.2.22(@mdx-js/react@3.0.1(@types/react@18.3.3)(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-hotkeys-hook@4.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 0.2.22(@mdx-js/react@3.0.1(@types/react@18.3.4)(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-hotkeys-hook@4.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
@@ -963,8 +963,8 @@ packages:
   '@types/react-dom@18.3.0':
     resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
 
-  '@types/react@18.3.3':
-    resolution: {integrity: sha512-hti/R0pS0q1/xx+TsI73XIqk26eBsISZ2R0wUijXIngRK9R/e7Xw/cXVxQK7R5JjW+SV4zGcn5hXjudkN/pLIw==}
+  '@types/react@18.3.4':
+    resolution: {integrity: sha512-J7W30FTdfCxDDjmfRM+/JqLHBIyl7xUIp9kwK637FGmY7+mkSFSe6L4jpZzhj5QMfLssSDP4/i75AKkrdC7/Jw==}
 
   '@types/unist@2.0.7':
     resolution: {integrity: sha512-cputDpIbFgLUaGQn6Vqg3/YsJwxUwHLO13v3i5ouxT4lat0khip9AEWxtERujXV9wxIB1EyF97BSJFt6vpdI8g==}
@@ -3054,20 +3054,20 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@mdx-js/react@3.0.1(@types/react@18.3.3)(react@18.3.1)':
+  '@mdx-js/react@3.0.1(@types/react@18.3.4)(react@18.3.1)':
     dependencies:
       '@types/mdx': 2.0.13
-      '@types/react': 18.3.3
+      '@types/react': 18.3.4
       react: 18.3.1
 
   '@next/env@14.2.5': {}
 
-  '@next/mdx@14.2.5(@mdx-js/loader@3.0.1(webpack@5.93.0))(@mdx-js/react@3.0.1(@types/react@18.3.3)(react@18.3.1))':
+  '@next/mdx@14.2.5(@mdx-js/loader@3.0.1(webpack@5.93.0))(@mdx-js/react@3.0.1(@types/react@18.3.4)(react@18.3.1))':
     dependencies:
       source-map: 0.7.4
     optionalDependencies:
       '@mdx-js/loader': 3.0.1(webpack@5.93.0)
-      '@mdx-js/react': 3.0.1(@types/react@18.3.3)(react@18.3.1)
+      '@mdx-js/react': 3.0.1(@types/react@18.3.4)(react@18.3.1)
 
   '@next/swc-darwin-arm64@14.2.5':
     optional: true
@@ -3158,7 +3158,7 @@ snapshots:
 
   '@types/hoist-non-react-statics@3.3.1':
     dependencies:
-      '@types/react': 18.3.3
+      '@types/react': 18.3.4
       hoist-non-react-statics: 3.3.2
 
   '@types/json-schema@7.0.9': {}
@@ -3187,9 +3187,9 @@ snapshots:
 
   '@types/react-dom@18.3.0':
     dependencies:
-      '@types/react': 18.3.3
+      '@types/react': 18.3.4
 
-  '@types/react@18.3.3':
+  '@types/react@18.3.4':
     dependencies:
       '@types/prop-types': 15.7.4
       csstype: 3.0.9
@@ -4220,7 +4220,7 @@ snapshots:
       '@formatjs/intl-displaynames': 6.6.8
       '@formatjs/intl-listformat': 7.5.7
       '@types/hoist-non-react-statics': 3.3.1
-      '@types/react': 18.3.3
+      '@types/react': 18.3.4
       hoist-non-react-statics: 3.3.2
       intl-messageformat: 10.5.14
       react: 18.3.1
@@ -4380,9 +4380,9 @@ snapshots:
       commander: 2.20.3
       source-map-support: 0.5.21
 
-  timvir@0.2.22(@mdx-js/react@3.0.1(@types/react@18.3.3)(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-hotkeys-hook@4.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
+  timvir@0.2.22(@mdx-js/react@3.0.1(@types/react@18.3.4)(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-hotkeys-hook@4.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@mdx-js/react': 3.0.1(@types/react@18.3.3)(react@18.3.1)
+      '@mdx-js/react': 3.0.1(@types/react@18.3.4)(react@18.3.1)
       bytestring: 1.0.0
       downshift: 7.6.2(react@18.3.1)
       fuzzaldrin-plus: 0.6.0
