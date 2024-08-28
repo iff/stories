@@ -3,6 +3,7 @@
   "extends": ["config:base"],
   "rangeStrategy": "bump",
   "prHourlyLimit": 0,
+  "dependencyDashboardApproval": true,
   "postUpdateOptions": ["pnpmDedupe"],
   "packageRules": [
     {
