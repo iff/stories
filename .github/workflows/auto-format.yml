@@ -27,7 +27,7 @@ jobs:
 
       - run: ./node_modules/.bin/prettier --write .
 
-      - uses: peter-evans/create-pull-request@v6
+      - uses: peter-evans/create-pull-request@v7
         with:
           title: "Auto Format #${{ github.event.pull_request.number }}"
           branch: auto-format-${{ github.event.pull_request.number }}

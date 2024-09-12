@@ -27,7 +27,7 @@ jobs:
           git log -1 --pretty=%B | tail +3 | awk -f .github/flake-to-markdown.awk >> "${GITHUB_OUTPUT}"
           echo "${delimiter}" >> "${GITHUB_OUTPUT}"
 
-      - uses: peter-evans/create-pull-request@v6
+      - uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.CREATE_PULL_REQUEST_TOKEN }}
           branch: update-nix-flake
