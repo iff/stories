@@ -39,8 +39,8 @@ importers:
         specifier: ^14.2.10
         version: 14.2.10(@mdx-js/loader@3.0.1(webpack@5.94.0))(@mdx-js/react@3.0.1(@types/react@18.3.5)(react@18.3.1))
       '@playwright/test':
-        specifier: ^1.47.0
-        version: 1.47.0
+        specifier: ^1.47.1
+        version: 1.47.1
       '@timvir/mdx':
         specifier: ^0.2.22
         version: 0.2.22
@@ -61,7 +61,7 @@ importers:
         version: 3.0.3
       '@vercel/speed-insights':
         specifier: ^1.0.12
-        version: 1.0.12(next@14.2.10(@babel/core@7.24.5)(@playwright/test@1.47.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 1.0.12(next@14.2.10(@babel/core@7.24.5)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       feed:
         specifier: ^4.2.2
         version: 4.2.2
@@ -88,7 +88,7 @@ importers:
         version: 0.3.5(fp-ts@2.16.9)(monocle-ts@2.3.13(fp-ts@2.16.9))
       next:
         specifier: ^14.2.10
-        version: 14.2.10(@babel/core@7.24.5)(@playwright/test@1.47.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 14.2.10(@babel/core@7.24.5)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-with-linaria:
         specifier: ^0.6.0
         version: 0.6.0(@babel/runtime@7.24.8)(@linaria/babel-preset@5.0.4)
@@ -892,8 +892,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@playwright/test@1.47.0':
-    resolution: {integrity: sha512-SgAdlSwYVpToI4e/IH19IHHWvoijAYH5hu2MWSXptRypLSnzj51PcGD+rsOXFayde4P9ZLi+loXVwArg6IUkCA==}
+  '@playwright/test@1.47.1':
+    resolution: {integrity: sha512-dbWpcNQZ5nj16m+A5UNScYx7HX5trIy7g4phrcitn+Nk83S32EBX/CLU4hiF4RGKX/yRc93AAqtfaXB7JWBd4Q==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -1737,13 +1737,13 @@ packages:
   picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
 
-  playwright-core@1.47.0:
-    resolution: {integrity: sha512-1DyHT8OqkcfCkYUD9zzUTfg7EfTd+6a8MkD/NWOvjo0u/SCNd5YmY/lJwFvUZOxJbWNds+ei7ic2+R/cRz/PDg==}
+  playwright-core@1.47.1:
+    resolution: {integrity: sha512-i1iyJdLftqtt51mEk6AhYFaAJCDx0xQ/O5NU8EKaWFgMjItPVma542Nh/Aq8aLCjIJSzjaiEQGW/nyqLkGF1OQ==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.47.0:
-    resolution: {integrity: sha512-jOWiRq2pdNAX/mwLiwFYnPHpEZ4rM+fRSQpRHwEwZlP2PUANvL3+aJOF/bvISMhFD30rqMxUB4RJx9aQbfh4Ww==}
+  playwright@1.47.1:
+    resolution: {integrity: sha512-SUEKi6947IqYbKxRiqnbUobVZY4bF1uu+ZnZNJX9DfU1tlf2UhWfvVjLf01pQx9URsOr18bFVUKXmanYWhbfkw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -3090,9 +3090,9 @@ snapshots:
   '@next/swc-win32-x64-msvc@14.2.10':
     optional: true
 
-  '@playwright/test@1.47.0':
+  '@playwright/test@1.47.1':
     dependencies:
-      playwright: 1.47.0
+      playwright: 1.47.1
 
   '@shikijs/core@1.6.0': {}
 
@@ -3184,9 +3184,9 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vercel/speed-insights@1.0.12(next@14.2.10(@babel/core@7.24.5)(@playwright/test@1.47.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@vercel/speed-insights@1.0.12(next@14.2.10(@babel/core@7.24.5)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     optionalDependencies:
-      next: 14.2.10(@babel/core@7.24.5)(@playwright/test@1.47.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 14.2.10(@babel/core@7.24.5)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
 
   '@webassemblyjs/ast@1.12.1':
@@ -4067,7 +4067,7 @@ snapshots:
       '@linaria/babel-preset': 5.0.4
       file-system-cache: 2.4.4
 
-  next@14.2.10(@babel/core@7.24.5)(@playwright/test@1.47.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  next@14.2.10(@babel/core@7.24.5)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@next/env': 14.2.10
       '@swc/helpers': 0.5.5
@@ -4088,7 +4088,7 @@ snapshots:
       '@next/swc-win32-arm64-msvc': 14.2.10
       '@next/swc-win32-ia32-msvc': 14.2.10
       '@next/swc-win32-x64-msvc': 14.2.10
-      '@playwright/test': 1.47.0
+      '@playwright/test': 1.47.1
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
@@ -4144,11 +4144,11 @@ snapshots:
 
   picocolors@1.0.0: {}
 
-  playwright-core@1.47.0: {}
+  playwright-core@1.47.1: {}
 
-  playwright@1.47.0:
+  playwright@1.47.1:
     dependencies:
-      playwright-core: 1.47.0
+      playwright-core: 1.47.1
     optionalDependencies:
       fsevents: 2.3.2
 
