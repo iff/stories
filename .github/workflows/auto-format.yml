@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
           clean: false
 
-      - uses: DeterminateSystems/nix-installer-action@v13
+      - uses: DeterminateSystems/nix-installer-action@v14
       - run: nix run github:nicknovitski/nix-develop .#workflow
 
       - run: ./node_modules/.bin/prettier --write .
