@@ -42,8 +42,8 @@ importers:
         specifier: ^1.47.2
         version: 1.47.2
       '@timvir/mdx':
-        specifier: ^0.2.22
-        version: 0.2.22
+        specifier: ^0.2.24
+        version: 0.2.24
       '@types/mdx':
         specifier: ^2.0.13
         version: 2.0.13
@@ -114,8 +114,8 @@ importers:
         specifier: ^11.0.0
         version: 11.0.0
       timvir:
-        specifier: ^0.2.22
-        version: 0.2.22(@mdx-js/react@3.0.1(@types/react@18.3.8)(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-hotkeys-hook@4.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        specifier: ^0.2.24
+        version: 0.2.24(@mdx-js/react@3.0.1(@types/react@18.3.8)(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-hotkeys-hook@4.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       typescript:
         specifier: ^5.6.2
         version: 5.6.2
@@ -906,8 +906,8 @@ packages:
   '@swc/helpers@0.5.5':
     resolution: {integrity: sha512-KGYxvIOXcceOAbEk4bi/dVLEK9z8sZ0uBB3Il5b1rhfClSpcX0yfRO0KmTkqR2cnQDymwLB+25ZyMzICg/cm/A==}
 
-  '@timvir/mdx@0.2.22':
-    resolution: {integrity: sha512-6qwMdod8hP5roez5Wgm+7sUMdi1h+NtTVAZk2hn5E2Rnkf7OpuNjME9aNr5zn/8hRJVVdJfn5YBZp1olVg7FvA==}
+  '@timvir/mdx@0.2.24':
+    resolution: {integrity: sha512-9r/uggj3C1Yz3xV74WukRRE0BolEFPvDuO4vwDIT4TqZ6pqiAjwv3u49h0hLPSNle4w/nMz9xqqrmcFD1PoIzw==}
 
   '@types/acorn@4.0.6':
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
@@ -1955,8 +1955,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  timvir@0.2.22:
-    resolution: {integrity: sha512-WmKRsLLi+0Go4gKFHrrqH5XHGsOvyGdC7yXoTvelSEuB8L2i5o30RPgwdf6QEm3kqc5kNgC9mut6A/pj7mYybw==}
+  timvir@0.2.24:
+    resolution: {integrity: sha512-CsBdRMoRMO9G4u9sWThGqcNjMbIO1td2w0HbwJ28wI8UXqWGFksBvy23tqC0hgKgS7owB5jMjhTIdDekJ6SLvQ==}
     peerDependencies:
       '@mdx-js/react': ^2 || ^3
       react: ^17 || ^18
@@ -3103,7 +3103,7 @@ snapshots:
       '@swc/counter': 0.1.3
       tslib: 2.4.0
 
-  '@timvir/mdx@0.2.22':
+  '@timvir/mdx@0.2.24':
     dependencies:
       '@babel/generator': 7.24.5
       '@babel/parser': 7.24.5
@@ -4364,7 +4364,7 @@ snapshots:
       commander: 2.20.3
       source-map-support: 0.5.21
 
-  timvir@0.2.22(@mdx-js/react@3.0.1(@types/react@18.3.8)(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-hotkeys-hook@4.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
+  timvir@0.2.24(@mdx-js/react@3.0.1(@types/react@18.3.8)(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react-hotkeys-hook@4.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
     dependencies:
       '@mdx-js/react': 3.0.1(@types/react@18.3.8)(react@18.3.1)
       bytestring: 1.0.0
