@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@formatjs/intl": "^2.10.8",
+    "@formatjs/intl": "^2.10.9",
     "@hapi/accept": "^6.0.3",
     "@linaria/babel-preset": "^5.0.4",
     "@linaria/core": "^5.0.2",
@@ -40,7 +40,7 @@
     "react-dom": "^18.3.1",
     "react-feather": "^2.0.10",
     "react-hotkeys-hook": "^4.5.1",
-    "react-intl": "^6.8.0",
+    "react-intl": "^6.8.1",
     "remark-mdx": "^3.1.0",
     "remark-parse": "^11.0.0",
     "timvir": "^0.2.24",
