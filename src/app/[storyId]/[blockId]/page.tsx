@@ -16,10 +16,10 @@ export interface Query extends ParsedUrlQuery {
 }
 
 interface Props {
-  params: {
+  params: Promise<{
     storyId: string;
     blockId: string;
-  };
+  }>;
 }
 
 interface Data {
@@ -48,8 +48,8 @@ type Block =
     };
 
 export default async function Page(props: Props) {
-  const { storyId, blockId } = props.params;
-  const { block, next, prev, title, blob } = await data(props.params);
+  const { storyId, blockId } = await props.params;
+  const { block, next, prev, title, blob } = await data({ storyId, blockId });
 
   const image = block.__typename === "Image" ? block.image : block.video?.poster;
 

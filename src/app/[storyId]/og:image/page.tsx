@@ -4,11 +4,11 @@ import * as React from "react";
 import Image from "next/image";
 
 interface Props {
-  params: { storyId: string };
+  params: Promise<{ storyId: string }>;
 }
 
 export default async function Page(props: Props) {
-  const { storyId } = props.params;
+  const { storyId } = await props.params;
   const story = stories.find((x) => x.id === storyId);
   if (!story) {
     return notFound();

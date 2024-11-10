@@ -7,8 +7,9 @@ import { Metadata } from "next";
 import { stories } from "content";
 import { Header } from "@/components/Header";
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const story = stories.find((x) => x.id === params.storyId);
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { storyId } = await props.params;
+  const story = stories.find((x) => x.id === storyId);
   if (!story) {
     return {};
   }
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: story.title,
     openGraph: {
-      images: `https://app-gcsszncmzq-lz.a.run.app/og/${process.env.VERCEL_URL}/${params.storyId}/og:image`,
+      images: `https://app-gcsszncmzq-lz.a.run.app/og/${process.env.VERCEL_URL}/${storyId}/og:image`,
     },
     twitter: {
       card: "summary_large_image",
@@ -29,13 +30,13 @@ export interface Query extends ParsedUrlQuery {
 }
 
 interface Props {
-  params: {
+  params: Promise<{
     storyId: string;
-  };
+  }>;
 }
 
 export default async function Page(props: Props) {
-  const { storyId } = props.params;
+  const { storyId } = await props.params;
   const blobs = await data({ storyId });
 
   const story = stories.find((x) => x.id === storyId);

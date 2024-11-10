@@ -12,14 +12,14 @@ export interface Query extends ParsedUrlQuery {
 }
 
 interface Props {
-  params: {
+  params: Promise<{
     storyId: string;
     blockId: string;
-  };
+  }>;
 }
 
 export default async function Page(props: Props) {
-  const { storyId, blockId } = props.params;
+  const { storyId, blockId } = await props.params;
   const block = await data({ storyId, blockId });
 
   return (
