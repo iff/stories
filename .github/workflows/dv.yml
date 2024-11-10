@@ -1,0 +1,41 @@
+name: Deployment Verification
+
+on: deployment_status
+
+env:
+  URNERYS: ur.caurea.org
+
+jobs:
+  urnerys:
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -sf -X POST -H "Content-Type: application/json" -d '{ "id": "github-run-${{ github.run_id }}-${{ github.run_attempt }}", "build": { "origin": { "commit": "${{ github.sha }}" } } }' "https://$URNERYS/api/v1/projects/stories/builds"
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 8
+
+      - run: pnpm install
+      - run: ./node_modules/.bin/playwright install --with-deps chromium
+
+      - run: ./node_modules/.bin/playwright test --retries 3
+        env:
+          URL: ${{ github.event.deployment_status.target_url }}
+
+      - run: |
+          case "${{ github.event.deployment_status.environment }}" in
+            Production)
+              curl -sf -X PATCH -H "Content-Type: application/json" -d '{ "baseline": { "build": "github-run-${{ github.run_id }}-${{ github.run_attempt }}" } }' "https://$URNERYS/api/v1/projects/stories/baselines/production"
+              ;;
+            *)
+              curl -sf -X POST -H "Content-Type: application/json" -d '{ "check": { "baseline": "production" } }' "https://$URNERYS/api/v1/projects/stories/builds/github-run-${{ github.run_id }}-${{ github.run_attempt }}/checks"
+              ;;
+          esac
