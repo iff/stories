@@ -32,7 +32,7 @@
     },
     {
       "automerge": true,
-      "matchPackageNames": ["/^@types//", "caniuse-lite"]
+      "matchPackageNames": ["/^@types//"]
     }
   ]
 }
