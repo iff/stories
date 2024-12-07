@@ -1,5 +1,5 @@
 import Sample from "../../../../../../components/Header/samples/basic";
 
-export default function Page() {
+export default async function Page() {
   return <Sample />;
 }
