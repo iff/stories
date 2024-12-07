@@ -8,7 +8,7 @@ const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {}
 
-function Group(props: Props, ref: React.ForwardedRef<React.ElementRef<typeof Root>>) {
+function Group(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Root>>) {
   const { children, className, ...rest } = props;
 
   return (
@@ -18,7 +18,7 @@ function Group(props: Props, ref: React.ForwardedRef<React.ElementRef<typeof Roo
           return child;
         }
 
-        const { span = [], aspectRatio = 1, ...props } = child.props;
+        const { span = [], aspectRatio = 1, ...props } = child.props as any;
 
         return (
           <div className={cx(classes.item, classes.span[span[0] ?? 12], span[1] && classes.span[`md:${span[1]}`])}>

@@ -21,7 +21,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   next?: { href: string } | (() => void);
 }
 
-function Lightbox(props: Props, ref: React.ForwardedRef<React.ElementRef<typeof Root>>) {
+function Lightbox(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Root>>) {
   const router = useRouter();
 
   const { onClose, caption, prev, next, className, children, ...rest } = props;
