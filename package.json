@@ -26,7 +26,7 @@
     "@types/react-dom": "^19.0.1",
     "@types/unist": "^3.0.3",
     "@vercel/speed-insights": "^1.1.0",
-    "caniuse-lite": "^1.0.30001687",
+    "caniuse-lite": "^1.0.30001688",
     "feed": "^4.2.2",
     "fp-ts": "^2.16.9",
     "immer": "^10.1.1",
