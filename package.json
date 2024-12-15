@@ -21,7 +21,7 @@
     "@playwright/test": "^1.49.0",
     "@timvir/mdx": "^0.2.25",
     "@types/mdx": "^2.0.13",
-    "@types/node": "^22.10.1",
+    "@types/node": "^22.10.2",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
     "@types/unist": "^3.0.3",
