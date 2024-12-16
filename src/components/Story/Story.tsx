@@ -1,7 +1,6 @@
 "use client";
 
 import { Content } from "@/components/Content";
-import { MDXProvider } from "@mdx-js/react";
 import * as React from "react";
 import { Context } from "./context";
 import { components } from "./internal";
@@ -22,13 +21,11 @@ function Story(props: Props) {
 
   return (
     <Context.Provider value={{ storyId, blobs }}>
-      <MDXProvider components={components}>
-        <Content>
-          <Body />
-        </Content>
+      <Content>
+        <Body components={components} />
+      </Content>
 
-        <div style={{ marginBottom: "10vh" }} />
-      </MDXProvider>
+      <div style={{ marginBottom: "10vh" }} />
     </Context.Provider>
   );
 }

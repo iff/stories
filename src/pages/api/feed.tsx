@@ -2,7 +2,6 @@ import { extractBlocks } from "@/cms";
 import { Context } from "@/components/Story/context";
 import { components } from "@/components/Story/internal";
 import { mediaType } from "@hapi/accept";
-import { MDXProvider } from "@mdx-js/react";
 import { site, stories } from "content";
 import { Feed } from "feed";
 import * as fs from "fs";
@@ -103,9 +102,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       description: story.teaser.text,
       content: ReactDOMServer.renderToStaticMarkup(
         <Context.Provider value={{ storyId: story.id, blobs }}>
-          <MDXProvider components={{ ...components, Image, Clip, Group }}>
-            <Body.default />
-          </MDXProvider>
+          <Body.default components={{ ...components, Image, Clip, Group }} />
         </Context.Provider>
       ),
       author: [author],
