@@ -9,7 +9,6 @@ export default async function Sample(props: Props) {
     <Clip
       video={(await importBlob("5bgepApG4LoLLgTrMZfBdZ4ZMe5ddEsFvAQaCJCPLrNx")).asVideo}
       caption="Tortor posuere ac ut consequat semper viverra nam."
-      onFocus={() => {}}
       {...props}
     />
   );
