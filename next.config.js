@@ -11,7 +11,6 @@ const plugins = [
   withMDX({
     extension: /\.mdx?$/,
     options: {
-      providerImportSource: "@mdx-js/react",
       remarkPlugins: [remarkPlugin],
     },
   }),
