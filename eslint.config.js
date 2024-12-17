@@ -28,7 +28,6 @@ export default [
 
       "import/no-anonymous-default-export": "off",
 
-      "react-hooks/exhaustive-deps": "off",
       "react-hooks/rules-of-hooks": "off",
 
       "@next/next/no-img-element": "off",

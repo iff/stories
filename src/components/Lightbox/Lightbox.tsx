@@ -58,7 +58,7 @@ function Lightbox(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeo
     return () => {
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [onClose, prev, next]);
+  }, [router, onClose, prev, next]);
 
   const el = (
     <Root ref={ref} className={cx(className, classes.root)} {...rest}>
