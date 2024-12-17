@@ -28,8 +28,6 @@ export default [
 
       "import/no-anonymous-default-export": "off",
 
-      "react/display-name": "off",
-
       "react-hooks/exhaustive-deps": "off",
       "react-hooks/rules-of-hooks": "off",
 
