@@ -197,6 +197,7 @@ export default Clip;
 const classes = {
   root: css`
     margin: 0;
+    overflow: hidden;
   `,
 
   figcaption: css`
