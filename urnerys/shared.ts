@@ -4,7 +4,8 @@ export function sanitizeTitle(s: string): string {
     .replace(/-+$/g, "")
     .replace(/^-/, "")
     .replace(/-$/, "")
-    .toLowerCase();
+    .toLowerCase()
+    .trim();
 }
 
 export const build = process.env.GITHUB_RUN_ID

@@ -21,7 +21,7 @@ for (const url of ["/docs/components/Image", "/docs/components/Group", "/docs/co
       const buffer = await element.screenshot();
 
       const childElement = await element.$(".timvir-b-Exhibit-caption");
-      const innerText = (await childElement?.innerText()) ?? `${index}`;
+      const innerText = `${url}-${(await childElement?.innerText()) ?? index}`;
 
       const formData = new FormData();
       formData.set("collection", "docs/exhibits");
