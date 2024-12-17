@@ -32,11 +32,28 @@ jobs:
       - if: ${{ steps.create-pull-request.outputs.pull-request-number }}
         run: exit 1
 
+  lint:
+    if: github.event.pull_request.draft == false
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          clean: false
+
+      - uses: DeterminateSystems/nix-installer-action@v16
+      - run: nix run github:nicknovitski/nix-develop .#workflow
+
+      - run: ./node_modules/.bin/eslint .
+
   prv:
     if: github.event.pull_request.draft == false
     name: Pull Request Verification
     runs-on: ubuntu-latest
     needs:
       - format
+      - lint
     steps:
       - run: "true"
