@@ -21,11 +21,13 @@ function Story(props: Props) {
 
   return (
     <Context.Provider value={{ storyId, blobs }}>
-      <Content>
-        <Body components={components} />
-      </Content>
+      <Root {...rest}>
+        <Content>
+          <Body components={components} />
+        </Content>
 
-      <div style={{ marginBottom: "10vh" }} />
+        <div style={{ marginBottom: "10vh" }} />
+      </Root>
     </Context.Provider>
   );
 }

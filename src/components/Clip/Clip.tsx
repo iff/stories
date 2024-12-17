@@ -10,8 +10,6 @@ import * as React from "react";
 const Root = "figure";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
-  blobId?: string;
-
   video?: {
     poster: {
       url: string;
@@ -48,7 +46,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
  */
 
 function Clip(props: Props) {
-  const { blobId, video, caption, onFocus, className, ...rest } = props;
+  const { video, caption, onFocus, className, ...rest } = props;
 
   const ref = React.useRef<null | HTMLDivElement>(null);
   const videoRef = React.useRef<null | HTMLVideoElement>(null);

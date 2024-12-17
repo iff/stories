@@ -19,10 +19,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const { accept, ["user-agent"]: userAgent } = req.headers;
+  const { accept } = req.headers;
 
   const acceptedContentType = mediaType(accept, ["application/atom+xml"]);
-  // console.log({ host, accept, userAgent, contentType: acceptedContentType });
 
   if (!acceptedContentType) {
     res.statusCode = 404;
@@ -118,9 +117,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 function Image(props: any) {
-  const { storyId, blobs } = React.useContext(Context);
+  const { blobs } = React.useContext(Context);
 
-  const { blobId, size, className, ...rest } = props;
+  const { blobId } = props;
   const blob = blobs.find((x) => x.name === blobId);
   if (!blob) {
     return <div>Image {blobId} not found!</div>;
@@ -130,9 +129,9 @@ function Image(props: any) {
 }
 
 function Clip(props: any) {
-  const { storyId, blobs } = React.useContext(Context);
+  const { blobs } = React.useContext(Context);
 
-  const { blobId, size, className, ...rest } = props;
+  const { blobId } = props;
   const blob = blobs.find((x) => x.name === blobId);
 
   return (

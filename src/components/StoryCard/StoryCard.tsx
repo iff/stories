@@ -53,7 +53,7 @@ async function StoryCard(props: Props) {
   const loaded = false;
 
   return (
-    <div {...rest} className={cx(classes.root, tweaks[layout])}>
+    <Root {...rest} className={cx(classes.root, tweaks[layout])}>
       <h2 className={classes.title}>{title}</h2>
 
       <div className={cx(classes.image)}>
@@ -138,7 +138,7 @@ async function StoryCard(props: Props) {
           style={{ opacity: loaded ? 0 : 1, backgroundImage: `url(${(blocks[0] ?? blob).asImage.placeholder.url})` }}
         />
       </div>
-    </div>
+    </Root>
   );
 }
 

@@ -5,12 +5,7 @@ import { stories } from "../../../content";
 import Story from "./Story";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-/**
- * The underlying DOM element which is rendered by this component.
- */
-const Root = "div";
-
-interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
+interface Props extends Omit<React.ComponentPropsWithoutRef<typeof Story>, "Body"> {
   storyId: string;
   blobs: Array<any>;
 }

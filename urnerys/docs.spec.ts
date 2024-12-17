@@ -1,5 +1,5 @@
 import { test } from "@playwright/test";
-import { build, sanitizeTitle, takeImage, uploadImage } from "./shared";
+import { build, sanitizeTitle, takeImage } from "./shared";
 
 for (const url of ["/docs/components/Image", "/docs/components/Group", "/docs/components/Clip"]) {
   test(url, async ({ page }, { title }) => {
