@@ -6,13 +6,37 @@ env:
   URNERYS: ur.caurea.org
 
 jobs:
+  setup:
+    if: github.event.deployment_status.state == 'success'
+    runs-on: [self-hosted, nixos]
+    steps:
+      - shell: nix develop .#workflow --command bash {0}
+        run: |
+          curl -sf -X POST -H "Content-Type: application/json" -d '{ "id": "github-run-${{ github.run_id }}-${{ github.run_attempt }}", "build": { "origin": { "commit": "${{ github.sha }}" } } }' "https://$URNERYS/api/v1/projects/stories/builds"
+
+  vst:
+    name: Visual Smoke Test
+    if: github.event.deployment_status.state == 'success'
+    runs-on: [self-hosted, nixos]
+    needs: setup
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          clean: false
+
+      - run: nix run github:nicknovitski/nix-develop .#workflow
+
+      - run: ../node_modules/.bin/playwright test
+        working-directory: vst
+        env:
+          URL: ${{ github.event.deployment_status.target_url }}
+
   urnerys:
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
+    needs: setup
     steps:
-      - run: |
-          curl -sf -X POST -H "Content-Type: application/json" -d '{ "id": "github-run-${{ github.run_id }}-${{ github.run_attempt }}", "build": { "origin": { "commit": "${{ github.sha }}" } } }' "https://$URNERYS/api/v1/projects/stories/builds"
-
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
@@ -30,7 +54,16 @@ jobs:
         env:
           URL: ${{ github.event.deployment_status.target_url }}
 
-      - run: |
+  seal:
+    if: github.event.deployment_status.state == 'success'
+    name: Deployment Verification
+    runs-on: [self-hosted, nixos]
+    needs:
+      - vst
+      - urnerys
+    steps:
+      - shell: nix develop .#workflow --command bash {0}
+        run: |
           case "${{ github.event.deployment_status.environment }}" in
             Production)
               curl -sf -X PATCH -H "Content-Type: application/json" -d '{ "baseline": { "build": "github-run-${{ github.run_id }}-${{ github.run_attempt }}" } }' "https://$URNERYS/api/v1/projects/stories/baselines/production"

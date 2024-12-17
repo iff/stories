@@ -44,11 +44,15 @@
             buildInputs = [
               node
               node.pkgs.pnpm
+
+              pkgs.curl
             ];
 
             shellHook = ''
               pnpm install >/dev/null 2>&1
             '';
+
+            PLAYWRIGHT_EXECUTABLE_PATH = "${pkgs.chromium}/bin/chromium";
           };
         }
       );
