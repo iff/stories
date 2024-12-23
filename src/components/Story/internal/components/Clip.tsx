@@ -5,15 +5,16 @@ import * as React from "react";
 import { Context } from "../../context";
 
 interface Props {
+  storyId: string;
   blobId: string;
   className?: string;
 }
 
 export default function Clip_(props: Props) {
   const router = useRouter();
-  const { storyId, blobs } = React.useContext(Context);
+  const { blobs } = React.useContext(Context);
 
-  const { blobId, className } = props;
+  const { storyId, blobId, className } = props;
   const blob = blobs.find((x) => x.name === blobId);
 
   return (

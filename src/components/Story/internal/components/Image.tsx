@@ -4,6 +4,7 @@ import * as React from "react";
 import { Context } from "../../context";
 
 interface Props {
+  storyId: string;
   blobId: string;
 
   size?: "narrow" | "wp" | "fw";
@@ -12,9 +13,9 @@ interface Props {
 }
 
 export default function Image_(props: Props) {
-  const { storyId, blobs } = React.useContext(Context);
+  const { blobs } = React.useContext(Context);
 
-  const { blobId, size, className, ...rest } = props;
+  const { storyId, blobId, size, className, ...rest } = props;
   const blob = blobs.find((x) => x.name === blobId);
   if (!blob) {
     return <div>Image {blobId} not found!</div>;

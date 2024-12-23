@@ -20,10 +20,17 @@ function Story(props: Props) {
   const { storyId, Body, blobs, ...rest } = props;
 
   return (
-    <Context.Provider value={{ storyId, blobs }}>
+    <Context.Provider value={{ blobs }}>
       <Root {...rest}>
         <Content>
-          <Body components={components} />
+          <Body
+            components={{
+              ...components,
+
+              Clip: (props: any) => <components.Clip storyId={storyId} {...props} />,
+              Image: (props: any) => <components.Image storyId={storyId} {...props} />,
+            }}
+          />
         </Content>
 
         <div style={{ marginBottom: "10vh" }} />

@@ -100,7 +100,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       link: url,
       description: story.teaser.text,
       content: ReactDOMServer.renderToStaticMarkup(
-        <Context.Provider value={{ storyId: story.id, blobs }}>
+        <Context.Provider value={{ blobs }}>
           <Body.default components={{ ...components, Image, Clip, Group }} />
         </Context.Provider>
       ),
