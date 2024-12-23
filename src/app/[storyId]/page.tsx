@@ -56,8 +56,9 @@ export default async function Page(props: Props) {
           components={{
             ...components,
 
-            Clip: (props: any) => <components.Clip storyId={storyId} {...props} />,
-            Image: (props: any) => <components.Image storyId={storyId} {...props} />,
+            Clip: (props: any) => <components.Clip storyId={storyId} blobs={blobs} {...props} />,
+            Group: (props: any) => <components.Group blobs={blobs} {...props} />,
+            Image: (props: any) => <components.Image storyId={storyId} blobs={blobs} {...props} />,
           }}
         />
       </StoryById>

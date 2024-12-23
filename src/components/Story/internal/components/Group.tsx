@@ -1,19 +1,15 @@
-"use client";
-
 import { Group } from "@/components/Group";
 import { cx } from "@linaria/core";
 import * as React from "react";
-import { Context } from "../../context";
 
 interface Props {
+  blobs: Array<any>;
   className?: string;
   children?: React.ReactNode;
 }
 
 export default function Group_(props: Props) {
-  const { blobs } = React.useContext(Context);
-
-  const { className, children } = props;
+  const { blobs, className, children } = props;
 
   return (
     <Group {...props} className={cx(className, "wp")}>

@@ -1,11 +1,9 @@
-"use client";
-
 import { Image } from "@/components/Image";
 import { css, cx } from "@linaria/core";
 import * as React from "react";
-import { Context } from "../../context";
 
 interface Props {
+  blobs: Array<any>;
   storyId: string;
   blobId: string;
 
@@ -15,9 +13,8 @@ interface Props {
 }
 
 export default function Image_(props: Props) {
-  const { blobs } = React.useContext(Context);
+  const { storyId, blobs, blobId, size, className, ...rest } = props;
 
-  const { storyId, blobId, size, className, ...rest } = props;
   const blob = blobs.find((x) => x.name === blobId);
   if (!blob) {
     return <div>Image {blobId} not found!</div>;
