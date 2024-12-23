@@ -1,3 +1,7 @@
-"use client";
+import type { MDXComponents } from "mdx/types";
 
-export { useMDXComponents } from "@mdx-js/react";
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    ...components,
+  };
+}
