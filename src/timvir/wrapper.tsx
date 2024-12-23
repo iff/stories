@@ -20,7 +20,7 @@ export default function Wrapper({ children }: { children?: React.ReactNode }) {
   return (
     <>
       <script type="module" src="/docs.js" />
-      <link href="https://unpkg.com/timvir@0.2.28/styles.css" rel="stylesheet" />
+      <link href="https://unpkg.com/timvir@0.2.31/styles.css" rel="stylesheet" />
 
       <Page location={{ asPath, push() {} }} Link={Link as any} toc={toc} mdxComponents={mdxComponents}>
         {children}
