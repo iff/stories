@@ -1,5 +1,4 @@
 import { extractBlocks } from "@/cms";
-import { Context } from "@/components/Story/context";
 import { components } from "@/components/Story/internal";
 import { mediaType } from "@hapi/accept";
 import { site, stories } from "content";
@@ -100,9 +99,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       link: url,
       description: story.teaser.text,
       content: ReactDOMServer.renderToStaticMarkup(
-        <Context.Provider value={{ blobs }}>
-          <Body.default components={{ ...components, Image, Clip, Group }} />
-        </Context.Provider>
+        <Body.default
+          components={{
+            ...components,
+
+            Clip: (props: any) => <Clip blobs={blobs} {...props} />,
+            Group: (props: any) => <Group blobs={blobs} {...props} />,
+            Image: (props: any) => <Image blobs={blobs} {...props} />,
+          }}
+        />
       ),
       author: [author],
       contributor: [author],
@@ -117,9 +122,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 function Image(props: any) {
-  const { blobs } = React.useContext(Context);
-
-  const { blobId } = props;
+  const { blobs, blobId } = props;
   const blob = blobs.find((x) => x.name === blobId);
   if (!blob) {
     return <div>Image {blobId} not found!</div>;
@@ -129,9 +132,7 @@ function Image(props: any) {
 }
 
 function Clip(props: any) {
-  const { blobs } = React.useContext(Context);
-
-  const { blobId } = props;
+  const { blobs, blobId } = props;
   const blob = blobs.find((x) => x.name === blobId);
 
   return (
