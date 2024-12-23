@@ -1,14 +1,9 @@
 "use client";
 
 import * as React from "react";
-import Story from "./Story";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-interface Props extends React.ComponentPropsWithoutRef<typeof Story> {
-  blobs: Array<any>;
-}
-
-function StoryById(props: Props) {
+function StoryById() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -42,7 +37,7 @@ function StoryById(props: Props) {
     };
   }, [router, pathname, focus]);
 
-  return <Story {...props} />;
+  return null;
 }
 
 export default StoryById;

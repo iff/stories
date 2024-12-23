@@ -9,10 +9,10 @@ interface Props {
 }
 
 export default function Group_(props: Props) {
-  const { blobs, className, children } = props;
+  const { blobs, className, children, ...rest } = props;
 
   return (
-    <Group {...props} className={cx(className, "wp")}>
+    <Group {...rest} className={cx(className, "wp")}>
       {React.Children.map(children, (child) => {
         if (!React.isValidElement(child)) {
           return child;

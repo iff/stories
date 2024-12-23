@@ -7,6 +7,7 @@ import { Metadata } from "next";
 import { stories } from "content";
 import { Header } from "@/components/Header";
 import { components } from "@/components/Story/internal";
+import { Content } from "@/components/Content";
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { storyId } = await props.params;
@@ -51,7 +52,7 @@ export default async function Page(props: Props) {
         <Header blob={await importBlob(story.image)} title={story.title} />
       </div>
 
-      <StoryById blobs={blobs}>
+      <Content>
         <story.body.Component
           components={{
             ...components,
@@ -61,7 +62,11 @@ export default async function Page(props: Props) {
             Image: (props: any) => <components.Image storyId={storyId} blobs={blobs} {...props} />,
           }}
         />
-      </StoryById>
+      </Content>
+
+      <div style={{ marginBottom: "10vh" }} />
+
+      <StoryById />
     </>
   );
 }
