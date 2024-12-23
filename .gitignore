@@ -31,3 +31,4 @@ yarn-error.log*
 
 .direnv/
 test-results/
+tsconfig.tsbuildinfo
