@@ -1,3 +1,5 @@
+"use client";
+
 import { Image } from "@/components/Image";
 import { css, cx } from "@linaria/core";
 import * as React from "react";

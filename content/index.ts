@@ -9,8 +9,7 @@ export const site = {
     name: "Tomáš Čarnecký",
     email: "tomc@caurea.org",
   },
-}
-
+};
 
 interface Story {
   id: string;
@@ -46,8 +45,8 @@ interface Story {
   };
 
   body: {
-    Component: React.ComponentType
-  }
+    Component: React.ComponentType<{ components?: any }>;
+  };
 }
 
 export const stories: Story[] = [
@@ -262,5 +261,5 @@ export const stories: Story[] = [
     body: {
       Component: dynamic(() => import(`./safe/body.mdx`)),
     },
-  }
-]
+  },
+];

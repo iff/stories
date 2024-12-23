@@ -1,12 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { stories } from "../../../content";
 import Story from "./Story";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-interface Props extends Omit<React.ComponentPropsWithoutRef<typeof Story>, "Body"> {
-  storyId: string;
+interface Props extends React.ComponentPropsWithoutRef<typeof Story> {
   blobs: Array<any>;
 }
 
@@ -14,7 +12,6 @@ function StoryById(props: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const story = stories.find((x) => x.id === props.storyId);
 
   const focus = searchParams?.get("focus");
   React.useEffect(() => {
@@ -45,11 +42,7 @@ function StoryById(props: Props) {
     };
   }, [router, pathname, focus]);
 
-  if (!story) {
-    return null;
-  }
-
-  return <Story {...props} Body={story.body.Component} />;
+  return <Story {...props} />;
 }
 
 export default StoryById;

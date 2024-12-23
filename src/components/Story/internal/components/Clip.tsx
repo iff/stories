@@ -1,3 +1,5 @@
+"use client";
+
 import { Clip } from "@/components/Clip";
 import { cx } from "@linaria/core";
 import { useRouter } from "next/navigation";

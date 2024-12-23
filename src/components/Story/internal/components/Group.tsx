@@ -1,3 +1,5 @@
+"use client";
+
 import { Group } from "@/components/Group";
 import { cx } from "@linaria/core";
 import * as React from "react";
