@@ -50,7 +50,7 @@ jobs:
       - run: pnpm install
       - run: ./node_modules/.bin/playwright install --with-deps chromium
 
-      - run: ./node_modules/.bin/playwright test --retries 3
+      - run: ./node_modules/.bin/playwright test urnerys/*.spec.ts
         env:
           URL: ${{ github.event.deployment_status.target_url }}
 

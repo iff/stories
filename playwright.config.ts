@@ -4,6 +4,7 @@ export default defineConfig({
   reporter: [["list"]],
 
   timeout: 5 * 60 * 1000,
+  retries: 3,
 
   fullyParallel: true,
 
