@@ -31,10 +31,10 @@ you need to make sure that the element is stretched vertically by placing it it
 inside a grid, using explict height, or similar techniques.
 
 <Grid style={{ margin: "20px 0" }}>
-  <Exhibit caption="Image in its intrinsic aspect ratio">
+  <Exhibit caption="Image in its intrinsic aspect ratio.">
     <Sample variant="basic" caption={undefined} />
   </Exhibit>
-  <Exhibit caption="Image fills available space (height: 200px)">
+  <Exhibit caption="Image fills available space (height: 200px).">
     <div style={{ display: "grid", height: 200 }}>
       <Sample variant="basic" caption={undefined} fill />
     </div>
@@ -71,11 +71,11 @@ The caption can be either placed below the image (default), or into an overlay
 which is visible on hover.
 
 <Grid style={{ margin: "20px 0" }}>
-  <Exhibit>
-    <Sample variant="basic" caption="Caption below the image" captionPlacement="below" />
+  <Exhibit caption="Caption below the image.">
+    <Sample variant="basic" captionPlacement="below" />
   </Exhibit>
-  <Exhibit>
-    <Sample variant="basic" caption="Caption shown in overlay on hover" captionPlacement="overlay" />
+  <Exhibit caption="Caption shown in overlay on hover.">
+    <Sample variant="basic" captionPlacement="overlay" />
   </Exhibit>
 </Grid>
 
@@ -95,7 +95,7 @@ An image with caption and `fill` mode will not render correctly.
 The image does not stretch to fill in all available space.
 Instead, the image and caption share a roughly equal space (making the image much smaller than it should be).
 
-<Exhibit>
+<Exhibit caption="Known defect: image with caption and fill.">
   <div style={{ display: "grid", height: 200 }}>
     <Sample variant="basic" fill />
   </div>
