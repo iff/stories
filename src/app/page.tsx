@@ -9,22 +9,21 @@ export default async function Page() {
     <>
       <Hero />
 
-      <div>
+      <div style={{ display: "grid", gap: "6em", marginBlock: "2em 6em" }}>
         {await Promise.all(
           featuredStories.map(async (story, index) => (
-            <div key={story.id} style={{ margin: "2em 0 6em" }}>
-              <StoryCard
-                layout={index % 2 ? "inverted" : "regular"}
-                story={{
-                  id: story.id,
-                }}
-                blob={await importBlob(story.image)}
-                blocks={await Promise.all(story.teaser.images.map((name) => importBlob(name)))}
-                title={story.title}
-                teaser={story.teaser.text}
-                date={story.date}
-              />
-            </div>
+            <StoryCard
+              key={story.id}
+              layout={index % 2 ? "inverted" : "regular"}
+              story={{
+                id: story.id,
+              }}
+              blob={await importBlob(story.image)}
+              blocks={await Promise.all(story.teaser.images.map((name) => importBlob(name)))}
+              title={story.title}
+              teaser={story.teaser.text}
+              date={story.date}
+            />
           ))
         )}
       </div>
