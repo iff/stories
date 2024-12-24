@@ -19,8 +19,6 @@
             echo " … for nothing remains of us but the vibrations we leave behind."
           '';
 
-          node = pkgs.nodejs_20;
-
           scripts = {
             dev = pkgs.writeShellScriptBin "dev" ''
               ./node_modules/.bin/next dev
@@ -29,8 +27,8 @@
         in {
           devShells.default = pkgs.mkShell {
             buildInputs = [
-              node
-              node.pkgs.pnpm
+              pkgs.nodejs
+              pkgs.nodejs.pkgs.pnpm
 
               scripts.dev
             ];
@@ -42,8 +40,8 @@
 
           devShells.workflow = pkgs.mkShell {
             buildInputs = [
-              node
-              node.pkgs.pnpm
+              pkgs.nodejs
+              pkgs.nodejs.pkgs.pnpm
 
               pkgs.curl
             ];
