@@ -41,30 +41,6 @@ inside a grid, using explict height, or similar techniques.
   </Exhibit>
 </Grid>
 
-## Placeholder
-
-As long as the image is not loaded yet, a placeholder image is shown in its place.
-Once the image is loaded, the placeholder image is faded away.
-If the image has no placeholder, a black background is used in its place.
-
-<Grid style={{ margin: "20px 0" }}>
-  <Exhibit caption="Image that has no placeholder.">
-    <div style={{ display: "grid", height: 200 }}>
-      <Sample variant="no-placeholder" fill />
-    </div>
-  </Exhibit>
-  <Exhibit caption="Placehonlder generated using SQIP.">
-    <div style={{ display: "grid", height: 200 }}>
-      <Sample variant="placeholder" fill />
-    </div>
-  </Exhibit>
-  <Exhibit caption="After image is loaded.">
-    <div style={{ display: "grid", height: 200 }}>
-      <Sample variant="basic" caption={undefined} fill />
-    </div>
-  </Exhibit>
-</Grid>
-
 ## Caption
 
 The caption can be either placed below the image (default), or into an overlay

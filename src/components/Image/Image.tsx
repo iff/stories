@@ -58,22 +58,17 @@ function Image(props: Props) {
   const { blob, fill = false, sizes, caption, captionPlacement = "below", href, className, ...rest } = props;
 
   const image = (
-    <>
-      <div
-        className={classes.placeholder}
-        style={blob.asImage.placeholder && { backgroundImage: `url(${blob.asImage.placeholder.url})` }}
-      />
-      <NextImage
-        className={classes.img}
-        alt=""
-        src={blob.asImage.url}
-        width={fill ? undefined : blob.asImage.dimensions.width}
-        height={fill ? undefined : blob.asImage.dimensions.height}
-        fill={fill}
-        style={{ objectFit: fill ? "cover" : undefined, display: blob.asImage.url ? undefined : "none" }}
-        sizes={sizes}
-      />
-    </>
+    <NextImage
+      className={classes.img}
+      alt=""
+      src={blob.asImage.url}
+      width={fill ? undefined : blob.asImage.dimensions.width}
+      height={fill ? undefined : blob.asImage.dimensions.height}
+      fill={fill}
+      style={{ objectFit: fill ? "cover" : undefined, display: blob.asImage.url ? undefined : "none" }}
+      sizes={sizes}
+      placeholder={blob.asImage.placeholder?.url as any}
+    />
   );
 
   return (
@@ -114,28 +109,13 @@ const classes = {
     text-decoration: none;
 
     outline-offset: 2px;
+    background-color: black;
   `,
 
   img: css`
     display: block;
     max-width: 100%;
     height: 100%;
-  `,
-
-  placeholder: css`
-    position: absolute;
-    inset: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-
-    background-size: cover;
-    background-position: 50% 50%;
-    background-color: black;
-
-    z-index: -1;
   `,
 
   figcaption: css`
