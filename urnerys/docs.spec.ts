@@ -18,7 +18,7 @@ for (const url of ["/docs/components/Image", "/docs/components/Group", "/docs/co
 
     const elements = await page.$$(".timvir-b-Exhibit");
     for (const [index, element] of elements.entries()) {
-      const buffer = await element.screenshot();
+      const buffer = await (await element.$(".timvir-b-Exhibit-container"))!.screenshot();
 
       const childElement = await element.$(".timvir-b-Exhibit-caption");
       const innerText = `${url}-${(await childElement?.innerText()) ?? index}`;
