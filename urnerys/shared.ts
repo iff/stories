@@ -27,10 +27,3 @@ export async function uploadImage(page, set, title, formula) {
     body: formData,
   });
 }
-
-export async function takeImage(page, title, set, url, viewport) {
-  await page.setViewportSize(viewport);
-  await page.goto(url, { waitUntil: "domcontentloaded" });
-  await page.waitForTimeout(2000);
-  await uploadImage(page, set, title, `w${viewport.width}`);
-}
