@@ -1,11 +1,12 @@
 import { test } from "@playwright/test";
-import { build, sanitizeTitle, uploadImage } from "./shared";
+import { build, interceptImages, sanitizeTitle, uploadImage, waitForImages } from "./shared";
 
 for (const url of ["/docs/components/Image", "/docs/components/Group", "/docs/components/Clip"]) {
   test(url, async ({ page }) => {
     await page.setViewportSize({ width: 1400, height: 900 });
     await page.goto(url, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(2000);
+    await waitForImages(page);
 
     const elements = await page.$$(".timvir-b-Exhibit");
     for (const [index, element] of elements.entries()) {
@@ -32,6 +33,8 @@ for (const url of ["/docs/components/Image", "/docs/components/Group", "/docs/co
 
 for (const url of ["/docs/components/Content/samples/basic", "/docs/components/Group/samples/responsive"]) {
   test(url, async ({ page }, { title }) => {
+    await interceptImages(page);
+
     const component = url.split("/").at(3);
 
     const viewports = [
@@ -46,6 +49,7 @@ for (const url of ["/docs/components/Content/samples/basic", "/docs/components/G
       await page.setViewportSize(viewport);
       await page.goto(url, { waitUntil: "domcontentloaded" });
       await page.waitForTimeout(2000);
+      await waitForImages(page);
 
       const height = await page.evaluate(() => Math.ceil(document.body.clientHeight));
       await page.setViewportSize({ width: viewport.width, height });
