@@ -2,22 +2,15 @@ import { css, cx } from "@linaria/core";
 import Link from "next/link";
 import * as React from "react";
 
-/**
- * The underlying DOM element which is rendered by this component.
- */
-const Root = "a";
+interface Props extends React.ComponentPropsWithoutRef<"a"> {}
 
-interface Props extends React.ComponentPropsWithoutRef<typeof Root> {}
-
-function Brandmark(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Root>>) {
+function Brandmark(props: Props, ref: React.ForwardedRef<React.ComponentRef<"a">>) {
   const { className, ...rest } = props;
 
   return (
-    <Link href="/" passHref legacyBehavior>
-      <Root ref={ref} className={cx(classes.root, className)} {...rest}>
-        <div>Stories</div>
-        <div>by Tomáš Čarnecký</div>
-      </Root>
+    <Link ref={ref} href="/" className={cx(classes.root, className)} {...rest}>
+      <div>Stories</div>
+      <div>by Tomáš Čarnecký</div>
     </Link>
   );
 }
