@@ -110,4 +110,25 @@ css`
       margin: 0;
     }
   }
+  :global() {
+    .content .wp {
+      grid-column: lex / rex;
+    }
+
+    .content .fw {
+      grid-column: le / re;
+    }
+
+    .content > *:not(.wp):not(.fw):not(.noLayout) {
+      grid-column: lc / rc;
+    }
+
+    .content > h2 {
+      margin: 3em 0 1em;
+    }
+
+    .content > p {
+      margin: 0;
+    }
+  }
 `;

@@ -51,7 +51,7 @@ export default function Image_(props: Props) {
 
 const styles = stylex.create({
   root: {
-    margin: "0 auto",
+    margin: "0 auto !important",
   },
 
   narrow: {

@@ -1,5 +1,10 @@
+import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
-import { css, cx } from "@linaria/core";
+
+import { cx } from "@linaria/core";
+
+import { vars } from "./variables.stylex";
+
 
 /**
  * The underlying DOM element which is rendered by this component.
@@ -11,8 +16,14 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {}
 function Content(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Root>>) {
   const { children, className, ...rest } = props;
 
+  /*
+   * Hack to allow className to be appended to. Should be removed once
+   * we migrate fully to StyleX.
+   */
+  const s = stylex.props(styles.root);
+
   return (
-    <Root ref={ref} className={cx(className, classes.root)} {...rest}>
+    <Root ref={ref} {...s}  className={cx(className, "content", s.className)} {...rest}>
       {children}
     </Root>
   );
@@ -20,71 +31,22 @@ function Content(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof
 
 export default React.forwardRef(Content);
 
-const classes = {
-  root: css`
-    display: grid;
-    row-gap: 2em;
+const styles = stylex.create({
+  root: {
+    display: "grid",
+    rowGap: "2em",
 
-    /*
-     * The width of the main (center) column. Choose so that lines
-     * of text are neither too long nor too short.
-     */
-    --center-column: 36em;
-
-    /*
-     * The (max) width of the extended columns
-     */
-    --extended-column: 12em;
-
-    grid-template-columns:
-      [le]
-      max(1em, env(safe-area-inset-left))
-      [lex lc]
-      1fr
-      [rc rex]
-      max(1em, env(safe-area-inset-right))
-      [re];
+    gridTemplateColumns:
+      "[le] max(1em, env(safe-area-inset-left)) [lex lc] 1fr [rc rex] max(1em, env(safe-area-inset-right)) [re]",
 
     /*
      * Can't use var() nor env() in media queries :(
      *
      * > (min-width: calc(var(--center-column) + max(1em, env(safe-area-inset-left)) + max(1em, env(safe-area-inset-right))))
      */
-    @media (min-width: calc(36em + 2em)) {
-      grid-template-columns:
-        [le]
-        1fr
-        max(1em, env(safe-area-inset-left))
-        [lex]
-        minmax(0, var(--extended-column))
-        [lc]
-        var(--center-column)
-        [rc]
-        minmax(0, var(--extended-column))
-        [rex]
-        max(1em, env(safe-area-inset-right))
-        1fr
-        [re];
-    }
-
-    .wp {
-      grid-column: lex / rex;
-    }
-
-    .fw {
-      grid-column: le / re;
-    }
-
-    & > *:not(.wp):not(.fw):not(.noLayout) {
-      grid-column: lc / rc;
-    }
-
-    & > h2 {
-      margin: 3em 0 1em;
-    }
-
-    & > p {
-      margin: 0;
-    }
-  `,
-};
+    "@media (min-width: calc(36em + 2em))": {
+      gridTemplateColumns:
+        `[le] 1fr max(1em, env(safe-area-inset-left)) [lex] minmax(0, ${vars.extendedColumn}) [lc] ${vars.centerColumn} [rc] minmax(0, ${vars.extendedColumn}) [rex] max(1em, env(safe-area-inset-right)) 1fr [re]`
+    },
+  },
+})
