@@ -41,7 +41,7 @@ body {
 }
 
 :root {
-  color-scheme: light;
+  color-scheme: light dark;
 
   --background-color: #fff;
   --text-color: #000;
@@ -50,8 +50,6 @@ body {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    color-scheme: dark;
-
     --background-color: #18191b;
     --text-color: hsla(0, 0%, 100%, 0.86);
     --secondary-text-color: hsla(0, 0%, 100%, 0.56);
