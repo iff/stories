@@ -1,7 +1,12 @@
-import { css, cx } from "@linaria/core";
+import * as stylex from "@stylexjs/stylex";
+import * as React from "react";
+
+import { cx } from "@linaria/core";
 import NextImage from "next/image";
 import Link, { LinkProps } from "next/link";
-import * as React from "react";
+import Caption from "./internal/Caption";
+
+import { vars } from "./variables.stylex";
 
 /**
  * The underlying DOM element which is rendered by this component.
@@ -59,7 +64,7 @@ function Image(props: Props) {
 
   const image = (
     <NextImage
-      className={classes.img}
+      {...stylex.props(styles.img)}
       alt=""
       src={blob.asImage.url}
       width={fill ? undefined : blob.asImage.dimensions.width}
@@ -71,84 +76,68 @@ function Image(props: Props) {
     />
   );
 
+  /*
+   * Hack to allow className to be appended to. Should be removed once
+   * we migrate fully to StyleX.
+   */
+  const s = stylex.props(captionPlacementVariant[captionPlacement], styles.root);
+
   return (
-    <Root className={cx(classes.root, className, classes.captionPlacement[captionPlacement])} {...rest}>
+    <Root {...s} className={cx(s.className, className)} {...rest}>
       {(() => {
         if (href) {
           return (
-            <Link href={href} className={classes.image}>
+            <Link href={href} {...stylex.props(styles.image)}>
               {image}
             </Link>
           );
         } else {
-          return <div className={classes.image}>{image}</div>;
+          return <div {...stylex.props(styles.image)}>{image}</div>;
         }
       })()}
 
-      {caption && <figcaption className={classes.figcaption}>{caption}</figcaption>}
+      {caption && <Caption captionPlacement={captionPlacement}>{caption}</Caption>}
     </Root>
   );
 }
 
 export default Image;
 
-const classes = {
-  root: css`
-    contain: layout;
-    display: grid;
-    width: 100%;
-    isolation: isolate;
-
-    margin: 0;
-  `,
-
-  image: css`
-    position: relative;
-    display: block;
-    color: inherit;
-    text-decoration: none;
-
-    outline-offset: 2px;
-    background-color: black;
-  `,
-
-  img: css`
-    display: block;
-    max-width: 100%;
-    height: 100%;
-  `,
-
-  figcaption: css`
-    text-align: center;
-    margin: 8px 0;
-    font-size: 0.75em;
-    line-height: 1.3;
-    color: var(--secondary-text-color);
-  `,
-
-  captionPlacement: {
-    overlay: css`
-      & figcaption {
-        position: absolute;
-        margin: 0;
-        left: 2px;
-        right: 2px;
-        bottom: 2px;
-        background-color: #18191b;
-        color: #fefefe;
-        padding: 8px 10px 6px;
-        text-align: left;
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.4s;
-      }
-
-      &:hover figcaption {
-        opacity: 1;
-      }
-      &:focus-within figcaption {
-        opacity: 1;
-      }
-    `,
+const styles = stylex.create({
+  root: {
+    contain: "layout",
+    display: "grid",
+    width: "100%",
+    isolation: "isolate",
+    margin: "0",
   },
-};
+
+  image: {
+    position: "relative",
+    display: "block",
+    color: "inherit",
+    textDecoration: "none",
+    outlineOffset: "2px",
+    backgroundColor: "black",
+  },
+
+  img: {
+    display: "block",
+    maxWidth: "100%",
+    height: "100%",
+  },
+});
+
+const captionPlacementVariant = stylex.create({
+  below: {},
+
+  overlay: {
+    [vars.figcaptionOpacity]: "0",
+    ":hover": {
+      [vars.figcaptionOpacity]: "1",
+    },
+    ":focus-within": {
+      [vars.figcaptionOpacity]: "1",
+    },
+  },
+});
