@@ -14,10 +14,7 @@
       "extends": ["monorepo:nextjs"],
       "groupName": "Next.js"
     },
-    {
-      "groupName": "Linaria",
-      "matchPackageNames": ["/^@linaria//"]
-    },
+
     {
       "matchPackageNames": ["immer", "use-immer"],
       "groupName": "Immer"

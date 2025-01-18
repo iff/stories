@@ -1,6 +1,5 @@
 import withMDX from "@next/mdx";
 import { remarkPlugin } from "@timvir/mdx";
-import withLinaria from "next-with-linaria";
 import stylexPlugin from "@stylexswc/nextjs-plugin";
 import * as path from "node:path";
 
@@ -11,7 +10,6 @@ function withPlugins(plugins, config) {
 }
 
 const plugins = [
-  withLinaria,
   withMDX({
     extension: /\.mdx?$/,
     options: {
