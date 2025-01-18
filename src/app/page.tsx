@@ -1,15 +1,18 @@
-import { Hero } from "@/components/Hero";
+import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
-import { stories } from "../../content";
+
+import { Hero } from "@/components/Hero";
 import { StoryCard } from "@/components/StoryCard";
 import { importBlob } from "@/cms";
+
+import { stories } from "../../content";
 
 export default async function Page() {
   return (
     <>
       <Hero />
 
-      <div style={{ display: "grid", gap: "6em", marginBlock: "2em 6em" }}>
+      <div {...stylex.props(styles.storyCards)}>
         {await Promise.all(
           featuredStories.map(async (story, index) => (
             <StoryCard
@@ -30,6 +33,14 @@ export default async function Page() {
     </>
   );
 }
+
+const styles = stylex.create({
+  storyCards: {
+    display: "grid",
+    gap: "6em",
+    marginBlock: "2em 6em",
+  },
+});
 
 const featuredStories = [...stories]
   .sort((a, b) => b.date[0].getTime() - a.date[0].getTime())
