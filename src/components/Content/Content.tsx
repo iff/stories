@@ -1,7 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
-import { cx } from "@linaria/core";
+import { cx } from "../../cx";
 
 import { vars } from "./variables.stylex";
 

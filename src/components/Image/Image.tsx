@@ -1,7 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
-import { cx } from "@linaria/core";
+import { cx } from "../../cx";
 import NextImage from "next/image";
 import Link, { LinkProps } from "next/link";
 import Caption from "./internal/Caption";

@@ -1,5 +1,5 @@
 import { Group } from "@/components/Group";
-import { cx } from "@linaria/core";
+import { cx } from "../../../../cx";
 import * as React from "react";
 
 interface Props {

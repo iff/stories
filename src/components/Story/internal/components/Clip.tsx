@@ -1,7 +1,7 @@
 "use client";
 
 import { Clip } from "@/components/Clip";
-import { cx } from "@linaria/core";
+import { cx } from "../../../../cx";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 

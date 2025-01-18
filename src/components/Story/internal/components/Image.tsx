@@ -2,7 +2,7 @@ import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
 import { Image } from "@/components/Image";
-import { cx } from "@linaria/core";
+import { cx } from "../../../../cx";
 
 interface Props {
   blobs: Array<any>;
