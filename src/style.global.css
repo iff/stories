@@ -1,30 +1,39 @@
 :root {
   -webkit-text-size-adjust: 100%;
 }
+
 html,
 body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   overscroll-behavior: none;
-  font-family: "Tuna", system-ui, sans-serif;
-  /*
-    * Font size goes from 17px to 21px, changes
-    * at fixed breakpoints.
-    */
-  font-size: 17px;
-  line-height: 1.8;
+}
+
+body {
   color: var(--text-color);
   background-color: var(--background-color);
+
+  font-family: "Tuna", system-ui, sans-serif;
+
+  /*
+   * Font size goes from 17px to 21px, changes
+   * at fixed breakpoints.
+   */
+  font-size: 17px;
+  line-height: 1.8;
+
   @media (min-width: 720px) {
     font-size: 19px;
     line-height: 1.7;
   }
+
   @media (min-width: 1280px) {
     font-size: 21px;
     line-height: 1.6;
   }
 }
+
 *,
 *::before,
 *::after {
@@ -96,4 +105,33 @@ body {
   font-weight: 700;
   src: url("/fonts/Tuna/371F3E_1_0.woff2") format("woff2");
   font-display: swap;
+}
+
+.content .wp {
+  grid-column: lex / rex;
+}
+
+.content .fw {
+  grid-column: le / re;
+}
+
+.content > *:not(.wp):not(.fw):not(.noLayout) {
+  grid-column: lc / rc;
+}
+
+.content > h2 {
+  margin: 3em 0 1em;
+}
+
+.content > p {
+  margin: 0;
+}
+
+.blockquote {
+  margin: 1em 0;
+  padding-left: 1em;
+  border-left: 2px solid #fe762a;
+}
+.blockquote > p {
+  margin: 0;
 }

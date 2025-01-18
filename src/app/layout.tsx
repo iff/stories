@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-import "../style.linaria.global";
+import "../style.global.css";
 
 export const metadata: Metadata = {
   title: "Stories by Tomáš Čarnecky",

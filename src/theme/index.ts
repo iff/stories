@@ -1,5 +1,3 @@
-import { css } from "@linaria/core";
-
 export const themes = {
   light: {
     backgroundColor: "#ffffff",
@@ -12,8 +10,6 @@ export const themes = {
     secondaryTextColor: "rgba(255 255 255 / 0.56)",
   },
 } as const;
-
-css``;
 
 export function mkTheme(config: (typeof themes)[keyof typeof themes]) {
   return `
