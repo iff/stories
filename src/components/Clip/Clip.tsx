@@ -1,8 +1,10 @@
 "use client";
 
-import { css, cx } from "@linaria/core";
-import NextImage from "next/image";
+import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
+
+import { cx } from "@linaria/core";
+import NextImage from "next/image";
 
 /**
  * The underlying DOM element which is rendered by this component.
@@ -81,12 +83,18 @@ function Clip(props: Props) {
     };
   }, [playing]);
 
+  /*
+   * Hack to allow className to be appended to. Should be removed once
+   * we migrate fully to StyleX.
+   */
+  const s = stylex.props(styles.root);
+
   return (
-    <Root ref={ref} className={cx(classes.root, className)} {...rest}>
+    <Root ref={ref} {...s} className={cx(s.className, className)} {...rest}>
       <div style={{ position: "relative", contain: "layout" }}>
         <video
           ref={videoRef}
-          className={classes.video}
+          {...stylex.props(styles.video)}
           playsInline
           onPause={() => {
             setPlaying(false);
@@ -101,7 +109,7 @@ function Clip(props: Props) {
           <source src={video?.renditions?.[0]?.url} type="video/mp4" />
         </video>
 
-        <div className={classes.poster} style={{ opacity: playing ? 0 : 1 }}>
+        <div data-poster {...stylex.props(styles.poster)} style={{ opacity: playing ? 0 : 1 }}>
           {video?.poster?.url && (
             <NextImage
               alt=""
@@ -113,11 +121,11 @@ function Clip(props: Props) {
               }}
             />
           )}
-          <div className={classes.sqip} style={{ backgroundImage: `url(${video?.poster?.placeholder?.url})` }} />
+          <div {...stylex.props(styles.sqip)} style={{ backgroundImage: `url(${video?.poster?.placeholder?.url})` }} />
         </div>
 
         {onFocus && (
-          <div className={classes.focus} onClick={onFocus}>
+          <div {...stylex.props(styles.focus)} onClick={onFocus}>
             <svg
               width={400}
               height={200}
@@ -140,7 +148,7 @@ function Clip(props: Props) {
           </div>
         )}
 
-        <div className={classes.actions}>
+        <div {...stylex.props(styles.actions)}>
           <svg
             width={400}
             height={200}
@@ -148,7 +156,7 @@ function Clip(props: Props) {
             style={{ position: "absolute", bottom: -1, right: -1, cursor: "pointer" }}
             onClick={() => {
               const videoElement = ref.current?.querySelector("video");
-              const posterElement = ref.current?.querySelector<HTMLElement>(`.${classes.poster}`);
+              const posterElement = ref.current?.querySelector<HTMLElement>(`[data-poster]`);
               if (!videoElement || !posterElement) {
                 return;
               }
@@ -184,99 +192,78 @@ function Clip(props: Props) {
           </svg>
         </div>
 
-        {playing && <div className={classes.progress} ref={progressRef} />}
+        {playing && <div {...stylex.props(styles.progress)} ref={progressRef} />}
       </div>
 
-      {caption && <figcaption className={classes.figcaption}>{caption}</figcaption>}
+      {caption && <figcaption {...stylex.props(styles.figcaption)}>{caption}</figcaption>}
     </Root>
   );
 }
 
 export default Clip;
 
-const classes = {
-  root: css`
-    margin: 0;
-    overflow: hidden;
-  `,
+const styles = stylex.create({
+  root: {
+    margin: 0,
+    overflow: "hidden",
+  },
 
-  figcaption: css`
-    text-align: center;
-    margin: 8px 0;
-    font-size: 0.75em;
-    line-height: 1.3;
-    font-style: italic;
-    color: var(--secondary-text-color);
-  `,
+  figcaption: {
+    textAlign: "center",
+    margin: "8px 0",
+    fontSize: "0.75em",
+    lineHeight: 1.3,
+    fontStyle: "italic",
+    color: "var(--secondary-text-color)",
+  },
 
-  video: css`
-    display: block;
-    width: 100%;
-    object-fit: fill;
-  `,
+  video: {
+    display: "block",
+    width: "100%",
+    objectFit: "fill",
+  },
 
-  poster: css`
-    transition: opacity 0.4s ease-out;
+  poster: {
+    transition: "opacity 0.4s ease-out",
+  },
 
-    img {
-      z-index: 2;
-    }
-  `,
+  img: {
+    zIndex: 2,
+  },
 
-  sqip: css`
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+  sqip: {
+    position: "absolute",
+    inset: 0,
+    pointerEvents: "none",
 
-    background-size: cover;
-    background-position: 50% 50%;
+    backgroundSize: "cover",
+    backgroundPosition: "50% 50%",
 
-    z-index: 1;
-  `,
+    zIndex: 1,
+  },
 
-  focus: css`
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 2;
-  `,
+  focus: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    zIndex: 2,
+  },
 
-  actions: css`
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: 2;
+  actions: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    zIndex: 2,
+  },
 
-    & > button {
-      display: block;
-      background: none;
-      outline: none;
-      border: none;
+  progress: {
+    position: "absolute",
+    bottom: "6px",
+    left: "5px",
+    height: "3px",
+    borderRadius: "2px",
+    background: "white",
 
-      padding: 3px;
-      background: black;
-      border-radius: 100%;
-
-      cursor: pointer;
-    }
-
-    button svg {
-      display: block;
-      width: 36px;
-      height: 36px;
-      stroke: white;
-      stroke-width: 1;
-    }
-  `,
-
-  progress: css`
-    position: absolute;
-    bottom: 6px;
-    left: 5px;
-    height: 3px;
-    border-radius: 2px;
-    background: white;
-
-    z-index: 3;
-  `,
-};
+    zIndex: 3,
+  },
+});
