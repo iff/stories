@@ -20,10 +20,10 @@ export const components = {
 const styles = stylex.create({
   h2: {
     margin: "3em 0 1em",
-    gridGolumn: "lc / rc",
+    gridColumn: "lc / rc",
   },
   p: {
     margin: 0,
-    gridGolumn: "lc / rc",
+    gridColumn: "lc / rc",
   },
 });

@@ -1,21 +1,21 @@
 "use client";
 
-import { Clip } from "@/components/Clip";
-import { cx } from "../../../../cx";
-import { useRouter } from "next/navigation";
+import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
+
+import { Clip } from "@/components/Clip";
+import { useRouter } from "next/navigation";
 
 interface Props {
   storyId: string;
   blobs: Array<any>;
   blobId: string;
-  className?: string;
 }
 
 export default function Clip_(props: Props) {
   const router = useRouter();
 
-  const { storyId, blobs, blobId, className } = props;
+  const { storyId, blobs, blobId } = props;
   const blob = blobs.find((x) => x.name === blobId);
 
   return (
@@ -23,10 +23,16 @@ export default function Clip_(props: Props) {
       {...props}
       id={blobId}
       video={blob?.asVideo}
-      className={cx(className, "wp")}
+      {...stylex.props(styles.root)}
       onFocus={() => {
         router.push(`/${storyId}/${blobId}`);
       }}
     />
   );
 }
+
+const styles = stylex.create({
+  root: {
+    gridColumn: "lex / rex",
+  },
+});

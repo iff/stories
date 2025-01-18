@@ -1,20 +1,13 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
-import { cx } from "../../../../cx";
 
 interface Props {
   children?: React.ReactNode;
 }
 
 export default function Heading_(props: Props) {
-  /*
-   * Hack to allow className to be appended to. Should be removed once
-   * we migrate fully to StyleX.
-   */
-  const s = stylex.props(styles.root);
-
   return (
-    <div {...s} className={cx("noLayout", s.className)}>
+    <div {...stylex.props(styles.root)}>
       <h2 {...stylex.props(styles.heading)} {...props} />
     </div>
   );

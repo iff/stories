@@ -107,18 +107,6 @@ body {
   font-display: swap;
 }
 
-.content .wp {
-  grid-column: lex / rex;
-}
-
-.content .fw {
-  grid-column: le / re;
-}
-
-.content > *:not(.wp):not(.fw):not(.noLayout) {
-  grid-column: lc / rc;
-}
-
 .blockquote {
   margin: 1em 0;
   padding-left: 1em;

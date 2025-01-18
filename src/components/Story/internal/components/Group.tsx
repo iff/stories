@@ -1,18 +1,18 @@
-import { Group } from "@/components/Group";
-import { cx } from "../../../../cx";
+import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
+
+import { Group } from "@/components/Group";
 
 interface Props {
   blobs: Array<any>;
-  className?: string;
   children?: React.ReactNode;
 }
 
 export default function Group_(props: Props) {
-  const { blobs, className, children, ...rest } = props;
+  const { blobs, children, ...rest } = props;
 
   return (
-    <Group {...rest} className={cx(className, "wp")}>
+    <Group {...stylex.props(styles.root)} {...rest}>
       {React.Children.map(children, (child) => {
         if (!React.isValidElement(child)) {
           return child;
@@ -39,3 +39,9 @@ export default function Group_(props: Props) {
     </Group>
   );
 }
+
+const styles = stylex.create({
+  root: {
+    gridColumn: "lex / rex",
+  },
+});
