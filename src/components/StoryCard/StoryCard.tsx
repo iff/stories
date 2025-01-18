@@ -1,11 +1,14 @@
+import * as stylex from "@stylexjs/stylex";
+import * as React from "react";
+
 import { defineMessage } from "@formatjs/intl";
-import { css, cx } from "@linaria/core";
 import Image from "next/legacy/image";
 import Link from "next/link";
-import * as React from "react";
 import * as Icons from "react-feather";
 import imageLoader from "src/imageLoader";
 import { getIntl } from "src/intl";
+
+import { vars } from "./variables.stylex";
 
 /**
  * The underlying DOM element which is rendered by this component.
@@ -53,21 +56,28 @@ async function StoryCard(props: Props) {
   const loaded = false;
 
   return (
-    <Root {...rest} className={cx(classes.root, tweaks[layout])}>
-      <h2 className={classes.title}>{title}</h2>
+    <Root {...rest} {...stylex.props(styles.root, tweaks[layout])}>
+      <h2 {...stylex.props(styles.title)}>{title}</h2>
 
-      <div className={cx(classes.image)}>
-        <Image alt="" src={blob.asImage.url} loader={imageLoader} layout="fill" objectFit="cover" />
+      <div {...stylex.props(styles.image)}>
+        <Image
+          alt=""
+          src={blob.asImage.url}
+          loader={imageLoader}
+          layout="fill"
+          objectFit="cover"
+          style={{ zIndex: 2 }}
+        />
         <div
-          className="sqip"
+          {...stylex.props(styles.sqip)}
           style={{ opacity: loaded ? 0 : 1, backgroundImage: `url(${blob.asImage.placeholder.url})` }}
         />
       </div>
 
-      <div className={classes.teaser}>
-        <div>
+      <div {...stylex.props(styles.teaser, layout === "inverted" && styles.teaserInverted)}>
+        <div {...stylex.props(styles.teaserDiv)}>
           {date && (
-            <div className={classes.date}>
+            <div {...stylex.props(styles.date)}>
               {(() => {
                 if (Array.isArray(date)) {
                   const [from, to] = date;
@@ -119,22 +129,24 @@ async function StoryCard(props: Props) {
 
           {teaser}
 
-          <Link href={`/${story.id}`} className={classes.read}>
-            <Icons.ArrowRight size={"1.1em"} /> read this story
+          <Link href={`/${story.id}`} {...stylex.props(styles.read)}>
+            <Icons.ArrowRight size={"1.1em"} style={{ margin: "0 8px 0 0" }} /> read this story
           </Link>
         </div>
       </div>
 
-      <div className={cx(classes.image2)}>
+      <div {...stylex.props(styles.image2)}>
         <Image
           alt=""
           src={(blocks[0] ?? blob).asImage.url}
           loader={imageLoader}
           {...(blocks[0] ?? blob).asImage.dimensions}
           objectFit="cover"
+          {...stylex.props((styles as any).img)}
+          style={{ zIndex: 2 }}
         />
         <div
-          className="sqip"
+          {...stylex.props(styles.sqip)}
           style={{ opacity: loaded ? 0 : 1, backgroundImage: `url(${(blocks[0] ?? blob).asImage.placeholder.url})` }}
         />
       </div>
@@ -144,200 +156,159 @@ async function StoryCard(props: Props) {
 
 export default StoryCard;
 
-const tweaks = {
-  regular: css``,
-  inverted: css`
-    @media (min-width: 720px) {
-      grid-template-areas:
+const tweaks = stylex.create({
+  regular: {},
+
+  inverted: {
+    "@media (min-width: 720px)": {
+      gridTemplateAreas: `
         ". . . title title title title title title"
         "teaser teaser teaser image image image image . ."
-        "si si si image image image image . ." !important;
-    }
-  `,
-};
+        "si si si image image image image . ."
+      `,
+    },
+  },
+});
 
-const classes = {
-  root: css`
-    display: grid;
+const styles = stylex.create({
+  root: {
+    display: "grid",
 
-    text-decoration: none;
+    textDecoration: "none",
 
-    --gap: 16px;
+    gridTemplateColumns:
+      "[vs] max(16px, env(safe-area-inset-left)) [xs] 0 [ms] 0 [ns] 1fr [ne] 0 [me] 0 [xe] max(16px, env(safe-area-inset-right)) [ve]",
 
-    --nc-w: 384px;
-    --mc-w: 160px;
-    --xc-w: 192px;
-
-    grid-template-columns:
-      [vs]
-      max(16px, env(safe-area-inset-left))
-      [xs]
-      0
-      [ms]
-      0
-      [ns]
-      1fr
-      [ne]
-      0
-      [me]
-      0
-      [xe]
-      max(16px, env(safe-area-inset-right))
-      [ve];
-
-    grid-template-areas:
+    gridTemplateAreas: `
       ". title title title title title title"
       "image image image image image image image"
-      ". teaser teaser teaser teaser teaser .";
+      ". teaser teaser teaser teaser teaser ."
+    `,
 
-    @media (min-width: 720px) {
-      --gap: 32px;
+    "@media (min-width: 720px)": {
+      [vars.gap]: "32px",
 
-      grid-template-columns:
-        [vs]
-        1fr
-        max(16px, env(safe-area-inset-left))
-        [xs]
-        minmax(0, var(--xc-w))
-        [ms]
-        var(--mc-w)
-        [ns]
-        var(--nc-w)
-        [ne]
-        var(--mc-w)
-        [me]
-        minmax(0, var(--xc-w))
-        [xe]
-        max(16px, env(safe-area-inset-right))
-        1fr
-        [ve];
+      gridTemplateColumns: `[vs] 1fr max(16px, env(safe-area-inset-left)) [xs] minmax(0, ${vars.xcW}) [ms] ${vars.mcW} [ns] ${vars.ncW} [ne] ${vars.mcW} [me] minmax(0, ${vars.xcW}) [xe] max(16px, env(safe-area-inset-right)) 1fr [ve]`,
 
-      grid-template-rows: min-content minmax(0, min-content) 1fr;
+      gridTemplateRows: "min-content minmax(0, min-content) 1fr",
 
-      grid-template-areas:
+      gridTemplateAreas: `
         ". . . . title title title title title"
         ". . image image image image teaser teaser teaser"
-        ". . image image image image si si si";
-    }
+        ". . image image image image si si si"
+      `,
+    },
+  },
 
-    .sqip {
-      position: absolute;
-      inset: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      pointer-events: none;
-      transition: opacity 0.8s ease-out 0.5s;
-      background-size: cover;
-      background-position: 50% 50%;
+  sqip: {
+    position: "absolute",
+    inset: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    pointerEvents: "none",
+    transition: "opacity 0.8s ease-out 0.5s",
+    backgroundSize: "cover",
+    backgroundPosition: "50% 50%",
 
-      z-index: 1;
-    }
-  `,
+    zIndex: 1,
+  },
 
-  image: css`
-    position: relative;
-    height: 0;
-    padding-bottom: 100%;
+  image: {
+    position: "relative",
+    height: 0,
+    paddingBottom: "100%",
 
-    grid-area: image;
+    gridArea: "image",
 
-    @media (min-width: 720px) {
-      padding-bottom: calc((11 / 16) * 100%);
-    }
+    "@media (min-width: 720px)": {
+      paddingBottom: "calc((11 / 16) * 100%)",
+    },
+  },
 
-    img {
-      z-index: 2;
-    }
-  `,
+  image2: {
+    position: "relative",
 
-  image2: css`
-    position: relative;
+    margin: "32px",
 
-    margin: 32px;
+    gridArea: "si",
 
-    grid-area: si;
+    display: "none",
+    "@media (min-width: 720px)": {
+      display: "block",
+    },
+  },
 
-    display: none;
-    @media (min-width: 720px) {
-      display: block;
-    }
+  title: {
+    fontSize: "clamp(32px, 3vw, 60px)",
+    lineHeight: 1.2,
+    fontWeight: 900,
+    letterSpacing: "0.09em",
 
-    img {
-      z-index: 2;
-    }
-  `,
+    margin: `0 0 ${vars.gap} 0`,
+    padding: "0.5em 0.7em 0.4em",
 
-  title: css`
-    font-size: clamp(32px, 3vw, 60px);
-    line-height: 1.2;
-    font-weight: 900;
-    letter-spacing: 0.09em;
+    background: "#18191b",
+    color: "rgba(255 255 255 / 0.96)",
 
-    margin: 0 0 var(--gap) 0;
-    padding: 0.5em 0.7em 0.4em;
+    gridArea: "title",
 
-    background: #18191b;
-    color: rgba(255 255 255 / 0.96);
+    "@media (prefers-color-scheme: dark)": {
+      background: "transparent",
+      borderBottom: "5px solid currentColor",
+      paddingBottom: "0.2em",
+    },
+  },
 
-    grid-area: title;
+  teaser: {
+    fontSize: "clamp(20px, 1.5vw, 24px)",
+    lineHeight: 1.4,
 
-    @media (prefers-color-scheme: dark) {
-      background: transparent;
-      border-bottom: 5px solid currentColor;
-      padding-bottom: 0.2em;
-    }
-  `,
+    margin: `${vars.gap} 0 0 0`,
 
-  teaser: css`
-    font-size: clamp(20px, 1.5vw, 24px);
-    line-height: 1.4;
+    gridArea: "teaser",
 
-    margin: var(--gap) 0 0 0;
+    "@media (min-width: 720px)": {
+      margin: "0 32px",
+    },
+  },
 
-    grid-area: teaser;
+  teaserInverted: {
+    "@media (min-width: 720px)": {
+      display: "flex",
+      justifyContent: "flex-end",
+    },
+  },
 
-    @media (min-width: 720px) {
-      margin: 0 32px;
-      ${tweaks.inverted} & {
-        display: flex;
-        justify-content: flex-end;
-      }
+  teaserDiv: {
+    "@media (min-width: 720px)": {
+      maxWidth: 530,
+    },
+  },
 
-      & > div {
-        max-width: 530px;
-      }
-    }
-  `,
+  date: {
+    marginBottom: "16px",
+    opacity: 0.6,
+    fontSize: "clamp(16px, 1.5vw, 20px)",
+  },
 
-  date: css`
-    margin-bottom: 16px;
-    opacity: 0.6;
-    font-size: clamp(16px, 1.5vw, 20px);
-  `,
+  read: {
+    fontSize: "clamp(16px, 1.5vw, 20px)",
+    display: "flex",
+    marginTop: "56px",
+    opacity: 0.6,
+    alignItems: "center",
+    justifyContent: "flex-end",
+    marginRight: 6,
 
-  read: css`
-    font-size: clamp(16px, 1.5vw, 20px);
-    display: block;
-    margin-top: 56px;
-    opacity: 0.6;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-right: 6px;
+    color: "inherit",
+    textDecoration: "none",
 
-    color: inherit;
-    text-decoration: none;
+    transition: "opacity 0.2s",
 
-    transition: opacity 0.2s;
-
-    &:hover {
-      opacity: 1;
-    }
-
-    & > svg {
-      margin: 0 8px 0 0;
-    }
-  `,
-};
+    ":hover": {
+      opacity: 1,
+    },
+  },
+});
