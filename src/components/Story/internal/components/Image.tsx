@@ -1,6 +1,8 @@
-import { Image } from "@/components/Image";
-import { css, cx } from "@linaria/core";
+import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
+
+import { Image } from "@/components/Image";
+import { cx } from "@linaria/core";
 
 interface Props {
   blobs: Array<any>;
@@ -20,28 +22,39 @@ export default function Image_(props: Props) {
     return <div>Image {blobId} not found!</div>;
   }
 
+  /*
+   * Hack to allow className to be appended to. Should be removed once
+   * we migrate fully to StyleX.
+   */
+  const s = stylex.props(styles.root, size === "narrow" && styles.narrow);
+
   return (
     <Image
       id={blobId}
       href={`/${storyId}/${blobId}`}
       blob={blob}
+      {...s}
       className={cx(
-        className,
+        s.className,
         size
           ? {
               full: "fw",
               wide: "wp",
             }[size]
           : "",
-        css`
-          margin: 0 auto;
-        `,
-        size === "narrow" &&
-          css`
-            max-width: 400px;
-          `
+        className
       )}
       {...rest}
     />
   );
 }
+
+const styles = stylex.create({
+  root: {
+    margin: "0 auto",
+  },
+
+  narrow: {
+    maxWidth: 400,
+  },
+});
