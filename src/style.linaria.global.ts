@@ -100,4 +100,14 @@ css`
       font-display: swap;
     }
   }
+  :global() {
+    .blockquote {
+      margin: 1em 0;
+      padding-left: 1em;
+      border-left: 2px solid #fe762a;
+    }
+    .blockquote > p {
+      margin: 0;
+    }
+  }
 `;

@@ -1,4 +1,3 @@
-import { css } from "@linaria/core";
 import * as React from "react";
 import { default as Clip } from "./components/Clip";
 import { default as Group } from "./components/Group";
@@ -10,18 +9,5 @@ export const components = {
   Image,
   Group,
   Clip,
-  blockquote: (props: any) => (
-    <blockquote
-      className={css`
-        margin: 1em 0;
-        padding-left: 1em;
-        border-left: 2px solid #fe762a;
-
-        & > p {
-          margin: 0;
-        }
-      `}
-      {...props}
-    />
-  ),
+  blockquote: (props: any) => <blockquote className="blockquote" {...props} />,
 };
