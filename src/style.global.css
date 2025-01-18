@@ -119,14 +119,6 @@ body {
   grid-column: lc / rc;
 }
 
-.content > h2 {
-  margin: 3em 0 1em;
-}
-
-.content > p {
-  margin: 0;
-}
-
 .blockquote {
   margin: 1em 0;
   padding-left: 1em;
