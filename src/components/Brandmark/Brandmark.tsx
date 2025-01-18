@@ -1,45 +1,55 @@
-import { css, cx } from "@linaria/core";
-import Link from "next/link";
+import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
-interface Props extends React.ComponentPropsWithoutRef<"a"> {}
+import Link from "next/link";
+
+interface Props extends React.ComponentPropsWithoutRef<"a"> {
+  size?: "regular" | "large";
+}
 
 function Brandmark(props: Props, ref: React.ForwardedRef<React.ComponentRef<"a">>) {
-  const { className, ...rest } = props;
+  const { size = "regular", ...rest } = props;
 
   return (
-    <Link ref={ref} href="/" className={cx(classes.root, className)} {...rest}>
-      <div>Stories</div>
-      <div>by Tomáš Čarnecký</div>
+    <Link ref={ref} href="/" {...stylex.props(styles.root, sizeVariants[size])} {...rest}>
+      <div {...stylex.props(styles.name)}>Stories</div>
+      <div {...stylex.props(styles.byline)}>by Tomáš Čarnecký</div>
     </Link>
   );
 }
 
 export default React.forwardRef(Brandmark);
 
-const classes = {
-  root: css`
-    display: block;
-    text-decoration: none;
-    text-align: center;
+const styles = stylex.create({
+  root: {
+    display: "block",
+    textDecoration: "none",
+    textAlign: "center",
+    fontSize: "clamp(32px, 3.5vw, 80px)",
+    lineHeight: 1,
+    padding: "0.5em 0.7em",
+    background: "#18191b",
+    color: "white",
+  },
 
-    font-size: clamp(32px, 3.5vw, 80px);
-    line-height: 1;
+  name: {
+    fontWeight: 900,
+    letterSpacing: "0.11em",
+  },
 
-    padding: 0.5em 0.7em;
+  byline: {
+    fontSize: "0.45em",
+    paddingTop: "0.2em",
+    opacity: 0.75,
+  },
+});
 
-    background: #18191b;
-    color: white;
+const sizeVariants = stylex.create({
+  regular: {
+    fontSize: "clamp(32px, 3.5vw, 80px)",
+  },
 
-    & > *:first-child {
-      font-weight: 900;
-      letter-spacing: 0.11em;
-    }
-    & > *:last-child {
-      font-size: 0.45em;
-
-      padding-top: 0.2em;
-      opacity: 0.75;
-    }
-  `,
-};
+  large: {
+    fontSize: "clamp(44px, 4vw, 80px)",
+  },
+});

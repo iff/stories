@@ -37,7 +37,7 @@ async function Hero(props: Props) {
       </div>
 
       <div className={classes.box}>
-        <Brandmark className={classes.brandmark} />
+        <Brandmark size="large" />
         <div className={classes.lead}>…for nothing remains of us but the vibrations we leave behind.</div>
       </div>
     </Root>
@@ -63,10 +63,6 @@ const classes = {
 
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
-  `,
-
-  brandmark: css`
-    font-size: clamp(44px, 4vw, 80px);
   `,
 
   lead: css`

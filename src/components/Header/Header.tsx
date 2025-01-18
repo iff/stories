@@ -34,7 +34,9 @@ function Header(props: Props) {
 
   return (
     <Root className={cx(className, classes.root)} {...rest}>
-      <Brandmark className={classes.brandmark} />
+      <div className={classes.brandmark}>
+        <Brandmark />
+      </div>
 
       <div className={classes.image}>
         <span>
