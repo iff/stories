@@ -10,7 +10,7 @@ export const components = {
   h1: (props: any) => <Heading {...props} />,
   h2: (props: any) => <h2 {...props} {...stylex.props(styles.h2)} />,
   p: (props: any) => <p {...props} {...stylex.props(styles.p)} />,
-  blockquote: (props: any) => <blockquote className="blockquote" {...props} />,
+  blockquote: (props: any) => <blockquote {...stylex.props(styles.blockquote)} {...props} />,
 
   Image,
   Group,
@@ -24,6 +24,12 @@ const styles = stylex.create({
   },
   p: {
     margin: 0,
+    gridColumn: "lc / rc",
+  },
+  blockquote: {
+    margin: "1em 0",
+    paddingLeft: "1em",
+    borderLeft: "2px solid #fe762a",
     gridColumn: "lc / rc",
   },
 });

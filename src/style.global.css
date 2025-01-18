@@ -104,12 +104,3 @@ body {
   src: url("/fonts/Tuna/371F3E_1_0.woff2") format("woff2");
   font-display: swap;
 }
-
-.blockquote {
-  margin: 1em 0;
-  padding-left: 1em;
-  border-left: 2px solid #fe762a;
-}
-.blockquote > p {
-  margin: 0;
-}
