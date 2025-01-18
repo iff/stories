@@ -1,7 +1,6 @@
 import { extractBlocks } from "@/cms";
 import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
-import { css } from "@linaria/core";
 import { stories } from "content";
 import * as fs from "fs";
 import Head from "next/head";
@@ -183,22 +182,18 @@ const Inner = {
           priority
         />
         <div
-          className={css`
-            position: absolute;
-            inset: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            pointer-events: none;
-
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: 50% 50%;
-
-            z-index: -1;
-          `}
           style={{
+            position: "absolute",
+            inset: 0,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            pointerEvents: "none",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "contain",
+            backgroundPosition: "50% 50%",
+            zIndex: -1,
             backgroundImage: `url(${blob.asImage.placeholder.url})`,
           }}
         />
@@ -208,11 +203,11 @@ const Inner = {
   Clip: function ({ video }: { video: any }) {
     return (
       <div
-        className={css`
-          height: 100%;
-          display: grid;
-          place-items: center;
-        `}
+        style={{
+          height: "100%",
+          display: "grid",
+          placeItems: "center",
+        }}
       >
         <Clip video={video} />
       </div>

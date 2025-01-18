@@ -1,5 +1,4 @@
 import { extractBlocks } from "@/cms";
-import { css } from "@linaria/core";
 import NextImage from "next/image";
 import { ParsedUrlQuery } from "querystring";
 import * as React from "react";
@@ -24,11 +23,11 @@ export default async function Page(props: Props) {
 
   return (
     <div
-      className={css`
-        width: 100vw;
-        height: 100vh;
-        display: grid;
-      `}
+      style={{
+        width: "100vw",
+        height: "100vh",
+        display: "grid",
+      }}
     >
       <NextImage
         alt=""
