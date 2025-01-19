@@ -1,3 +1,6 @@
+import * as stylex from "@stylexjs/stylex";
+import * as React from "react";
+
 import { extractBlocks, importBlob } from "@/cms";
 import { StoryById } from "@/components/Story";
 import * as fs from "fs";
@@ -47,18 +50,23 @@ export default async function Page(props: Props) {
 
   return (
     <>
-      <div style={{ marginBottom: "2em" }}>
+      <div {...stylex.props(styles.root)}>
         <Header blob={await importBlob(story.image)} title={story.title} />
+        <Body storyId={storyId} blobs={blobs} Component={story.body.Component} />
       </div>
-
-      <Body storyId={storyId} blobs={blobs} Component={story.body.Component} />
-
-      <div style={{ marginBottom: "10vh" }} />
 
       <StoryById />
     </>
   );
 }
+
+const styles = stylex.create({
+  root: {
+    display: "grid",
+    gap: "2em",
+    marginBottom: "10vh",
+  },
+});
 
 async function data({ storyId }): Promise<Array<any>> {
   if (!fs.existsSync(`./content/${storyId}/body.mdx`)) {
