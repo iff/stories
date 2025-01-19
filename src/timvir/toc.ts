@@ -3,6 +3,10 @@ export default [
     label: "Components",
     children: [
       {
+        label: "Body",
+        path: "/docs/components/Body",
+      },
+      {
         label: "Clip",
         path: "/docs/components/Clip",
       },

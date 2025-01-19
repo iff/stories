@@ -1,0 +1,22 @@
+# Body
+
+The `Body` component renders the MDX that contains the story content.
+The component applies the proper styling for (some of the) standard Markdown elements (such as h1, h2, paragraph, blockquote).
+It also supports three custom components inside MDX: Image, Group, and Clip.
+
+## Layout
+
+The component establishes a 5-column CSS grid layout.
+
+The center column is used for regular content (paragraphs).
+It has a max-width set such that text remains readable and isn't displayed in too wide lines.
+
+Some of the custom components can chose to be rendered slightly narrower, slightly wider, or stretch all the way to the viewport edges.
+
+## Samples
+
+The following samples are used to demonstrate and test specific content types:
+
+- [Text](./Body/samples/text): headings, paragraphs, block quotes.
+- [Image](./Body/samples/image): the image component in all its layout variants.
+- [Group](./Body/samples/group): the group component showing in multiple configurations.
