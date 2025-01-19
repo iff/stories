@@ -1,5 +1,4 @@
 import { extractBlocks } from "@/cms";
-import { components } from "@/components/Story/internal";
 import { mediaType } from "@hapi/accept";
 import { site, stories } from "content";
 import { Feed } from "feed";
@@ -101,7 +100,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       content: ReactDOMServer.renderToStaticMarkup(
         <Body.default
           components={{
-            ...components,
+            h1: (props: React.ComponentProps<"h1">) => <h2 {...props} />,
+            h2: (props: React.ComponentProps<"h2">) => <h3 {...props} />,
+            p: (props: React.ComponentProps<"p">) => <p {...props} />,
+            blockquote: (props: React.ComponentProps<"blockquote">) => <blockquote {...props} />,
 
             Clip: (props: any) => <Clip blobs={blobs} {...props} />,
             Group: (props: any) => <Group blobs={blobs} {...props} />,
