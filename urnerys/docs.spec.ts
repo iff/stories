@@ -32,8 +32,8 @@ for (const url of ["/docs/components/Image", "/docs/components/Group", "/docs/co
 }
 
 for (const url of [
-  "/docs/components/Content/samples/basic",
   "/docs/components/Group/samples/responsive",
+  "/docs/components/Body/samples/layout",
   "/docs/components/Body/samples/text",
   "/docs/components/Body/samples/image",
   "/docs/components/Body/samples/group",

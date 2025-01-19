@@ -1,10 +1,11 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
-import { Content } from "@/components/Content";
 import { Clip } from "@/components/Clip";
 import { Image } from "@/components/Image";
 import { Group } from "@/components/Group";
+
+import { vars } from "./variables.stylex";
 
 /**
  * The underlying DOM element which is rendered by this component.
@@ -23,75 +24,71 @@ function Body(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Ro
 
   return (
     <Root ref={ref} {...stylex.props(styles.root)} {...rest}>
-      <Content>
-        <Component
-          components={{
-            h1: (props: any) => <h2 {...stylex.props(styles.h2)} {...props} />,
-            h2: (props: any) => <h3 {...stylex.props(styles.h3)} {...props} />,
+      <Component
+        components={{
+          h1: (props: any) => <h2 {...stylex.props(styles.h2)} {...props} />,
+          h2: (props: any) => <h3 {...stylex.props(styles.h3)} {...props} />,
 
-            p: (props: any) => <p {...props} {...stylex.props(styles.p)} />,
+          p: (props: any) => <p {...props} {...stylex.props(styles.p)} />,
 
-            blockquote: (props: any) => <blockquote {...stylex.props(styles.blockquote)} {...props} />,
+          blockquote: (props: any) => <blockquote {...stylex.props(styles.blockquote)} {...props} />,
 
-            Clip: ({ blobId }: { blobId: string }) => {
-              const blob = blobs.find((x) => x.name === blobId);
-              return (
-                <Clip id={blobId} video={blob?.asVideo} href={`/${storyId}/${blobId}`} sx={styles.extendedWidth} />
-              );
-            },
+          Clip: ({ blobId }: { blobId: string }) => {
+            const blob = blobs.find((x) => x.name === blobId);
+            return <Clip id={blobId} video={blob?.asVideo} href={`/${storyId}/${blobId}`} sx={styles.extendedWidth} />;
+          },
 
-            Group: (props: any) => {
-              const { children, ...rest } = props;
+          Group: (props: any) => {
+            const { children, ...rest } = props;
 
-              return (
-                <Group sx={styles.extendedWidth} {...rest}>
-                  {React.Children.map(children, (child) => {
-                    if (!React.isValidElement(child)) {
-                      return child;
-                    }
-
-                    /*
-                     * If the child element is an Image, and is missing 'aspectRatio',
-                     * compute it from the image dimensions.
-                     */
-                    if ((child.props as any).blobId) {
-                      const props = { ...(child.props as any) };
-
-                      const blob = blobs.find((x) => x.name === (child.props as any).blobId);
-                      if (!props.aspectRatio && blob?.asImage?.dimensions) {
-                        const { width, height } = blob.asImage.dimensions;
-                        props.aspectRatio = width / height;
-                      }
-
-                      return React.cloneElement(child, props);
-                    }
-
+            return (
+              <Group sx={styles.extendedWidth} {...rest}>
+                {React.Children.map(children, (child) => {
+                  if (!React.isValidElement(child)) {
                     return child;
-                  })}
-                </Group>
-              );
-            },
+                  }
 
-            Image: (props: any) => {
-              const { blobId, size, ...rest } = props;
-              const blob = blobs.find((x) => x.name === blobId);
-              if (!blob) {
-                return <div>Image {blobId} not found!</div>;
-              }
+                  /*
+                   * If the child element is an Image, and is missing 'aspectRatio',
+                   * compute it from the image dimensions.
+                   */
+                  if ((child.props as any).blobId) {
+                    const props = { ...(child.props as any) };
 
-              return (
-                <Image
-                  id={blobId}
-                  href={`/${storyId}/${blobId}`}
-                  blob={blob}
-                  sx={[styles.contentWidth, size && sizeVariants[size]]}
-                  {...rest}
-                />
-              );
-            },
-          }}
-        />
-      </Content>
+                    const blob = blobs.find((x) => x.name === (child.props as any).blobId);
+                    if (!props.aspectRatio && blob?.asImage?.dimensions) {
+                      const { width, height } = blob.asImage.dimensions;
+                      props.aspectRatio = width / height;
+                    }
+
+                    return React.cloneElement(child, props);
+                  }
+
+                  return child;
+                })}
+              </Group>
+            );
+          },
+
+          Image: (props: any) => {
+            const { blobId, size, ...rest } = props;
+            const blob = blobs.find((x) => x.name === blobId);
+            if (!blob) {
+              return <div>Image {blobId} not found!</div>;
+            }
+
+            return (
+              <Image
+                id={blobId}
+                href={`/${storyId}/${blobId}`}
+                blob={blob}
+                sx={[styles.contentWidth, size && sizeVariants[size]]}
+                {...rest}
+              />
+            );
+          },
+        }}
+      />
     </Root>
   );
 }
@@ -99,7 +96,22 @@ function Body(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Ro
 export default React.forwardRef(Body);
 
 const styles = stylex.create({
-  root: {},
+  root: {
+    display: "grid",
+    rowGap: "2em",
+
+    gridTemplateColumns:
+      "[le] max(1em, env(safe-area-inset-left)) [lex lc] 1fr [rc rex] max(1em, env(safe-area-inset-right)) [re]",
+
+    /*
+     * Can't use var() nor env() in media queries :(
+     *
+     * > (min-width: calc(var(--center-column) + max(1em, env(safe-area-inset-left)) + max(1em, env(safe-area-inset-right))))
+     */
+    "@media (min-width: calc(36em + 2em))": {
+      gridTemplateColumns: `[le] 1fr max(1em, env(safe-area-inset-left)) [lex] minmax(0, ${vars.extendedColumn}) [lc] ${vars.centerColumn} [rc] minmax(0, ${vars.extendedColumn}) [rex] max(1em, env(safe-area-inset-right)) 1fr [re]`,
+    },
+  },
 
   contentWidth: {
     gridColumn: "lc / rc",

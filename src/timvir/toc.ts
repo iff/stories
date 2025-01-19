@@ -11,10 +11,6 @@ export default [
         path: "/docs/components/Clip",
       },
       {
-        label: "Content",
-        path: "/docs/components/Content",
-      },
-      {
         label: "Group",
         path: "/docs/components/Group",
       },
