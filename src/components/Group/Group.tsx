@@ -1,25 +1,20 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
-import { cx } from "../../cx";
 
 /**
  * The underlying DOM element which is rendered by this component.
  */
 const Root = "div";
 
-interface Props extends React.ComponentPropsWithoutRef<typeof Root> {}
+interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
+  sx?: any;
+}
 
 function Group(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Root>>) {
-  const { children, className, ...rest } = props;
-
-  /*
-   * Hack to allow className to be appended to. Should be removed once
-   * we migrate fully to StyleX.
-   */
-  const s = stylex.props(styles.root);
+  const { children, sx, ...rest } = props;
 
   return (
-    <Root ref={ref} {...s} className={cx(s.className, className)} {...rest}>
+    <Root ref={ref} {...stylex.props(styles.root, sx)} {...rest}>
       {React.Children.map(children, (child) => {
         if (!React.isValidElement(child)) {
           return child;
@@ -33,10 +28,7 @@ function Group(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof R
             {React.createElement<any>(child.type, {
               ...props,
 
-              /*
-               * Also a bit dangerous to pass down constructed StyleX props.
-               */
-              ...stylex.props(styles.itemChild),
+              sx: styles.itemChild,
 
               captionPlacement: "overlay",
               fill: true,

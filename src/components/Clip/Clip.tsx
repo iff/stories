@@ -3,7 +3,6 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
-import { cx } from "../../cx";
 import NextImage from "next/image";
 
 /**
@@ -39,6 +38,8 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
    * `onFocus` event handler. Rename to something else. Ideas: `onOpen`.
    */
   onFocus?: () => void;
+
+  sx?: any;
 }
 
 /*
@@ -48,7 +49,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
  */
 
 function Clip(props: Props) {
-  const { video, caption, onFocus, className, ...rest } = props;
+  const { video, caption, onFocus, sx, ...rest } = props;
 
   const ref = React.useRef<null | HTMLDivElement>(null);
   const videoRef = React.useRef<null | HTMLVideoElement>(null);
@@ -83,14 +84,8 @@ function Clip(props: Props) {
     };
   }, [playing]);
 
-  /*
-   * Hack to allow className to be appended to. Should be removed once
-   * we migrate fully to StyleX.
-   */
-  const s = stylex.props(styles.root);
-
   return (
-    <Root ref={ref} {...s} className={cx(s.className, className)} {...rest}>
+    <Root ref={ref} {...stylex.props(styles.root, sx)} {...rest}>
       <div style={{ position: "relative", contain: "layout" }}>
         <video
           ref={videoRef}

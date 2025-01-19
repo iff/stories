@@ -1,7 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
-import { cx } from "../../cx";
 import NextImage from "next/image";
 import Link, { LinkProps } from "next/link";
 import Caption from "./internal/Caption";
@@ -57,10 +56,12 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
    */
   span?: number | number[];
   aspectRatio?: number;
+
+  sx?: any;
 }
 
 function Image(props: Props) {
-  const { blob, fill = false, sizes, caption, captionPlacement = "below", href, className, ...rest } = props;
+  const { blob, fill = false, sizes, caption, captionPlacement = "below", href, sx, ...rest } = props;
 
   const image = (
     <NextImage
@@ -76,14 +77,8 @@ function Image(props: Props) {
     />
   );
 
-  /*
-   * Hack to allow className to be appended to. Should be removed once
-   * we migrate fully to StyleX.
-   */
-  const s = stylex.props(captionPlacementVariant[captionPlacement], styles.root);
-
   return (
-    <Root {...s} className={cx(s.className, className)} {...rest}>
+    <Root {...stylex.props(captionPlacementVariant[captionPlacement], styles.root, sx)} {...rest}>
       {(() => {
         if (href) {
           return (

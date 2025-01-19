@@ -23,10 +23,10 @@ export default function Clip_(props: Props) {
       {...props}
       id={blobId}
       video={blob?.asVideo}
-      {...stylex.props(styles.root)}
       onFocus={() => {
         router.push(`/${storyId}/${blobId}`);
       }}
+      sx={styles.root}
     />
   );
 }

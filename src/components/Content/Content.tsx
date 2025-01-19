@@ -1,8 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
-import { cx } from "../../cx";
-
 import { vars } from "./variables.stylex";
 
 
@@ -14,16 +12,10 @@ const Root = "div";
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {}
 
 function Content(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Root>>) {
-  const { children, className, ...rest } = props;
-
-  /*
-   * Hack to allow className to be appended to. Should be removed once
-   * we migrate fully to StyleX.
-   */
-  const s = stylex.props(styles.root);
+  const { children, ...rest } = props;
 
   return (
-    <Root ref={ref} {...s}  className={cx(className, "content", s.className)} {...rest}>
+    <Root ref={ref} {...stylex.props(styles.root)} {...rest}>
       {children}
     </Root>
   );

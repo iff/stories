@@ -24,7 +24,7 @@ export default function Image_(props: Props) {
       id={blobId}
       href={`/${storyId}/${blobId}`}
       blob={blob}
-      {...stylex.props(styles.root, size && styles[size])}
+      sx={[styles.root, size && sizeVariants[size]]}
       {...rest}
     />
   );
@@ -34,7 +34,9 @@ const styles = stylex.create({
   root: {
     gridColumn: "lc / rc",
   },
+});
 
+const sizeVariants = stylex.create({
   narrow: {
     margin: "0 auto !important",
     maxWidth: 400,

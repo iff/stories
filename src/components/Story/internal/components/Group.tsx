@@ -12,7 +12,7 @@ export default function Group_(props: Props) {
   const { blobs, children, ...rest } = props;
 
   return (
-    <Group {...stylex.props(styles.root)} {...rest}>
+    <Group sx={styles.root} {...rest}>
       {React.Children.map(children, (child) => {
         if (!React.isValidElement(child)) {
           return child;
