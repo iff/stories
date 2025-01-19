@@ -26,19 +26,21 @@ function Body(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Ro
     <Root ref={ref} {...stylex.props(styles.root)} {...rest}>
       <Component
         components={{
-          h1: (props: any) => <h2 {...stylex.props(styles.h2)} {...props} />,
-          h2: (props: any) => <h3 {...stylex.props(styles.h3)} {...props} />,
+          h1: (props: React.ComponentProps<"h1">) => <h2 {...stylex.props(styles.h2)} {...props} />,
+          h2: (props: React.ComponentProps<"h2">) => <h3 {...stylex.props(styles.h3)} {...props} />,
 
-          p: (props: any) => <p {...props} {...stylex.props(styles.p)} />,
+          p: (props: React.ComponentProps<"p">) => <p {...props} {...stylex.props(styles.p)} />,
 
-          blockquote: (props: any) => <blockquote {...stylex.props(styles.blockquote)} {...props} />,
+          blockquote: (props: React.ComponentProps<"blockquote">) => (
+            <blockquote {...stylex.props(styles.blockquote)} {...props} />
+          ),
 
           Clip: ({ blobId }: { blobId: string }) => {
             const blob = blobs.find((x) => x.name === blobId);
             return <Clip id={blobId} video={blob?.asVideo} href={`/${storyId}/${blobId}`} sx={styles.extendedWidth} />;
           },
 
-          Group: (props: any) => {
+          Group: (props: React.ComponentProps<"div">) => {
             const { children, ...rest } = props;
 
             return (
@@ -70,7 +72,7 @@ function Body(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Ro
             );
           },
 
-          Image: (props: any) => {
+          Image: (props: { blobId: string; size?: "narrow" | "wide" | "full" }) => {
             const { blobId, size, ...rest } = props;
             const blob = blobs.find((x) => x.name === blobId);
             if (!blob) {
