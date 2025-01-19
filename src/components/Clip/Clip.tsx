@@ -4,6 +4,7 @@ import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
 import NextImage from "next/image";
+import Link, { LinkProps } from "next/link";
 
 /**
  * The underlying DOM element which is rendered by this component.
@@ -31,13 +32,10 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   caption?: React.ReactNode;
 
   /**
-   * Invoked when the user clicks on the arrow in the top right of the clip.
-   * Inside stories, this will open the clip in a Lightbox, on a separate URL.
-   *
-   * XXX: The name `onFocus` is misleading, and it overrides the default DOM
-   * `onFocus` event handler. Rename to something else. Ideas: `onOpen`.
+   * URL to open when the user clicks on the arrow in the top right of the clip.
+   * Inside stories, this will open the clip in a Lightbox.
    */
-  onFocus?: () => void;
+  href?: LinkProps["href"];
 
   sx?: any;
 }
@@ -49,7 +47,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
  */
 
 function Clip(props: Props) {
-  const { video, caption, onFocus, sx, ...rest } = props;
+  const { video, caption, href, sx, ...rest } = props;
 
   const ref = React.useRef<null | HTMLDivElement>(null);
   const videoRef = React.useRef<null | HTMLVideoElement>(null);
@@ -119,8 +117,8 @@ function Clip(props: Props) {
           <div {...stylex.props(styles.sqip)} style={{ backgroundImage: `url(${video?.poster?.placeholder?.url})` }} />
         </div>
 
-        {onFocus && (
-          <div {...stylex.props(styles.focus)} onClick={onFocus}>
+        {href && (
+          <Link {...stylex.props(styles.focus)} href={href}>
             <svg
               width={400}
               height={200}
@@ -140,7 +138,7 @@ function Clip(props: Props) {
                 <polyline points="7 7 17 7 17 17" />
               </g>
             </svg>
-          </div>
+          </Link>
         )}
 
         <div {...stylex.props(styles.actions)}>
@@ -238,6 +236,7 @@ const styles = stylex.create({
   },
 
   focus: {
+    display: "block",
     position: "absolute",
     top: 0,
     right: 0,
