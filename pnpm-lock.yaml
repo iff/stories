@@ -108,8 +108,8 @@ importers:
         specifier: ^4.6.1
         version: 4.6.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-intl:
-        specifier: ^7.1.4
-        version: 7.1.4(typescript@5.7.3)
+        specifier: ^7.1.5
+        version: 7.1.5(react@19.0.0)(typescript@5.7.3)
       remark-mdx:
         specifier: ^3.1.0
         version: 3.1.0
@@ -2005,9 +2005,10 @@ packages:
       react: '>=16.8.1'
       react-dom: '>=16.8.1'
 
-  react-intl@7.1.4:
-    resolution: {integrity: sha512-deZFfvIR4aJIHmI7t3nn3Q46OuriyNRYPaQ3KM4lg6Fh6huMr7m8fkSzR6593WeUghkh8ZoQlYjUVrQEcrlbrA==}
+  react-intl@7.1.5:
+    resolution: {integrity: sha512-cVvsVdaOnZ85XBXU0Lc2PVGNhGlzl4UBV+aWAGe/zrV5Xr+CEW7izUsAp/fIuwvCsJl9R+aokppm+P7cdhnpUA==}
     peerDependencies:
+      react: ^16.6.0 || 17 || 18 || 19
       typescript: '5'
     peerDependenciesMeta:
       typescript:
@@ -4728,7 +4729,7 @@ snapshots:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  react-intl@7.1.4(typescript@5.7.3):
+  react-intl@7.1.5(react@19.0.0)(typescript@5.7.3):
     dependencies:
       '@formatjs/ecma402-abstract': 2.3.2
       '@formatjs/icu-messageformat-parser': 2.11.0
