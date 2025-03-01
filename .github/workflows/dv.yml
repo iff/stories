@@ -10,6 +10,11 @@ jobs:
     if: github.event.deployment_status.state == 'success'
     runs-on: [self-hosted, nixos]
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          clean: false
+
       - shell: nix develop .#workflow --command bash {0}
         run: |
           curl -sf -X POST -H "Content-Type: application/json" -d '{ "id": "github-run-${{ github.run_id }}-${{ github.run_attempt }}", "build": { "origin": { "commit": "${{ github.sha }}" } } }' "https://$URNERYS/api/v1/projects/stories/builds"
