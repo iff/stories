@@ -20,7 +20,7 @@
     "@stylexswc/webpack-plugin": "^0.6.6",
     "@timvir/mdx": "^0.2.34",
     "@types/mdx": "^2.0.13",
-    "@types/node": "^22.13.8",
+    "@types/node": "^22.13.9",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@types/unist": "^3.0.3",
