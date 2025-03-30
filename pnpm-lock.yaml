@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@formatjs/intl':
-        specifier: ^3.1.5
-        version: 3.1.5(typescript@5.8.2)
+        specifier: ^3.1.6
+        version: 3.1.6(typescript@5.8.2)
       '@hapi/accept':
         specifier: ^6.0.3
         version: 6.0.3
@@ -108,8 +108,8 @@ importers:
         specifier: ^4.6.1
         version: 4.6.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-intl:
-        specifier: ^7.1.7
-        version: 7.1.7(react@19.0.0)(typescript@5.8.2)
+        specifier: ^7.1.10
+        version: 7.1.10(react@19.0.0)(typescript@5.8.2)
       remark-mdx:
         specifier: ^3.1.0
         version: 3.1.0
@@ -267,10 +267,10 @@ packages:
   '@formatjs/intl-localematcher@0.6.1':
     resolution: {integrity: sha512-ePEgLgVCqi2BBFnTMWPfIghu6FkbZnnBVhO2sSxvLfrdFw7wCHAHiDoM2h4NRgjbaY7+B7HgOLZGkK187pZTZg==}
 
-  '@formatjs/intl@3.1.5':
-    resolution: {integrity: sha512-cCTrhTqXGbacet55cKrRlT6lhhDqCBJCqoyngksWNqKzr832jDqrMLjf2tihJArx6TNhPdCJOVgyDw93DhfFhA==}
+  '@formatjs/intl@3.1.6':
+    resolution: {integrity: sha512-tDkXnA4qpIFcDWac8CyVJq6oW8DR7W44QDUBsfXWIIJD/FYYen0QoH46W7XsVMFfPOVKkvbufjboZrrWbEfmww==}
     peerDependencies:
-      typescript: 5.8.2
+      typescript: ^5.6.0
     peerDependenciesMeta:
       typescript:
         optional: true
@@ -654,16 +654,10 @@ packages:
   '@types/node@22.13.10':
     resolution: {integrity: sha512-I6LPUvlRH+O6VRUqYOcMudhaIdUVWfsjnZavnsraHvpBwaEyMN29ry+0UVJhImYL16xsscu0aske3yA+uPOWfw==}
 
-  '@types/prop-types@15.7.14':
-    resolution: {integrity: sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==}
-
   '@types/react-dom@19.0.4':
     resolution: {integrity: sha512-4fSQ8vWFkg+TGhePfUzVmat3eC14TXYSsiiDSLI0dVLsrm9gZFABjPy/Qu6TKgl1tq1Bu1yDsuQgY3A3DOjCcg==}
     peerDependencies:
       '@types/react': ^19.0.0
-
-  '@types/react@18.3.19':
-    resolution: {integrity: sha512-fcdJqaHOMDbiAwJnXv6XCzX0jDW77yI3tJqYh1Byn8EL5/S628WRx9b/y3DnNe55zTukUQKrfYxiZls2dHcUMw==}
 
   '@types/react@19.0.10':
     resolution: {integrity: sha512-JuRQ9KXLEjaUNjTWpzuR231Z2WpIwczOkBEIvbHNCzQefFIT0L8IqE6NV6ULLyC1SI/i234JnDoMkfg+RjQj2g==}
@@ -2032,11 +2026,11 @@ packages:
       react: '>=16.8.1'
       react-dom: '>=16.8.1'
 
-  react-intl@7.1.7:
-    resolution: {integrity: sha512-CQAW7HaiPY3rZ+RCxL91n9MIJ7yaNDt1WGmU2dO6O+JLDqQJSlBxYctGkAoUEGAWNdt2mxAX+ENMwg+cCGnyQQ==}
+  react-intl@7.1.10:
+    resolution: {integrity: sha512-I5eB73BAqBbkd2M3wL8gTSE/xFvJRmxZcjS1HMnBT3KXya2PUSI7nDO/tlapX8khchoDoliliMsmyIURB/ww1g==}
     peerDependencies:
-      react: ^18
-      typescript: 5.8.2
+      react: 16 || 17 || 18 || 19
+      typescript: ^5.6.0
     peerDependenciesMeta:
       typescript:
         optional: true
@@ -2640,7 +2634,7 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@formatjs/intl@3.1.5(typescript@5.8.2)':
+  '@formatjs/intl@3.1.6(typescript@5.8.2)':
     dependencies:
       '@formatjs/ecma402-abstract': 2.3.4
       '@formatjs/fast-memoize': 2.2.7
@@ -3014,16 +3008,9 @@ snapshots:
     dependencies:
       undici-types: 6.20.0
 
-  '@types/prop-types@15.7.14': {}
-
   '@types/react-dom@19.0.4(@types/react@19.0.10)':
     dependencies:
       '@types/react': 19.0.10
-
-  '@types/react@18.3.19':
-    dependencies:
-      '@types/prop-types': 15.7.14
-      csstype: 3.0.9
 
   '@types/react@19.0.10':
     dependencies:
@@ -4791,13 +4778,13 @@ snapshots:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  react-intl@7.1.7(react@19.0.0)(typescript@5.8.2):
+  react-intl@7.1.10(react@19.0.0)(typescript@5.8.2):
     dependencies:
       '@formatjs/ecma402-abstract': 2.3.4
       '@formatjs/icu-messageformat-parser': 2.11.2
-      '@formatjs/intl': 3.1.5(typescript@5.8.2)
+      '@formatjs/intl': 3.1.6(typescript@5.8.2)
       '@types/hoist-non-react-statics': 3.3.1
-      '@types/react': 18.3.19
+      '@types/react': 19.0.10
       hoist-non-react-statics: 3.3.2
       intl-messageformat: 10.7.16
       react: 19.0.0
