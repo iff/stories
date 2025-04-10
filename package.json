@@ -49,6 +49,6 @@
     "typescript": "^5.8.3",
     "unified": "^11.0.5",
     "use-immer": "^0.11.0",
-    "webpack": "^5.98.0"
+    "webpack": "^5.99.5"
   }
 }
