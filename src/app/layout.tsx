@@ -14,7 +14,7 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-const baseUrl = process.env.NODE_ENV === "production" ? `https://stories.caurea.org` : "http://localhost:3000";
+const baseUrl = process.env.NODE_ENV === "production" ? "https://stories.caurea.org" : "http://localhost:3000";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

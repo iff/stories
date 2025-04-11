@@ -74,99 +74,99 @@ const styles = stylex.create({
 });
 
 const spanVariants = stylex.create({
-  [`1`]: {
+  "1": {
     gridColumnEnd: "span 1",
   },
-  [`2`]: {
+  "2": {
     gridColumnEnd: "span 2",
   },
-  [`3`]: {
+  "3": {
     gridColumnEnd: "span 3",
   },
-  [`4`]: {
+  "4": {
     gridColumnEnd: "span 4",
   },
-  [`5`]: {
+  "5": {
     gridColumnEnd: "span 5",
   },
-  [`6`]: {
+  "6": {
     gridColumnEnd: "span 6",
   },
-  [`7`]: {
+  "7": {
     gridColumnEnd: "span 7",
   },
-  [`8`]: {
+  "8": {
     gridColumnEnd: "span 8",
   },
-  [`9`]: {
+  "9": {
     gridColumnEnd: "span 9",
   },
-  [`10`]: {
+  "10": {
     gridColumnEnd: "span 10",
   },
-  [`11`]: {
+  "11": {
     gridColumnEnd: "span 11",
   },
-  [`12`]: {
+  "12": {
     gridColumnEnd: "span 12",
   },
 
-  [`md:1`]: {
+  "md:1": {
     "@media (min-width: 720px)": {
       gridColumnEnd: "span 1",
     },
   },
-  [`md:2`]: {
+  "md:2": {
     "@media (min-width: 720px)": {
       gridColumnEnd: "span 2",
     },
   },
-  [`md:3`]: {
+  "md:3": {
     "@media (min-width: 720px)": {
       gridColumnEnd: "span 3",
     },
   },
-  [`md:4`]: {
+  "md:4": {
     "@media (min-width: 720px)": {
       gridColumnEnd: "span 4",
     },
   },
-  [`md:5`]: {
+  "md:5": {
     "@media (min-width: 720px)": {
       gridColumnEnd: "span 5",
     },
   },
-  [`md:6`]: {
+  "md:6": {
     "@media (min-width: 720px)": {
       gridColumnEnd: "span 6",
     },
   },
-  [`md:7`]: {
+  "md:7": {
     "@media (min-width: 720px)": {
       gridColumnEnd: "span 7",
     },
   },
-  [`md:8`]: {
+  "md:8": {
     "@media (min-width: 720px)": {
       gridColumnEnd: "span 8",
     },
   },
-  [`md:9`]: {
+  "md:9": {
     "@media (min-width: 720px)": {
       gridColumnEnd: "span 9",
     },
   },
-  [`md:10`]: {
+  "md:10": {
     "@media (min-width: 720px)": {
       gridColumnEnd: "span 10",
     },
   },
-  [`md:11`]: {
+  "md:11": {
     "@media (min-width: 720px)": {
       gridColumnEnd: "span 11",
     },
   },
-  [`md:12`]: {
+  "md:12": {
     "@media (min-width: 720px)": {
       gridColumnEnd: "span 12",
     },

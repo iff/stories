@@ -3,8 +3,8 @@ import * as React from "react";
 
 import { extractBlocks, importBlob } from "@/cms";
 import { StoryById } from "@/components/Story";
-import * as fs from "fs";
-import { ParsedUrlQuery } from "querystring";
+import * as fs from "node:fs";
+import { ParsedUrlQuery } from "node:querystring";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { stories } from "content";
@@ -83,7 +83,7 @@ async function data({ storyId }): Promise<Array<any>> {
 
     const res = await fetch(`${process.env.API}/graphql`, {
       method: "POST",
-      headers: { ["Content-Type"]: "application/json" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         query: `query Story { ${blocks.map(
           ({ id }) =>

@@ -2,11 +2,11 @@ import { extractBlocks } from "@/cms";
 import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
 import { stories } from "content";
-import * as fs from "fs";
+import * as fs from "node:fs";
 import Head from "next/head";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
-import { ParsedUrlQuery } from "querystring";
+import { ParsedUrlQuery } from "node:querystring";
 import * as React from "react";
 
 export interface Query extends ParsedUrlQuery {
@@ -103,7 +103,7 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
       blobP = (async () => {
         const res = await fetch(`${process.env.API}/graphql`, {
           method: "POST",
-          headers: { ["Content-Type"]: "application/json" },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             query: `query Block {
                 blob(name: "${block.id}") {
@@ -168,49 +168,45 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
 }
 
 const Inner = {
-  Image: function ({ blob }: { blob: any }) {
-    return (
-      <>
-        <NextImage
-          alt=""
-          src={blob.asImage.url}
-          fill
-          sizes="100vw"
-          style={{
-            objectFit: "contain",
-          }}
-          priority
-        />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            pointerEvents: "none",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "contain",
-            backgroundPosition: "50% 50%",
-            zIndex: -1,
-            backgroundImage: `url(${blob.asImage.placeholder.url})`,
-          }}
-        />
-      </>
-    );
-  },
-  Clip: function ({ video }: { video: any }) {
-    return (
+  Image: ({ blob }: { blob: any }) => (
+    <>
+      <NextImage
+        alt=""
+        src={blob.asImage.url}
+        fill
+        sizes="100vw"
+        style={{
+          objectFit: "contain",
+        }}
+        priority
+      />
       <div
         style={{
-          height: "100%",
-          display: "grid",
-          placeItems: "center",
+          position: "absolute",
+          inset: 0,
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          pointerEvents: "none",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "contain",
+          backgroundPosition: "50% 50%",
+          zIndex: -1,
+          backgroundImage: `url(${blob.asImage.placeholder.url})`,
         }}
-      >
-        <Clip video={video} />
-      </div>
-    );
-  },
+      />
+    </>
+  ),
+  Clip: ({ video }: { video: any }) => (
+    <div
+      style={{
+        height: "100%",
+        display: "grid",
+        placeItems: "center",
+      }}
+    >
+      <Clip video={video} />
+    </div>
+  ),
 } as const;

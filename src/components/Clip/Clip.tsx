@@ -149,7 +149,7 @@ function Clip(props: Props) {
             style={{ position: "absolute", bottom: -1, right: -1, cursor: "pointer" }}
             onClick={() => {
               const videoElement = ref.current?.querySelector("video");
-              const posterElement = ref.current?.querySelector<HTMLElement>(`[data-poster]`);
+              const posterElement = ref.current?.querySelector<HTMLElement>("[data-poster]");
               if (!videoElement || !posterElement) {
                 return;
               }

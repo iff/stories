@@ -10,28 +10,18 @@
 
   "linter": {
     "rules": {
-      "correctness": {
-        "noConstantCondition": "off"
-      },
-      "complexity": {
-        "useArrowFunction": "off",
-        "useLiteralKeys": "off"
-      },
       "style": {
         "useImportType": "off",
-        "noUnusedTemplateLiteral": "off",
-        "noNonNullAssertion": "off",
-        "noUselessElse": "off",
-        "useNodejsImportProtocol": "off"
+        "noNonNullAssertion": "warn",
+        "noUselessElse": "off"
       },
       "a11y": {
         "useKeyWithClickEvents": "off",
-        "useAltText": "off",
         "useMediaCaption": "off",
         "noSvgWithoutTitle": "off"
       },
       "suspicious": {
-        "noExplicitAny": "off"
+        "noExplicitAny": "warn"
       }
     }
   }

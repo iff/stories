@@ -2,7 +2,7 @@ import { extractBlocks } from "@/cms";
 import { mediaType } from "@hapi/accept";
 import { site, stories } from "content";
 import { Feed } from "feed";
-import * as fs from "fs";
+import * as fs from "node:fs";
 import { NextApiRequest, NextApiResponse } from "next";
 import * as React from "react";
 import ReactDOMServer from "react-dom/server";
@@ -73,7 +73,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       const res = await fetch(`${process.env.API}/graphql`, {
         method: "POST",
-        headers: { ["Content-Type"]: "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           query: `query Feed { ${blocks.map(
             ({ id }) =>
@@ -130,7 +130,7 @@ function Image(props: any) {
     return <div>Image {blobId} not found!</div>;
   }
 
-  return <img src={blob.asImage.url} />;
+  return <img alt="" src={blob.asImage.url} />;
 }
 
 function Clip(props: any) {

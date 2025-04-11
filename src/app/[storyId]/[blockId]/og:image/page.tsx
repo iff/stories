@@ -1,8 +1,8 @@
 import { extractBlocks } from "@/cms";
 import NextImage from "next/image";
-import { ParsedUrlQuery } from "querystring";
+import { ParsedUrlQuery } from "node:querystring";
 import * as React from "react";
-import * as fs from "fs";
+import * as fs from "node:fs";
 import { notFound } from "next/navigation";
 
 export interface Query extends ParsedUrlQuery {
@@ -56,7 +56,7 @@ async function data({ storyId, blockId }): Promise<Block> {
   const blob = await (async () => {
     const res = await fetch(`${process.env.API}/graphql`, {
       method: "POST",
-      headers: { ["Content-Type"]: "application/json" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         query: `query OpenGraphImage {
             blob(name: "${blockId}") {

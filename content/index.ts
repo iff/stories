@@ -70,7 +70,7 @@ export const stories: Story[] = [
       /**
        * A React component that renders the story body.
        */
-      Component: dynamic(() => import(`./where-i-was-meant-to-be/body.mdx`)),
+      Component: dynamic(() => import("./where-i-was-meant-to-be/body.mdx")),
     },
   },
 
@@ -91,7 +91,7 @@ export const stories: Story[] = [
     },
 
     body: {
-      Component: dynamic(() => import(`./one-more-rush/body.mdx`)),
+      Component: dynamic(() => import("./one-more-rush/body.mdx")),
     },
   },
 
@@ -112,7 +112,7 @@ export const stories: Story[] = [
     },
 
     body: {
-      Component: dynamic(() => import(`./dreamers-wake/body.mdx`)),
+      Component: dynamic(() => import("./dreamers-wake/body.mdx")),
     },
   },
 
@@ -133,7 +133,7 @@ export const stories: Story[] = [
     },
 
     body: {
-      Component: dynamic(() => import(`./blouson-noir/body.mdx`)),
+      Component: dynamic(() => import("./blouson-noir/body.mdx")),
     },
   },
 
@@ -154,7 +154,7 @@ export const stories: Story[] = [
     },
 
     body: {
-      Component: dynamic(() => import(`./shivering-sense/body.mdx`)),
+      Component: dynamic(() => import("./shivering-sense/body.mdx")),
     },
   },
 
@@ -175,7 +175,7 @@ export const stories: Story[] = [
     },
 
     body: {
-      Component: dynamic(() => import(`./no-end-in-sight/body.mdx`)),
+      Component: dynamic(() => import("./no-end-in-sight/body.mdx")),
     },
   },
 
@@ -196,7 +196,7 @@ export const stories: Story[] = [
     },
 
     body: {
-      Component: dynamic(() => import(`./rebirth/body.mdx`)),
+      Component: dynamic(() => import("./rebirth/body.mdx")),
     },
   },
 
@@ -217,7 +217,7 @@ export const stories: Story[] = [
     },
 
     body: {
-      Component: dynamic(() => import(`./where-the-roads-collide/body.mdx`)),
+      Component: dynamic(() => import("./where-the-roads-collide/body.mdx")),
     },
   },
 
@@ -238,7 +238,7 @@ export const stories: Story[] = [
     },
 
     body: {
-      Component: dynamic(() => import(`./kindest-regards/body.mdx`)),
+      Component: dynamic(() => import("./kindest-regards/body.mdx")),
     },
   },
 
@@ -259,7 +259,7 @@ export const stories: Story[] = [
     },
 
     body: {
-      Component: dynamic(() => import(`./safe/body.mdx`)),
+      Component: dynamic(() => import("./safe/body.mdx")),
     },
   },
 ];
