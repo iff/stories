@@ -45,7 +45,9 @@ interface Story {
   };
 
   body: {
-    Component: React.ComponentType<{ components?: any }>;
+    Component: React.ComponentType<{
+      components: Record<string, unknown>;
+    }>;
   };
 }
 

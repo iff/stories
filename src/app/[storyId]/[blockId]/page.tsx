@@ -29,7 +29,7 @@ interface Data {
 
   title?: string;
 
-  blob?: any;
+  blob: { name: string; asImage: { url: string; placeholder: { url: string } } };
 }
 
 type Block =
@@ -42,7 +42,7 @@ type Block =
   | {
       __typename: "Clip";
       id: string;
-      video: any;
+      video: NonNullable<React.ComponentProps<typeof Clip>["video"]>;
       caption: null | string;
     };
 
@@ -59,7 +59,7 @@ export default async function Page(props: Props) {
 
         <meta property="og:title" content={title} />
         {block.caption && <meta property="og:description" content={block.caption} />}
-        <meta property="og:image" content={image.src} />
+        <meta property="og:image" content={"src" in image ? image.src : image.url} />
 
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
@@ -95,7 +95,23 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
   const { blocks, blob } = await (async () => {
     const body = await fs.promises.readFile(`content/${storyId}/body.mdx`, { encoding: "utf8" });
 
-    let blobP: Promise<any> = Promise.resolve({});
+    let blobP: Promise<{
+      name: string;
+      asImage: { url: string; dimensions: { width: number; height: number }; placeholder: { url: string } };
+      asVideo: {
+        poster: { url: string; dimensions: { width: number; height: number }; placeholder: { url: string } };
+        renditions: Array<{ url: string }>;
+      };
+    }> = Promise.resolve(
+      {} as {
+        name: string;
+        asImage: { url: string; dimensions: { width: number; height: number }; placeholder: { url: string } };
+        asVideo: {
+          poster: { url: string; dimensions: { width: number; height: number }; placeholder: { url: string } };
+          renditions: Array<{ url: string }>;
+        };
+      },
+    );
     const blocks = extractBlocks(body);
 
     const block = blocks.find((x) => x.id === blockId);
@@ -136,7 +152,7 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
   return {
     block: {
       ...block,
-      caption: block!.caption ?? null,
+      caption: block.caption ?? null,
       ...(() => {
         if ("asImage" in blob && blob.asImage) {
           return {
@@ -168,7 +184,7 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
 }
 
 const Inner = {
-  Image: ({ blob }: { blob: any }) => (
+  Image: ({ blob }: { blob: { asImage: { url: string; placeholder: { url: string } } } }) => (
     <>
       <NextImage
         alt=""
@@ -198,7 +214,7 @@ const Inner = {
       />
     </>
   ),
-  Clip: ({ video }: { video: any }) => (
+  Clip: ({ video }: { video: React.ComponentProps<typeof Clip>["video"] }) => (
     <div
       style={{
         height: "100%",

@@ -142,7 +142,6 @@ async function StoryCard(props: Props) {
           loader={imageLoader}
           {...(blocks[0] ?? blob).asImage.dimensions}
           objectFit="cover"
-          {...stylex.props((styles as any).img)}
           style={{ zIndex: 2 }}
         />
         <div

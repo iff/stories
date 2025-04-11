@@ -1,4 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
+import { CompiledStyles, InlineStyles, StyleXArray } from "@stylexjs/stylex/lib/StyleXTypes";
+import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 import * as React from "react";
 
 import NextImage from "next/image";
@@ -57,7 +59,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   span?: number | number[];
   aspectRatio?: number;
 
-  sx?: any;
+  sx?: StyleXArray<(null | undefined | CompiledStyles) | boolean | Readonly<[CompiledStyles, InlineStyles]>>;
 }
 
 function Image(props: Props) {
@@ -73,7 +75,7 @@ function Image(props: Props) {
       fill={fill}
       style={{ objectFit: fill ? "cover" : undefined, display: blob.asImage.url ? undefined : "none" }}
       sizes={sizes}
-      placeholder={blob.asImage.placeholder?.url as any}
+      placeholder={blob.asImage.placeholder?.url as PlaceholderValue}
     />
   );
 

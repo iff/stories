@@ -66,7 +66,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const body = await fs.promises.readFile(`./content/${story.id}/body.mdx`, { encoding: "utf8" });
     const blocks = extractBlocks(body);
 
-    const blobs = await (async () => {
+    const blobs = await (async (): Promise<
+      Array<{ name: string; asImage: { url: string }; asVideo: { renditions: Array<{ url: string }> } }>
+    > => {
       if (blocks.length === 0) {
         return [];
       }
@@ -105,9 +107,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             p: (props: React.ComponentProps<"p">) => <p {...props} />,
             blockquote: (props: React.ComponentProps<"blockquote">) => <blockquote {...props} />,
 
-            Clip: (props: any) => <Clip blobs={blobs} {...props} />,
-            Group: (props: any) => <Group blobs={blobs} {...props} />,
-            Image: (props: any) => <Image blobs={blobs} {...props} />,
+            Clip: (props: { blobId: string }) => <Clip blobs={blobs} {...props} />,
+            Group: (props: { children?: React.ReactNode }) => <Group {...props} />,
+            Image: (props: { blobId: string }) => <Image blobs={blobs} {...props} />,
           }}
         />,
       ),
@@ -123,7 +125,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.end(feed.atom1());
 };
 
-function Image(props: any) {
+function Image(props: { blobs: Array<{ name: string; asImage: { url: string } }>; blobId: string }) {
   const { blobs, blobId } = props;
   const blob = blobs.find((x) => x.name === blobId);
   if (!blob) {
@@ -133,9 +135,16 @@ function Image(props: any) {
   return <img alt="" src={blob.asImage.url} />;
 }
 
-function Clip(props: any) {
+function Clip(props: {
+  blobs: Array<{ name: string; asVideo: { renditions: Array<{ url: string }> } }>;
+  blobId: string;
+}) {
   const { blobs, blobId } = props;
   const blob = blobs.find((x) => x.name === blobId);
+
+  if (!blob) {
+    return <div>Clip {blobId} not found!</div>;
+  }
 
   return (
     <video>
@@ -144,6 +153,6 @@ function Clip(props: any) {
   );
 }
 
-function Group(props: any) {
+function Group(props: { children?: React.ReactNode }) {
   return <>{props.children}</>;
 }

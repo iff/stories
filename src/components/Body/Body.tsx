@@ -14,9 +14,43 @@ const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   storyId: string;
-  blobs: any[];
+  blobs: Array<{
+    name: string;
 
-  Component: React.ComponentType<{ components?: any }>;
+    asImage: {
+      url: string;
+
+      dimensions: {
+        width: number;
+        height: number;
+      };
+
+      placeholder?: {
+        url: string;
+      };
+    };
+
+    asVideo: {
+      poster: {
+        url: string;
+
+        dimensions: {
+          width: number;
+          height: number;
+        };
+
+        placeholder: {
+          url: string;
+        };
+      };
+
+      renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
+    };
+  }>;
+
+  Component: React.ComponentType<{
+    components: Record<string, unknown>;
+  }>;
 }
 
 function Body(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Root>>) {
@@ -50,14 +84,16 @@ function Body(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Ro
                     return child;
                   }
 
+                  const childProps = child.props as { blobId?: string; aspectRatio?: number };
+
                   /*
                    * If the child element is an Image, and is missing 'aspectRatio',
                    * compute it from the image dimensions.
                    */
-                  if ((child.props as any).blobId) {
-                    const props = { ...(child.props as any) };
+                  if (childProps?.blobId) {
+                    const props = { ...childProps };
 
-                    const blob = blobs.find((x) => x.name === (child.props as any).blobId);
+                    const blob = blobs.find((x) => x.name === childProps.blobId);
                     if (!props.aspectRatio && blob?.asImage?.dimensions) {
                       const { width, height } = blob.asImage.dimensions;
                       props.aspectRatio = width / height;

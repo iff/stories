@@ -25,7 +25,39 @@ export default async function Sample(props: Props) {
     });
     const json = await res.json();
 
-    return Object.values(json.data);
+    return Object.values(json.data) as Array<{
+      name: string;
+
+      asImage: {
+        url: string;
+
+        dimensions: {
+          width: number;
+          height: number;
+        };
+
+        placeholder?: {
+          url: string;
+        };
+      };
+
+      asVideo: {
+        poster: {
+          url: string;
+
+          dimensions: {
+            width: number;
+            height: number;
+          };
+
+          placeholder: {
+            url: string;
+          };
+        };
+
+        renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
+      };
+    }>;
   })();
 
   return <Body storyId={"storyId"} blobs={blobs} Component={Component} {...props} />;

@@ -1,6 +1,7 @@
 "use client";
 
 import * as stylex from "@stylexjs/stylex";
+import { CompiledStyles, InlineStyles, StyleXArray } from "@stylexjs/stylex/lib/StyleXTypes";
 import * as React from "react";
 
 import NextImage from "next/image";
@@ -37,7 +38,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
    */
   href?: LinkProps["href"];
 
-  sx?: any;
+  sx?: StyleXArray<(null | undefined | CompiledStyles) | boolean | Readonly<[CompiledStyles, InlineStyles]>>;
 }
 
 /*

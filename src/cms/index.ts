@@ -18,14 +18,17 @@ type Block =
 export function extractBlocks(mdx: string): Array<Block> {
   const blocks: Array<Block> = [];
 
-  function go(node: unist.Node & unist.Parent & { name: string; attributes: any[] }) {
+  function go(
+    node: unist.Node &
+      unist.Parent & { name?: string; attributes?: Array<{ type: string; name: string; value?: string }> },
+  ) {
     if (Array.isArray(node.children)) {
       node.children.forEach(go);
     }
 
     if ((node.type === "mdxJsxFlowElement" || node.type === "mdxJsxTextElement") && node.name === "Image") {
-      const blobId = node.attributes.find((x) => x.type === "mdxJsxAttribute" && x.name === "blobId")?.value;
-      const caption = node.attributes.find((x) => x.type === "mdxJsxAttribute" && x.name === "caption")?.value;
+      const blobId = node.attributes?.find((x) => x.type === "mdxJsxAttribute" && x.name === "blobId")?.value;
+      const caption = node.attributes?.find((x) => x.type === "mdxJsxAttribute" && x.name === "caption")?.value;
 
       if (blobId) {
         blocks.push({
@@ -36,8 +39,8 @@ export function extractBlocks(mdx: string): Array<Block> {
       }
     }
     if ((node.type === "mdxJsxFlowElement" || node.type === "mdxJsxTextElement") && node.name === "Clip") {
-      const blobId = node.attributes.find((x) => x.type === "mdxJsxAttribute" && x.name === "blobId")?.value;
-      const caption = node.attributes.find((x) => x.type === "mdxJsxAttribute" && x.name === "caption")?.value;
+      const blobId = node.attributes?.find((x) => x.type === "mdxJsxAttribute" && x.name === "blobId")?.value;
+      const caption = node.attributes?.find((x) => x.type === "mdxJsxAttribute" && x.name === "caption")?.value;
 
       if (blobId) {
         blocks.push({
@@ -50,7 +53,7 @@ export function extractBlocks(mdx: string): Array<Block> {
   }
 
   const root = unified().use(remarkParse).use(remarkMdx).parse(mdx);
-  go(root as any);
+  go(root);
 
   return blocks;
 }

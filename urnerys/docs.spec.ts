@@ -12,7 +12,10 @@ for (const url of ["/docs/components/Image", "/docs/components/Group", "/docs/co
     for (const [index, element] of elements.entries()) {
       await element.scrollIntoViewIfNeeded();
 
-      const buffer = await (await element.$(".timvir-b-Exhibit-container"))!.screenshot();
+      const buffer = await (await element.$(".timvir-b-Exhibit-container"))?.screenshot();
+      if (!buffer) {
+        continue;
+      }
 
       const childElement = await element.$(".timvir-b-Exhibit-caption");
       const innerText = `${(await childElement?.innerText()) ?? index}`;

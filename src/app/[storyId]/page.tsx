@@ -68,7 +68,41 @@ const styles = stylex.create({
   },
 });
 
-async function data({ storyId }): Promise<Array<any>> {
+async function data({ storyId }): Promise<
+  Array<{
+    name: string;
+
+    asImage: {
+      url: string;
+
+      dimensions: {
+        width: number;
+        height: number;
+      };
+
+      placeholder?: {
+        url: string;
+      };
+    };
+
+    asVideo: {
+      poster: {
+        url: string;
+
+        dimensions: {
+          width: number;
+          height: number;
+        };
+
+        placeholder: {
+          url: string;
+        };
+      };
+
+      renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
+    };
+  }>
+> {
   if (!fs.existsSync(`./content/${storyId}/body.mdx`)) {
     return notFound();
   }
@@ -97,7 +131,39 @@ async function data({ storyId }): Promise<Array<any>> {
     });
     const json = await res.json();
 
-    return Object.values(json.data);
+    return Object.values(json.data) as Array<{
+      name: string;
+
+      asImage: {
+        url: string;
+
+        dimensions: {
+          width: number;
+          height: number;
+        };
+
+        placeholder?: {
+          url: string;
+        };
+      };
+
+      asVideo: {
+        poster: {
+          url: string;
+
+          dimensions: {
+            width: number;
+            height: number;
+          };
+
+          placeholder: {
+            url: string;
+          };
+        };
+
+        renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
+      };
+    }>;
   })();
 
   return blobs;

@@ -19,9 +19,6 @@
         "useKeyWithClickEvents": "off",
         "useMediaCaption": "off",
         "noSvgWithoutTitle": "off"
-      },
-      "suspicious": {
-        "noExplicitAny": "warn"
       }
     }
   }

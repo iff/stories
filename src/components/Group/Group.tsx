@@ -1,4 +1,5 @@
 import * as stylex from "@stylexjs/stylex";
+import { CompiledStyles, InlineStyles, StyleXArray } from "@stylexjs/stylex/lib/StyleXTypes";
 import * as React from "react";
 
 /**
@@ -7,7 +8,7 @@ import * as React from "react";
 const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
-  sx?: any;
+  sx?: StyleXArray<(null | undefined | CompiledStyles) | boolean | Readonly<[CompiledStyles, InlineStyles]>>;
 }
 
 function Group(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Root>>) {
@@ -20,12 +21,12 @@ function Group(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof R
           return child;
         }
 
-        const { span = [], aspectRatio = 1, ...props } = child.props as any;
+        const { span = [], aspectRatio = 1, ...props } = child.props as { span?: Array<number>; aspectRatio?: number };
 
         return (
           <div {...stylex.props(styles.item, spanVariants[span[0] ?? 12], span[1] && spanVariants[`md:${span[1]}`])}>
             <div {...stylex.props(styles.itemChild)} style={{ aspectRatio: `${aspectRatio}` }} />
-            {React.createElement<any>(child.type, {
+            {React.createElement(child.type, {
               ...props,
 
               sx: styles.itemChild,
