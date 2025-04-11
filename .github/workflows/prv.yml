@@ -18,7 +18,7 @@ jobs:
 
       - run: nix run github:nicknovitski/nix-develop .#workflow
 
-      - run: ./node_modules/.bin/prettier --write .
+      - run: biome format --write .
 
       - id: create-pull-request
         uses: peter-evans/create-pull-request@v7
@@ -44,7 +44,7 @@ jobs:
 
       - run: nix run github:nicknovitski/nix-develop .#workflow
 
-      - run: ./node_modules/.bin/eslint .
+      - run: biome lint .
 
   prv:
     if: github.event.pull_request.draft == false

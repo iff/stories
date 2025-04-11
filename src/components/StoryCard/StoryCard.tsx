@@ -94,7 +94,7 @@ async function StoryCard(props: Props) {
                           from: intl.formatDate(from, { day: "numeric" }),
                           to: intl.formatDate(from, { day: "numeric" }),
                           year: intl.formatDate(to, { year: "numeric" }),
-                        }
+                        },
                       );
                     } else {
                       return intl.formatMessage(
@@ -105,7 +105,7 @@ async function StoryCard(props: Props) {
                         {
                           from: intl.formatDate(from, { month: "long", day: "numeric" }),
                           to: intl.formatDate(to, { month: "long", day: "numeric", year: "numeric" }),
-                        }
+                        },
                       );
                     }
                   } else {
@@ -117,7 +117,7 @@ async function StoryCard(props: Props) {
                       {
                         from: intl.formatDate(from, { month: "long", day: "numeric", year: "numeric" }),
                         to: intl.formatDate(to, { month: "long", day: "numeric", year: "numeric" }),
-                      }
+                      },
                     );
                   }
                 } else {

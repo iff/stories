@@ -19,7 +19,7 @@ export default async function Sample(props: Props) {
               name
               asImage { url dimensions { width height } }
               asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
-            }`
+            }`,
         )} }`,
       }),
     });

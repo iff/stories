@@ -28,7 +28,8 @@
           devShells.default = pkgs.mkShell {
             buildInputs = [
               pkgs.nodejs
-              pkgs.nodejs.pkgs.pnpm
+              pkgs.pnpm
+              pkgs.biome
 
               scripts.dev
             ];
@@ -41,7 +42,8 @@
           devShells.workflow = pkgs.mkShell {
             buildInputs = [
               pkgs.nodejs
-              pkgs.nodejs.pkgs.pnpm
+              pkgs.pnpm
+              pkgs.biome
 
               pkgs.curl
             ];

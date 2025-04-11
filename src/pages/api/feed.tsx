@@ -81,7 +81,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 name
                 asImage { url dimensions { width height } }
                 asVideo { poster { url dimensions { width height } } renditions { url } }
-              }`
+              }`,
           )} }`,
         }),
       });
@@ -109,7 +109,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             Group: (props: any) => <Group blobs={blobs} {...props} />,
             Image: (props: any) => <Image blobs={blobs} {...props} />,
           }}
-        />
+        />,
       ),
       author: [author],
       contributor: [author],

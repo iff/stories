@@ -91,7 +91,7 @@ async function data({ storyId }): Promise<Array<any>> {
               name
               asImage { url dimensions { width height } }
               asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
-            }`
+            }`,
         )} }`,
       }),
     });

@@ -6,7 +6,7 @@ const mqls = Object.fromEntries(
       mql.addEventListener("change", applyTheme);
       return mql;
     })(),
-  ])
+  ]),
 );
 
 applyTheme();

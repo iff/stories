@@ -26,8 +26,6 @@
     "@types/unist": "^3.0.3",
     "@vercel/speed-insights": "^1.2.0",
     "caniuse-lite": "^1.0.30001713",
-    "eslint": "^9.24.0",
-    "eslint-config-next": "^15.3.0",
     "feed": "^4.2.2",
     "fp-ts": "^2.16.9",
     "immer": "^10.1.1",
