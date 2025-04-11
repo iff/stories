@@ -18,7 +18,7 @@ jobs:
 
       - run: nix run github:nicknovitski/nix-develop .#workflow
 
-      - run: biome check --write .
+      - run: biome check --write --reporter=github .
 
       - id: create-pull-request
         uses: peter-evans/create-pull-request@v7
