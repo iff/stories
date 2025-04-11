@@ -1,8 +1,8 @@
+import * as fs from "node:fs";
 import { extractBlocks } from "@/cms";
 import { mediaType } from "@hapi/accept";
 import { site, stories } from "content";
 import { Feed } from "feed";
-import * as fs from "node:fs";
 import { NextApiRequest, NextApiResponse } from "next";
 import * as React from "react";
 import ReactDOMServer from "react-dom/server";

@@ -1,9 +1,9 @@
+import * as fs from "node:fs";
+import { ParsedUrlQuery } from "node:querystring";
 import { extractBlocks } from "@/cms";
 import NextImage from "next/image";
-import { ParsedUrlQuery } from "node:querystring";
-import * as React from "react";
-import * as fs from "node:fs";
 import { notFound } from "next/navigation";
+import * as React from "react";
 
 export interface Query extends ParsedUrlQuery {
   storyId: string;

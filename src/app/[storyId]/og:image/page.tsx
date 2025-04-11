@@ -1,7 +1,7 @@
 import { stories } from "content";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import * as React from "react";
-import Image from "next/image";
 
 interface Props {
   params: Promise<{ storyId: string }>;

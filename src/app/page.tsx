@@ -1,9 +1,9 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
+import { importBlob } from "@/cms";
 import { Hero } from "@/components/Hero";
 import { StoryCard } from "@/components/StoryCard";
-import { importBlob } from "@/cms";
 
 import { stories } from "../../content";
 

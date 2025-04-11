@@ -1,4 +1,4 @@
-import { expect, Page, PageScreenshotOptions } from "@playwright/test";
+import { Page, PageScreenshotOptions, expect } from "@playwright/test";
 import sharp from "sharp";
 
 export function sanitizeTitle(s: string): string {

@@ -5,9 +5,9 @@ on:
     types: [opened, synchronize, ready_for_review]
 
 jobs:
-  format:
+  biome:
     if: github.event.pull_request.draft == false
-    name: Format
+    name: Biome
     runs-on: [self-hosted, nixos]
 
     steps:
@@ -18,40 +18,24 @@ jobs:
 
       - run: nix run github:nicknovitski/nix-develop .#workflow
 
-      - run: biome format --write .
+      - run: biome check --write .
 
       - id: create-pull-request
         uses: peter-evans/create-pull-request@v7
         with:
-          title: "Format #${{ github.event.pull_request.number }}"
-          branch: format-${{ github.event.pull_request.number }}
-          commit-message: "format:write"
+          title: "Biome Write #${{ github.event.pull_request.number }}"
+          branch: biome-write-${{ github.event.pull_request.number }}
+          commit-message: "biome:write"
           base: ${{ github.event.pull_request.head.ref }}
 
       - if: ${{ steps.create-pull-request.outputs.pull-request-number }}
         run: exit 1
-
-  lint:
-    if: github.event.pull_request.draft == false
-    name: Lint
-    runs-on: [self-hosted, nixos]
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          clean: false
-
-      - run: nix run github:nicknovitski/nix-develop .#workflow
-
-      - run: biome lint .
 
   prv:
     if: github.event.pull_request.draft == false
     name: Pull Request Verification
     runs-on: [self-hosted, nixos]
     needs:
-      - format
-      - lint
+      - biome
     steps:
       - run: "true"

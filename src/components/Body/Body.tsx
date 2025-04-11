@@ -2,8 +2,8 @@ import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
 import { Clip } from "@/components/Clip";
-import { Image } from "@/components/Image";
 import { Group } from "@/components/Group";
+import { Image } from "@/components/Image";
 
 import { vars } from "./variables.stylex";
 

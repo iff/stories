@@ -1,7 +1,7 @@
-import withMDX from "@next/mdx";
-import { remarkPlugin } from "@timvir/mdx";
-import stylexPlugin from "@stylexswc/nextjs-plugin";
 import * as path from "node:path";
+import withMDX from "@next/mdx";
+import stylexPlugin from "@stylexswc/nextjs-plugin";
+import { remarkPlugin } from "@timvir/mdx";
 
 const rootDir = new URL(".", import.meta.url).pathname;
 
