@@ -7,7 +7,7 @@ import { extractBlocks, importBlob } from "@/cms";
 import { Body } from "@/components/Body";
 import { Header } from "@/components/Header";
 import { StoryById } from "@/components/Story";
-import { stories } from "content";
+import { lookupStory } from "content";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -25,7 +25,8 @@ interface Props {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { storyId } = await props.params;
-  const story = stories.find((x) => x.id === storyId);
+
+  const story = await lookupStory(storyId);
   if (!story) {
     return {};
   }
@@ -44,7 +45,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 export default async function Page(props: Props) {
   const { storyId } = await props.params;
 
-  const story = stories.find((x) => x.id === storyId);
+  const story = await lookupStory(storyId);
   if (!story) {
     return notFound();
   }

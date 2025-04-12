@@ -51,6 +51,10 @@ interface Story {
   };
 }
 
+export async function lookupStory(id: string): Promise<Story | undefined> {
+  return stories.find((story) => story.id === id);
+}
+
 export const stories: Story[] = [
   {
     id: "where-i-was-meant-to-be",

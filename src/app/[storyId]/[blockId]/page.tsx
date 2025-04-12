@@ -3,7 +3,7 @@ import { ParsedUrlQuery } from "node:querystring";
 import { extractBlocks } from "@/cms";
 import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
-import { stories } from "content";
+import { lookupStory } from "content";
 import Head from "next/head";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
@@ -149,7 +149,7 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
 
   const index = blocks.indexOf(block);
 
-  const story = stories.find((x) => x.id === storyId);
+  const story = await lookupStory(storyId);
 
   return {
     block: {

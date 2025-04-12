@@ -1,4 +1,4 @@
-import { stories } from "content";
+import { lookupStory } from "content";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import * as React from "react";
@@ -9,7 +9,8 @@ interface Props {
 
 export default async function Page(props: Props) {
   const { storyId } = await props.params;
-  const story = stories.find((x) => x.id === storyId);
+
+  const story = await lookupStory(storyId);
   if (!story) {
     return notFound();
   }
