@@ -18,6 +18,7 @@
     "paths": {
       "@/cms": ["src/cms"],
       "@/components/*": ["src/components/*"],
+      "@/fonts": ["src/fonts"],
       "@/hooks/*": ["src/hooks/*"],
       "@/timvir/*": ["src/timvir/*"],
       "@/theme": ["src/theme"]

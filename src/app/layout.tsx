@@ -1,3 +1,4 @@
+import { tuna } from "@/fonts";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 
@@ -18,7 +19,7 @@ const baseUrl = process.env.NODE_ENV === "production" ? "https://stories.caurea.
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={tuna.className}>
       <head>
         <link rel="icon" href="/favicon.png" />
         <link rel="alternate" type="application/rss+xml" title="Stories by Tomáš Čarnecky" href={`${baseUrl}/feed`} />
