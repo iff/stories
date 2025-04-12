@@ -12,8 +12,18 @@ export const site = {
 };
 
 interface Story {
+  /**
+   * The primary identifier of the story. Keep it human-readable and unique.
+   * Use lowercase alphanumeric characters and hyphens only.
+   *
+   * @example "where-i-was-meant-to-be"
+   */
   id: string;
 
+  /**
+   * Public stories are visible to everyone. Hidden stories are only accessible
+   * when you enter the URL directly, they are not listed on the home page.
+   */
   visibility: "PUBLIC" | "HIDDEN";
 
   /**
@@ -22,6 +32,11 @@ interface Story {
    */
   publishedAt: null | Date;
 
+  /**
+   * The title of the story. Keep it short and descriptive.
+   *
+   * @example "Where I Was Meant to Be"
+   */
   title: string;
 
   /**
@@ -31,7 +46,8 @@ interface Story {
 
   /**
    * The primary image for the story. This is used in the teaser on the home page,
-   * in the header on the story page, and as the Open Graph image.
+   * in the header on the story page, and as the Open Graph image of the story
+   * page itself.
    */
   image: string;
 

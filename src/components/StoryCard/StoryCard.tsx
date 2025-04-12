@@ -92,7 +92,7 @@ async function StoryCard(props: Props) {
                         {
                           month: intl.formatDate(from, { month: "long" }),
                           from: intl.formatDate(from, { day: "numeric" }),
-                          to: intl.formatDate(from, { day: "numeric" }),
+                          to: intl.formatDate(to, { day: "numeric" }),
                           year: intl.formatDate(to, { year: "numeric" }),
                         },
                       );
