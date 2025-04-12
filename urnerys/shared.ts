@@ -15,7 +15,7 @@ export const build = process.env.GITHUB_RUN_ID
   ? `github-run-${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_ATTEMPT}`
   : sanitizeTitle(new Date().toISOString());
 
-export async function uploadImage(page, set, title, formula) {
+export async function uploadImage(page: Page, set: string, title: string, formula: string) {
   const buffer = await page.screenshot({ fullPage: true });
 
   const formData = new FormData();

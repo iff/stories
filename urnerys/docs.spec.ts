@@ -63,7 +63,7 @@ for (const url of [
       const height = await page.evaluate(() => Math.ceil(document.body.clientHeight));
       await page.setViewportSize({ width: viewport.width, height });
 
-      await uploadImage(page, `Components/${component}/Samples`, title.split("/").at(-1), `w${viewport.width}`);
+      await uploadImage(page, `Components/${component}/Samples`, title.split("/").at(-1)!, `w${viewport.width}`);
     }
   });
 }

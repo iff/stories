@@ -71,7 +71,7 @@ const styles = stylex.create({
   },
 });
 
-async function data({ storyId }): Promise<
+async function data({ storyId }: Params): Promise<
   Array<{
     name: string;
 

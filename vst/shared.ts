@@ -14,7 +14,13 @@ export const build = process.env.GITHUB_RUN_ID
   ? `github-run-${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_ATTEMPT}`
   : sanitizeTitle(new Date().toISOString());
 
-export async function uploadImage(page: Page, collection, title, formula, options?: PageScreenshotOptions) {
+export async function uploadImage(
+  page: Page,
+  collection: string,
+  title: string,
+  formula: string,
+  options?: PageScreenshotOptions,
+) {
   const buffer = await page.screenshot(options);
 
   const formData = new FormData();
@@ -84,18 +90,4 @@ export async function interceptImages(page: Page) {
       await route.fulfill({ response });
     }
   });
-}
-
-export async function takeImage(page: Page, title, collection, url, viewports) {
-  await interceptImages(page);
-
-  await page.goto(url, { waitUntil: "domcontentloaded" });
-  await page.waitForSelector("img");
-
-  for (const viewport of viewports) {
-    await page.setViewportSize(viewport);
-    await page.waitForTimeout(50);
-    await waitForImages(page);
-    await uploadImage(page, collection, title, `w${viewport.width}`);
-  }
 }

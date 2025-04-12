@@ -24,7 +24,13 @@ function Group(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof R
         const { span = [], aspectRatio = 1, ...props } = child.props as { span?: Array<number>; aspectRatio?: number };
 
         return (
-          <div {...stylex.props(styles.item, spanVariants[span[0] ?? 12], span[1] && spanVariants[`md:${span[1]}`])}>
+          <div
+            {...stylex.props(
+              styles.item,
+              spanVariants[`${span[0] ?? 12}` as keyof typeof spanVariants],
+              typeof span[1] === "number" ? spanVariants[`md:${span[1]}` as keyof typeof spanVariants] : undefined,
+            )}
+          >
             <div {...stylex.props(styles.itemChild)} style={{ aspectRatio: `${aspectRatio}` }} />
             {React.createElement(child.type, {
               ...props,

@@ -10,11 +10,13 @@ export interface Query extends ParsedUrlQuery {
   blockId: string;
 }
 
+interface Params {
+  storyId: string;
+  blockId: string;
+}
+
 interface Props {
-  params: Promise<{
-    storyId: string;
-    blockId: string;
-  }>;
+  params: Promise<Params>;
 }
 
 export default async function Page(props: Props) {
@@ -44,7 +46,7 @@ export default async function Page(props: Props) {
 
 type Block = { __typename: "Image"; id: string; image: { src: string; sqip: { src: string } }; caption: null | string };
 
-async function data({ storyId, blockId }): Promise<Block> {
+async function data({ storyId, blockId }: Params): Promise<Block> {
   const body = await fs.promises.readFile(`content/${storyId}/body.mdx`, { encoding: "utf8" });
 
   const blocks = extractBlocks(body);

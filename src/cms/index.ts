@@ -26,7 +26,7 @@ export function extractBlocks(mdx: string): Array<Block> {
 
   function go(
     node: unist.Node &
-      unist.Parent & { name?: string; attributes?: Array<{ type: string; name: string; value?: string }> },
+      Partial<unist.Parent> & { name?: string; attributes?: Array<{ type: string; name: string; value?: string }> },
   ) {
     if (Array.isArray(node.children)) {
       node.children.forEach(go);
