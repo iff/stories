@@ -3,17 +3,23 @@ import remarkParse from "remark-parse";
 import { unified } from "unified";
 import * as unist from "unist";
 
-type Block =
-  | {
-      __typename: "Image";
-      id: string;
-      caption?: string;
-    }
-  | {
-      __typename: "Clip";
-      id: string;
-      caption?: string;
-    };
+/**
+ * A Block is an element in a story which is not self-contained.
+ * It requires data to be fetched from an external source.
+ */
+type Block = Image | Clip;
+
+interface Image {
+  __typename: "Image";
+  id: string;
+  caption?: string;
+}
+
+interface Clip {
+  __typename: "Clip";
+  id: string;
+  caption?: string;
+}
 
 export function extractBlocks(mdx: string): Array<Block> {
   const blocks: Array<Block> = [];
@@ -38,6 +44,7 @@ export function extractBlocks(mdx: string): Array<Block> {
         });
       }
     }
+
     if ((node.type === "mdxJsxFlowElement" || node.type === "mdxJsxTextElement") && node.name === "Clip") {
       const blobId = node.attributes?.find((x) => x.type === "mdxJsxAttribute" && x.name === "blobId")?.value;
       const caption = node.attributes?.find((x) => x.type === "mdxJsxAttribute" && x.name === "caption")?.value;
@@ -52,8 +59,7 @@ export function extractBlocks(mdx: string): Array<Block> {
     }
   }
 
-  const root = unified().use(remarkParse).use(remarkMdx).parse(mdx);
-  go(root);
+  go(unified().use(remarkParse).use(remarkMdx).parse(mdx));
 
   return blocks;
 }
@@ -65,9 +71,82 @@ export async function importBlob(name: string) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      query: `query Blob { blob(name: "${name}") { id name asImage { url dimensions { width height } placeholder { url } } asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } } } }`,
+      query: `
+        query Blob($name: String!) {
+          blob(name: $name) {
+            __typename
+            id
+            name
+
+            asImage {
+              url
+              dimensions {
+                width
+                height
+              }
+              placeholder {
+                url
+              }
+            }
+
+            asVideo {
+              poster {
+                url
+                dimensions {
+                  width
+                  height
+                }
+                placeholder {
+                  url
+                }
+              }
+              renditions {
+                url
+              }
+            }
+          }
+        }`,
+      variables: {
+        name,
+      },
     }),
   });
+
   const json = await res.json();
-  return json.data.blob;
+
+  return json.data.blob as {
+    __typename: "Image" | "Clip";
+    id: string;
+    name: string;
+
+    asImage: {
+      url: string;
+
+      dimensions: {
+        width: number;
+        height: number;
+      };
+
+      placeholder: {
+        url: string;
+      };
+    };
+
+    asVideo: {
+      poster: {
+        url: string;
+
+        dimensions: {
+          width: number;
+          height: number;
+        };
+
+        placeholder: {
+          url: string;
+        };
+      };
+
+      renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
+    };
+  };
 }

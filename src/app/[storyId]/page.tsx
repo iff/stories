@@ -11,6 +11,18 @@ import { stories } from "content";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+export interface Query extends ParsedUrlQuery {
+  storyId: string;
+}
+
+interface Params {
+  storyId: string;
+}
+
+interface Props {
+  params: Promise<Params>;
+}
+
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { storyId } = await props.params;
   const story = stories.find((x) => x.id === storyId);
@@ -29,24 +41,15 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   };
 }
 
-export interface Query extends ParsedUrlQuery {
-  storyId: string;
-}
-
-interface Props {
-  params: Promise<{
-    storyId: string;
-  }>;
-}
-
 export default async function Page(props: Props) {
   const { storyId } = await props.params;
-  const blobs = await data({ storyId });
 
   const story = stories.find((x) => x.id === storyId);
   if (!story) {
     return notFound();
   }
+
+  const blobs = await data({ storyId });
 
   return (
     <>
@@ -110,31 +113,44 @@ async function data({ storyId }): Promise<
   const body = await fs.promises.readFile(`./content/${storyId}/body.mdx`, { encoding: "utf8" });
   const blocks = extractBlocks(body);
 
-  const blobs = await (async () => {
-    if (blocks.length === 0) {
-      return [];
-    }
+  if (blocks.length === 0) {
+    return [];
+  }
 
-    const res = await fetch(`${process.env.API}/graphql`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query: `query Story { ${blocks.map(
-          ({ id }) =>
-            `b${id}: blob(name: "${id}") {
+  const res = await fetch(`${process.env.API}/graphql`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `query Story { ${blocks.map(
+        ({ id }) =>
+          `b${id}: blob(name: "${id}") {
               name
               asImage { url dimensions { width height } }
               asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
             }`,
-        )} }`,
-      }),
-    });
-    const json = await res.json();
+      )} }`,
+    }),
+  });
+  const json = await res.json();
 
-    return Object.values(json.data) as Array<{
-      name: string;
+  return Object.values(json.data) as Array<{
+    name: string;
 
-      asImage: {
+    asImage: {
+      url: string;
+
+      dimensions: {
+        width: number;
+        height: number;
+      };
+
+      placeholder?: {
+        url: string;
+      };
+    };
+
+    asVideo: {
+      poster: {
         url: string;
 
         dimensions: {
@@ -142,29 +158,12 @@ async function data({ storyId }): Promise<
           height: number;
         };
 
-        placeholder?: {
+        placeholder: {
           url: string;
         };
       };
 
-      asVideo: {
-        poster: {
-          url: string;
-
-          dimensions: {
-            width: number;
-            height: number;
-          };
-
-          placeholder: {
-            url: string;
-          };
-        };
-
-        renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
-      };
-    }>;
-  })();
-
-  return blobs;
+      renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
+    };
+  }>;
 }

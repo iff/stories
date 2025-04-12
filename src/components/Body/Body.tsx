@@ -14,6 +14,7 @@ const Root = "div";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   storyId: string;
+
   blobs: Array<{
     name: string;
 
@@ -63,7 +64,7 @@ function Body(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Ro
           h1: (props: React.ComponentProps<"h1">) => <h2 {...stylex.props(styles.h2)} {...props} />,
           h2: (props: React.ComponentProps<"h2">) => <h3 {...stylex.props(styles.h3)} {...props} />,
 
-          p: (props: React.ComponentProps<"p">) => <p {...props} {...stylex.props(styles.p)} />,
+          p: (props: React.ComponentProps<"p">) => <p {...stylex.props(styles.p)} {...props} />,
 
           blockquote: (props: React.ComponentProps<"blockquote">) => (
             <blockquote {...stylex.props(styles.blockquote)} {...props} />
@@ -71,7 +72,11 @@ function Body(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Ro
 
           Clip: ({ blobId }: { blobId: string }) => {
             const blob = blobs.find((x) => x.name === blobId);
-            return <Clip id={blobId} video={blob?.asVideo} href={`/${storyId}/${blobId}`} sx={styles.extendedWidth} />;
+            if (!blob) {
+              return <div>Clip {blobId} not found!</div>;
+            }
+
+            return <Clip id={blobId} video={blob.asVideo} href={`/${storyId}/${blobId}`} sx={styles.extendedWidth} />;
           },
 
           Group: (props: React.ComponentProps<"div">) => {

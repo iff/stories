@@ -14,11 +14,13 @@ export interface Query extends ParsedUrlQuery {
   blockId: string;
 }
 
+interface Params {
+  storyId: string;
+  blockId: string;
+}
+
 interface Props {
-  params: Promise<{
-    storyId: string;
-    blockId: string;
-  }>;
+  params: Promise<Params>;
 }
 
 interface Data {
