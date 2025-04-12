@@ -5,7 +5,8 @@ import type { Metadata, Viewport } from "next";
 import "../style.global.css";
 
 export const metadata: Metadata = {
-  title: "Stories by Tomáš Čarnecky",
+  title: "Stories by Tomáš Čarnecký",
+  description: "A collection of short stories and visual narratives from my travels around the world.",
 };
 
 export const viewport: Viewport = {
