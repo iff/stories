@@ -31,11 +31,27 @@ jobs:
       - if: ${{ steps.create-pull-request.outputs.pull-request-number }}
         run: exit 1
 
+  knip:
+    if: github.event.pull_request.draft == false
+    name: Knip
+    runs-on: [self-hosted, nixos]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          clean: false
+
+      - run: nix run github:nicknovitski/nix-develop .#workflow
+
+      - run: pnpm exec knip
+
   prv:
     if: github.event.pull_request.draft == false
     name: Pull Request Verification
     runs-on: [self-hosted, nixos]
     needs:
       - biome
+      - knip
     steps:
       - run: "true"

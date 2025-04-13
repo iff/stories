@@ -16,8 +16,6 @@
     "@playwright/test": "^1.51.1",
     "@stylexjs/stylex": "^0.12.0",
     "@stylexswc/nextjs-plugin": "^0.7.1",
-    "@stylexswc/rs-compiler": "^0.7.1",
-    "@stylexswc/webpack-plugin": "^0.7.1",
     "@timvir/mdx": "^0.2.36",
     "@types/mdx": "^2.0.13",
     "@types/node": "^22.14.1",
@@ -27,6 +25,7 @@
     "@vercel/speed-insights": "^1.2.0",
     "caniuse-lite": "^1.0.30001713",
     "feed": "^4.2.2",
+    "knip": "^5.50.2",
     "next": "^15.3.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -37,7 +36,6 @@
     "sharp": "^0.34.1",
     "timvir": "^0.2.36",
     "typescript": "^5.8.3",
-    "unified": "^11.0.5",
-    "webpack": "^5.99.5"
+    "unified": "^11.0.5"
   }
 }
