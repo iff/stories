@@ -1,9 +1,6 @@
 import { KnipConfig } from "knip";
 
 const config: KnipConfig = {
-  // Too many issues with these rules to have them enabled at this time
-  exclude: ["exports"],
-
   entry: [
     // Visual Smoke Test
     "vst/playwright.config.ts",

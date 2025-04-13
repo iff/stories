@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 import { Page } from "timvir/core";
-import * as mdxComponents from "./components";
+import { mdxComponents } from "./components";
 import toc from "./toc";
 
 export default function Wrapper({ children }: { children?: React.ReactNode }) {

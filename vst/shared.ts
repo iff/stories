@@ -1,7 +1,6 @@
 import { Page, PageScreenshotOptions, expect } from "@playwright/test";
-import sharp from "sharp";
 
-export function sanitizeTitle(s: string): string {
+function sanitizeTitle(s: string): string {
   return s
     .replaceAll(/[\/:*\?"<>|\s]+/g, "-")
     .replace(/-+$/g, "")
@@ -10,7 +9,7 @@ export function sanitizeTitle(s: string): string {
     .toLowerCase();
 }
 
-export const build = process.env.GITHUB_RUN_ID
+const build = process.env.GITHUB_RUN_ID
   ? `github-run-${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_ATTEMPT}`
   : sanitizeTitle(new Date().toISOString());
 
@@ -56,38 +55,4 @@ export async function waitForImages(page: Page): Promise<void> {
       await expect(img).not.toHaveJSProperty("naturalWidth", 0);
     }
   }
-}
-
-export async function interceptImages(page: Page) {
-  /*
-   * Transform all images to be entirely black to avoid spurious snapshot
-   * diffs due to image rendering artifacts.
-   *
-   * We merely fill the image (with black), while keeping its original
-   * dimensions. This ensures that the layout of the page remains as
-   * intended.
-   */
-  await page.route("**/*", async (route) => {
-    const response = await route.fetch();
-    if (response.headers()["content-type"]?.startsWith("image/")) {
-      const body = await response.body();
-
-      const transformer = sharp(body);
-      transformer.composite([
-        {
-          input: { create: { width: 1, height: 1, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 1 } } },
-          tile: true,
-        },
-      ]);
-      transformer.png({});
-
-      await route.fulfill({
-        response,
-        headers: { "content-type": "image/png" },
-        body: await transformer.toBuffer(),
-      });
-    } else {
-      await route.fulfill({ response });
-    }
-  });
 }

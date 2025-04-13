@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Code } from "timvir/blocks";
 
-export * from "timvir/builtins";
+import * as builtins from "timvir/builtins";
 
-export function pre(props: React.HTMLProps<HTMLPreElement>) {
+function pre(props: React.HTMLProps<HTMLPreElement>) {
   if (!props.children || !React.isValidElement(props.children)) {
     return null;
   }
@@ -13,3 +13,8 @@ export function pre(props: React.HTMLProps<HTMLPreElement>) {
   const [, language = "markdown"] = (className || "").match(/^language-(.*)$/) || [];
   return <Code language={language}>{children}</Code>;
 }
+
+export const mdxComponents = {
+  ...builtins,
+  pre,
+};
