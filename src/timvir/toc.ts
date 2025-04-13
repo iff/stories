@@ -7,6 +7,10 @@ export default [
         path: "/docs/components/Body",
       },
       {
+        label: "Brandmark",
+        path: "/docs/components/Brandmark",
+      },
+      {
         label: "Clip",
         path: "/docs/components/Clip",
       },
@@ -17,6 +21,10 @@ export default [
       {
         label: "Header",
         path: "/docs/components/Header",
+      },
+      {
+        label: "Hero",
+        path: "/docs/components/Hero",
       },
       {
         label: "Image",
