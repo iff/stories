@@ -17,6 +17,11 @@ const plugins = [
     },
   }),
   stylexPlugin({
+    /*
+     * CSS Cascade Layers are widely available across major browsers.
+     */
+    useCSSLayers: true,
+
     rsOptions: {
       dev: process.env.NODE_ENV !== "production",
       aliases: {
