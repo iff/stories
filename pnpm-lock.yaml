@@ -19,10 +19,10 @@ importers:
         version: 3.1.0(webpack@5.99.5)
       '@mdx-js/react':
         specifier: ^3.1.0
-        version: 3.1.0(@types/react@19.1.1)(react@19.1.0)
+        version: 3.1.0(@types/react@19.1.2)(react@19.1.0)
       '@next/mdx':
         specifier: ^15.3.0
-        version: 15.3.0(@mdx-js/loader@3.1.0(webpack@5.99.5))(@mdx-js/react@3.1.0(@types/react@19.1.1)(react@19.1.0))
+        version: 15.3.0(@mdx-js/loader@3.1.0(webpack@5.99.5))(@mdx-js/react@3.1.0(@types/react@19.1.2)(react@19.1.0))
       '@playwright/test':
         specifier: ^1.51.1
         version: 1.51.1
@@ -42,11 +42,11 @@ importers:
         specifier: ^22.14.1
         version: 22.14.1
       '@types/react':
-        specifier: ^19.1.1
-        version: 19.1.1
+        specifier: ^19.1.2
+        version: 19.1.2
       '@types/react-dom':
         specifier: ^19.1.2
-        version: 19.1.2(@types/react@19.1.1)
+        version: 19.1.2(@types/react@19.1.2)
       '@types/unist':
         specifier: ^3.0.3
         version: 3.0.3
@@ -88,7 +88,7 @@ importers:
         version: 0.34.1
       timvir:
         specifier: ^0.2.36
-        version: 0.2.36(@mdx-js/react@3.1.0(@types/react@19.1.1)(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-hotkeys-hook@5.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
+        version: 0.2.36(@mdx-js/react@3.1.0(@types/react@19.1.2)(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-hotkeys-hook@5.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -551,8 +551,8 @@ packages:
     peerDependencies:
       '@types/react': ^19.0.0
 
-  '@types/react@19.1.1':
-    resolution: {integrity: sha512-ePapxDL7qrgqSF67s0h9m412d9DbXyC1n59O2st+9rjuuamWsZuD2w55rqY12CbzsZ7uVXb5Nw0gEp9Z8MMutQ==}
+  '@types/react@19.1.2':
+    resolution: {integrity: sha512-oxLPMytKchWGbnQM9O7D67uPa9paTNxO7jVoNMXgkkErULBPhPARCfkKL9ytcIJJRGjbsVwW4ugJzyFFvm/Tiw==}
 
   '@types/unist@2.0.7':
     resolution: {integrity: sha512-cputDpIbFgLUaGQn6Vqg3/YsJwxUwHLO13v3i5ouxT4lat0khip9AEWxtERujXV9wxIB1EyF97BSJFt6vpdI8g==}
@@ -1843,20 +1843,20 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@mdx-js/react@3.1.0(@types/react@19.1.1)(react@19.1.0)':
+  '@mdx-js/react@3.1.0(@types/react@19.1.2)(react@19.1.0)':
     dependencies:
       '@types/mdx': 2.0.13
-      '@types/react': 19.1.1
+      '@types/react': 19.1.2
       react: 19.1.0
 
   '@next/env@15.3.0': {}
 
-  '@next/mdx@15.3.0(@mdx-js/loader@3.1.0(webpack@5.99.5))(@mdx-js/react@3.1.0(@types/react@19.1.1)(react@19.1.0))':
+  '@next/mdx@15.3.0(@mdx-js/loader@3.1.0(webpack@5.99.5))(@mdx-js/react@3.1.0(@types/react@19.1.2)(react@19.1.0))':
     dependencies:
       source-map: 0.7.4
     optionalDependencies:
       '@mdx-js/loader': 3.1.0(webpack@5.99.5)
-      '@mdx-js/react': 3.1.0(@types/react@19.1.1)(react@19.1.0)
+      '@mdx-js/react': 3.1.0(@types/react@19.1.2)(react@19.1.0)
 
   '@next/swc-darwin-arm64@15.3.0':
     optional: true
@@ -2036,11 +2036,11 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
-  '@types/react-dom@19.1.2(@types/react@19.1.1)':
+  '@types/react-dom@19.1.2(@types/react@19.1.2)':
     dependencies:
-      '@types/react': 19.1.1
+      '@types/react': 19.1.2
 
-  '@types/react@19.1.1':
+  '@types/react@19.1.2':
     dependencies:
       csstype: 3.0.9
 
@@ -3150,9 +3150,9 @@ snapshots:
       source-map-support: 0.5.21
     optional: true
 
-  timvir@0.2.36(@mdx-js/react@3.1.0(@types/react@19.1.1)(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-hotkeys-hook@5.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0):
+  timvir@0.2.36(@mdx-js/react@3.1.0(@types/react@19.1.2)(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-hotkeys-hook@5.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0):
     dependencies:
-      '@mdx-js/react': 3.1.0(@types/react@19.1.1)(react@19.1.0)
+      '@mdx-js/react': 3.1.0(@types/react@19.1.2)(react@19.1.0)
       bytestring: 1.0.0
       downshift: 7.6.2(react@19.1.0)
       fuzzaldrin-plus: 0.6.0
