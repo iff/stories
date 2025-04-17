@@ -24,10 +24,6 @@
       "matchPackageNames": ["/^@mdx-js//"]
     },
     {
-      "matchPackageNames": ["timvir", "@timvir/mdx"],
-      "groupName": "Timvir"
-    },
-    {
       "automerge": true,
       "matchPackageNames": ["/^@types//"]
     }
