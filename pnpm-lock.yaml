@@ -33,8 +33,8 @@ importers:
         specifier: ^0.7.1
         version: 0.7.1(next@15.3.0(@babel/core@7.26.10)(@playwright/test@1.51.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@timvir/mdx':
-        specifier: ^0.2.36
-        version: 0.2.36
+        specifier: ^0.2.37
+        version: 0.2.37
       '@types/mdx':
         specifier: ^2.0.13
         version: 2.0.13
@@ -87,8 +87,8 @@ importers:
         specifier: ^0.34.1
         version: 0.34.1
       timvir:
-        specifier: ^0.2.36
-        version: 0.2.36(@mdx-js/react@3.1.0(@types/react@19.1.2)(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-hotkeys-hook@5.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
+        specifier: ^0.2.37
+        version: 0.2.37(@mdx-js/react@3.1.0(@types/react@19.1.2)(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-hotkeys-hook@5.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -507,8 +507,8 @@ packages:
   '@swc/helpers@0.5.15':
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
 
-  '@timvir/mdx@0.2.36':
-    resolution: {integrity: sha512-98rMCFy5lgUXlSYcbJftPz4Lv+HsQqyL9pBXpp1rblQhSC3exMeDf7uk4KWhqZ6kV+ysJVTb1MEOOq0TkoKMqA==}
+  '@timvir/mdx@0.2.37':
+    resolution: {integrity: sha512-fNd1Wo1aGU4B2wpfBAoP3iplWDRouh1TyehPwfiJincqtqo3wQs00PbfgKMU/BsIxbqlov4dXIzf1UTJ77x2RQ==}
 
   '@types/acorn@4.0.6':
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
@@ -886,9 +886,6 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  fuzzaldrin-plus@0.6.0:
-    resolution: {integrity: sha512-srIDThJHkdp3aPwJpR/HNzYZCRJwm07b/igxseoHSB7qR8e/gQp4F6lMGknE3TQI1Aq14TiFf/wzrHOp9LY/EA==}
-
   gensync@1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
     engines: {node: '>=6.9.0'}
@@ -919,9 +916,6 @@ packages:
 
   hast-util-whitespace@3.0.0:
     resolution: {integrity: sha512-88JUN06ipLwsnv+dVn+OIYOvAuvBMy/Qoi6O7mQHxdPXpjy+Cd6xRkWwux7DKO+4sYILtLBRIKgsdpS2gQc7qw==}
-
-  immer@10.1.1:
-    resolution: {integrity: sha512-s2MPrmjovJcoMaHtx6K11Ra7oD05NT97w1IC5zpMkT6Atjr7H8LjaDd81iIxUYpMKSRRNMJE703M1Fhr/TctHw==}
 
   inline-style-parser@0.1.1:
     resolution: {integrity: sha512-7NXolsK4CAS5+xvdj5OMMbI962hU/wvwoxk+LWR9Ek9bVtyuuYScDN6eS0rUm6TxApFpw7CX1o4uJzcd4AyD3Q==}
@@ -1423,8 +1417,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  timvir@0.2.36:
-    resolution: {integrity: sha512-A3vuCGLcKKhkZKhj6ayzyfYYDaaKnXO+Vzhfk4U4cjR4ixonWyFjud1Yx6sOMFrzVH9auGixAPmAemrVIiP1EA==}
+  timvir@0.2.37:
+    resolution: {integrity: sha512-9+tvTxmqxjgAEF6iS6Jzw0hZTMtSzM38AO4qRoa4ZP53ql9rR2mZjPHUJ/uR7mJRoIPdiZ+nJbfvblA5TPtZnA==}
     peerDependencies:
       '@mdx-js/react': ^2 || ^3
       react: ^17 || ^18 || ^19
@@ -1481,12 +1475,6 @@ packages:
     hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
-
-  use-immer@0.11.0:
-    resolution: {integrity: sha512-RNAqi3GqsWJ4bcCd4LMBgdzvPmTABam24DUaFiKfX9s3MSorNRz9RDZYJkllJoMHUxVLMDetwAuCDeyWNrp1yA==}
-    peerDependencies:
-      immer: '>=8.0.0'
-      react: ^16.8.0 || ^17.0.1 || ^18.0.0 || ^19.0.0
 
   vfile-message@4.0.2:
     resolution: {integrity: sha512-jRDZ1IMLttGj41KcZvlrYAaI3CfqpLpfpf+Mfig13viT6NKvRzWZ+lXz0Y5D60w6uJIBAOGq9mSHf0gktF0duw==}
@@ -1977,7 +1965,7 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@timvir/mdx@0.2.36':
+  '@timvir/mdx@0.2.37':
     dependencies:
       '@babel/generator': 7.26.10
       '@babel/parser': 7.26.10
@@ -2391,8 +2379,6 @@ snapshots:
   fsevents@2.3.2:
     optional: true
 
-  fuzzaldrin-plus@0.6.0: {}
-
   gensync@1.0.0-beta.2: {}
 
   glob-parent@5.1.2:
@@ -2445,8 +2431,6 @@ snapshots:
   hast-util-whitespace@3.0.0:
     dependencies:
       '@types/hast': 3.0.2
-
-  immer@10.1.1: {}
 
   inline-style-parser@0.1.1: {}
 
@@ -3150,19 +3134,16 @@ snapshots:
       source-map-support: 0.5.21
     optional: true
 
-  timvir@0.2.36(@mdx-js/react@3.1.0(@types/react@19.1.2)(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-hotkeys-hook@5.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0):
+  timvir@0.2.37(@mdx-js/react@3.1.0(@types/react@19.1.2)(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-hotkeys-hook@5.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0):
     dependencies:
       '@mdx-js/react': 3.1.0(@types/react@19.1.2)(react@19.1.0)
       bytestring: 1.0.0
       downshift: 7.6.2(react@19.1.0)
-      fuzzaldrin-plus: 0.6.0
-      immer: 10.1.1
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       react-feather: 2.0.10(react@19.1.0)
       react-hotkeys-hook: 5.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       shiki: 1.6.0
-      use-immer: 0.11.0(immer@10.1.1)(react@19.1.0)
       wonka: 6.3.4
 
   to-regex-range@5.0.1:
@@ -3226,11 +3207,6 @@ snapshots:
       browserslist: 4.24.2
       escalade: 3.2.0
       picocolors: 1.1.1
-
-  use-immer@0.11.0(immer@10.1.1)(react@19.1.0):
-    dependencies:
-      immer: 10.1.1
-      react: 19.1.0
 
   vfile-message@4.0.2:
     dependencies:
