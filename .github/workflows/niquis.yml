@@ -14,7 +14,7 @@ jobs:
           fetch-depth: 0
           clean: false
 
-      - run: nix run github:nicknovitski/nix-develop .#workflow
+      - run: nix run .#nix-develop .#workflow
 
       - run: pnpm run build
 
