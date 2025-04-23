@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0
           clean: false
 
-      - run: nix run github:nicknovitski/nix-develop .#workflow
+      - run: nix run .#nix-develop .#workflow
 
       - run: biome check --write --reporter=github .
 
@@ -42,7 +42,7 @@ jobs:
           fetch-depth: 0
           clean: false
 
-      - run: nix run github:nicknovitski/nix-develop .#workflow
+      - run: nix run .#nix-develop .#workflow
 
       - run: ./node_modules/.bin/knip
 
@@ -57,7 +57,7 @@ jobs:
           fetch-depth: 0
           clean: false
 
-      - run: nix run github:nicknovitski/nix-develop .#workflow
+      - run: nix run .#nix-develop .#workflow
 
       - run: ./node_modules/.bin/tsc --build
 
