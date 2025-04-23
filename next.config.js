@@ -38,6 +38,10 @@ const plugins = [
 export default withPlugins(plugins, {
   reactStrictMode: true,
 
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 
   transpilePackages: ["timvir"],

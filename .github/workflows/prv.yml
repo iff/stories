@@ -44,7 +44,22 @@ jobs:
 
       - run: nix run github:nicknovitski/nix-develop .#workflow
 
-      - run: pnpm exec knip
+      - run: ./node_modules/.bin/knip
+
+  typescript:
+    if: github.event.pull_request.draft == false
+    name: TypeScript
+    runs-on: [self-hosted, nixos]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          clean: false
+
+      - run: nix run github:nicknovitski/nix-develop .#workflow
+
+      - run: ./node_modules/.bin/tsc --build
 
   prv:
     if: github.event.pull_request.draft == false
@@ -53,5 +68,6 @@ jobs:
     needs:
       - biome
       - knip
+      - typescript
     steps:
       - run: "true"
