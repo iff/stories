@@ -4,6 +4,7 @@ on: deployment_status
 
 env:
   URNERYS: ur.caurea.org
+  BUILDID: github-run-${{ github.run_id }}-${{ github.run_attempt }}
 
 jobs:
   setup:
@@ -17,7 +18,7 @@ jobs:
 
       - shell: nix develop .#workflow --command bash {0}
         run: |
-          curl -sf -X POST -H "Content-Type: application/json" -d '{ "id": "github-run-${{ github.run_id }}-${{ github.run_attempt }}", "build": { "origin": { "commit": "${{ github.sha }}" } } }' "https://$URNERYS/api/v1/projects/stories/builds"
+          curl -sf -X POST -H "Content-Type: application/json" -d '{ "id": "${{ env.BUILDID }}", "build": { "origin": { "commit": "${{ github.sha }}" } } }' "https://$URNERYS/api/v1/projects/stories/builds"
 
   vst:
     name: Visual Smoke Test
@@ -71,9 +72,9 @@ jobs:
         run: |
           case "${{ github.event.deployment_status.environment }}" in
             Production)
-              curl -sf -X PATCH -H "Content-Type: application/json" -d '{ "baseline": { "build": "github-run-${{ github.run_id }}-${{ github.run_attempt }}" } }' "https://$URNERYS/api/v1/projects/stories/baselines/production"
+              curl -sf -X PATCH -H "Content-Type: application/json" -d '{ "baseline": { "build": "${{ env.BUILDID }}" } }' "https://$URNERYS/api/v1/projects/stories/baselines/production"
               ;;
             *)
-              curl -sf -X POST -H "Content-Type: application/json" -d '{ "check": { "baseline": "production" } }' "https://$URNERYS/api/v1/projects/stories/builds/github-run-${{ github.run_id }}-${{ github.run_attempt }}/checks"
+              curl -sf -X POST -H "Content-Type: application/json" -d '{ "check": { "baseline": "production" } }' "https://$URNERYS/api/v1/projects/stories/builds/${{ env.BUILDID }}/checks"
               ;;
           esac

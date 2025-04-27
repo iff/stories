@@ -9,9 +9,7 @@ function sanitizeTitle(s: string): string {
     .toLowerCase();
 }
 
-const build = process.env.GITHUB_RUN_ID
-  ? `github-run-${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_RUN_ATTEMPT}`
-  : sanitizeTitle(new Date().toISOString());
+const build = process.env.BUILDID ?? sanitizeTitle(new Date().toISOString());
 
 export async function uploadImage(
   page: Page,
