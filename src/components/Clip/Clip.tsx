@@ -4,6 +4,8 @@ import * as stylex from "@stylexjs/stylex";
 import { CompiledStyles, InlineStyles, StyleXArray } from "@stylexjs/stylex/lib/StyleXTypes";
 import * as React from "react";
 
+import { color } from "@/tokens.stylex";
+
 import NextImage from "next/image";
 import Link, { LinkProps } from "next/link";
 
@@ -208,7 +210,7 @@ const styles = stylex.create({
     fontSize: "0.75em",
     lineHeight: 1.3,
     fontStyle: "italic",
-    color: "var(--secondary-text-color)",
+    color: color.secondaryText,
   },
 
   video: {

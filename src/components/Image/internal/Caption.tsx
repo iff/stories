@@ -1,6 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
+import { color } from "@/tokens.stylex";
+
 import { vars } from "../variables.stylex";
 
 /**
@@ -33,7 +35,7 @@ const captionPlacementVariant = stylex.create({
     textAlign: "center",
     margin: "8px 0",
 
-    color: "var(--secondary-text-color)",
+    color: color.secondaryText,
   },
 
   overlay: {
