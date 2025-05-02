@@ -3,6 +3,8 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
+import { color } from "@/tokens.stylex";
+
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/navigation";
 import * as ReactDOM from "react-dom";
@@ -102,8 +104,8 @@ const styles = stylex.create({
     right: 0,
     bottom: 0,
     left: 0,
-    background: "#18191b",
-    color: "white",
+    backgroundColor: color.container,
+    color: color.onContainer,
     display: "flex",
     flexDirection: "column",
   },

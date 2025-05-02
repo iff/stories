@@ -1,6 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
+import { color } from "@/tokens.stylex";
+
 import { importBlob } from "@/cms";
 import { Brandmark } from "@/components/Brandmark";
 import Image from "next/image";
@@ -58,8 +60,8 @@ const styles = stylex.create({
   },
 
   lead: {
-    background: "#18191b",
-    color: "white",
+    background: color.container,
+    color: color.onContainer,
     textAlign: "center",
 
     padding: "0.7em 1em",

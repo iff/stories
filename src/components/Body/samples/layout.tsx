@@ -16,7 +16,7 @@ export default function Sample(props: Props) {
               placeItems: "center",
               padding: "8px",
               gridColumn: "lc / rc",
-              background: "teal",
+              backgroundColor: "teal",
               margin: "2px 0",
             }}
           >
@@ -28,7 +28,7 @@ export default function Sample(props: Props) {
               placeItems: "center",
               padding: "8px",
               gridColumn: "lex / rex",
-              background: "teal",
+              backgroundColor: "teal",
               margin: "2px 0",
             }}
           >
@@ -40,7 +40,7 @@ export default function Sample(props: Props) {
               placeItems: "center",
               padding: "8px",
               gridColumn: "le / re",
-              background: "teal",
+              backgroundColor: "teal",
               margin: "2px 0",
             }}
           >

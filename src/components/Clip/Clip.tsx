@@ -259,7 +259,7 @@ const styles = stylex.create({
     left: "5px",
     height: "3px",
     borderRadius: "2px",
-    background: "white",
+    backgroundColor: "white",
 
     zIndex: 3,
   },

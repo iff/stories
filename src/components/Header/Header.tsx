@@ -1,6 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
+import { color } from "@/tokens.stylex";
+
 import { Brandmark } from "@/components/Brandmark";
 import Image from "next/image";
 
@@ -108,8 +110,8 @@ const styles = stylex.create({
     margin: 0,
     padding: "0.55em 0.7em 0.4em",
 
-    background: "#18191b",
-    color: "white",
+    backgroundColor: color.container,
+    color: color.onContainer,
 
     fontSize: "clamp(32px, 3.5vw, 80px)",
     lineHeight: 1.2,

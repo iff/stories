@@ -1,6 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
+import { color } from "@/tokens.stylex";
+
 import Link from "next/link";
 
 interface Props extends React.ComponentPropsWithoutRef<"a"> {
@@ -28,8 +30,8 @@ const styles = stylex.create({
     fontSize: "clamp(32px, 3.5vw, 80px)",
     lineHeight: 1,
     padding: "0.5em 0.7em",
-    background: "#18191b",
-    color: "white",
+    backgroundColor: color.container,
+    color: color.onContainer,
   },
 
   name: {

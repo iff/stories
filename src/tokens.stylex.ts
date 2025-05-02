@@ -15,6 +15,10 @@ export const color = stylex.defineVars({
     default: "rgba(0, 0, 0, 0.66)",
     [DARK]: "hsla(0, 0%, 100%, 0.56)",
   },
+
+  container: "#18191b",
+  onContainer: "#ffffff",
+
   accent: {
     default: "#fe762a",
     [DARK]: "#fe762a",

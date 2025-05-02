@@ -187,8 +187,8 @@ const styles = stylex.create({
     margin: `0 0 ${vars.gap} 0`,
     padding: "0.5em 0.7em 0.4em",
 
-    background: "#18191b",
-    color: "rgba(255 255 255 / 0.96)",
+    background: color.container,
+    color: color.onContainer,
 
     gridArea: "title",
 
@@ -227,7 +227,7 @@ const styles = stylex.create({
 
   date: {
     marginBottom: "16px",
-    opacity: 0.6,
+    color: color.secondaryText,
     fontSize: "clamp(16px, 1.5vw, 20px)",
   },
 

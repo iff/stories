@@ -176,8 +176,8 @@ const styles = stylex.create({
     margin: "2em 0 1em",
     padding: "0.55em 0.7em 0.4em",
 
-    background: "black",
-    color: "white",
+    backgroundColor: color.container,
+    color: color.onContainer,
 
     fontSize: "clamp(32px, 3.5vw, 80px)",
     lineHeight: 1.2,
