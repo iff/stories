@@ -40,15 +40,13 @@ function Header(props: Props) {
       </div>
 
       <div {...stylex.props(styles.image)}>
-        <span {...stylex.props(styles.img)}>
-          <Image alt="" src={blob.asImage.url} fill sizes="100vw" style={{ objectFit: "cover" }} />
-        </span>
         <div
           {...stylex.props(styles.sqip)}
           style={{
             backgroundImage: `url(${blob.asImage.placeholder.url})`,
           }}
         />
+        <Image alt="" src={blob.asImage.url} fill sizes="100vw" {...stylex.props(styles.img)} />
       </div>
 
       <h1 {...stylex.props(styles.title)}>{title}</h1>
@@ -75,51 +73,29 @@ const styles = stylex.create({
   image: {
     position: "relative",
     height: "100%",
+
+    "@media (min-width: 720px)": {
+      margin: "56px 0 56px 88px",
+      height: "calc(100% - 112px)",
+    },
   },
 
   img: {
     position: "absolute",
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-
+    inset: 0,
     zIndex: 2,
-
-    "@media (min-width: 720px)": {
-      margin: "56px 0 56px 88px",
-
-      boxSizing: "border-box",
-      display: "block",
-      overflow: "hidden",
-      width: "initial",
-      height: "initial",
-      background: "none",
-      opacity: 1,
-      border: 0,
-      padding: 0,
-    },
+    objectFit: "cover",
   },
 
   sqip: {
     position: "absolute",
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
+    inset: 0,
     pointerEvents: "none",
     transition: "opacity 0.8s ease-out 0.2s",
     backgroundSize: "cover",
     backgroundPosition: "50% 50%",
 
     zIndex: 1,
-
-    "@media (min-width: 720px)": {
-      top: 56,
-      right: 0,
-      bottom: 56,
-      left: 88,
-    },
   },
 
   title: {
