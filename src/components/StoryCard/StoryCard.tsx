@@ -1,6 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
+import { color } from "@/tokens.stylex";
+
 import Image from "next/image";
 import Link from "next/link";
 import * as Icons from "react-feather";
@@ -245,7 +247,7 @@ const styles = stylex.create({
     transition: "color 0.12s",
 
     ":hover": {
-      color: "#fe762a",
+      color: color.accent,
     },
 
     "@media (min-width: 720px)": {
@@ -254,6 +256,6 @@ const styles = stylex.create({
   },
   icon: {
     margin: "-2px 4px 0 -6px",
-    color: "#fe762a",
+    color: color.accent,
   },
 });

@@ -1,6 +1,8 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
+import { color } from "@/tokens.stylex";
+
 import { Clip } from "@/components/Clip";
 import { Group } from "@/components/Group";
 import { Image } from "@/components/Image";
@@ -196,7 +198,7 @@ const styles = stylex.create({
     gridColumn: "lc / rc",
     margin: "1em 0",
     paddingLeft: "1em",
-    borderLeft: "2px solid #fe762a",
+    borderLeft: `2px solid ${color.accent}`,
   },
 });
 

@@ -21,7 +21,8 @@
       "@/fonts": ["fonts"],
       "@/hooks/*": ["src/hooks/*"],
       "@/timvir/*": ["src/timvir/*"],
-      "@/theme": ["src/theme"]
+      "@/theme": ["src/theme"],
+      "@/tokens.stylex": ["src/tokens.stylex"]
     },
     "incremental": true,
     "plugins": [
