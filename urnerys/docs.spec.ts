@@ -40,6 +40,8 @@ for (const url of [
   "/docs/components/Body/samples/text",
   "/docs/components/Body/samples/image",
   "/docs/components/Body/samples/group",
+  "/docs/components/StoryCard/samples/regular",
+  "/docs/components/StoryCard/samples/inverted",
 ]) {
   test(url, async ({ page }, { title }) => {
     await interceptImages(page);

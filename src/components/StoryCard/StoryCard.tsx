@@ -1,14 +1,14 @@
 import * as stylex from "@stylexjs/stylex";
 import * as React from "react";
 
-import { defineMessage } from "@formatjs/intl";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import * as Icons from "react-feather";
 import imageLoader from "src/imageLoader";
-import { getIntl } from "src/intl";
 
 import { vars } from "./variables.stylex";
+
+import StoryCardDateFragment from "./internal/StoryCardDateFragment";
 
 /**
  * The underlying DOM element which is rendered by this component.
@@ -49,105 +49,40 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 }
 
 async function StoryCard(props: Props) {
-  const intl = await getIntl("en");
-
   const { story, blocks = [], blob, date, title, teaser, layout = "regular", ...rest } = props;
-
-  const loaded = false;
 
   return (
     <Root {...rest} {...stylex.props(styles.root, tweaks[layout])}>
       <h2 {...stylex.props(styles.title)}>{title}</h2>
 
       <div {...stylex.props(styles.image)}>
-        <Image
-          alt=""
-          src={blob.asImage.url}
-          loader={imageLoader}
-          layout="fill"
-          objectFit="cover"
-          style={{ zIndex: 2 }}
-        />
-        <div
-          {...stylex.props(styles.sqip)}
-          style={{ opacity: loaded ? 0 : 1, backgroundImage: `url(${blob.asImage.placeholder.url})` }}
-        />
+        <Image alt="" src={blob.asImage.url} loader={imageLoader} fill style={{ objectFit: "cover" }} />
       </div>
 
       <div {...stylex.props(styles.teaser, layout === "inverted" && styles.teaserInverted)}>
         <div {...stylex.props(styles.teaserDiv)}>
           {date && (
             <div {...stylex.props(styles.date)}>
-              {(() => {
-                if (Array.isArray(date)) {
-                  const [from, to] = date;
-
-                  if (from.getUTCFullYear() === to.getUTCFullYear()) {
-                    if (from.getUTCMonth() === to.getUTCMonth()) {
-                      return intl.formatMessage(
-                        defineMessage({
-                          id: "hQR6Zk3",
-                          defaultMessage: "{month} {from} – {to}, {year}",
-                        }),
-                        {
-                          month: intl.formatDate(from, { month: "long" }),
-                          from: intl.formatDate(from, { day: "numeric" }),
-                          to: intl.formatDate(to, { day: "numeric" }),
-                          year: intl.formatDate(to, { year: "numeric" }),
-                        },
-                      );
-                    } else {
-                      return intl.formatMessage(
-                        defineMessage({
-                          id: "xo4t6Jj",
-                          defaultMessage: "{from} – {to}",
-                        }),
-                        {
-                          from: intl.formatDate(from, { month: "long", day: "numeric" }),
-                          to: intl.formatDate(to, { month: "long", day: "numeric", year: "numeric" }),
-                        },
-                      );
-                    }
-                  } else {
-                    return intl.formatMessage(
-                      defineMessage({
-                        id: "pakxPSK",
-                        defaultMessage: "{from} – {to}",
-                      }),
-                      {
-                        from: intl.formatDate(from, { month: "long", day: "numeric", year: "numeric" }),
-                        to: intl.formatDate(to, { month: "long", day: "numeric", year: "numeric" }),
-                      },
-                    );
-                  }
-                } else {
-                  return intl.formatDate(date);
-                }
-              })()}
+              <StoryCardDateFragment date={date} />
             </div>
           )}
 
           {teaser}
 
           <Link href={`/${story.id}`} {...stylex.props(styles.read)}>
-            <Icons.ArrowRight size={"1.1em"} style={{ margin: "0 8px 0 0" }} /> read this story
+            <Icons.ArrowRight size={"1.1em"} {...stylex.props(styles.icon)} /> Read this story
           </Link>
         </div>
       </div>
 
-      <div {...stylex.props(styles.image2)}>
-        <Image
-          alt=""
-          src={(blocks[0] ?? blob).asImage.url}
-          loader={imageLoader}
-          {...(blocks[0] ?? blob).asImage.dimensions}
-          objectFit="cover"
-          style={{ zIndex: 2 }}
-        />
-        <div
-          {...stylex.props(styles.sqip)}
-          style={{ opacity: loaded ? 0 : 1, backgroundImage: `url(${(blocks[0] ?? blob).asImage.placeholder.url})` }}
-        />
+      <div
+        {...stylex.props(styles.image2)}
+        style={{
+          justifySelf: layout === "inverted" ? "start" : "end",
+          aspectRatio: "11 / 16",
+        }}
+      >
+        <Image alt="" src={(blocks[0] ?? blob).asImage.url} loader={imageLoader} fill style={{ objectFit: "cover" }} />
       </div>
     </Root>
   );
@@ -159,11 +94,18 @@ const tweaks = stylex.create({
   regular: {},
 
   inverted: {
-    "@media (min-width: 720px)": {
+    "@media (min-width: 840px) and (max-width: 1399.999px)": {
+      gridTemplateColumns: "max(16px, env(safe-area-inset-left)) 1fr 1.5fr max(16px, env(safe-area-inset-right))",
+      gridTemplateAreas: `
+        ". title title title"
+        "teaser teaser image image"
+      `,
+    },
+
+    "@media (min-width: 1400px)": {
       gridTemplateAreas: `
         ". . . title title title title title title"
-        "teaser teaser teaser image image image image . ."
-        "si si si image image image image . ."
+        "teaser teaser teaser image image image image si si"
       `,
     },
   },
@@ -172,69 +114,64 @@ const tweaks = stylex.create({
 const styles = stylex.create({
   root: {
     display: "grid",
+    overflow: "hidden",
 
     textDecoration: "none",
 
-    gridTemplateColumns:
-      "[vs] max(16px, env(safe-area-inset-left)) [xs] 0 [ms] 0 [ns] 1fr [ne] 0 [me] 0 [xe] max(16px, env(safe-area-inset-right)) [ve]",
+    gridTemplateColumns: "max(16px, env(safe-area-inset-left)) 1fr max(16px, env(safe-area-inset-right))",
 
     gridTemplateAreas: `
-      ". title title title title title title"
-      "image image image image image image image"
-      ". teaser teaser teaser teaser teaser ."
+      ". title title"
+      "image image image"
+      ". teaser ."
     `,
 
-    "@media (min-width: 720px)": {
+    "@media (min-width: 840px) and (max-width: 1399.999px)": {
+      [vars.gap]: "24px",
+
+      gridTemplateColumns: "max(16px, env(safe-area-inset-left)) 1.5fr 1fr max(16px, env(safe-area-inset-right))",
+
+      gridTemplateAreas: `
+        ". title title title"
+        "image image teaser teaser"
+      `,
+    },
+
+    "@media (min-width: 1400px)": {
       [vars.gap]: "32px",
 
       gridTemplateColumns: `[vs] 1fr max(16px, env(safe-area-inset-left)) [xs] minmax(0, ${vars.xcW}) [ms] ${vars.mcW} [ns] ${vars.ncW} [ne] ${vars.mcW} [me] minmax(0, ${vars.xcW}) [xe] max(16px, env(safe-area-inset-right)) 1fr [ve]`,
 
-      gridTemplateRows: "min-content minmax(0, min-content) 1fr",
+      gridTemplateRows: "min-content minmax(0, min-content)",
 
       gridTemplateAreas: `
-        ". . . . title title title title title"
-        ". . image image image image teaser teaser teaser"
-        ". . image image image image si si si"
+        ". . title title title title title title title"
+        "si si image image image image teaser teaser teaser"
       `,
     },
   },
 
-  sqip: {
-    position: "absolute",
-    inset: 0,
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    pointerEvents: "none",
-    transition: "opacity 0.8s ease-out 0.5s",
-    backgroundSize: "cover",
-    backgroundPosition: "50% 50%",
-
-    zIndex: 1,
-  },
-
   image: {
-    position: "relative",
-    height: 0,
-    paddingBottom: "100%",
-
     gridArea: "image",
 
-    "@media (min-width: 720px)": {
-      paddingBottom: "calc((11 / 16) * 100%)",
-    },
+    position: "relative",
+    height: 0,
+    paddingBottom: "calc((11 / 16) * 100%)",
   },
 
   image2: {
     position: "relative",
 
-    margin: "32px",
-
     gridArea: "si",
 
+    margin: "0 32px",
+
+    alignSelf: "stretch",
+
+    height: "75%",
+
     display: "none",
-    "@media (min-width: 720px)": {
+    "@media (min-width: 1400px)": {
       display: "block",
     },
   },
@@ -268,7 +205,7 @@ const styles = stylex.create({
 
     gridArea: "teaser",
 
-    "@media (min-width: 720px)": {
+    "@media (min-width: 840px)": {
       margin: "0 32px",
     },
   },
@@ -281,9 +218,9 @@ const styles = stylex.create({
   },
 
   teaserDiv: {
-    "@media (min-width: 720px)": {
-      maxWidth: 530,
-    },
+    maxWidth: 530,
+
+    "@media (min-width: 720px)": {},
   },
 
   date: {
@@ -293,21 +230,30 @@ const styles = stylex.create({
   },
 
   read: {
-    fontSize: "clamp(16px, 1.5vw, 20px)",
+    position: "relative",
+
+    fontSize: "clamp(20px, 1.5vw, 24px)",
+    lineHeight: 1.4,
+
     display: "flex",
-    marginTop: "56px",
-    opacity: 0.6,
+    marginTop: "32px",
     alignItems: "center",
-    justifyContent: "flex-end",
-    marginRight: 6,
 
     color: "inherit",
     textDecoration: "none",
 
-    transition: "opacity 0.2s",
+    transition: "color 0.12s",
 
     ":hover": {
-      opacity: 1,
+      color: "#fe762a",
     },
+
+    "@media (min-width: 720px)": {
+      marginTop: "56px",
+    },
+  },
+  icon: {
+    margin: "-2px 4px 0 -6px",
+    color: "#fe762a",
   },
 });

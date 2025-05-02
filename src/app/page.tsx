@@ -41,6 +41,10 @@ const styles = stylex.create({
     display: "grid",
     gap: "6em",
     marginBlock: "2em 6em",
+
+    "@media (min-width: 720px)": {
+      gap: "9em",
+    },
   },
 });
 

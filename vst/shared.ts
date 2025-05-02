@@ -38,6 +38,11 @@ export async function waitForImages(page: Page): Promise<void> {
   for (const img of await page.locator("img").all()) {
     const isVisible = await img.evaluate((node) => {
       const rect = node.getBoundingClientRect();
+
+      if (rect.width === 0 && rect.height === 0) {
+        return false;
+      }
+
       return (
         rect.top >= 0 &&
         rect.left >= 0 &&
@@ -45,6 +50,7 @@ export async function waitForImages(page: Page): Promise<void> {
         rect.right <= (window.innerWidth || document.documentElement.clientWidth)
       );
     });
+
     if (isVisible) {
       // https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/complete
       await expect(img).toHaveJSProperty("complete", true);
