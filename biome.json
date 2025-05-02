@@ -12,7 +12,6 @@
     "rules": {
       "style": {
         "useImportType": "off",
-        "noNonNullAssertion": "warn",
         "noUselessElse": "off"
       },
       "a11y": {
