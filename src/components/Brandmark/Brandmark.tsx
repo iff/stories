@@ -42,7 +42,7 @@ const styles = stylex.create({
   byline: {
     fontSize: "0.45em",
     paddingTop: "0.2em",
-    opacity: 0.75,
+    color: color.onContainerSecondary,
   },
 });
 

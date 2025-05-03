@@ -18,6 +18,7 @@ export const color = stylex.defineVars({
 
   container: "#18191b",
   onContainer: "#ffffff",
+  onContainerSecondary: "rgba(255, 255, 255, 0.75)",
 
   accent: {
     default: "#fe762a",
