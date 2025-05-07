@@ -27,6 +27,7 @@ jobs:
           branch: biome-write-${{ github.event.pull_request.number }}
           commit-message: "biome:write"
           base: ${{ github.event.pull_request.head.ref }}
+          delete-branch: true
 
       - if: ${{ steps.create-pull-request.outputs.pull-request-number }}
         run: exit 1
