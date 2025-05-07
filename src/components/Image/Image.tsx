@@ -67,13 +67,12 @@ function Image(props: Props) {
 
   const image = (
     <NextImage
-      {...stylex.props(styles.img)}
+      {...stylex.props(styles.img, fill ? styles.cover : false, blob.asImage.url ? false : styles.blank)}
       alt=""
       src={blob.asImage.url}
       width={fill ? undefined : blob.asImage.dimensions.width}
       height={fill ? undefined : blob.asImage.dimensions.height}
       fill={fill}
-      style={{ objectFit: fill ? "cover" : undefined, display: blob.asImage.url ? undefined : "none" }}
       sizes={sizes}
       placeholder={blob.asImage.placeholder?.url as PlaceholderValue}
     />
@@ -122,6 +121,14 @@ const styles = stylex.create({
     display: "block",
     maxWidth: "100%",
     height: "100%",
+  },
+
+  cover: {
+    objectFit: "cover",
+  },
+
+  blank: {
+    display: "none",
   },
 });
 

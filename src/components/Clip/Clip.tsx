@@ -6,7 +6,7 @@ import * as React from "react";
 
 import { color } from "@/tokens.stylex";
 
-import NextImage from "next/image";
+import Image from "next/image";
 import Link, { LinkProps } from "next/link";
 
 /**
@@ -15,17 +15,13 @@ import Link, { LinkProps } from "next/link";
 const Root = "figure";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
-  video?: {
+  video: {
     poster: {
       url: string;
 
       dimensions: {
         width: number;
         height: number;
-      };
-
-      placeholder: {
-        url: string;
       };
     };
 
@@ -44,7 +40,6 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 }
 
 /*
- * - SQIP    : showing the low quality placeholder
  * - POSTER  : showing the poster in full resolution
  * - PLAYING : playing the video
  */
@@ -67,7 +62,7 @@ function Clip(props: Props) {
           if (videoRef.current && progressRef.current) {
             const video = videoRef.current;
             const progress = video.currentTime / video.duration;
-            progressRef.current.style.width = `calc(${progress * 100}% - 10px)`;
+            progressRef.current.style.width = `calc((100% - 10px) * ${progress})`;
           }
 
           update();
@@ -82,12 +77,19 @@ function Clip(props: Props) {
         cancelAnimationFrame(rafId);
         rafId = undefined;
       }
+
+      if (progressRef.current) {
+        progressRef.current.style.width = "0px";
+      }
     };
   }, [playing]);
 
   return (
     <Root ref={ref} {...stylex.props(styles.root, sx)} {...rest}>
-      <div style={{ position: "relative", contain: "layout" }}>
+      <div
+        {...stylex.props(styles.wrapper)}
+        style={{ aspectRatio: `${video.poster.dimensions.width} / ${video.poster.dimensions.height}` }}
+      >
         <video
           ref={videoRef}
           {...stylex.props(styles.video)}
@@ -102,23 +104,16 @@ function Clip(props: Props) {
             setPlaying(false);
           }}
         >
-          <source src={video?.renditions?.[0]?.url} type="video/mp4" />
+          <source src={video.renditions[0]?.url} type="video/mp4" />
         </video>
 
-        <div data-poster {...stylex.props(styles.poster)} style={{ opacity: playing ? 0 : 1 }}>
-          {video?.poster?.url && (
-            <NextImage
-              alt=""
-              src={video?.poster?.url}
-              fill
-              sizes="100vw"
-              style={{
-                objectFit: "cover",
-              }}
-            />
-          )}
-          <div {...stylex.props(styles.sqip)} style={{ backgroundImage: `url(${video?.poster?.placeholder?.url})` }} />
-        </div>
+        <Image
+          {...stylex.props(styles.poster, playing ? false : styles.visible)}
+          alt=""
+          src={video.poster.url}
+          fill
+          sizes="100vw"
+        />
 
         {href && (
           <Link {...stylex.props(styles.focus)} href={href}>
@@ -152,18 +147,15 @@ function Clip(props: Props) {
             style={{ position: "absolute", bottom: -1, right: -1, cursor: "pointer" }}
             onClick={() => {
               const videoElement = ref.current?.querySelector("video");
-              const posterElement = ref.current?.querySelector<HTMLElement>("[data-poster]");
-              if (!videoElement || !posterElement) {
+              if (!videoElement) {
                 return;
               }
 
               if (videoElement.paused) {
                 videoElement.currentTime = 0;
                 videoElement.play();
-                posterElement.style.opacity = "0";
               } else {
                 videoElement.pause();
-                posterElement.style.opacity = "1";
               }
             }}
           >
@@ -188,7 +180,7 @@ function Clip(props: Props) {
           </svg>
         </div>
 
-        {playing && <div {...stylex.props(styles.progress)} ref={progressRef} />}
+        <div {...stylex.props(styles.progress, playing && styles.visible)} ref={progressRef} />
       </div>
 
       {caption && <figcaption {...stylex.props(styles.figcaption)}>{caption}</figcaption>}
@@ -202,6 +194,15 @@ const styles = stylex.create({
   root: {
     margin: 0,
     overflow: "hidden",
+  },
+
+  visible: {
+    opacity: 1,
+  },
+
+  wrapper: {
+    position: "relative",
+    contain: "layout",
   },
 
   figcaption: {
@@ -220,21 +221,10 @@ const styles = stylex.create({
   },
 
   poster: {
+    display: "block",
+    opacity: 0,
     transition: "opacity 0.4s ease-out",
-  },
-
-  img: {
-    zIndex: 2,
-  },
-
-  sqip: {
-    position: "absolute",
-    inset: 0,
-    pointerEvents: "none",
-
-    backgroundSize: "cover",
-    backgroundPosition: "50% 50%",
-
+    objectFit: "cover",
     zIndex: 1,
   },
 
@@ -260,6 +250,8 @@ const styles = stylex.create({
     height: "3px",
     borderRadius: "2px",
     backgroundColor: "white",
+    transition: "width 0.12s ease-out",
+    opacity: 0,
 
     zIndex: 3,
   },
