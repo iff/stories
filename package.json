@@ -24,7 +24,7 @@
     "@types/unist": "^3.0.3",
     "@vercel/speed-insights": "^1.2.0",
     "caniuse-lite": "^1.0.30001718",
-    "feed": "^4.2.2",
+    "feed": "^5.0.1",
     "knip": "^5.57.2",
     "next": "^15.3.2",
     "react": "^19.1.0",
