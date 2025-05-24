@@ -1,5 +1,5 @@
 import * as stylex from "@stylexjs/stylex";
-import { CompiledStyles, InlineStyles, StyleXArray } from "@stylexjs/stylex/lib/StyleXTypes";
+import { CompiledStyles, InlineStyles, StyleXArray } from "@stylexjs/stylex";
 import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 import * as React from "react";
 

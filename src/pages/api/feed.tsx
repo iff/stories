@@ -67,7 +67,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const blocks = extractBlocks(body);
 
     const blobs = await (async (): Promise<
-      Array<{ name: string; asImage: { url: string }; asVideo: { renditions: Array<{ url: string }> } }>
+      Array<{
+        name: string;
+        asImage: { url: string; dimensions: { width: number; height: number } };
+        asVideo: {
+          poster: { url: string; dimensions: { width: number; height: number } };
+          renditions: Array<{ url: string }>;
+        };
+      }>
     > => {
       if (blocks.length === 0) {
         return [];
@@ -125,18 +132,27 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.end(feed.atom1());
 };
 
-function Image(props: { blobs: Array<{ name: string; asImage: { url: string } }>; blobId: string }) {
+function Image(props: {
+  blobs: Array<{ name: string; asImage: { url: string; dimensions: { width: number; height: number } } }>;
+  blobId: string;
+}) {
   const { blobs, blobId } = props;
   const blob = blobs.find((x) => x.name === blobId);
   if (!blob) {
     return <div>Image {blobId} not found!</div>;
   }
 
-  return <img alt="" src={blob.asImage.url} />;
+  return <img src={blob.asImage.url} {...blob.asImage.dimensions} alt="" />;
 }
 
 function Clip(props: {
-  blobs: Array<{ name: string; asVideo: { renditions: Array<{ url: string }> } }>;
+  blobs: Array<{
+    name: string;
+    asVideo: {
+      poster: { url: string; dimensions: { width: number; height: number } };
+      renditions: Array<{ url: string }>;
+    };
+  }>;
   blobId: string;
 }) {
   const { blobs, blobId } = props;
@@ -147,7 +163,7 @@ function Clip(props: {
   }
 
   return (
-    <video>
+    <video {...blob.asVideo.poster.dimensions}>
       <source src={blob.asVideo.renditions[0].url} type="video/mp4" />
     </video>
   );
