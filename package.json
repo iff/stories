@@ -18,7 +18,7 @@
     "@stylexswc/nextjs-plugin": "^0.8.1",
     "@timvir/mdx": "^0.2.38",
     "@types/mdx": "^2.0.13",
-    "@types/node": "^22.15.21",
+    "@types/node": "^22.15.24",
     "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
     "@types/unist": "^3.0.3",
