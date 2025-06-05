@@ -23,7 +23,7 @@
     "@types/react-dom": "^19.1.5",
     "@types/unist": "^3.0.3",
     "@vercel/speed-insights": "^1.2.0",
-    "caniuse-lite": "^1.0.30001718",
+    "caniuse-lite": "^1.0.30001721",
     "feed": "^5.1.0",
     "knip": "^5.59.1",
     "next": "^15.3.3",
