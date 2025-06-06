@@ -1,9 +1,10 @@
 import * as fs from "node:fs";
 import { ParsedUrlQuery } from "node:querystring";
-import { extractBlocks } from "@/cms";
+import { extractBlocks, importBlob } from "@/cms";
 import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
 import { lookupStory } from "content";
+import { Metadata } from "next";
 import Head from "next/head";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
@@ -21,6 +22,23 @@ interface Params {
 
 interface Props {
   params: Promise<Params>;
+}
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { storyId, blockId } = await props.params;
+  const { block } = await data({ storyId, blockId });
+
+  const image = block.__typename === "Image" ? block.image : block.video?.poster;
+
+  return {
+    title: block.caption,
+    openGraph: {
+      images: "src" in image ? image.src : image.url,
+    },
+    twitter: {
+      card: "summary_large_image",
+    },
+  };
 }
 
 interface Data {
@@ -58,12 +76,6 @@ export default async function Page(props: Props) {
     <>
       <Head>
         <title>{title}</title>
-
-        <meta property="og:title" content={title} />
-        {block.caption && <meta property="og:description" content={block.caption} />}
-        <meta property="og:image" content={"src" in image ? image.src : image.url} />
-
-        <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
       <Lightbox

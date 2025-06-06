@@ -31,10 +31,12 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     return {};
   }
 
+  const blob = await importBlob(story.image);
+
   return {
     title: story.title,
     openGraph: {
-      images: `https://app-gcsszncmzq-lz.a.run.app/og/${process.env.VERCEL_URL}/${storyId}/og:image`,
+      images: blob.asImage.url,
     },
     twitter: {
       card: "summary_large_image",
