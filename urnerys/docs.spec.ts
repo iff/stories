@@ -4,7 +4,7 @@ import { build, interceptImages, sanitizeTitle, uploadImage, waitForImages } fro
 for (const url of ["/docs/components/Image", "/docs/components/Group", "/docs/components/Clip"]) {
   test(url, async ({ page }) => {
     await page.setViewportSize({ width: 1400, height: 900 });
-    await page.goto(url, { waitUntil: "domcontentloaded" });
+    await page.goto(url);
     await page.waitForTimeout(2000);
     await waitForImages(page);
 
@@ -58,7 +58,7 @@ for (const url of [
 
     for (const viewport of viewports) {
       await page.setViewportSize(viewport);
-      await page.goto(url, { waitUntil: "domcontentloaded" });
+      await page.goto(url);
       await page.waitForTimeout(2000);
       await waitForImages(page);
 

@@ -29,6 +29,22 @@ export async function uploadImage(page: Page, set: string, title: string, formul
 }
 
 export async function waitForImages(page: Page): Promise<void> {
+  /*
+   * Force all images (even those outside of the viewport) to be decoded
+   * synchronously and loaded eagerly.
+   */
+  await page.evaluate(() => {
+    Array.from(document.images).every((img) => {
+      if (img.decoding !== "sync") {
+        img.decoding = "sync";
+      }
+
+      if (img.loading !== "eager") {
+        img.loading = "eager";
+      }
+    });
+  });
+
   for (const img of await page.locator("img").all()) {
     const isVisible = await img.evaluate((node) => {
       const rect = node.getBoundingClientRect();
@@ -39,6 +55,7 @@ export async function waitForImages(page: Page): Promise<void> {
         rect.right <= (window.innerWidth || document.documentElement.clientWidth)
       );
     });
+
     if (isVisible) {
       // https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/complete
       await expect(img).toHaveJSProperty("complete", true);
@@ -47,6 +64,12 @@ export async function waitForImages(page: Page): Promise<void> {
       await expect(img).not.toHaveJSProperty("naturalWidth", 0);
     }
   }
+
+  /*
+   * Add a small delay to allow the GPU or compositor to finish processing
+   * the page and fully render all the images.
+   */
+  await page.waitForTimeout(50);
 }
 
 export async function interceptImages(page: Page) {
