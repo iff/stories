@@ -13,6 +13,10 @@ export default defineConfig({
     trace: "on-first-retry",
     screenshot: "only-on-failure",
 
+    extraHTTPHeaders: {
+      "x-vercel-skip-toolbar": "1",
+    },
+
     launchOptions: {
       executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH,
       args: ["--single-process"],

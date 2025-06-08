@@ -12,5 +12,9 @@ export default defineConfig({
     baseURL: process.env.URL ?? "http://localhost:3000",
     trace: "on-first-retry",
     screenshot: "only-on-failure",
+
+    extraHTTPHeaders: {
+      "x-vercel-skip-toolbar": "1",
+    },
   },
 });
