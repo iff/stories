@@ -58,7 +58,15 @@ async function StoryCard(props: Props) {
       <h2 {...stylex.props(styles.title)}>{title}</h2>
 
       <div {...stylex.props(styles.image)}>
-        <Image alt="" src={blob.asImage.url} loader={imageLoader} fill style={{ objectFit: "cover" }} />
+        <Image
+          alt=""
+          src={blob.asImage.url}
+          loader={imageLoader}
+          fill
+          style={{ objectFit: "cover" }}
+          placeholder="blur"
+          blurDataURL={blob.asImage.placeholder.url}
+        />
       </div>
 
       <div {...stylex.props(styles.teaser, layout === "inverted" && styles.teaserInverted)}>
@@ -84,7 +92,15 @@ async function StoryCard(props: Props) {
           aspectRatio: "11 / 16",
         }}
       >
-        <Image alt="" src={(blocks[0] ?? blob).asImage.url} loader={imageLoader} fill style={{ objectFit: "cover" }} />
+        <Image
+          alt=""
+          src={(blocks[0] ?? blob).asImage.url}
+          loader={imageLoader}
+          fill
+          style={{ objectFit: "cover" }}
+          placeholder="blur"
+          blurDataURL={(blocks[0] ?? blob).asImage.placeholder.url}
+        />
       </div>
     </Root>
   );
