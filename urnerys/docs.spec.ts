@@ -5,7 +5,7 @@ for (const url of ["/docs/components/Image", "/docs/components/Group", "/docs/co
   test(url, async ({ page }) => {
     await page.setViewportSize({ width: 1400, height: 900 });
     await page.goto(url);
-    await page.waitForTimeout(2000);
+    await page.waitForLoadState("networkidle");
     await waitForImages(page);
 
     const elements = await page.$$(".timvir-b-Exhibit");
