@@ -10,7 +10,7 @@ export default defineConfig({
 
   use: {
     baseURL: process.env.URL ?? "http://localhost:3000",
-    trace: "on-first-retry",
+    trace: "on",
     screenshot: "only-on-failure",
 
     extraHTTPHeaders: {

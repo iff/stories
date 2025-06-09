@@ -38,6 +38,12 @@ jobs:
         env:
           URL: ${{ github.event.deployment_status.target_url }}
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: test-results-vst
+          path: test-results/
+          retention-days: 7
+
   urnerys:
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
@@ -59,6 +65,12 @@ jobs:
       - run: ./node_modules/.bin/playwright test urnerys/*.spec.ts
         env:
           URL: ${{ github.event.deployment_status.target_url }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: test-results-urnerys
+          path: test-results/
+          retention-days: 7
 
   seal:
     if: github.event.deployment_status.state == 'success'
