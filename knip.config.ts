@@ -2,8 +2,9 @@ import { KnipConfig } from "knip";
 
 const config: KnipConfig = {
   entry: [
-    // Visual Smoke Test
+    // Playwright Tests
     "vst/playwright.config.ts",
+    "urnerys/playwright.config.ts",
 
     // Next.js MDX support
     "mdx-components.tsx",
