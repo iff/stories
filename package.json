@@ -13,7 +13,7 @@
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.3.4",
-    "@playwright/test": "^1.52.0",
+    "@playwright/test": "^1.53.1",
     "@stylexjs/stylex": "^0.13.1",
     "@stylexswc/nextjs-plugin": "^0.8.1",
     "@timvir/mdx": "^0.2.38",
