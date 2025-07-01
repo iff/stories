@@ -16,7 +16,7 @@
     "@playwright/test": "^1.53.1",
     "@stylexjs/stylex": "^0.13.1",
     "@stylexswc/nextjs-plugin": "^0.8.1",
-    "@timvir/mdx": "^0.2.38",
+    "@timvir/mdx": "^0.2.39",
     "@types/mdx": "^2.0.13",
     "@types/node": "^22.15.33",
     "@types/react": "^19.1.8",
@@ -34,7 +34,7 @@
     "remark-mdx": "^3.1.0",
     "remark-parse": "^11.0.0",
     "sharp": "^0.34.2",
-    "timvir": "^0.2.38",
+    "timvir": "^0.2.39",
     "typescript": "^5.8.3",
     "unified": "^11.0.5"
   }
