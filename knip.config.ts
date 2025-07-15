@@ -5,9 +5,6 @@ const config: KnipConfig = {
     // Playwright Tests
     "vst/playwright.config.ts",
     "urnerys/playwright.config.ts",
-
-    // Next.js MDX support
-    "mdx-components.tsx",
   ],
 
   ignore: ["public/**/*"],
@@ -15,6 +12,11 @@ const config: KnipConfig = {
   ignoreDependencies: [
     // Explicit dependency so it can be updated by Renovate
     "caniuse-lite",
+  ],
+
+  ignoreBinaries: [
+    // Installed through Nix
+    "biome",
   ],
 };
 
