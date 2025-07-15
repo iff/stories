@@ -1,5 +1,5 @@
-import { importBlob } from "@/cms";
 import * as React from "react";
+import { importBlob } from "@/cms";
 import { Image } from "..";
 
 type Props = Partial<React.ComponentPropsWithoutRef<typeof Image>>;

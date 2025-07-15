@@ -2,12 +2,11 @@
 
 import * as stylex from "@stylexjs/stylex";
 import { CompiledStyles, InlineStyles, StyleXArray } from "@stylexjs/stylex";
+import Image from "next/image";
+import Link, { LinkProps } from "next/link";
 import * as React from "react";
 
 import { color } from "@/tokens.stylex";
-
-import Image from "next/image";
-import Link, { LinkProps } from "next/link";
 
 /**
  * The underlying DOM element which is rendered by this component.
@@ -54,7 +53,7 @@ function Clip(props: Props) {
 
   const progressRef = React.useRef<null | HTMLDivElement>(null);
   React.useEffect(() => {
-    let rafId: undefined | number = undefined;
+    let rafId: undefined | number;
 
     if (playing) {
       const update = () => {
@@ -123,6 +122,7 @@ function Clip(props: Props) {
               viewBox="-400 0 400 200"
               style={{ position: "absolute", top: -1, right: -1, cursor: "pointer" }}
             >
+              <title>Open in Lightbox</title>
               <path d="M0 0 L-80 0 L0 100 Z" fill="black" />
               <g
                 transform="scale(1.5) translate(-28, 4)"
@@ -159,6 +159,7 @@ function Clip(props: Props) {
               }
             }}
           >
+            <title>{playing ? "Pause" : "Play"}</title>
             <path d="M0 0 L-250 0 L0 -80 Z" fill="black" />
             <g
               transform="translate(-90, -90) scale(3)"

@@ -1,8 +1,8 @@
-import { Page, PageScreenshotOptions, expect } from "@playwright/test";
+import { expect, Page, PageScreenshotOptions } from "@playwright/test";
 
 function sanitizeTitle(s: string): string {
   return s
-    .replaceAll(/[\/:*\?"<>|\s]+/g, "-")
+    .replaceAll(/[/:*?"<>|\s]+/g, "-")
     .replace(/-+$/g, "")
     .replace(/^-/, "")
     .replace(/-$/, "")

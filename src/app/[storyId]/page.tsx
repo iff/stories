@@ -1,15 +1,13 @@
-import * as stylex from "@stylexjs/stylex";
-import * as React from "react";
-
 import * as fs from "node:fs";
 import { ParsedUrlQuery } from "node:querystring";
+import * as stylex from "@stylexjs/stylex";
+import { lookupStory } from "content";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { extractBlocks, importBlob } from "@/cms";
 import { Body } from "@/components/Body";
 import { Header } from "@/components/Header";
 import { StoryById } from "@/components/Story";
-import { lookupStory } from "content";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
 
 export interface Query extends ParsedUrlQuery {
   storyId: string;

@@ -1,6 +1,6 @@
+import { defineMessage } from "@formatjs/intl";
 import * as React from "react";
 
-import { defineMessage } from "@formatjs/intl";
 import { getIntl } from "src/intl";
 
 /**

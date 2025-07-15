@@ -1,5 +1,4 @@
 import * as stylex from "@stylexjs/stylex";
-import * as React from "react";
 
 import { importBlob } from "@/cms";
 import { Hero } from "@/components/Hero";

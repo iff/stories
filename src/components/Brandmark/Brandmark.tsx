@@ -1,9 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
-import * as React from "react";
-
-import { color } from "@/tokens.stylex";
-
 import Link from "next/link";
+import * as React from "react";
+import { color } from "@/tokens.stylex";
 
 interface Props extends React.ComponentPropsWithoutRef<"a"> {
   size?: "regular" | "large";

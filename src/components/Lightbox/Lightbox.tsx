@@ -1,14 +1,13 @@
 "use client";
 
 import * as stylex from "@stylexjs/stylex";
-import * as React from "react";
-
-import { color } from "@/tokens.stylex";
-
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/navigation";
+import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as Icons from "react-feather";
+
+import { color } from "@/tokens.stylex";
 
 /**
  * The underlying DOM element which is rendered by this component.

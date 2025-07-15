@@ -1,11 +1,10 @@
 import * as stylex from "@stylexjs/stylex";
+import Image from "next/image";
 import * as React from "react";
-
-import { color } from "@/tokens.stylex";
 
 import { importBlob } from "@/cms";
 import { Brandmark } from "@/components/Brandmark";
-import Image from "next/image";
+import { color } from "@/tokens.stylex";
 
 /**
  * The underlying DOM element which is rendered by this component.

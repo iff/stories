@@ -1,6 +1,6 @@
 {
   "files": {
-    "ignore": [".direnv", ".next", "node_modules"]
+    "includes": ["**", "!**/.direnv", "!**/.next", "!**/node_modules"]
   },
 
   "formatter": {
@@ -15,9 +15,8 @@
         "noUselessElse": "off"
       },
       "a11y": {
-        "useKeyWithClickEvents": "off",
-        "useMediaCaption": "off",
-        "noSvgWithoutTitle": "off"
+        "noStaticElementInteractions": "off",
+        "useKeyWithClickEvents": "off"
       }
     }
   }

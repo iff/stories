@@ -1,16 +1,15 @@
 import * as stylex from "@stylexjs/stylex";
-import * as React from "react";
-
-import { color } from "@/tokens.stylex";
-
 import Image from "next/image";
 import Link from "next/link";
+import * as React from "react";
 import * as Icons from "react-feather";
-import imageLoader from "src/imageLoader";
 
-import { vars } from "./variables.stylex";
+import imageLoader from "src/imageLoader";
+import { color } from "@/tokens.stylex";
 
 import StoryCardDateFragment from "./internal/StoryCardDateFragment";
+
+import { vars } from "./variables.stylex";
 
 /**
  * The underlying DOM element which is rendered by this component.

@@ -1,10 +1,10 @@
 import * as stylex from "@stylexjs/stylex";
 import { CompiledStyles, InlineStyles, StyleXArray } from "@stylexjs/stylex";
 import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
-import * as React from "react";
-
 import NextImage from "next/image";
 import Link, { LinkProps } from "next/link";
+import * as React from "react";
+
 import Caption from "./internal/Caption";
 
 import { vars } from "./variables.stylex";

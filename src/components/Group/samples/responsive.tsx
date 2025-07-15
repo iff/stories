@@ -1,6 +1,6 @@
+import * as React from "react";
 import { importBlob } from "@/cms";
 import { Image } from "@/components/Image";
-import * as React from "react";
 import { Group } from "..";
 
 type Props = Partial<React.ComponentPropsWithoutRef<typeof Group>>;

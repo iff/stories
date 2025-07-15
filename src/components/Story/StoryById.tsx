@@ -10,7 +10,7 @@ function StoryById() {
 
   const focus = searchParams?.get("focus");
   React.useEffect(() => {
-    let rafHandle: undefined | number = undefined;
+    let rafHandle: undefined | number;
 
     if (pathname && focus) {
       const go = () => {

@@ -1,11 +1,13 @@
+// biome-ignore-all lint/performance/noImgElement: This file generates static HTML for the feed
+
 import * as fs from "node:fs";
-import { extractBlocks } from "@/cms";
 import { mediaType } from "@hapi/accept";
 import { site, stories } from "content";
 import { Feed } from "feed";
 import { NextApiRequest, NextApiResponse } from "next";
 import * as React from "react";
 import ReactDOMServer from "react-dom/server";
+import { extractBlocks } from "@/cms";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { host } = req.headers;

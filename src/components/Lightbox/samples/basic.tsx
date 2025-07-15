@@ -1,6 +1,6 @@
-import { importBlob } from "@/cms";
 import NextImage from "next/image";
 import * as React from "react";
+import { importBlob } from "@/cms";
 import { Lightbox } from "..";
 
 type Props = Partial<React.ComponentPropsWithoutRef<typeof Lightbox>>;

@@ -2,11 +2,10 @@ import * as stylex from "@stylexjs/stylex";
 import { MDXProps } from "mdx/types";
 import * as React from "react";
 
-import { color } from "@/tokens.stylex";
-
 import { Clip } from "@/components/Clip";
 import { Group } from "@/components/Group";
 import { Image } from "@/components/Image";
+import { color } from "@/tokens.stylex";
 
 import { vars } from "./variables.stylex";
 

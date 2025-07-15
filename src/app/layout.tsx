@@ -1,7 +1,7 @@
-import { tuna } from "@/fonts";
 import * as stylex from "@stylexjs/stylex";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
+import { tuna } from "@/fonts";
 
 import { color } from "@/tokens.stylex";
 

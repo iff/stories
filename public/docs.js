@@ -13,7 +13,7 @@ applyTheme();
 function applyTheme() {
   const theme = detectTheme();
   if (theme) {
-    useTheme(theme);
+    document.documentElement.setAttribute("data-timvir-theme", theme);
   }
 }
 
@@ -30,8 +30,4 @@ function detectTheme() {
       return colorScheme;
     }
   }
-}
-
-function useTheme(theme) {
-  document.documentElement.setAttribute("data-timvir-theme", theme);
 }

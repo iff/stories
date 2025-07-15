@@ -1,9 +1,9 @@
-import { Page, expect } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 import sharp from "sharp";
 
 export function sanitizeTitle(s: string): string {
   return s
-    .replaceAll(/[\/:*\?"<>|\s\.\(\)]+/g, "-")
+    .replaceAll(/[/:*?"<>|\s.()]+/g, "-")
     .replace(/-+$/g, "")
     .replace(/^-/, "")
     .replace(/-$/, "")
