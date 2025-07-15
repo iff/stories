@@ -203,13 +203,13 @@ const styles = stylex.create({
     margin: `0 0 ${vars.gap} 0`,
     padding: "0.5em 0.7em 0.4em",
 
-    background: color.container,
+    backgroundColor: color.container,
     color: color.onContainer,
 
     gridArea: "title",
 
     "@media (prefers-color-scheme: dark)": {
-      background: "transparent",
+      backgroundColor: "transparent",
       borderBottom: "5px solid currentColor",
       paddingBottom: "0.2em",
     },

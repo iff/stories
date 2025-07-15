@@ -60,7 +60,7 @@ const styles = stylex.create({
   },
 
   lead: {
-    background: color.container,
+    backgroundColor: color.container,
     color: color.onContainer,
     textAlign: "center",
 
@@ -90,7 +90,7 @@ const styles = stylex.create({
       left: 0,
       bottom: 0,
       right: 0,
-      background: "radial-gradient(circle, transparent 70%, black 200%)",
+      backgroundImage: "radial-gradient(circle, transparent 70%, black 200%)",
       zIndex: 2,
     },
 
