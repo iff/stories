@@ -1,3 +1,4 @@
+import { MDXProps } from "mdx/types";
 import dynamic from "next/dynamic";
 import * as React from "react";
 
@@ -61,9 +62,7 @@ interface Story {
   };
 
   body: {
-    Component: React.ComponentType<{
-      components: Record<string, unknown>;
-    }>;
+    Component: React.ComponentType<MDXProps>;
   };
 }
 

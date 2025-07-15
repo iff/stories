@@ -1,4 +1,5 @@
 import * as stylex from "@stylexjs/stylex";
+import { MDXProps } from "mdx/types";
 import * as React from "react";
 
 import { color } from "@/tokens.stylex";
@@ -51,9 +52,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
     };
   }>;
 
-  Component: React.ComponentType<{
-    components: Record<string, unknown>;
-  }>;
+  Component: React.ComponentType<MDXProps>;
 }
 
 function Body(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Root>>) {
