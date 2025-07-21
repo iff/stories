@@ -39,8 +39,8 @@ importers:
         specifier: ^2.0.13
         version: 2.0.13
       '@types/node':
-        specifier: ^22.16.4
-        version: 22.16.4
+        specifier: ^22.16.5
+        version: 22.16.5
       '@types/react':
         specifier: ^19.1.8
         version: 19.1.8
@@ -61,7 +61,7 @@ importers:
         version: 5.1.0
       knip:
         specifier: ^5.62.0
-        version: 5.62.0(@types/node@22.16.4)(typescript@5.8.3)
+        version: 5.62.0(@types/node@22.16.5)(typescript@5.8.3)
       next:
         specifier: ^15.4.1
         version: 15.4.1(@babel/core@7.26.10)(@playwright/test@1.54.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -626,8 +626,8 @@ packages:
   '@types/ms@0.7.31':
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
 
-  '@types/node@22.16.4':
-    resolution: {integrity: sha512-PYRhNtZdm2wH/NT2k/oAJ6/f2VD2N2Dag0lGlx2vWgMSJXGNmlce5MiTQzoWAiIJtso30mjnfQCOKVH+kAQC/g==}
+  '@types/node@22.16.5':
+    resolution: {integrity: sha512-bJFoMATwIGaxxx8VJPeM8TonI8t579oRvgAuT8zFugJsJZgzqv0Fu8Mhp68iecjzG7cnN3mO2dJQ5uUM2EFrgQ==}
 
   '@types/react-dom@19.1.6':
     resolution: {integrity: sha512-4hOiT/dwO8Ko0gV1m/TJZYk3y0KBnY9vzDh7W+DH17b2HFSOGgdj33dhihPeuy3l0q23+4e+hoXHV6hCC4dCXw==}
@@ -2151,7 +2151,7 @@ snapshots:
 
   '@types/ms@0.7.31': {}
 
-  '@types/node@22.16.4':
+  '@types/node@22.16.5':
     dependencies:
       undici-types: 6.21.0
 
@@ -2595,7 +2595,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.16.4
+      '@types/node': 22.16.5
       merge-stream: 2.0.0
       supports-color: 8.1.1
     optional: true
@@ -2618,10 +2618,10 @@ snapshots:
 
   json5@2.2.3: {}
 
-  knip@5.62.0(@types/node@22.16.4)(typescript@5.8.3):
+  knip@5.62.0(@types/node@22.16.5)(typescript@5.8.3):
     dependencies:
       '@nodelib/fs.walk': 1.2.8
-      '@types/node': 22.16.4
+      '@types/node': 22.16.5
       fast-glob: 3.3.3
       formatly: 0.2.4
       jiti: 2.4.2
