@@ -54,11 +54,11 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   Component: React.ComponentType<MDXProps>;
 }
 
-function Body(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Root>>) {
+function Body(props: Props) {
   const { storyId, blobs, Component, ...rest } = props;
 
   return (
-    <Root ref={ref} {...stylex.props(styles.root)} {...rest}>
+    <Root {...stylex.props(styles.root)} {...rest}>
       <Component
         components={{
           h1: (props: React.ComponentProps<"h1">) => <h2 {...stylex.props(styles.h2)} {...props} />,
@@ -136,7 +136,7 @@ function Body(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Ro
   );
 }
 
-export default React.forwardRef(Body);
+export default Body;
 
 const styles = stylex.create({
   root: {

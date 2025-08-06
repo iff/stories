@@ -7,18 +7,18 @@ interface Props extends React.ComponentPropsWithoutRef<"a"> {
   size?: "regular" | "large";
 }
 
-function Brandmark(props: Props, ref: React.ForwardedRef<React.ComponentRef<"a">>) {
+function Brandmark(props: Props) {
   const { size = "regular", ...rest } = props;
 
   return (
-    <Link ref={ref} href="/" {...stylex.props(styles.root, sizeVariants[size])} {...rest}>
+    <Link href="/" {...stylex.props(styles.root, sizeVariants[size])} {...rest}>
       <div {...stylex.props(styles.name)}>Stories</div>
       <div {...stylex.props(styles.byline)}>by Tomáš Čarnecký</div>
     </Link>
   );
 }
 
-export default React.forwardRef(Brandmark);
+export default Brandmark;
 
 const styles = stylex.create({
   root: {

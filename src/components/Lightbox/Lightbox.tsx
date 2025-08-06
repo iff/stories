@@ -23,7 +23,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   next?: { href: string } | (() => void);
 }
 
-function Lightbox(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Root>>) {
+function Lightbox(props: Props) {
   const router = useRouter();
 
   const { onClose, caption, prev, next, children, ...rest } = props;
@@ -63,7 +63,7 @@ function Lightbox(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeo
   }, [router, onClose, prev, next]);
 
   const el = (
-    <Root ref={ref} {...stylex.props(styles.root)} {...rest}>
+    <Root {...stylex.props(styles.root)} {...rest}>
       <div {...stylex.props(styles.top)}>
         <Nav {...stylex.props(styles.close)} action={onClose}>
           <Icons.X style={{ display: "block" }} />
@@ -93,7 +93,7 @@ function Lightbox(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeo
   }
 }
 
-export default React.forwardRef(Lightbox);
+export default Lightbox;
 
 const styles = stylex.create({
   root: {

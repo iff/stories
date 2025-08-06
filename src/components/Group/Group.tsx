@@ -11,11 +11,11 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   sx?: StyleXArray<(null | undefined | CompiledStyles) | boolean | Readonly<[CompiledStyles, InlineStyles]>>;
 }
 
-function Group(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof Root>>) {
+function Group(props: Props) {
   const { children, sx, ...rest } = props;
 
   return (
-    <Root ref={ref} {...stylex.props(styles.root, sx)} {...rest}>
+    <Root {...stylex.props(styles.root, sx)} {...rest}>
       {React.Children.map(children, (child) => {
         if (!React.isValidElement(child)) {
           return child;
@@ -55,7 +55,7 @@ function Group(props: Props, ref: React.ForwardedRef<React.ComponentRef<typeof R
   );
 }
 
-export default React.forwardRef(Group);
+export default Group;
 
 const styles = stylex.create({
   root: {
