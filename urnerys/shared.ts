@@ -20,7 +20,7 @@ export async function uploadImage(page: Page, set: string, title: string, formul
   formData.set("collection", set);
   formData.set("snapshot", sanitizeTitle(title));
   formData.set("formula", formula);
-  formData.set("payload", new File([buffer], "screenshot.png", { type: "image/png" }));
+  formData.set("payload", new File([new Uint8Array(buffer)], "screenshot.png", { type: "image/png" }));
 
   await fetch(`https://${process.env.URNERYS}/api/v1/projects/stories/builds/${build}/images`, {
     method: "POST",

@@ -24,7 +24,7 @@ for (const url of ["/docs/components/Image", "/docs/components/Group", "/docs/co
       formData.set("collection", `Components/${url.split("/").at(-1)}/Exhibits`);
       formData.set("snapshot", sanitizeTitle(innerText));
       formData.set("formula", "none");
-      formData.set("payload", new File([buffer], "screenshot.png", { type: "image/png" }));
+      formData.set("payload", new File([new Uint8Array(buffer)], "screenshot.png", { type: "image/png" }));
 
       await fetch(`https://${process.env.URNERYS}/api/v1/projects/stories/builds/${build}/images`, {
         method: "POST",
