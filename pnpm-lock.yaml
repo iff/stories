@@ -15,14 +15,14 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
       '@mdx-js/loader':
-        specifier: ^3.1.0
-        version: 3.1.0(webpack@5.99.5)
+        specifier: ^3.1.1
+        version: 3.1.1(webpack@5.99.5)
       '@mdx-js/react':
-        specifier: ^3.1.0
-        version: 3.1.0(@types/react@19.1.12)(react@19.1.1)
+        specifier: ^3.1.1
+        version: 3.1.1(@types/react@19.1.12)(react@19.1.1)
       '@next/mdx':
         specifier: ^15.5.2
-        version: 15.5.2(@mdx-js/loader@3.1.0(webpack@5.99.5))(@mdx-js/react@3.1.0(@types/react@19.1.12)(react@19.1.1))
+        version: 15.5.2(@mdx-js/loader@3.1.1(webpack@5.99.5))(@mdx-js/react@3.1.1(@types/react@19.1.12)(react@19.1.1))
       '@playwright/test':
         specifier: ^1.55.0
         version: 1.55.0
@@ -88,7 +88,7 @@ importers:
         version: 0.34.3
       timvir:
         specifier: ^0.2.39
-        version: 0.2.39(@mdx-js/react@3.1.0(@types/react@19.1.12)(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react-hotkeys-hook@5.1.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)
+        version: 0.2.39(@mdx-js/react@3.1.1(@types/react@19.1.12)(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react-hotkeys-hook@5.1.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
@@ -360,8 +360,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@mdx-js/loader@3.1.0':
-    resolution: {integrity: sha512-xU/lwKdOyfXtQGqn3VnJjlDrmKXEvMi1mgYxVmukEUtVycIz1nh7oQ40bKTd4cA7rLStqu0740pnhGYxGoqsCg==}
+  '@mdx-js/loader@3.1.1':
+    resolution: {integrity: sha512-0TTacJyZ9mDmY+VefuthVshaNIyCGZHJG2fMnGaDttCt8HmjUF7SizlHJpaCDoGnN635nK1wpzfpx/Xx5S4WnQ==}
     peerDependencies:
       webpack: '>=5'
     peerDependenciesMeta:
@@ -371,8 +371,8 @@ packages:
   '@mdx-js/mdx@3.0.0':
     resolution: {integrity: sha512-Icm0TBKBLYqroYbNW3BPnzMGn+7mwpQOK310aZ7+fkCtiU3aqv2cdcX+nd0Ydo3wI5Rx8bX2Z2QmGb/XcAClCw==}
 
-  '@mdx-js/react@3.1.0':
-    resolution: {integrity: sha512-QjHtSaoameoalGnKDT3FoIl4+9RwyTmo9ZJGBdLOks/YOiWHoRDI3PUwEzOE7kEmGcV3AFcp9K6dYu9rEuKLAQ==}
+  '@mdx-js/react@3.1.1':
+    resolution: {integrity: sha512-f++rKLQgUVYDAtECQ6fn/is15GkEH9+nZPM3MS0RcxVqoTfawHvDlSCH7JbMhAM6uJ32v3eXLvLmLvjGu7PTQw==}
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
@@ -1913,7 +1913,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
 
-  '@mdx-js/loader@3.1.0(webpack@5.99.5)':
+  '@mdx-js/loader@3.1.1(webpack@5.99.5)':
     dependencies:
       '@mdx-js/mdx': 3.0.0
       source-map: 0.7.4
@@ -1950,7 +1950,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@mdx-js/react@3.1.0(@types/react@19.1.12)(react@19.1.1)':
+  '@mdx-js/react@3.1.1(@types/react@19.1.12)(react@19.1.1)':
     dependencies:
       '@types/mdx': 2.0.13
       '@types/react': 19.1.12
@@ -1965,12 +1965,12 @@ snapshots:
 
   '@next/env@15.5.2': {}
 
-  '@next/mdx@15.5.2(@mdx-js/loader@3.1.0(webpack@5.99.5))(@mdx-js/react@3.1.0(@types/react@19.1.12)(react@19.1.1))':
+  '@next/mdx@15.5.2(@mdx-js/loader@3.1.1(webpack@5.99.5))(@mdx-js/react@3.1.1(@types/react@19.1.12)(react@19.1.1))':
     dependencies:
       source-map: 0.7.4
     optionalDependencies:
-      '@mdx-js/loader': 3.1.0(webpack@5.99.5)
-      '@mdx-js/react': 3.1.0(@types/react@19.1.12)(react@19.1.1)
+      '@mdx-js/loader': 3.1.1(webpack@5.99.5)
+      '@mdx-js/react': 3.1.1(@types/react@19.1.12)(react@19.1.1)
 
   '@next/swc-darwin-arm64@15.5.2':
     optional: true
@@ -3326,9 +3326,9 @@ snapshots:
       source-map-support: 0.5.21
     optional: true
 
-  timvir@0.2.39(@mdx-js/react@3.1.0(@types/react@19.1.12)(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react-hotkeys-hook@5.1.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1):
+  timvir@0.2.39(@mdx-js/react@3.1.1(@types/react@19.1.12)(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react-hotkeys-hook@5.1.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1):
     dependencies:
-      '@mdx-js/react': 3.1.0(@types/react@19.1.12)(react@19.1.1)
+      '@mdx-js/react': 3.1.1(@types/react@19.1.12)(react@19.1.1)
       bytestring: 1.0.0
       downshift: 7.6.2(react@19.1.1)
       react: 19.1.1
