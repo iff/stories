@@ -31,10 +31,10 @@ you need to make sure that the element is stretched vertically by placing it it
 inside a grid, using explict height, or similar techniques.
 
 <Grid style={{ margin: "20px 0" }}>
-  <Exhibit caption="Image in its intrinsic aspect ratio.">
+  <Exhibit caption="Image in its intrinsic aspect ratio." style={{ gridColumn: "initial" }}>
     <Sample variant="basic" caption={undefined} />
   </Exhibit>
-  <Exhibit caption="Image fills available space (height: 200px).">
+  <Exhibit caption="Image fills available space (height: 200px)." style={{ gridColumn: "initial" }}>
     <div style={{ display: "grid", height: 200 }}>
       <Sample variant="basic" caption={undefined} fill />
     </div>
@@ -47,10 +47,10 @@ The caption can be either placed below the image (default), or into an overlay
 which is visible on hover.
 
 <Grid style={{ margin: "20px 0" }}>
-  <Exhibit caption="Caption below the image.">
+  <Exhibit caption="Caption below the image." style={{ gridColumn: "initial" }}>
     <Sample variant="basic" captionPlacement="below" />
   </Exhibit>
-  <Exhibit caption="Caption shown in overlay on hover.">
+  <Exhibit caption="Caption shown in overlay on hover." style={{ gridColumn: "initial" }}>
     <Sample variant="basic" captionPlacement="overlay" />
   </Exhibit>
 </Grid>
