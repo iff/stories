@@ -57,7 +57,7 @@ jobs:
 
       - uses: pnpm/action-setup@v4
         with:
-          version: 10.15.1
+          version: 10.16.1
 
       - run: pnpm install
       - run: ./node_modules/.bin/playwright install --with-deps chromium
