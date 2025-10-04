@@ -10,6 +10,10 @@ import { extractBlocks } from "@/cms";
 import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
 
+export async function generateStaticParams() {
+  return [];
+}
+
 export interface Query extends ParsedUrlQuery {
   storyId: string;
   blockId: string;
