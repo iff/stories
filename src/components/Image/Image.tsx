@@ -63,7 +63,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 }
 
 function Image(props: Props) {
-  const { blob, fill = false, sizes, caption, captionPlacement = "below", href, sx, ...rest } = props;
+  const { id, blob, fill = false, sizes, caption, captionPlacement = "below", href, sx, ...rest } = props;
 
   const image = (
     <NextImage
@@ -83,12 +83,16 @@ function Image(props: Props) {
       {(() => {
         if (href) {
           return (
-            <Link href={href} {...stylex.props(styles.image)}>
+            <Link id={id} href={href} {...stylex.props(styles.image)}>
               {image}
             </Link>
           );
         } else {
-          return <div {...stylex.props(styles.image)}>{image}</div>;
+          return (
+            <div id={id} {...stylex.props(styles.image)}>
+              {image}
+            </div>
+          );
         }
       })()}
 

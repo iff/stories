@@ -150,3 +150,7 @@ export async function importBlob(name: string) {
     };
   };
 }
+
+export function blockIdSelector(blockId: string) {
+  return `b-${blockId}`;
+}

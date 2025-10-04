@@ -4,7 +4,6 @@ import * as stylex from "@stylexjs/stylex";
 import { lookupStory } from "content";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import * as React from "react";
 import { extractBlocks, importBlob } from "@/cms";
 import { Body } from "@/components/Body";
 import { Header } from "@/components/Header";
@@ -64,9 +63,7 @@ export default async function Page(props: Props) {
         <Body storyId={storyId} blobs={blobs} Component={story.body.Component} />
       </div>
 
-      <React.Suspense>
-        <StoryById />
-      </React.Suspense>
+      <StoryById />
     </>
   );
 }

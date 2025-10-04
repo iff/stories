@@ -6,7 +6,7 @@ import Head from "next/head";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
 import * as React from "react";
-import { extractBlocks } from "@/cms";
+import { blockIdSelector, extractBlocks } from "@/cms";
 import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
 
@@ -81,7 +81,7 @@ export default async function Page(props: Props) {
       </Head>
 
       <Lightbox
-        onClose={{ href: `/${storyId}?focus=${blockId}` }}
+        onClose={{ href: `/${storyId}#${blockIdSelector(blockId)}` }}
         caption={block.caption}
         prev={prev ? { href: `/${storyId}/${prev}` } : undefined}
         next={next ? { href: `/${storyId}/${next}` } : undefined}

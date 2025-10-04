@@ -2,6 +2,8 @@ import * as stylex from "@stylexjs/stylex";
 import { MDXProps } from "mdx/types";
 import * as React from "react";
 
+import { blockIdSelector } from "@/cms";
+
 import { Clip } from "@/components/Clip";
 import { Group } from "@/components/Group";
 import { Image } from "@/components/Image";
@@ -76,7 +78,14 @@ function Body(props: Props) {
               return <div>Clip {blobId} not found!</div>;
             }
 
-            return <Clip id={blobId} video={blob.asVideo} href={`/${storyId}/${blobId}`} sx={styles.extendedWidth} />;
+            return (
+              <Clip
+                id={blockIdSelector(blobId)}
+                video={blob.asVideo}
+                href={`/${storyId}/${blobId}`}
+                sx={styles.extendedWidth}
+              />
+            );
           },
 
           Group: (props: React.ComponentProps<"div">) => {
@@ -122,7 +131,7 @@ function Body(props: Props) {
 
             return (
               <Image
-                id={blobId}
+                id={blockIdSelector(blobId)}
                 href={`/${storyId}/${blobId}`}
                 blob={blob}
                 sx={[styles.contentWidth, size && sizeVariants[size]]}
