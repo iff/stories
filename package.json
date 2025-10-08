@@ -25,7 +25,7 @@
     "@vercel/speed-insights": "^1.2.0",
     "caniuse-lite": "^1.0.30001749",
     "feed": "^5.1.0",
-    "knip": "^5.64.1",
+    "knip": "^5.64.2",
     "next": "^15.5.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
