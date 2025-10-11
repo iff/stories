@@ -16,15 +16,21 @@ import * as types from './graphql';
  */
 type Documents = {
     "\n    query Block($name: String!) {\n      blob(name: $name) {\n        name\n\n        asImage {\n          url\n          dimensions { width height }\n          placeholder { url }\n        }\n\n        asVideo {\n          poster {\n            url\n            dimensions { width height }\n            placeholder { url }\n          }\n          renditions {\n            url\n          }\n        }\n      }\n    }\n  ": typeof types.BlockDocument,
+    "\n    query Blob($name: String!) {\n      blob(name: $name) {\n        id\n        name\n\n        asImage {\n          url\n          dimensions {\n            width\n            height\n          }\n          placeholder {\n            url\n          }\n        }\n\n        asVideo {\n          poster {\n            url\n            dimensions {\n              width\n              height\n            }\n            placeholder {\n              url\n            }\n          }\n          renditions {\n            url\n\n            dimensions {\n              width\n              height\n            }\n          }\n        }\n      }\n    }\n  ": typeof types.BlobDocument,
 };
 const documents: Documents = {
     "\n    query Block($name: String!) {\n      blob(name: $name) {\n        name\n\n        asImage {\n          url\n          dimensions { width height }\n          placeholder { url }\n        }\n\n        asVideo {\n          poster {\n            url\n            dimensions { width height }\n            placeholder { url }\n          }\n          renditions {\n            url\n          }\n        }\n      }\n    }\n  ": types.BlockDocument,
+    "\n    query Blob($name: String!) {\n      blob(name: $name) {\n        id\n        name\n\n        asImage {\n          url\n          dimensions {\n            width\n            height\n          }\n          placeholder {\n            url\n          }\n        }\n\n        asVideo {\n          poster {\n            url\n            dimensions {\n              width\n              height\n            }\n            placeholder {\n              url\n            }\n          }\n          renditions {\n            url\n\n            dimensions {\n              width\n              height\n            }\n          }\n        }\n      }\n    }\n  ": types.BlobDocument,
 };
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n    query Block($name: String!) {\n      blob(name: $name) {\n        name\n\n        asImage {\n          url\n          dimensions { width height }\n          placeholder { url }\n        }\n\n        asVideo {\n          poster {\n            url\n            dimensions { width height }\n            placeholder { url }\n          }\n          renditions {\n            url\n          }\n        }\n      }\n    }\n  "): typeof import('./graphql').BlockDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    query Blob($name: String!) {\n      blob(name: $name) {\n        id\n        name\n\n        asImage {\n          url\n          dimensions {\n            width\n            height\n          }\n          placeholder {\n            url\n          }\n        }\n\n        asVideo {\n          poster {\n            url\n            dimensions {\n              width\n              height\n            }\n            placeholder {\n              url\n            }\n          }\n          renditions {\n            url\n\n            dimensions {\n              width\n              height\n            }\n          }\n        }\n      }\n    }\n  "): typeof import('./graphql').BlobDocument;
 
 
 export function graphql(source: string) {

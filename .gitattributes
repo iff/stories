@@ -1,0 +1,2 @@
+src/graphql/** linguist-generated=true
+src/graphql/schema.graphql linguist-generated=false

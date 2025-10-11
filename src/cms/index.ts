@@ -2,6 +2,8 @@ import remarkMdx from "remark-mdx";
 import remarkParse from "remark-parse";
 import { unified } from "unified";
 import * as unist from "unist";
+import { graphql } from "@/graphql";
+import { BlobQuery } from "@/graphql/graphql";
 
 /**
  * A Block is an element in a story which is not self-contained.
@@ -64,90 +66,90 @@ export function extractBlocks(mdx: string): Array<Block> {
   return blocks;
 }
 
-export async function importBlob(name: string) {
+async function importBlob(name: string) {
+  const BlobQuery = graphql(`
+    query Blob($name: String!) {
+      blob(name: $name) {
+        id
+        name
+
+        asImage {
+          url
+          dimensions {
+            width
+            height
+          }
+          placeholder {
+            url
+          }
+        }
+
+        asVideo {
+          poster {
+            url
+            dimensions {
+              width
+              height
+            }
+            placeholder {
+              url
+            }
+          }
+          renditions {
+            url
+
+            dimensions {
+              width
+              height
+            }
+          }
+        }
+      }
+    }
+  `);
+
   const res = await fetch(`${process.env.API}/graphql`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      query: `
-        query Blob($name: String!) {
-          blob(name: $name) {
-            __typename
-            id
-            name
-
-            asImage {
-              url
-              dimensions {
-                width
-                height
-              }
-              placeholder {
-                url
-              }
-            }
-
-            asVideo {
-              poster {
-                url
-                dimensions {
-                  width
-                  height
-                }
-                placeholder {
-                  url
-                }
-              }
-              renditions {
-                url
-              }
-            }
-          }
-        }`,
+      query: BlobQuery,
       variables: {
         name,
       },
     }),
   });
 
-  const json = await res.json();
+  const json = (await res.json()) as { data: BlobQuery };
+  if (!json.data.blob) {
+    throw new Error(`Blob ${name} not found`);
+  }
 
-  return json.data.blob as {
-    __typename: "Image" | "Clip";
-    id: string;
-    name: string;
+  return json.data.blob;
+}
 
-    asImage: {
-      url: string;
+export async function importImage(name: string) {
+  const blob = await importBlob(name);
+  if (!blob.asImage) {
+    throw new Error(`Blob ${name} not Image`);
+  }
 
-      dimensions: {
-        width: number;
-        height: number;
-      };
+  return {
+    ...blob,
+    asImage: blob.asImage,
+  };
+}
 
-      placeholder: {
-        url: string;
-      };
-    };
+export async function importVideo(name: string) {
+  const blob = await importBlob(name);
+  if (!blob.asVideo) {
+    throw new Error(`Blob ${name} not Video`);
+  }
 
-    asVideo: {
-      poster: {
-        url: string;
-
-        dimensions: {
-          width: number;
-          height: number;
-        };
-
-        placeholder: {
-          url: string;
-        };
-      };
-
-      renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
-    };
+  return {
+    ...blob,
+    asVideo: blob.asVideo,
   };
 }
 

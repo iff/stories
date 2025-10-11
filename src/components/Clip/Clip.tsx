@@ -24,7 +24,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
       };
     };
 
-    renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
+    renditions: ReadonlyArray<{ url: string; dimensions: { width: number; height: number } }>;
   };
 
   caption?: React.ReactNode;

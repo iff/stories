@@ -3,7 +3,7 @@ import * as stylex from "@stylexjs/stylex";
 import { lookupStory } from "content";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { extractBlocks, importBlob } from "@/cms";
+import { extractBlocks, importImage } from "@/cms";
 import { Body } from "@/components/Body";
 import { Header } from "@/components/Header";
 import { StoryById } from "@/components/Story";
@@ -28,7 +28,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     return {};
   }
 
-  const blob = await importBlob(story.image);
+  const blob = await importImage(story.image);
 
   return {
     title: story.title,
@@ -54,7 +54,7 @@ export default async function Page(props: Props) {
   return (
     <>
       <div {...stylex.props(styles.root)}>
-        <Header blob={await importBlob(story.image)} title={story.title} />
+        <Header blob={await importImage(story.image)} title={story.title} />
         <Body storyId={storyId} blobs={blobs} Component={story.body.Component} />
       </div>
 

@@ -1,6 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
 
-import { importBlob } from "@/cms";
+import { importImage } from "@/cms";
 import { Hero } from "@/components/Hero";
 import { StoryCard } from "@/components/StoryCard";
 
@@ -21,8 +21,8 @@ export default async function Page() {
                 story={{
                   id: story.id,
                 }}
-                blob={await importBlob(story.image)}
-                blocks={await Promise.all(story.teaser.images.map((name) => importBlob(name)))}
+                blob={await importImage(story.image)}
+                blocks={await Promise.all(story.teaser.images.map((name) => importImage(name)))}
                 title={story.title}
                 teaser={story.teaser.text}
                 date={story.date}

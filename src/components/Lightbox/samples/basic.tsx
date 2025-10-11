@@ -1,6 +1,6 @@
 import NextImage from "next/image";
 import * as React from "react";
-import { importBlob } from "@/cms";
+import { importImage } from "@/cms";
 import { Lightbox } from "..";
 
 type Props = Partial<React.ComponentPropsWithoutRef<typeof Lightbox>>;
@@ -11,7 +11,7 @@ export default async function Sample(props: Props) {
       <Lightbox {...props}>
         <NextImage
           alt=""
-          src={(await importBlob("3c2f6pB3cuLRJp4wgf77c2vg4YX55GrnhvzL9eMc8yHC")).asImage.url}
+          src={(await importImage("3c2f6pB3cuLRJp4wgf77c2vg4YX55GrnhvzL9eMc8yHC")).asImage.url}
           fill
           sizes="100vw"
           style={{

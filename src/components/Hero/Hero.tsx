@@ -2,7 +2,7 @@ import * as stylex from "@stylexjs/stylex";
 import Image from "next/image";
 import * as React from "react";
 
-import { importBlob } from "@/cms";
+import { importImage } from "@/cms";
 import { Brandmark } from "@/components/Brandmark";
 import { color } from "@/tokens.stylex";
 
@@ -16,7 +16,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {}
 async function Hero(props: Props) {
   const { ...rest } = props;
 
-  const blob = await importBlob("DtmNcLbCUqzbXVfgQSowJeJZTTs9UztyYkupTzAQzbCf");
+  const blob = await importImage("DtmNcLbCUqzbXVfgQSowJeJZTTs9UztyYkupTzAQzbCf");
 
   return (
     <Root {...stylex.props(styles.root)} {...rest}>
