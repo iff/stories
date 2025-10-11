@@ -1,5 +1,4 @@
 import * as fs from "node:fs";
-import { ParsedUrlQuery } from "node:querystring";
 import * as stylex from "@stylexjs/stylex";
 import { lookupStory } from "content";
 import { Metadata } from "next";
@@ -11,10 +10,6 @@ import { StoryById } from "@/components/Story";
 
 export async function generateStaticParams() {
   return [];
-}
-
-export interface Query extends ParsedUrlQuery {
-  storyId: string;
 }
 
 interface Params {

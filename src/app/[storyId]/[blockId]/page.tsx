@@ -1,5 +1,4 @@
 import * as fs from "node:fs";
-import { ParsedUrlQuery } from "node:querystring";
 import { lookupStory } from "content";
 import { Metadata } from "next";
 import Head from "next/head";
@@ -13,11 +12,6 @@ import { Lightbox } from "@/components/Lightbox";
 
 export async function generateStaticParams() {
   return [];
-}
-
-export interface Query extends ParsedUrlQuery {
-  storyId: string;
-  blockId: string;
 }
 
 interface Params {
