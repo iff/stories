@@ -7,6 +7,9 @@ const config: KnipConfig = {
     "urnerys/playwright.config.ts",
 
     "src/imageLoader.ts",
+
+    "src/graphql/index.ts",
+    "src/graphql/graphql.ts",
   ],
 
   ignore: ["public/**/*"],

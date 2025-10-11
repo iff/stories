@@ -16,6 +16,8 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
+      "@/graphql": ["src/graphql"],
+      "@/graphql/graphql": ["src/graphql/graphql"],
       "@/cms": ["src/cms"],
       "@/components/*": ["src/components/*"],
       "@/fonts": ["fonts"],

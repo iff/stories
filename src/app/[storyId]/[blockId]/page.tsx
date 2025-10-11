@@ -9,6 +9,8 @@ import * as ReactDOM from "react-dom";
 import { blockIdSelector, extractBlocks } from "@/cms";
 import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
+import { graphql } from "@/graphql";
+import { BlockQuery } from "@/graphql/graphql";
 
 export async function generateStaticParams() {
   return [];
@@ -43,18 +45,12 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 interface Data {
   block: Block;
 
-  next: null | {
-    name: string;
-    asImage: { dimensions: { width: number; height: number }; url: string; placeholder: { url: string } };
-  };
-  prev: null | {
-    name: string;
-    asImage: { dimensions: { width: number; height: number }; url: string; placeholder: { url: string } };
-  };
+  next: null | NonNullable<BlockQuery["blob"]>;
+  prev: null | NonNullable<BlockQuery["blob"]>;
 
   title?: string;
 
-  blob: { name: string; asImage: { url: string; placeholder: { url: string } } };
+  blob: NonNullable<BlockQuery["blob"]>;
 }
 
 type Block =
@@ -107,7 +103,7 @@ export default async function Page(props: Props) {
   );
 }
 
-function preloadBlob(blob: { name: string; asImage?: { url: string; dimensions: { width: number; height: number } } }) {
+function preloadBlob(blob: NonNullable<BlockQuery["blob"]>) {
   if (blob.asImage) {
     const { props } = getImageProps({
       alt: "",
@@ -126,22 +122,49 @@ function preloadBlob(blob: { name: string; asImage?: { url: string; dimensions: 
   }
 }
 
-async function fetchBlob(name: string) {
+async function fetchBlob(name: string): Promise<NonNullable<BlockQuery["blob"]>> {
+  const BlockQuery = graphql(`
+    query Block($name: String!) {
+      blob(name: $name) {
+        name
+
+        asImage {
+          url
+          dimensions { width height }
+          placeholder { url }
+        }
+
+        asVideo {
+          poster {
+            url
+            dimensions { width height }
+            placeholder { url }
+          }
+          renditions {
+            url
+          }
+        }
+      }
+    }
+  `);
+
   const res = await fetch(`${process.env.API}/graphql`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
-      query: `query Block {
-          blob(name: "${name}") {
-            name
-            asImage { url dimensions { width height } placeholder { url } }
-            asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
-          }
-        }`,
+      query: BlockQuery,
+      variables: {
+        name,
+      },
     }),
   });
 
-  const json = await res.json();
+  const json = (await res.json()) as { data: BlockQuery };
+  if (!json.data.blob) {
+    notFound();
+  }
 
   return json.data.blob;
 }
@@ -203,36 +226,37 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
 }
 
 const Inner = {
-  Image: ({ blob }: { blob: { asImage: { url: string; placeholder: { url: string } } } }) => (
-    <>
-      <NextImage
-        alt=""
-        src={blob.asImage.url}
-        fill
-        sizes="100vw"
-        style={{
-          objectFit: "contain",
-        }}
-        priority
-      />
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          pointerEvents: "none",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "contain",
-          backgroundPosition: "50% 50%",
-          zIndex: -1,
-          backgroundImage: `url(${blob.asImage.placeholder.url})`,
-        }}
-      />
-    </>
-  ),
+  Image: ({ blob }: { blob: NonNullable<BlockQuery["blob"]> }) =>
+    blob.asImage ? (
+      <>
+        <NextImage
+          alt=""
+          src={blob.asImage.url}
+          fill
+          sizes="100vw"
+          style={{
+            objectFit: "contain",
+          }}
+          priority
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            pointerEvents: "none",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "contain",
+            backgroundPosition: "50% 50%",
+            zIndex: -1,
+            backgroundImage: `url(${blob.asImage.placeholder.url})`,
+          }}
+        />
+      </>
+    ) : null,
   Clip: ({ video }: { video: React.ComponentProps<typeof Clip>["video"] }) => (
     <div
       style={{

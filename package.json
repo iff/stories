@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "@formatjs/intl": "^3.1.8",
+    "@graphql-codegen/cli": "^6.0.0",
+    "@graphql-codegen/client-preset": "^5.1.0",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@hapi/accept": "^6.0.3",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
@@ -25,6 +28,7 @@
     "@vercel/speed-insights": "^1.2.0",
     "caniuse-lite": "^1.0.30001749",
     "feed": "^5.1.0",
+    "graphql": "^16.11.0",
     "knip": "^5.64.3",
     "next": "^15.5.4",
     "react": "^19.2.0",

@@ -1,6 +1,6 @@
 {
   "files": {
-    "includes": ["**", "!**/.direnv", "!**/.next", "!**/node_modules"]
+    "includes": ["**", "!**/.direnv", "!**/.next", "!**/node_modules", "!src/graphql"]
   },
 
   "formatter": {
