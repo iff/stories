@@ -3,9 +3,10 @@ import { ParsedUrlQuery } from "node:querystring";
 import { lookupStory } from "content";
 import { Metadata } from "next";
 import Head from "next/head";
-import NextImage from "next/image";
+import NextImage, { getImageProps } from "next/image";
 import { notFound } from "next/navigation";
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { blockIdSelector, extractBlocks } from "@/cms";
 import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
@@ -48,8 +49,14 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 interface Data {
   block: Block;
 
-  next: null | string;
-  prev: null | string;
+  next: null | {
+    name: string;
+    asImage: { dimensions: { width: number; height: number }; url: string; placeholder: { url: string } };
+  };
+  prev: null | {
+    name: string;
+    asImage: { dimensions: { width: number; height: number }; url: string; placeholder: { url: string } };
+  };
 
   title?: string;
 
@@ -74,6 +81,13 @@ export default async function Page(props: Props) {
   const { storyId, blockId } = await props.params;
   const { block, next, prev, title, blob } = await data({ storyId, blockId });
 
+  if (prev) {
+    preloadBlob(prev);
+  }
+  if (next) {
+    preloadBlob(next);
+  }
+
   return (
     <>
       <Head>
@@ -83,8 +97,8 @@ export default async function Page(props: Props) {
       <Lightbox
         onClose={{ href: `/${storyId}#${blockIdSelector(blockId)}` }}
         caption={block.caption}
-        prev={prev ? { href: `/${storyId}/${prev}` } : undefined}
-        next={next ? { href: `/${storyId}/${next}` } : undefined}
+        prev={prev ? { href: `/${storyId}/${prev.name}` } : undefined}
+        next={next ? { href: `/${storyId}/${next.name}` } : undefined}
       >
         {(() => {
           switch (block.__typename) {
@@ -99,71 +113,66 @@ export default async function Page(props: Props) {
   );
 }
 
+function preloadBlob(blob: { name: string; asImage?: { url: string; dimensions: { width: number; height: number } } }) {
+  if (blob.asImage) {
+    const { props } = getImageProps({
+      alt: "",
+      src: blob.asImage.url,
+      width: blob.asImage.dimensions.width,
+      height: blob.asImage.dimensions.height,
+      sizes: "100vw",
+    });
+
+    ReactDOM.preload(blob.asImage.url, {
+      as: "image",
+      imageSrcSet: props.srcSet,
+      imageSizes: props.sizes,
+      fetchPriority: "low",
+    });
+  }
+}
+
+async function fetchBlob(name: string) {
+  const res = await fetch(`${process.env.API}/graphql`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `query Block {
+          blob(name: "${name}") {
+            name
+            asImage { url dimensions { width height } placeholder { url } }
+            asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
+          }
+        }`,
+    }),
+  });
+
+  const json = await res.json();
+
+  return json.data.blob;
+}
+
 async function data({ storyId, blockId }: { storyId: string; blockId: string }): Promise<Data> {
-  /*
-   * Extract information from the story content:
-   *
-   *  - An ordered list of all blocks. This is required to determine the
-   *    previous and next block IDs.
-   *  - Informtion about the selected block fetched from the media distribution
-   *    system.
-   */
-  const { blocks, blob } = await (async () => {
-    const body = await fs.promises.readFile(`content/${storyId}/body.mdx`, { encoding: "utf8" });
+  const story = await lookupStory(storyId);
+  if (!story) {
+    notFound();
+  }
 
-    let blobP: Promise<{
-      name: string;
-      asImage: { url: string; dimensions: { width: number; height: number }; placeholder: { url: string } };
-      asVideo: {
-        poster: { url: string; dimensions: { width: number; height: number }; placeholder: { url: string } };
-        renditions: Array<{ url: string }>;
-      };
-    }> = Promise.resolve(
-      {} as {
-        name: string;
-        asImage: { url: string; dimensions: { width: number; height: number }; placeholder: { url: string } };
-        asVideo: {
-          poster: { url: string; dimensions: { width: number; height: number }; placeholder: { url: string } };
-          renditions: Array<{ url: string }>;
-        };
-      },
-    );
-    const blocks = extractBlocks(body);
-
-    const block = blocks.find((x) => x.id === blockId);
-    if (block) {
-      blobP = (async () => {
-        const res = await fetch(`${process.env.API}/graphql`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            query: `query Block {
-                blob(name: "${block.id}") {
-                  name
-                  asImage { url dimensions { width height } placeholder { url } }
-                  asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
-                }
-              }`,
-          }),
-        });
-
-        const json = await res.json();
-
-        return json.data.blob;
-      })();
-    }
-
-    return { blocks, blob: await blobP };
-  })();
+  const body = await fs.promises.readFile(`content/${storyId}/body.mdx`, { encoding: "utf8" });
+  const blocks = extractBlocks(body);
 
   const block = blocks.find((x) => x.id === blockId);
   if (!block) {
-    return notFound();
+    notFound();
   }
 
   const index = blocks.indexOf(block);
 
-  const story = await lookupStory(storyId);
+  const [blob, prev, next] = await Promise.all([
+    fetchBlob(block.id),
+    blocks[index - 1]?.id ? fetchBlob(blocks[index - 1].id) : null,
+    blocks[index + 1]?.id ? fetchBlob(blocks[index + 1].id) : null,
+  ]);
 
   return {
     block: {
@@ -190,8 +199,8 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
       })(),
     } as Block,
 
-    prev: blocks[index - 1]?.id ?? null,
-    next: blocks[index + 1]?.id ?? null,
+    prev,
+    next,
 
     title: `${blockId} - ${story?.title}`,
 

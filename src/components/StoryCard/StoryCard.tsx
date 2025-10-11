@@ -4,7 +4,6 @@ import Link from "next/link";
 import * as React from "react";
 import * as Icons from "react-feather";
 
-import imageLoader from "src/imageLoader";
 import { color } from "@/tokens.stylex";
 
 import StoryCardDateFragment from "./internal/StoryCardDateFragment";
@@ -60,7 +59,6 @@ async function StoryCard(props: Props) {
         <Image
           alt=""
           src={blob.asImage.url}
-          loader={imageLoader}
           fill
           style={{ objectFit: "cover" }}
           placeholder="blur"
@@ -94,7 +92,6 @@ async function StoryCard(props: Props) {
         <Image
           alt=""
           src={(blocks[0] ?? blob).asImage.url}
-          loader={imageLoader}
           fill
           style={{ objectFit: "cover" }}
           placeholder="blur"

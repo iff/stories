@@ -5,6 +5,8 @@ const config: KnipConfig = {
     // Playwright Tests
     "vst/playwright.config.ts",
     "urnerys/playwright.config.ts",
+
+    "src/imageLoader.ts",
   ],
 
   ignore: ["public/**/*"],
