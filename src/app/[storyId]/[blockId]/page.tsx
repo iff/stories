@@ -10,7 +10,7 @@ import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
 import { graphql } from "@/graphql";
 import { execute } from "@/graphql/execute";
-import { BlockQuery } from "@/graphql/graphql";
+import { StoryBlockPageQuery, StoryBlockPageSiblingQuery } from "@/graphql/graphql";
 
 export async function generateStaticParams() {
   return [];
@@ -46,26 +46,15 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   };
 }
 
-interface Data {
-  block: Block;
-
-  next: null | NonNullable<BlockQuery["blob"]>;
-  prev: null | NonNullable<BlockQuery["blob"]>;
-
-  title?: string;
-
-  blob: NonNullable<BlockQuery["blob"]>;
-}
-
 export default async function Page(props: Props) {
   const { storyId, blockId } = await props.params;
   const { block, next, prev, blob } = await data({ storyId, blockId });
 
   if (prev) {
-    preloadBlob(prev);
+    preloadBlockSibling(prev);
   }
   if (next) {
-    preloadBlob(next);
+    preloadBlockSibling(next);
   }
 
   return (
@@ -133,7 +122,7 @@ export default async function Page(props: Props) {
   );
 }
 
-function preloadBlob(blob: NonNullable<BlockQuery["blob"]>) {
+function preloadBlockSibling(blob: NonNullable<StoryBlockPageSiblingQuery["blob"]>) {
   if (blob.asImage) {
     const { props } = getImageProps({
       alt: "",
@@ -152,9 +141,9 @@ function preloadBlob(blob: NonNullable<BlockQuery["blob"]>) {
   }
 }
 
-async function fetchBlob(name: string): Promise<NonNullable<BlockQuery["blob"]>> {
-  const BlockQuery = graphql(`
-    query Block($name: String!) {
+async function fetchBlockData(name: string) {
+  const StoryBlockPageQuery = graphql(`
+    query StoryBlockPage($name: String!) {
       blob(name: $name) {
         name
 
@@ -179,12 +168,51 @@ async function fetchBlob(name: string): Promise<NonNullable<BlockQuery["blob"]>>
     }
   `);
 
-  const { data } = await execute(BlockQuery, { name });
+  const { data } = await execute(StoryBlockPageQuery, { name });
   if (!data || !data.blob) {
     notFound();
   }
 
   return data.blob;
+}
+
+async function fetchBlockSiblingData(name: string) {
+  const BlockSiblingQuery = graphql(`
+    query StoryBlockPageSibling($name: String!) {
+      blob(name: $name) {
+        name
+
+        asImage {
+          url
+          dimensions { width height }
+        }
+
+        asVideo {
+          poster {
+            url
+            dimensions { width height }
+          }
+        }
+      }
+    }
+  `);
+
+  const { data } = await execute(BlockSiblingQuery, { name });
+  if (!data || !data.blob) {
+    throw new Error("Block Sibling Not Found");
+  }
+
+  return data.blob;
+}
+
+interface Data {
+  block: Block;
+
+  blob: NonNullable<StoryBlockPageQuery["blob"]>;
+  title: string;
+
+  next: null | NonNullable<StoryBlockPageSiblingQuery["blob"]>;
+  prev: null | NonNullable<StoryBlockPageSiblingQuery["blob"]>;
 }
 
 async function data({ storyId, blockId }: { storyId: string; blockId: string }): Promise<Data> {
@@ -204,19 +232,18 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
   const index = blocks.indexOf(block);
 
   const [blob, prev, next] = await Promise.all([
-    fetchBlob(block.id),
-    blocks[index - 1]?.id ? fetchBlob(blocks[index - 1].id) : null,
-    blocks[index + 1]?.id ? fetchBlob(blocks[index + 1].id) : null,
+    fetchBlockData(block.id),
+    blocks[index - 1]?.id ? fetchBlockSiblingData(blocks[index - 1].id) : null,
+    blocks[index + 1]?.id ? fetchBlockSiblingData(blocks[index + 1].id) : null,
   ]);
 
   return {
     block,
 
-    prev,
-    next,
-
+    blob,
     title: `${blockId} - ${story.title}`,
 
-    blob,
+    prev,
+    next,
   };
 }
