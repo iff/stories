@@ -8,9 +8,7 @@ import * as ReactDOM from "react-dom";
 import { Block, blockIdSelector, extractBlocks } from "@/cms";
 import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
-import { graphql } from "@/graphql";
-import { execute } from "@/graphql/execute";
-import { StoryBlockPageQuery, StoryBlockPageSiblingQuery } from "@/graphql/graphql";
+import { execute, graphql, StoryBlockPageQuery, StoryBlockPageSiblingQuery } from "@/graphql";
 
 export async function generateStaticParams() {
   return [];

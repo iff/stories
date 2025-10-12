@@ -1,3 +1,1 @@
-src/graphql/** linguist-generated=true
-src/graphql/schema.graphql linguist-generated=false
-src/graphql/execute.ts linguist-generated=false
+src/graphql/generated/ linguist-generated=true

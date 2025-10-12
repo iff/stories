@@ -2,8 +2,7 @@ import remarkMdx from "remark-mdx";
 import remarkParse from "remark-parse";
 import { unified } from "unified";
 import * as unist from "unist";
-import { graphql } from "@/graphql";
-import { execute } from "@/graphql/execute";
+import { execute, graphql } from "@/graphql";
 
 /**
  * A Block is an element in a story which is not self-contained.
