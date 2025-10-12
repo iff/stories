@@ -5,9 +5,9 @@ on:
     types: [opened, synchronize, ready_for_review]
 
 jobs:
-  biome:
+  integrity:
     if: github.event.pull_request.draft == false
-    name: Biome
+    name: Integrity
     runs-on: [self-hosted, nixos]
 
     steps:
@@ -18,24 +18,44 @@ jobs:
 
       - run: nix run .#nix-develop .#workflow
 
-      - run: biome check --write --reporter=github .
+      - run: ./node_modules/.bin/graphql-codegen
+      - run: biome format --write .
 
       - id: create-pull-request
         uses: peter-evans/create-pull-request@v7
         with:
-          title: "Biome Write #${{ github.event.pull_request.number }}"
-          branch: biome-write-${{ github.event.pull_request.number }}
-          commit-message: "biome:write"
+          title: "Fix Integrity Violations in #${{ github.event.pull_request.number }}"
+          branch: fix-integrity-violations-${{ github.event.pull_request.number }}
           base: ${{ github.event.pull_request.head.ref }}
           delete-branch: true
+          draft: true
 
       - if: ${{ steps.create-pull-request.outputs.pull-request-number }}
         run: exit 1
+
+  biome:
+    if: github.event.pull_request.draft == false
+    name: Biome
+    runs-on: [self-hosted, nixos]
+    needs:
+      - integrity
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          clean: false
+
+      - run: nix run .#nix-develop .#workflow
+
+      - run: biome check --reporter=github .
 
   knip:
     if: github.event.pull_request.draft == false
     name: Knip
     runs-on: [self-hosted, nixos]
+    needs:
+      - integrity
 
     steps:
       - uses: actions/checkout@v5
@@ -51,6 +71,8 @@ jobs:
     if: github.event.pull_request.draft == false
     name: TypeScript
     runs-on: [self-hosted, nixos]
+    needs:
+      - integrity
 
     steps:
       - uses: actions/checkout@v5
@@ -67,6 +89,7 @@ jobs:
     name: Pull Request Verification
     runs-on: [self-hosted, nixos]
     needs:
+      - integrity
       - biome
       - knip
       - typescript
