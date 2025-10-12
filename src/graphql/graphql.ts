@@ -231,7 +231,7 @@ export type BlockQueryVariables = Exact<{
 }>;
 
 
-export type BlockQuery = { readonly __typename?: 'Query', readonly blob: { readonly __typename?: 'Blob', readonly name: string, readonly asImage: { readonly __typename?: 'Image', readonly url: string, readonly dimensions: { readonly __typename?: 'Dimensions', readonly width: number, readonly height: number }, readonly placeholder: { readonly __typename?: 'Image', readonly url: string } } | null, readonly asVideo: { readonly __typename?: 'Video', readonly poster: { readonly __typename?: 'Image', readonly url: string, readonly dimensions: { readonly __typename?: 'Dimensions', readonly width: number, readonly height: number }, readonly placeholder: { readonly __typename?: 'Image', readonly url: string } }, readonly renditions: ReadonlyArray<{ readonly __typename?: 'Rendition', readonly url: string }> } | null } | null };
+export type BlockQuery = { readonly __typename?: 'Query', readonly blob: { readonly __typename?: 'Blob', readonly name: string, readonly asImage: { readonly __typename?: 'Image', readonly url: string, readonly dimensions: { readonly __typename?: 'Dimensions', readonly width: number, readonly height: number }, readonly placeholder: { readonly __typename?: 'Image', readonly url: string } } | null, readonly asVideo: { readonly __typename?: 'Video', readonly poster: { readonly __typename?: 'Image', readonly url: string, readonly dimensions: { readonly __typename?: 'Dimensions', readonly width: number, readonly height: number }, readonly placeholder: { readonly __typename?: 'Image', readonly url: string } }, readonly renditions: ReadonlyArray<{ readonly __typename?: 'Rendition', readonly url: string, readonly dimensions: { readonly __typename?: 'Dimensions', readonly width: number, readonly height: number } }> } | null } | null };
 
 export type BlobQueryVariables = Exact<{
   name: Scalars['String']['input'];
@@ -286,6 +286,10 @@ export const BlockDocument = new TypedDocumentString(`
       }
       renditions {
         url
+        dimensions {
+          width
+          height
+        }
       }
     }
   }

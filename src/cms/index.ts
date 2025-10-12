@@ -9,7 +9,7 @@ import { BlobQuery } from "@/graphql/graphql";
  * A Block is an element in a story which is not self-contained.
  * It requires data to be fetched from an external source.
  */
-type Block = Image | Clip;
+export type Block = Image | Clip;
 
 interface Image {
   __typename: "Image";

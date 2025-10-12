@@ -1,11 +1,11 @@
+import assert from "node:assert";
 import * as fs from "node:fs";
 import { lookupStory } from "content";
 import { Metadata } from "next";
 import NextImage, { getImageProps } from "next/image";
 import { notFound } from "next/navigation";
-import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { blockIdSelector, extractBlocks } from "@/cms";
+import { Block, blockIdSelector, extractBlocks } from "@/cms";
 import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
 import { graphql } from "@/graphql";
@@ -26,14 +26,18 @@ interface Props {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { storyId, blockId } = await props.params;
-  const { title, block } = await data({ storyId, blockId });
-
-  const image = block.__typename === "Image" ? block.image : block.video?.poster;
+  const { title, blob } = await data({ storyId, blockId });
 
   return {
     title,
     openGraph: {
-      images: "src" in image ? image.src : image.url,
+      images: (() => {
+        if (blob.asImage) {
+          return blob.asImage.url;
+        } else if (blob.asVideo?.poster) {
+          return blob.asVideo.poster.url;
+        }
+      })(),
     },
     twitter: {
       card: "summary_large_image",
@@ -51,20 +55,6 @@ interface Data {
 
   blob: NonNullable<BlockQuery["blob"]>;
 }
-
-type Block =
-  | {
-      __typename: "Image";
-      id: string;
-      image: { src: string; sqip: { src: string } };
-      caption: null | string;
-    }
-  | {
-      __typename: "Clip";
-      id: string;
-      video: NonNullable<React.ComponentProps<typeof Clip>["video"]>;
-      caption: null | string;
-    };
 
 export default async function Page(props: Props) {
   const { storyId, blockId } = await props.params;
@@ -86,10 +76,56 @@ export default async function Page(props: Props) {
     >
       {(() => {
         switch (block.__typename) {
-          case "Image":
-            return <Inner.Image key={block.id} blob={blob} />;
-          case "Clip":
-            return <Inner.Clip key={block.id} video={block.video} />;
+          case "Image": {
+            assert(blob.asImage);
+
+            return (
+              <>
+                <NextImage
+                  alt=""
+                  src={blob.asImage.url}
+                  fill
+                  sizes="100vw"
+                  style={{
+                    objectFit: "contain",
+                  }}
+                  priority
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    top: 0,
+                    right: 0,
+                    bottom: 0,
+                    left: 0,
+                    pointerEvents: "none",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "contain",
+                    backgroundPosition: "50% 50%",
+                    zIndex: -1,
+                    backgroundImage: `url(${blob.asImage.placeholder.url})`,
+                  }}
+                />
+              </>
+            );
+          }
+
+          case "Clip": {
+            assert(blob.asVideo);
+
+            return (
+              <div
+                style={{
+                  height: "100%",
+                  display: "grid",
+                  placeItems: "center",
+                }}
+              >
+                <Clip video={blob.asVideo} />
+              </div>
+            );
+          }
         }
       })()}
     </Lightbox>
@@ -135,6 +171,7 @@ async function fetchBlob(name: string): Promise<NonNullable<BlockQuery["blob"]>>
           }
           renditions {
             url
+            dimensions { width height }
           }
         }
       }
@@ -185,29 +222,7 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
   ]);
 
   return {
-    block: {
-      ...block,
-      caption: block.caption ?? null,
-      ...(() => {
-        if ("asImage" in blob && blob.asImage) {
-          return {
-            image: {
-              src: blob.asImage.url,
-              ...blob.asImage.dimensions,
-              sqip: {
-                src: blob.asImage.placeholder.url,
-              },
-            },
-          };
-        }
-
-        if ("asVideo" in blob && blob.asVideo) {
-          return { video: blob.asVideo };
-        }
-
-        return {};
-      })(),
-    } as Block,
+    block,
 
     prev,
     next,
@@ -217,48 +232,3 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
     blob,
   };
 }
-
-const Inner = {
-  Image: ({ blob }: { blob: NonNullable<BlockQuery["blob"]> }) =>
-    blob.asImage ? (
-      <>
-        <NextImage
-          alt=""
-          src={blob.asImage.url}
-          fill
-          sizes="100vw"
-          style={{
-            objectFit: "contain",
-          }}
-          priority
-        />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            pointerEvents: "none",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "contain",
-            backgroundPosition: "50% 50%",
-            zIndex: -1,
-            backgroundImage: `url(${blob.asImage.placeholder.url})`,
-          }}
-        />
-      </>
-    ) : null,
-  Clip: ({ video }: { video: React.ComponentProps<typeof Clip>["video"] }) => (
-    <div
-      style={{
-        height: "100%",
-        display: "grid",
-        placeItems: "center",
-      }}
-    >
-      <Clip video={video} />
-    </div>
-  ),
-} as const;
