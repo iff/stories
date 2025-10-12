@@ -3,7 +3,7 @@ import remarkParse from "remark-parse";
 import { unified } from "unified";
 import * as unist from "unist";
 import { graphql } from "@/graphql";
-import { BlobQuery } from "@/graphql/graphql";
+import { execute } from "@/graphql/execute";
 
 /**
  * A Block is an element in a story which is not self-contained.
@@ -108,25 +108,12 @@ async function importBlob(name: string) {
     }
   `);
 
-  const res = await fetch(`${process.env.API}/graphql`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: BlobQuery,
-      variables: {
-        name,
-      },
-    }),
-  });
-
-  const json = (await res.json()) as { data: BlobQuery };
-  if (!json.data.blob) {
+  const { data } = await execute(BlobQuery, { name });
+  if (!data || !data.blob) {
     throw new Error(`Blob ${name} not found`);
   }
 
-  return json.data.blob;
+  return data.blob;
 }
 
 export async function importImage(name: string) {

@@ -18,6 +18,7 @@
     "paths": {
       "@/graphql": ["src/graphql"],
       "@/graphql/graphql": ["src/graphql/graphql"],
+      "@/graphql/execute": ["src/graphql/execute"],
       "@/cms": ["src/cms"],
       "@/components/*": ["src/components/*"],
       "@/fonts": ["fonts"],

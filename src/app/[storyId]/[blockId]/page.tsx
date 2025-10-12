@@ -9,6 +9,7 @@ import { Block, blockIdSelector, extractBlocks } from "@/cms";
 import { Clip } from "@/components/Clip";
 import { Lightbox } from "@/components/Lightbox";
 import { graphql } from "@/graphql";
+import { execute } from "@/graphql/execute";
 import { BlockQuery } from "@/graphql/graphql";
 
 export async function generateStaticParams() {
@@ -178,25 +179,12 @@ async function fetchBlob(name: string): Promise<NonNullable<BlockQuery["blob"]>>
     }
   `);
 
-  const res = await fetch(`${process.env.API}/graphql`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: BlockQuery,
-      variables: {
-        name,
-      },
-    }),
-  });
-
-  const json = (await res.json()) as { data: BlockQuery };
-  if (!json.data.blob) {
+  const { data } = await execute(BlockQuery, { name });
+  if (!data || !data.blob) {
     notFound();
   }
 
-  return json.data.blob;
+  return data.blob;
 }
 
 async function data({ storyId, blockId }: { storyId: string; blockId: string }): Promise<Data> {
