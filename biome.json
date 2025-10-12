@@ -14,6 +14,9 @@
         "useImportType": "off",
         "noUselessElse": "off"
       },
+      "correctness": {
+        "noNestedComponentDefinitions": "off"
+      },
       "a11y": {
         "noStaticElementInteractions": "off",
         "useKeyWithClickEvents": "off"

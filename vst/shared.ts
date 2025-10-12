@@ -38,7 +38,7 @@ export async function waitForImages(page: Page): Promise<void> {
    * synchronously and loaded eagerly.
    */
   await page.evaluate(() => {
-    Array.from(document.images).every((img) => {
+    Array.from(document.images).forEach((img) => {
       if (img.decoding !== "sync") {
         img.decoding = "sync";
       }
