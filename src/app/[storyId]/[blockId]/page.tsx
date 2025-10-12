@@ -1,7 +1,6 @@
 import * as fs from "node:fs";
 import { lookupStory } from "content";
 import { Metadata } from "next";
-import Head from "next/head";
 import NextImage, { getImageProps } from "next/image";
 import { notFound } from "next/navigation";
 import * as React from "react";
@@ -27,12 +26,12 @@ interface Props {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { storyId, blockId } = await props.params;
-  const { block } = await data({ storyId, blockId });
+  const { title, block } = await data({ storyId, blockId });
 
   const image = block.__typename === "Image" ? block.image : block.video?.poster;
 
   return {
-    title: block.caption,
+    title,
     openGraph: {
       images: "src" in image ? image.src : image.url,
     },
@@ -69,7 +68,7 @@ type Block =
 
 export default async function Page(props: Props) {
   const { storyId, blockId } = await props.params;
-  const { block, next, prev, title, blob } = await data({ storyId, blockId });
+  const { block, next, prev, blob } = await data({ storyId, blockId });
 
   if (prev) {
     preloadBlob(prev);
@@ -79,27 +78,21 @@ export default async function Page(props: Props) {
   }
 
   return (
-    <>
-      <Head>
-        <title>{title}</title>
-      </Head>
-
-      <Lightbox
-        onClose={{ href: `/${storyId}#${blockIdSelector(blockId)}` }}
-        caption={block.caption}
-        prev={prev ? { href: `/${storyId}/${prev.name}` } : undefined}
-        next={next ? { href: `/${storyId}/${next.name}` } : undefined}
-      >
-        {(() => {
-          switch (block.__typename) {
-            case "Image":
-              return <Inner.Image key={block.id} blob={blob} />;
-            case "Clip":
-              return <Inner.Clip key={block.id} video={block.video} />;
-          }
-        })()}
-      </Lightbox>
-    </>
+    <Lightbox
+      onClose={{ href: `/${storyId}#${blockIdSelector(blockId)}` }}
+      caption={block.caption}
+      prev={prev ? { href: `/${storyId}/${prev.name}` } : undefined}
+      next={next ? { href: `/${storyId}/${next.name}` } : undefined}
+    >
+      {(() => {
+        switch (block.__typename) {
+          case "Image":
+            return <Inner.Image key={block.id} blob={blob} />;
+          case "Clip":
+            return <Inner.Clip key={block.id} video={block.video} />;
+        }
+      })()}
+    </Lightbox>
   );
 }
 
@@ -219,7 +212,7 @@ async function data({ storyId, blockId }: { storyId: string; blockId: string }):
     prev,
     next,
 
-    title: `${blockId} - ${story?.title}`,
+    title: `${blockId} - ${story.title}`,
 
     blob,
   };
