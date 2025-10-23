@@ -72,8 +72,8 @@ importers:
         specifier: ^16.11.0
         version: 16.11.0
       knip:
-        specifier: ^5.65.0
-        version: 5.65.0(@types/node@22.18.10)(typescript@5.9.3)
+        specifier: ^5.66.2
+        version: 5.66.2(@types/node@22.18.10)(typescript@5.9.3)
       next:
         specifier: ^15.5.6
         version: 15.5.6(@babel/core@7.26.10)(@playwright/test@1.56.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -1827,8 +1827,8 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
-  knip@5.65.0:
-    resolution: {integrity: sha512-wMSca3O1JGs/JgEQx7uZUZYMnZvGqhNjL4b2w8LJGxFzEckNWcvyHopsCwkC7M6aeWgIASCT9vCFDXklvvey3g==}
+  knip@5.66.2:
+    resolution: {integrity: sha512-5wvsdc17C5bMxjuGfN9KVS/tW5KIvzP1RClfpTMdLYm8IXIsfWsiHlFkTvZIca9skwoVDyTyXmbRq4w1Poim+A==}
     engines: {node: '>=18.18.0'}
     hasBin: true
     peerDependencies:
@@ -4620,7 +4620,7 @@ snapshots:
 
   json5@2.2.3: {}
 
-  knip@5.65.0(@types/node@22.18.10)(typescript@5.9.3):
+  knip@5.66.2(@types/node@22.18.10)(typescript@5.9.3):
     dependencies:
       '@nodelib/fs.walk': 1.2.8
       '@types/node': 22.18.10
