@@ -38,7 +38,7 @@ jobs:
         env:
           URL: ${{ github.event.deployment_status.target_url }}
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: test-results-vst
           path: test-results/
@@ -67,7 +67,7 @@ jobs:
         env:
           URL: ${{ github.event.deployment_status.target_url }}
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: test-results-urnerys
           path: test-results/
