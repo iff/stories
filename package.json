@@ -18,7 +18,7 @@
     "@next/mdx": "^15.5.6",
     "@playwright/test": "^1.56.1",
     "@stylexjs/stylex": "^0.16.3",
-    "@stylexswc/nextjs-plugin": "^0.12.0",
+    "@stylexswc/nextjs-plugin": "^0.12.1",
     "@timvir/mdx": "^0.2.44",
     "@types/mdx": "^2.0.13",
     "@types/node": "^24.9.2",
