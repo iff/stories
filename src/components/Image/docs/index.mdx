@@ -30,7 +30,7 @@ fills the available space (equivalent to `object-fit: cover`). In the later case
 you need to make sure that the element is stretched vertically by placing it it
 inside a grid, using explict height, or similar techniques.
 
-<Grid style={{ margin: "20px 0" }}>
+{/* <Grid style={{ margin: "20px 0" }}>
   <Exhibit caption="Image in its intrinsic aspect ratio." style={{ gridColumn: "initial" }}>
     <Sample variant="basic" caption={undefined} />
   </Exhibit>
@@ -39,31 +39,31 @@ inside a grid, using explict height, or similar techniques.
       <Sample variant="basic" caption={undefined} fill />
     </div>
   </Exhibit>
-</Grid>
+</Grid> */}
 
 ## Caption
 
 The caption can be either placed below the image (default), or into an overlay
 which is visible on hover.
 
-<Grid style={{ margin: "20px 0" }}>
+{/* <Grid style={{ margin: "20px 0" }}>
   <Exhibit caption="Caption below the image." style={{ gridColumn: "initial" }}>
     <Sample variant="basic" captionPlacement="below" />
   </Exhibit>
   <Exhibit caption="Caption shown in overlay on hover." style={{ gridColumn: "initial" }}>
     <Sample variant="basic" captionPlacement="overlay" />
   </Exhibit>
-</Grid>
+</Grid> */}
 
 ## Link
 
 The image can be optionally wrapped in a link.
 
-<Exhibit caption="An image that is also a link.">
+{/* <Exhibit caption="An image that is also a link.">
   <div style={{ display: "grid", height: 200 }}>
     <Sample variant="link" caption={undefined} fill />
   </div>
-</Exhibit>
+</Exhibit> */}
 
 ## Known Defects
 
@@ -71,11 +71,11 @@ An image with caption and `fill` mode will not render correctly.
 The image does not stretch to fill in all available space.
 Instead, the image and caption share a roughly equal space (making the image much smaller than it should be).
 
-<Exhibit caption="Known defect: image with caption and fill.">
+{/* <Exhibit caption="Known defect: image with caption and fill.">
   <div style={{ display: "grid", height: 200 }}>
     <Sample variant="basic" fill />
   </div>
-</Exhibit>
+</Exhibit> */}
 
 [sqip]: https://github.com/axe312ger/sqip
 [next/image]: https://nextjs.org/docs/api-reference/next/image
