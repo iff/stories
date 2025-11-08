@@ -11,6 +11,10 @@ export const site = {
   },
 };
 
+export async function lookupStory(id: string): Promise<Story | undefined> {
+  return stories.find((story) => story.id === id);
+}
+
 interface Story {
   id: string;
 
