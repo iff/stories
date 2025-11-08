@@ -3,12 +3,13 @@ import dynamic from "next/dynamic";
 import * as React from "react";
 
 export const site = {
-  title: "Stories",
-  byline: "…for nothing remains of us but the vibrations we leave behind.",
+  title: "Lenses",
+  byline:
+    "sometimes the lense with which I perceive the world is a physical device attached to a camera",
 
   author: {
-    name: "Tomáš Čarnecký",
-    email: "tomc@caurea.org",
+    name: "Yves Ineichen",
+    email: "y@y.io",
   },
 };
 
@@ -72,215 +73,185 @@ export async function lookupStory(id: string): Promise<Story | undefined> {
 
 export const stories: Story[] = [
   {
-    id: "where-i-was-meant-to-be",
+    id: "hawaii",
 
     visibility: "PUBLIC",
-    publishedAt: new Date(Date.parse("2021-01-22")),
+    publishedAt: new Date(Date.parse("2020-01-01")),
 
-    title: "Where I was meant to be",
-    date: [new Date(Date.parse("2021-01-05")), new Date(Date.parse("2021-01-19"))],
+    title: "Hawaii",
+    date: [
+      new Date(Date.parse("2016-11-15")),
+      new Date(Date.parse("2016-12-01")),
+    ],
 
-    image: "2ZfTSs9o51poWKLtqQ2X9Fo7jgKE7dK8g4CXKybZxQB2",
+    image: "GzkGi2tBqxRFQ3efnr5Kxa64tX56hb4fbnK5tTWM5a9k",
 
     teaser: {
-      text: "I was going through a really fucking difficult time in my life and needed to get the fuck away from comfort.",
-      images: ["4urziJ8cBEYCJxWdGWZriVDwi966AxQZRxYsVCT4hjjv"],
+      text: "fairytale island",
+      images: ["GNm6m1gnH9TiRwYrrgsmg3HdVRjEWDZTW1xAYmoJuHNR"],
     },
 
     body: {
       /**
        * A React component that renders the story body.
        */
-      Component: dynamic(() => import("./where-i-was-meant-to-be/body.mdx")),
+      Component: dynamic(() => import(`./hawaii/body.mdx`)),
     },
   },
-
   {
-    id: "one-more-rush",
+    id: "amsterdam",
 
     visibility: "PUBLIC",
-    publishedAt: new Date(Date.parse("2021-05-18")),
+    publishedAt: new Date(Date.parse("2020-01-01")),
 
-    title: "One More Rush",
-    date: [new Date(Date.parse("2021-03-28")), new Date(Date.parse("2021-05-07"))],
+    title: "Amsterdam",
+    date: [
+      new Date(Date.parse("2017-05-20")),
+      new Date(Date.parse("2017-06-01")),
+    ],
 
-    image: "4zfWtmEUAz4bPvkAHZUVrdik83FJtWZkZ2eJ1cYkZ7Kc",
+    image: "47xXYVZEjAVVyEqYs7TpphRpE52WKZ7nVXoqJPT67iX3",
 
     teaser: {
-      text: "I’m fortunate enough that I can work from wherever there is good internet. That covers a lot of this earths surface – and airspace.",
-      images: ["G2RyoGrTfkSnw37DBsyVP4JGgcEMB33NR4AfJ5HBssG9"],
+      text: "smombie life",
+      images: ["Gh83ou9cqktKK9PBZLukuDviJ7Dvfqf1ep5zcZ3KA5kn"],
     },
 
     body: {
-      Component: dynamic(() => import("./one-more-rush/body.mdx")),
+      /**
+       * A React component that renders the story body.
+       */
+      Component: dynamic(() => import(`./amsterdam/body.mdx`)),
     },
   },
-
   {
-    id: "dreamers-wake",
+    id: "marocco",
 
     visibility: "PUBLIC",
-    publishedAt: new Date(Date.parse("2021-08-08")),
+    publishedAt: new Date(Date.parse("2020-01-01")),
 
-    title: "Dreamer's Wake",
-    date: [new Date(Date.parse("2021-06-26")), new Date(Date.parse("2021-07-13"))],
+    title: "Marocco",
+    date: [
+      new Date(Date.parse("2019-01-31")),
+      new Date(Date.parse("2019-02-10")),
+    ],
 
-    image: "5zuDhsdMcMz7Cvk97Vr2ErDiQb8SYknUPiemgeJmgsCa",
+    image: "6hkdp7oJ9g8qqzGcP9AAXrv9xk6S9GTUPB42J1YAYXeX",
 
     teaser: {
-      text: "Madeira wasn't my first choice where to go, but I'm glad the weather circumstances made me change my plans and go to this gorgeous island. I'll forever be grateful for the experience that I've had the chance to live through, and the people I've met.",
-      images: ["2jQPQHZQUdWZM1KiHDiYWzZs3LF6aTWBK8diCZPo3kcd"],
+      text: "colorful remoteness",
+      images: ["2XeYAL9caXND6XJB1988dfnS4ZWVkc94aFM5SSNoeyYw"],
     },
 
     body: {
-      Component: dynamic(() => import("./dreamers-wake/body.mdx")),
+      /**
+       * A React component that renders the story body.
+       */
+      Component: dynamic(() => import(`./marocco/body.mdx`)),
     },
   },
-
   {
-    id: "blouson-noir",
+    id: "snowline",
 
     visibility: "PUBLIC",
-    publishedAt: new Date(Date.parse("2021-11-06")),
+    publishedAt: new Date(Date.parse("2020-01-01")),
 
-    title: "Blouson Noir",
-    date: [new Date(Date.parse("2021-09-13")), new Date(Date.parse("2021-10-16"))],
+    title: "Snowline",
+    date: [
+      new Date(Date.parse("2021-03-06")),
+      new Date(Date.parse("2021-03-06")),
+    ],
 
-    image: "CbAA5a6fa9Qdb7E6gCnfNVx5UXbAxwLXGxAP5PDDMqYV",
+    image: "C673XbvFp8M5k899he4QNmj919yu5uMsBbckNfNyUVqT",
 
     teaser: {
-      text: "A remote-work experiment from a small country in western asia. I spent four weeks in Armenia, traveled 2200km by car, living in a tent while working my 9to5 day job.",
-      images: ["94CwSoC6ZdyDJof7juAxMo9gpyUkhKDhZgSTDeeYrz2Z"],
+      text: "unexpected separation",
+      images: ["9ECapbRAJzBu2BoZ6UG47EzRxDJFgAdr9xiTPF5VTcst"],
     },
 
     body: {
-      Component: dynamic(() => import("./blouson-noir/body.mdx")),
+      /**
+       * A React component that renders the story body.
+       */
+      Component: dynamic(() => import(`./snowline/body.mdx`)),
     },
   },
-
   {
-    id: "shivering-sense",
+    id: "bavona",
 
     visibility: "PUBLIC",
-    publishedAt: new Date(Date.parse("2022-04-24")),
+    publishedAt: new Date(Date.parse("2020-01-01")),
 
-    title: "Shivering Sense",
-    date: [new Date(Date.parse("2021-12-19")), new Date(Date.parse("2022-02-16"))],
+    title: "Bavona",
+    date: [
+      new Date(Date.parse("2020-01-01")),
+      new Date(Date.parse("2024-02-10")),
+    ],
 
-    image: "BefU8tziWMjkR6YWg5Tt5187xsdkkXp2ro5zSA6FYTWW",
+    image: "HMzyN2b5oADqoKsK29WZjxebYWWUWhZ7PZQ3HQyzn8WV",
 
     teaser: {
-      text: "Escaping the freezing european winter weather and spending Christmas and New Years somplace warm.",
-      images: ["4U6KQvhw1RBh3LRsfUm3YKYzcinDGEfmWWsu5mK8LwKS"],
+      text: "second home",
+      images: ["DK7FoWh3M9J1Nwk7GFGjcYoCMwpsDcJzZo8DZtK9wMwV"],
     },
 
     body: {
-      Component: dynamic(() => import("./shivering-sense/body.mdx")),
+      /**
+       * A React component that renders the story body.
+       */
+      Component: dynamic(() => import(`./bavona/body.mdx`)),
     },
   },
-
   {
-    id: "no-end-in-sight",
+    id: "bergell",
 
-    visibility: "PUBLIC",
-    publishedAt: new Date(Date.parse("2022-12-12")),
+    visibility: "HIDDEN",
+    publishedAt: new Date(Date.parse("2020-01-01")),
 
-    title: "No End in Sight",
-    date: [new Date(Date.parse("2022-10-26")), new Date(Date.parse("2022-11-13"))],
+    title: "Bergell",
+    date: [
+      new Date(Date.parse("2020-01-01")),
+      new Date(Date.parse("2024-02-10")),
+    ],
 
-    image: "ARSdapw2zdSqg2mBAePGixd7z7oPzythmAafqogNCVjd",
+    image: "BCctiLtVp3AheJNa1RqSZ32eMAtjRvJ6ppYMESJ845x8",
 
     teaser: {
-      text: "Exploring North Macedonia's cities, mountains, and lakes during the last warm autumn days of 2022.",
-      images: ["8T5Xc8AYcWk7VcCPSZmScwZiXBjgrWZdTBMqd7w8x7dv"],
+      text: "escaping lockdown",
+      images: [""],
     },
 
     body: {
-      Component: dynamic(() => import("./no-end-in-sight/body.mdx")),
+      /**
+       * A React component that renders the story body.
+       */
+      Component: dynamic(() => import(`./bergell/body.mdx`)),
     },
   },
-
   {
-    id: "rebirth",
+    id: "nz",
 
-    visibility: "PUBLIC",
-    publishedAt: new Date(Date.parse("2023-06-07")),
+    visibility: "HIDDEN",
+    publishedAt: new Date(Date.parse("2020-01-01")),
 
-    title: "Rebirth",
-    date: [new Date(Date.parse("2022-12-14")), new Date(Date.parse("2023-01-15"))],
+    title: "New Zealand",
+    date: [
+      new Date(Date.parse("2020-01-01")),
+      new Date(Date.parse("2024-02-10")),
+    ],
 
-    image: "3hTEGq6HsHYSQzVd1qP8Z7UwK7J2Ggm5U5YC6PdQjHVU",
+    image: "8Cfadtq1pQ2XgLn55skdb2CoawepiJF1kF9HwUZW8T3r",
 
     teaser: {
-      text: "A second opportunity presented itself for me to spend a few weeks in Morocco. I celebrated christmas in a dasert camp, and summitted the highest mountain of north africa on new years eve.",
-      images: ["ComZXKPfxqaKvk4nPd772JPNyjGj2QR7JrbdPFg16Pdt"],
+      text: "escaping lockdown",
+      images: [""],
     },
 
     body: {
-      Component: dynamic(() => import("./rebirth/body.mdx")),
-    },
-  },
-
-  {
-    id: "where-the-roads-collide",
-
-    visibility: "PUBLIC",
-    publishedAt: new Date(Date.parse("2023-07-23")),
-
-    title: "Where the Roads Collide",
-    date: [new Date(Date.parse("2023-06-05")), new Date(Date.parse("2023-06-26"))],
-
-    image: "FvWPgxfsmWHtaUmzuNSte99GMM5Rtiu2CiKMJnZgXbfR",
-
-    teaser: {
-      text: "Checking another country in the Western Balkans off my bucket list.",
-      images: ["7yWSUn7qFfaaRoiPk9UrtTeXDLFULHVpd7RYTLc1t1Vo", "2uDPdSfjM7rcAm5gN12YUFzvs4qPChL9rukXrgsPKwyS"],
-    },
-
-    body: {
-      Component: dynamic(() => import("./where-the-roads-collide/body.mdx")),
-    },
-  },
-
-  {
-    id: "kindest-regards",
-
-    visibility: "PUBLIC",
-    publishedAt: new Date(Date.parse("2024-01-06")),
-
-    title: "Kindest Regards",
-    date: [new Date(Date.parse("2023-08-18")), new Date(Date.parse("2023-09-17"))],
-
-    image: "B9uJRSuzBxXBpBhAKZAYm1S35wD6s2sH2RixcN9G8Wax",
-
-    teaser: {
-      text: "Fying over 9000 kilometers just to attend a 3 day workshop is wasteful. Why not stay a bit longer?",
-      images: ["EpLn9QA3f1b53Jgr6uut7zDCHXMArXsrzEX9rVVJqv63"],
-    },
-
-    body: {
-      Component: dynamic(() => import("./kindest-regards/body.mdx")),
-    },
-  },
-
-  {
-    id: "safe",
-
-    visibility: "PUBLIC",
-    publishedAt: new Date(Date.parse("2024-03-05")),
-
-    title: "Safe",
-    date: [new Date(Date.parse("2023-12-19")), new Date(Date.parse("2024-01-14"))],
-
-    image: "52AiaqkiyZeScySiUdDq2PwKdHovwX7SHbzMzAGaL9V7",
-
-    teaser: {
-      text: "I wanted to escape into deep Georgian winter. Instead, I was celebrating New Year’s Eve stuck in my car in the middle of the mountains, and strolling though Batumi during balmy summer weather.",
-      images: ["3NSmDSaXPc8Np3C3GQonevnvCL5w5jGY8Fqybn4GJnHP"],
-    },
-
-    body: {
-      Component: dynamic(() => import("./safe/body.mdx")),
+      /**
+       * A React component that renders the story body.
+       */
+      Component: dynamic(() => import(`./nz/body.mdx`)),
     },
   },
 ];

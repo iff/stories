@@ -10,7 +10,7 @@ export default async function Page() {
     <>
       <div {...stylex.props(styles.storyCards)}>
         {await Promise.all(
-          featuredStories.map(async (story, index) => (
+          featuredStories.map(async (story, _index) => (
             <StoryCard
               key={story.id}
               story={{
