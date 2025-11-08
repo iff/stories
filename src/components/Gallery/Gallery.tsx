@@ -196,6 +196,7 @@ const styles = stylex.create({
     height: "100vh",
     backgroundColor: "#fff",
     overflow: "hidden",
+    fontFamily: "iAWriterQuattroS, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
   },
 
   slideContainer: {
