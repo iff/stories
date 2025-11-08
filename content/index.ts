@@ -1,11 +1,9 @@
-import { MDXProps } from "mdx/types";
 import dynamic from "next/dynamic";
 import * as React from "react";
 
 export const site = {
   title: "Lenses",
-  byline:
-    "sometimes the lense with which I perceive the world is a physical device attached to a camera",
+  byline: "sometimes the lense with which I perceive the world is a physical device attached to a camera",
 
   author: {
     name: "Yves Ineichen",
@@ -14,18 +12,8 @@ export const site = {
 };
 
 interface Story {
-  /**
-   * The primary identifier of the story. Keep it human-readable and unique.
-   * Use lowercase alphanumeric characters and hyphens only.
-   *
-   * @example "where-i-was-meant-to-be"
-   */
   id: string;
 
-  /**
-   * Public stories are visible to everyone. Hidden stories are only accessible
-   * when you enter the URL directly, they are not listed on the home page.
-   */
   visibility: "PUBLIC" | "HIDDEN";
 
   /**
@@ -34,11 +22,6 @@ interface Story {
    */
   publishedAt: null | Date;
 
-  /**
-   * The title of the story. Keep it short and descriptive.
-   *
-   * @example "Where I Was Meant to Be"
-   */
   title: string;
 
   /**
@@ -48,8 +31,7 @@ interface Story {
 
   /**
    * The primary image for the story. This is used in the teaser on the home page,
-   * in the header on the story page, and as the Open Graph image of the story
-   * page itself.
+   * in the header on the story page, and as the Open Graph image.
    */
   image: string;
 
@@ -63,12 +45,8 @@ interface Story {
   };
 
   body: {
-    Component: React.ComponentType<MDXProps>;
+    Component: React.ComponentType;
   };
-}
-
-export async function lookupStory(id: string): Promise<Story | undefined> {
-  return stories.find((story) => story.id === id);
 }
 
 export const stories: Story[] = [
@@ -79,10 +57,7 @@ export const stories: Story[] = [
     publishedAt: new Date(Date.parse("2020-01-01")),
 
     title: "Hawaii",
-    date: [
-      new Date(Date.parse("2016-11-15")),
-      new Date(Date.parse("2016-12-01")),
-    ],
+    date: [new Date(Date.parse("2016-11-15")), new Date(Date.parse("2016-12-01"))],
 
     image: "GzkGi2tBqxRFQ3efnr5Kxa64tX56hb4fbnK5tTWM5a9k",
 
@@ -105,10 +80,7 @@ export const stories: Story[] = [
     publishedAt: new Date(Date.parse("2020-01-01")),
 
     title: "Amsterdam",
-    date: [
-      new Date(Date.parse("2017-05-20")),
-      new Date(Date.parse("2017-06-01")),
-    ],
+    date: [new Date(Date.parse("2017-05-20")), new Date(Date.parse("2017-06-01"))],
 
     image: "47xXYVZEjAVVyEqYs7TpphRpE52WKZ7nVXoqJPT67iX3",
 
@@ -131,10 +103,7 @@ export const stories: Story[] = [
     publishedAt: new Date(Date.parse("2020-01-01")),
 
     title: "Marocco",
-    date: [
-      new Date(Date.parse("2019-01-31")),
-      new Date(Date.parse("2019-02-10")),
-    ],
+    date: [new Date(Date.parse("2019-01-31")), new Date(Date.parse("2019-02-10"))],
 
     image: "6hkdp7oJ9g8qqzGcP9AAXrv9xk6S9GTUPB42J1YAYXeX",
 
@@ -157,10 +126,7 @@ export const stories: Story[] = [
     publishedAt: new Date(Date.parse("2020-01-01")),
 
     title: "Snowline",
-    date: [
-      new Date(Date.parse("2021-03-06")),
-      new Date(Date.parse("2021-03-06")),
-    ],
+    date: [new Date(Date.parse("2021-03-06")), new Date(Date.parse("2021-03-06"))],
 
     image: "C673XbvFp8M5k899he4QNmj919yu5uMsBbckNfNyUVqT",
 
@@ -183,10 +149,7 @@ export const stories: Story[] = [
     publishedAt: new Date(Date.parse("2020-01-01")),
 
     title: "Bavona",
-    date: [
-      new Date(Date.parse("2020-01-01")),
-      new Date(Date.parse("2024-02-10")),
-    ],
+    date: [new Date(Date.parse("2020-01-01")), new Date(Date.parse("2024-02-10"))],
 
     image: "HMzyN2b5oADqoKsK29WZjxebYWWUWhZ7PZQ3HQyzn8WV",
 
@@ -209,10 +172,7 @@ export const stories: Story[] = [
     publishedAt: new Date(Date.parse("2020-01-01")),
 
     title: "Bergell",
-    date: [
-      new Date(Date.parse("2020-01-01")),
-      new Date(Date.parse("2024-02-10")),
-    ],
+    date: [new Date(Date.parse("2020-01-01")), new Date(Date.parse("2024-02-10"))],
 
     image: "BCctiLtVp3AheJNa1RqSZ32eMAtjRvJ6ppYMESJ845x8",
 
@@ -235,10 +195,7 @@ export const stories: Story[] = [
     publishedAt: new Date(Date.parse("2020-01-01")),
 
     title: "New Zealand",
-    date: [
-      new Date(Date.parse("2020-01-01")),
-      new Date(Date.parse("2024-02-10")),
-    ],
+    date: [new Date(Date.parse("2020-01-01")), new Date(Date.parse("2024-02-10"))],
 
     image: "8Cfadtq1pQ2XgLn55skdb2CoawepiJF1kF9HwUZW8T3r",
 
