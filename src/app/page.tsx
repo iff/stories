@@ -1,7 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
 
 import { importImage } from "@/cms";
-import { Hero } from "@/components/Hero";
 import { StoryCard } from "@/components/StoryCard";
 
 import { stories } from "../../content";
@@ -9,27 +8,19 @@ import { stories } from "../../content";
 export default async function Page() {
   return (
     <>
-      <Hero />
-
       <div {...stylex.props(styles.storyCards)}>
-        {
-          await Promise.all(
-            featuredStories.map(async (story, index) => (
-              <StoryCard
-                key={story.id}
-                layout={index % 2 ? "inverted" : "regular"}
-                story={{
-                  id: story.id,
-                }}
-                blob={await importImage(story.image)}
-                blocks={await Promise.all(story.teaser.images.map((name) => importImage(name)))}
-                title={story.title}
-                teaser={story.teaser.text}
-                date={story.date}
-              />
-            )),
-          )
-        }
+        {await Promise.all(
+          featuredStories.map(async (story, index) => (
+            <StoryCard
+              key={story.id}
+              story={{
+                id: story.id,
+              }}
+              blob={await importImage(story.image)}
+              title={story.title}
+            />
+          )),
+        )}
       </div>
     </>
   );
@@ -38,11 +29,20 @@ export default async function Page() {
 const styles = stylex.create({
   storyCards: {
     display: "grid",
-    gap: "6em",
-    marginBlock: "2em 6em",
+    gridTemplateColumns: "repeat(2, 1fr)",
+    gap: "3rem",
+    padding: "2rem",
+    maxWidth: "1400px",
+    margin: "0 auto",
 
-    "@media (min-width: 720px)": {
-      gap: "9em",
+    "@media (min-width: 1024px)": {
+      gridTemplateColumns: "repeat(3, 1fr)",
+      gap: "4rem",
+    },
+
+    "@media (max-width: 640px)": {
+      gridTemplateColumns: "1fr",
+      gap: "2rem",
     },
   },
 });
