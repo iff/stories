@@ -47,10 +47,14 @@ function Header(props: Props) {
             backgroundImage: `url(${blob.asImage.placeholder.url})`,
           }}
         />
-        <Image alt="" src={blob.asImage.url} fill sizes="100vw" {...stylex.props(styles.img)} />
+        <Image
+          alt=""
+          src={blob.asImage.url}
+          fill
+          sizes="80vw"
+          {...stylex.props(styles.img)}
+        />
       </div>
-
-      <h1 {...stylex.props(styles.title)}>{title}</h1>
     </Root>
   );
 }

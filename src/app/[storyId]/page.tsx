@@ -3,9 +3,8 @@ import * as stylex from "@stylexjs/stylex";
 import { lookupStory } from "content";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { extractBlocks, importImage } from "@/cms";
-import { Body } from "@/components/Body";
-import { Header } from "@/components/Header";
+import { extractBlocks, extractContentBlocks, importImage } from "@/cms";
+import { Gallery } from "@/components/Gallery";
 import { StoryById } from "@/components/Story";
 
 export async function generateStaticParams() {
@@ -49,15 +48,40 @@ export default async function Page(props: Props) {
     return notFound();
   }
 
-  const blobs = await data({ storyId });
+  const { blobs, contentBlocks } = await data({ storyId });
+
+  // Convert content blocks to gallery slides
+  const slides = contentBlocks.map((block) => {
+    if (block.__typename === "TextBlock") {
+      return {
+        type: "text" as const,
+        textContent: block.content,
+      };
+    } else if (block.__typename === "ImageGroup") {
+      // Map images in the group to include their blobs
+      const images = block.images.map((img) => ({
+        ...img,
+        blob: blobs.find((b) => b.name === img.id),
+      }));
+      return {
+        type: "group" as const,
+        images,
+      };
+    } else {
+      // Image or Clip block
+      const blob = blobs.find((b) => b.name === block.id);
+      return {
+        type: block.__typename === "Clip" ? "video" : "image" as const,
+        blobId: block.id,
+        caption: block.caption,
+        blob: blob,
+      };
+    }
+  });
 
   return (
     <>
-      <div {...stylex.props(styles.root)}>
-        <Header blob={await importImage(story.image)} title={story.title} />
-        <Body storyId={storyId} blobs={blobs} Component={story.body.Component} />
-      </div>
-
+      <Gallery slides={slides} />
       <StoryById />
     </>
   );
@@ -71,11 +95,24 @@ const styles = stylex.create({
   },
 });
 
-async function data({ storyId }: Params): Promise<
-  Array<{
-    name: string;
+type BlobData = {
+  name: string;
 
-    asImage: {
+  asImage: {
+    url: string;
+
+    dimensions: {
+      width: number;
+      height: number;
+    };
+
+    placeholder?: {
+      url: string;
+    };
+  };
+
+  asVideo: {
+    poster: {
       url: string;
 
       dimensions: {
@@ -83,38 +120,29 @@ async function data({ storyId }: Params): Promise<
         height: number;
       };
 
-      placeholder?: {
+      placeholder: {
         url: string;
       };
     };
 
-    asVideo: {
-      poster: {
-        url: string;
+    renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
+  };
+};
 
-        dimensions: {
-          width: number;
-          height: number;
-        };
-
-        placeholder: {
-          url: string;
-        };
-      };
-
-      renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
-    };
-  }>
-> {
+async function data({ storyId }: Params): Promise<{
+  blobs: Array<BlobData>;
+  contentBlocks: Array<{ __typename: string; id: string; caption?: string; content?: string }>;
+}> {
   if (!fs.existsSync(`./content/${storyId}/body.mdx`)) {
     return notFound();
   }
 
   const body = await fs.promises.readFile(`./content/${storyId}/body.mdx`, { encoding: "utf8" });
+  const contentBlocks = extractContentBlocks(body);
   const blocks = extractBlocks(body);
 
   if (blocks.length === 0) {
-    return [];
+    return { blobs: [], contentBlocks };
   }
 
   const res = await fetch(`${process.env.API}/graphql`, {
@@ -125,7 +153,7 @@ async function data({ storyId }: Params): Promise<
         ({ id }) =>
           `b${id}: blob(name: "${id}") {
               name
-              asImage { url dimensions { width height } }
+              asImage { url dimensions { width height } placeholder { url } }
               asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
             }`,
       )} }`,
@@ -133,37 +161,8 @@ async function data({ storyId }: Params): Promise<
   });
   const json = await res.json();
 
-  return Object.values(json.data) as Array<{
-    name: string;
-
-    asImage: {
-      url: string;
-
-      dimensions: {
-        width: number;
-        height: number;
-      };
-
-      placeholder?: {
-        url: string;
-      };
-    };
-
-    asVideo: {
-      poster: {
-        url: string;
-
-        dimensions: {
-          width: number;
-          height: number;
-        };
-
-        placeholder: {
-          url: string;
-        };
-      };
-
-      renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
-    };
-  }>;
+  return {
+    blobs: Object.values(json.data) as Array<BlobData>,
+    contentBlocks,
+  };
 }
