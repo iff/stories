@@ -84,8 +84,11 @@ function Gallery(props: Props) {
 
   return (
     <Root {...stylex.props(styles.root)} {...rest}>
-      {/* Back to home button */}
-      <Link href="/" {...stylex.props(styles.backButton)} aria-label="Back to home">
+      <Link
+        href="/"
+        {...stylex.props(styles.backButton)}
+        aria-label="Back to home"
+      >
         ^
       </Link>
 
@@ -98,19 +101,28 @@ function Gallery(props: Props) {
                 alt={currentSlide.caption || ""}
                 width={currentSlide.blob.asImage.dimensions.width}
                 height={currentSlide.blob.asImage.dimensions.height}
-                placeholder={currentSlide.blob.asImage.placeholder ? "blur" : undefined}
+                placeholder={
+                  currentSlide.blob.asImage.placeholder ? "blur" : undefined
+                }
                 blurDataURL={currentSlide.blob.asImage.placeholder?.url}
-                style={{ width: 'auto', height: 'auto', maxWidth: '90vw', maxHeight: '85vh' }}
+                style={{
+                  width: "auto",
+                  height: "auto",
+                  maxWidth: "90vw",
+                  maxHeight: "85vh",
+                }}
               />
             </div>
             {currentSlide.caption && (
-              <div {...stylex.props(styles.caption)}>{currentSlide.caption}</div>
+              <div {...stylex.props(styles.caption)}>
+                {currentSlide.caption}
+              </div>
             )}
           </div>
         )}
 
         {currentSlide.type === "group" && currentSlide.images && (
-          <div {...stylex.props(styles.groupSlide)}>
+          <div {...stylex.props(styles.groupContainer)}>
             <Group>
               {currentSlide.images.map((image) => {
                 if (!image.blob) return null;
@@ -131,20 +143,20 @@ function Gallery(props: Props) {
           <div {...stylex.props(styles.textSlide)}>
             <div {...stylex.props(styles.textContent)}>
               {currentSlide.textContent?.split("\n\n").map((paragraph, idx) => {
-                // Check if it's a heading
-                if (paragraph.startsWith("##")) {
-                  const text = paragraph.replace(/^##\s*/, "");
-                  return (
-                    <h2 key={idx} {...stylex.props(styles.textHeading)}>
-                      {text}
-                    </h2>
-                  );
-                } else if (paragraph.startsWith("###")) {
+                // TODO markdown?
+                if (paragraph.startsWith("###")) {
                   const text = paragraph.replace(/^###\s*/, "");
                   return (
                     <h3 key={idx} {...stylex.props(styles.textSubheading)}>
                       {text}
                     </h3>
+                  );
+                } else if (paragraph.startsWith("##")) {
+                  const text = paragraph.replace(/^##\s*/, "");
+                  return (
+                    <h2 key={idx} {...stylex.props(styles.textHeading)}>
+                      {text}
+                    </h2>
                   );
                 }
                 // Regular paragraph
@@ -159,7 +171,6 @@ function Gallery(props: Props) {
         )}
       </div>
 
-      {/* Navigation Arrows */}
       {currentIndex > 0 && (
         <button
           onClick={goToPrev}
@@ -179,7 +190,6 @@ function Gallery(props: Props) {
         </button>
       )}
 
-      {/* Progress indicator */}
       <div {...stylex.props(styles.progress)}>
         {currentIndex + 1} / {slides.length}
       </div>
@@ -196,7 +206,8 @@ const styles = stylex.create({
     height: "100vh",
     backgroundColor: "#fff",
     overflow: "hidden",
-    fontFamily: "iAWriterQuattroS, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    fontFamily:
+      "iAWriterQuattroS, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
   },
 
   slideContainer: {
@@ -209,14 +220,11 @@ const styles = stylex.create({
 
   imageWrapper: {
     position: "relative",
-    width: "100%",
-    height: "100%",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
-    gap: "2rem",
-    padding: "2rem",
+    gap: "1rem",
   },
 
   imageContainer: {
@@ -227,20 +235,16 @@ const styles = stylex.create({
   },
 
   caption: {
-    fontSize: "14px",
-    lineHeight: 1.6,
-    color: "#333",
-    textAlign: "center",
-    maxWidth: "600px",
-    padding: "0 1rem",
+    fontSize: "12px",
+    lineHeight: 1.5,
+    color: "#999",
+    textAlign: "left",
+    padding: 0,
   },
 
-  groupSlide: {
+  groupContainer: {
     width: "90vw",
     maxHeight: "85vh",
-    overflowY: "auto",
-    padding: "2rem",
-    margin: "0 auto",
   },
 
   textSlide: {
