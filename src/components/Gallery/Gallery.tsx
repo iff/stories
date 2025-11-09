@@ -55,6 +55,63 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   slides: GallerySlide[];
 }
 
+// Helper function to render inline markdown (bold, italic, links)
+function renderInlineMarkdown(text: string): React.ReactNode {
+  const parts: React.ReactNode[] = [];
+  let remaining = text;
+  let key = 0;
+
+  // Regex patterns for inline markdown
+  const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/;
+  const boldPattern = /\*\*([^*]+)\*\*/;
+  const italicPattern = /\*([^*]+)\*/;
+
+  while (remaining.length > 0) {
+    // Try to match link first
+    const linkMatch = remaining.match(linkPattern);
+    if (linkMatch && linkMatch.index !== undefined) {
+      if (linkMatch.index > 0) {
+        parts.push(remaining.substring(0, linkMatch.index));
+      }
+      parts.push(
+        <a key={key++} href={linkMatch[2]} style={{ color: '#666', textDecoration: 'underline' }}>
+          {linkMatch[1]}
+        </a>
+      );
+      remaining = remaining.substring(linkMatch.index + linkMatch[0].length);
+      continue;
+    }
+
+    // Try to match bold
+    const boldMatch = remaining.match(boldPattern);
+    if (boldMatch && boldMatch.index !== undefined) {
+      if (boldMatch.index > 0) {
+        parts.push(remaining.substring(0, boldMatch.index));
+      }
+      parts.push(<strong key={key++}>{boldMatch[1]}</strong>);
+      remaining = remaining.substring(boldMatch.index + boldMatch[0].length);
+      continue;
+    }
+
+    // Try to match italic
+    const italicMatch = remaining.match(italicPattern);
+    if (italicMatch && italicMatch.index !== undefined) {
+      if (italicMatch.index > 0) {
+        parts.push(remaining.substring(0, italicMatch.index));
+      }
+      parts.push(<em key={key++}>{italicMatch[1]}</em>);
+      remaining = remaining.substring(italicMatch.index + italicMatch[0].length);
+      continue;
+    }
+
+    // No more matches, add the rest
+    parts.push(remaining);
+    break;
+  }
+
+  return parts.length > 0 ? parts : text;
+}
+
 function Gallery(props: Props) {
   const { slides, ...rest } = props;
   const [currentIndex, setCurrentIndex] = React.useState(0);
@@ -143,26 +200,25 @@ function Gallery(props: Props) {
           <div {...stylex.props(styles.textSlide)}>
             <div {...stylex.props(styles.textContent)}>
               {currentSlide.textContent?.split("\n\n").map((paragraph, idx) => {
-                // TODO markdown?
                 if (paragraph.startsWith("###")) {
                   const text = paragraph.replace(/^###\s*/, "");
                   return (
                     <h3 key={idx} {...stylex.props(styles.textSubheading)}>
-                      {text}
+                      {renderInlineMarkdown(text)}
                     </h3>
                   );
                 } else if (paragraph.startsWith("##")) {
                   const text = paragraph.replace(/^##\s*/, "");
                   return (
                     <h2 key={idx} {...stylex.props(styles.textHeading)}>
-                      {text}
+                      {renderInlineMarkdown(text)}
                     </h2>
                   );
                 }
                 // Regular paragraph
                 return (
                   <p key={idx} {...stylex.props(styles.textParagraph)}>
-                    {paragraph}
+                    {renderInlineMarkdown(paragraph)}
                   </p>
                 );
               })}
@@ -243,7 +299,7 @@ const styles = stylex.create({
   },
 
   groupContainer: {
-    width: "90vw",
+    // width: "90vw",
     maxHeight: "85vh",
   },
 

@@ -86,23 +86,8 @@ export function extractBlocks(mdx: string): Array<Block> {
 
 export function extractContentBlocks(mdx: string): Array<ContentBlock> {
   const contentBlocks: Array<ContentBlock> = [];
-  let currentTextContent: string[] = [];
   let textBlockId = 0;
   let groupId = 0;
-
-  function flushTextBlock() {
-    if (currentTextContent.length > 0) {
-      const content = currentTextContent.join("\n\n").trim();
-      if (content) {
-        contentBlocks.push({
-          __typename: "TextBlock",
-          id: `text-${textBlockId++}`,
-          content,
-        });
-      }
-      currentTextContent = [];
-    }
-  }
 
   function extractText(node: any): string {
     if (node.type === "text") {
@@ -155,12 +140,42 @@ export function extractContentBlocks(mdx: string): Array<ContentBlock> {
     return { id: blobId, caption, span, aspectRatio };
   }
 
+  function extractTextFromNodes(nodes: any[]): string {
+    return nodes.map((node) => {
+      if (node.type === "text") {
+        return node.value;
+      }
+      if (node.type === "paragraph") {
+        const text = extractText(node);
+        return text;
+      }
+      if (node.type === "heading") {
+        const text = extractText(node);
+        return `${"#".repeat(node.depth)} ${text}`;
+      }
+      if (Array.isArray(node.children)) {
+        return extractTextFromNodes(node.children);
+      }
+      return "";
+    }).filter(x => x).join("\n\n");
+  }
+
   function go(node: any, insideGroup = false): any {
+    // Check if this is a Text block
+    if ((node.type === "mdxJsxFlowElement" || node.type === "mdxJsxTextElement") && node.name === "Text") {
+      // Extract the text content from children
+      const textContent = extractTextFromNodes(node.children || []);
+
+      contentBlocks.push({
+        __typename: "TextBlock",
+        id: `text-${textBlockId++}`,
+        content: textContent,
+      });
+      return;
+    }
+
     // Check if this is a Group
     if ((node.type === "mdxJsxFlowElement" || node.type === "mdxJsxTextElement") && node.name === "Group") {
-      // Flush text before group
-      flushTextBlock();
-
       // Extract all images from the group
       const images: Array<any> = [];
       if (Array.isArray(node.children)) {
@@ -181,15 +196,12 @@ export function extractContentBlocks(mdx: string): Array<ContentBlock> {
           images,
         });
       }
-      return; // Don't continue processing children since we already extracted images
+      return;
     }
 
     // Check if this is an Image or Clip block (not inside a group)
     if (!insideGroup && (node.type === "mdxJsxFlowElement" || node.type === "mdxJsxTextElement") &&
         (node.name === "Image" || node.name === "Clip")) {
-
-      // Flush any accumulated text before this media block
-      flushTextBlock();
 
       const blobId = node.attributes?.find((x: any) => x.type === "mdxJsxAttribute" && x.name === "blobId")?.value;
       const caption = node.attributes?.find((x: any) => x.type === "mdxJsxAttribute" && x.name === "caption")?.value;
@@ -201,28 +213,10 @@ export function extractContentBlocks(mdx: string): Array<ContentBlock> {
           caption,
         } as Image | Clip);
       }
-      return; // Don't process children of Image/Clip, but siblings will be processed
+      return;
     }
 
-    // Extract text content from paragraphs and headings
-    if (node.type === "paragraph") {
-      const text = extractText(node);
-      if (text.trim()) {
-        currentTextContent.push(text);
-      }
-    } else if (node.type === "heading") {
-      const text = extractText(node);
-      if (text.trim()) {
-        currentTextContent.push(`${"#".repeat(node.depth)} ${text}`);
-      }
-    } else if (node.type === "blockquote") {
-      const text = node.children?.map(extractText).join("\n") || "";
-      if (text.trim()) {
-        currentTextContent.push(`> ${text}`);
-      }
-    }
-
-    // Recursively process children (unless we already returned above)
+    // Recursively process children
     if (Array.isArray(node.children)) {
       node.children.forEach((child) => go(child, insideGroup));
     }
@@ -230,9 +224,6 @@ export function extractContentBlocks(mdx: string): Array<ContentBlock> {
 
   const tree = unified().use(remarkParse).use(remarkMdx).parse(mdx);
   go(tree);
-
-  // Flush any remaining text at the end
-  flushTextBlock();
 
   return contentBlocks;
 }
