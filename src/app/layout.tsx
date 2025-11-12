@@ -19,11 +19,6 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://iff.io"
-    : "http://localhost:3000";
-
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { className, ...rest } = stylex.props(styles.html);
 
@@ -31,12 +26,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en" className={`${tuna.className} ${className}`} {...rest}>
       <head>
         <link rel="icon" href="/favicon.png" />
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          title="iff canvas"
-          href={`${baseUrl}/feed`}
-        />
       </head>
 
       <body {...stylex.props(styles.body)}>
