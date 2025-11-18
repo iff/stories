@@ -28,10 +28,10 @@ importers:
         version: 3.1.1(webpack@5.99.5(@swc/core@1.15.2))
       '@mdx-js/react':
         specifier: ^3.1.1
-        version: 3.1.1(@types/react@19.2.5)(react@19.2.0)
+        version: 3.1.1(@types/react@19.2.6)(react@19.2.0)
       '@next/mdx':
         specifier: ^15.5.6
-        version: 15.5.6(@mdx-js/loader@3.1.1(webpack@5.99.5(@swc/core@1.15.2)))(@mdx-js/react@3.1.1(@types/react@19.2.5)(react@19.2.0))
+        version: 15.5.6(@mdx-js/loader@3.1.1(webpack@5.99.5(@swc/core@1.15.2)))(@mdx-js/react@3.1.1(@types/react@19.2.6)(react@19.2.0))
       '@playwright/test':
         specifier: ^1.56.1
         version: 1.56.1
@@ -51,11 +51,11 @@ importers:
         specifier: ^24.10.1
         version: 24.10.1
       '@types/react':
-        specifier: ^19.2.5
-        version: 19.2.5
+        specifier: ^19.2.6
+        version: 19.2.6
       '@types/react-dom':
         specifier: ^19.2.3
-        version: 19.2.3(@types/react@19.2.5)
+        version: 19.2.3(@types/react@19.2.6)
       '@types/unist':
         specifier: ^3.0.3
         version: 3.0.3
@@ -1238,8 +1238,8 @@ packages:
     peerDependencies:
       '@types/react': ^19.2.0
 
-  '@types/react@19.2.5':
-    resolution: {integrity: sha512-keKxkZMqnDicuvFoJbzrhbtdLSPhj/rZThDlKWCDbgXmUg0rEUFtRssDXKYmtXluZlIqiC5VqkCgRwzuyLHKHw==}
+  '@types/react@19.2.6':
+    resolution: {integrity: sha512-p/jUvulfgU7oKtj6Xpk8cA2Y1xKTtICGpJYeJXz2YVO2UcvjQgeRMLDGfDeqeRW2Ta+0QNFwcc8X3GH8SxZz6w==}
 
   '@types/unist@2.0.7':
     resolution: {integrity: sha512-cputDpIbFgLUaGQn6Vqg3/YsJwxUwHLO13v3i5ouxT4lat0khip9AEWxtERujXV9wxIB1EyF97BSJFt6vpdI8g==}
@@ -1555,8 +1555,8 @@ packages:
   css-mediaquery@0.1.2:
     resolution: {integrity: sha512-COtn4EROW5dBGlE/4PiKnh6rZpAPxDeFLaEEwt4i10jpDMFt2EhQGS79QmmrO+iKCHv0PU/HrOWEhijFd1x99Q==}
 
-  csstype@3.0.9:
-    resolution: {integrity: sha512-rpw6JPxK6Rfg1zLOYCSwle2GFOOsnjmDYDaBwEcwoOg4qlsIVCN789VkBZDJAGi4T07gI4YSutR43t9Zz4Lzuw==}
+  csstype@3.2.3:
+    resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
 
   data-uri-to-buffer@4.0.1:
     resolution: {integrity: sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A==}
@@ -3837,10 +3837,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@mdx-js/react@3.1.1(@types/react@19.2.5)(react@19.2.0)':
+  '@mdx-js/react@3.1.1(@types/react@19.2.6)(react@19.2.0)':
     dependencies:
       '@types/mdx': 2.0.13
-      '@types/react': 19.2.5
+      '@types/react': 19.2.6
       react: 19.2.0
 
   '@napi-rs/wasm-runtime@1.0.7':
@@ -3852,12 +3852,12 @@ snapshots:
 
   '@next/env@15.5.6': {}
 
-  '@next/mdx@15.5.6(@mdx-js/loader@3.1.1(webpack@5.99.5(@swc/core@1.15.2)))(@mdx-js/react@3.1.1(@types/react@19.2.5)(react@19.2.0))':
+  '@next/mdx@15.5.6(@mdx-js/loader@3.1.1(webpack@5.99.5(@swc/core@1.15.2)))(@mdx-js/react@3.1.1(@types/react@19.2.6)(react@19.2.0))':
     dependencies:
       source-map: 0.7.4
     optionalDependencies:
       '@mdx-js/loader': 3.1.1(webpack@5.99.5(@swc/core@1.15.2))
-      '@mdx-js/react': 3.1.1(@types/react@19.2.5)(react@19.2.0)
+      '@mdx-js/react': 3.1.1(@types/react@19.2.6)(react@19.2.0)
 
   '@next/swc-darwin-arm64@15.5.6':
     optional: true
@@ -4169,13 +4169,13 @@ snapshots:
     dependencies:
       undici-types: 7.16.0
 
-  '@types/react-dom@19.2.3(@types/react@19.2.5)':
+  '@types/react-dom@19.2.3(@types/react@19.2.6)':
     dependencies:
-      '@types/react': 19.2.5
+      '@types/react': 19.2.6
 
-  '@types/react@19.2.5':
+  '@types/react@19.2.6':
     dependencies:
-      csstype: 3.0.9
+      csstype: 3.2.3
 
   '@types/unist@2.0.7': {}
 
@@ -4524,7 +4524,7 @@ snapshots:
 
   css-mediaquery@0.1.2: {}
 
-  csstype@3.0.9: {}
+  csstype@3.2.3: {}
 
   data-uri-to-buffer@4.0.1: {}
 
