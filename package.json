@@ -22,7 +22,7 @@
     "@timvir/mdx": "^0.2.44",
     "@types/mdx": "^2.0.13",
     "@types/node": "^24.10.1",
-    "@types/react": "^19.2.6",
+    "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@types/unist": "^3.0.3",
     "@vercel/speed-insights": "^1.2.0",
