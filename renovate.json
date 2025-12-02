@@ -5,6 +5,7 @@
   "prHourlyLimit": 0,
   "dependencyDashboardApproval": true,
   "postUpdateOptions": ["pnpmDedupe"],
+  "minimumReleaseAge": "9 days",
   "packageRules": [
     {
       "extends": ["monorepo:react"],
