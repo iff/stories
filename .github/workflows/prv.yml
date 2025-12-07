@@ -8,13 +8,19 @@ jobs:
   integrity:
     if: github.event.pull_request.draft == false
     name: Integrity
-    runs-on: [self-hosted, nixos]
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
           clean: false
+
+      - name: install nix
+        uses: cachix/install-nix-action@6004951b182f8860210c8d6f0d808ec5b1a33d28 # v25
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          nix_path: nixpkgs=channel:nixos-unstable
 
       - run: nix run .#nix-develop .#workflow
 
@@ -36,7 +42,7 @@ jobs:
   biome:
     if: github.event.pull_request.draft == false
     name: Biome
-    runs-on: [self-hosted, nixos]
+    runs-on: ubuntu-latest
     needs:
       - integrity
 
@@ -45,6 +51,12 @@ jobs:
         with:
           fetch-depth: 0
           clean: false
+
+      - name: install nix
+        uses: cachix/install-nix-action@6004951b182f8860210c8d6f0d808ec5b1a33d28 # v25
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          nix_path: nixpkgs=channel:nixos-unstable
 
       - run: nix run .#nix-develop .#workflow
 
@@ -53,7 +65,7 @@ jobs:
   knip:
     if: github.event.pull_request.draft == false
     name: Knip
-    runs-on: [self-hosted, nixos]
+    runs-on: ubuntu-latest
     needs:
       - integrity
 
@@ -62,6 +74,12 @@ jobs:
         with:
           fetch-depth: 0
           clean: false
+
+      - name: install nix
+        uses: cachix/install-nix-action@6004951b182f8860210c8d6f0d808ec5b1a33d28 # v25
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          nix_path: nixpkgs=channel:nixos-unstable
 
       - run: nix run .#nix-develop .#workflow
 
@@ -70,7 +88,7 @@ jobs:
   typescript:
     if: github.event.pull_request.draft == false
     name: TypeScript
-    runs-on: [self-hosted, nixos]
+    runs-on: ubuntu-latest
     needs:
       - integrity
 
@@ -80,6 +98,12 @@ jobs:
           fetch-depth: 0
           clean: false
 
+      - name: install nix
+        uses: cachix/install-nix-action@6004951b182f8860210c8d6f0d808ec5b1a33d28 # v25
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          nix_path: nixpkgs=channel:nixos-unstable
+
       - run: nix run .#nix-develop .#workflow
 
       - run: ./node_modules/.bin/tsc --build
@@ -87,7 +111,7 @@ jobs:
   prv:
     if: github.event.pull_request.draft == false
     name: Pull Request Verification
-    runs-on: [self-hosted, nixos]
+    runs-on: ubuntu-latest
     needs:
       - integrity
       - biome
