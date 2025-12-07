@@ -35,6 +35,7 @@ function Group(props: Props) {
             {React.createElement(child.type, {
               ...props,
 
+              aspectRatio,
               sx: styles.itemChild,
 
               captionPlacement: "overlay",

@@ -1,11 +1,10 @@
 import * as fs from "node:fs";
-import * as stylex from "@stylexjs/stylex";
 import { lookupStory } from "content";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { extractBlocks, extractContentBlocks, importImage } from "@/cms";
+import { importImage } from "@/cms";
 import { Gallery } from "@/components/Gallery";
-import { StoryById } from "@/components/Story";
+import { BlobProvider } from "@/components/BlobContext";
 
 export async function generateStaticParams() {
   return [];
@@ -48,121 +47,75 @@ export default async function Page(props: Props) {
     return notFound();
   }
 
-  const { blobs, contentBlocks } = await data({ storyId });
+  const blobMap = await fetchBlobData({ storyId });
 
-  // Convert content blocks to gallery slides
-  const slides = contentBlocks.map((block) => {
-    if (block.__typename === "TextBlock") {
-      return {
-        type: "text" as const,
-        textContent: block.content,
-      };
-    } else if (block.__typename === "ImageGroup") {
-      // Map images in the group to include their blobs
-      const images = block.images.map((img) => ({
-        ...img,
-        blob: blobs.find((b) => b.name === img.id),
-      }));
-      return {
-        type: "group" as const,
-        images,
-      };
-    } else {
-      // Image or Clip block
-      const blob = blobs.find((b) => b.name === block.id);
-      return {
-        type: block.__typename === "Clip" ? "video" : "image" as const,
-        blobId: block.id,
-        caption: block.caption,
-        blob: blob,
-      };
-    }
-  });
+  // Dynamically import the MDX file
+  const { default: BodyComponent } = await import(`../../../content/${storyId}/body.mdx`);
 
   return (
-    <>
-      <Gallery slides={slides} />
-      <StoryById />
-    </>
+    <BlobProvider blobs={blobMap}>
+      <Gallery>
+        <BodyComponent />
+      </Gallery>
+    </BlobProvider>
   );
 }
 
-const styles = stylex.create({
-  root: {
-    display: "grid",
-    gap: "2em",
-    marginBottom: "10vh",
-  },
-});
-
-type BlobData = {
-  name: string;
-
-  asImage: {
-    url: string;
-
-    dimensions: {
-      width: number;
-      height: number;
-    };
-
-    placeholder?: {
-      url: string;
-    };
-  };
-
-  asVideo: {
-    poster: {
-      url: string;
-
-      dimensions: {
-        width: number;
-        height: number;
-      };
-
-      placeholder: {
-        url: string;
-      };
-    };
-
-    renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
-  };
-};
-
-async function data({ storyId }: Params): Promise<{
-  blobs: Array<BlobData>;
-  contentBlocks: Array<{ __typename: string; id: string; caption?: string; content?: string }>;
-}> {
-  if (!fs.existsSync(`./content/${storyId}/body.mdx`)) {
-    return notFound();
+/**
+ * Fetches blob data for all blobIds referenced in the story's MDX file
+ * Returns a map of blobId -> blob data for use with BlobContext
+ */
+async function fetchBlobData({ storyId }: Params): Promise<Record<string, {
+  blobId: string;
+  url: string;
+  width: number;
+  height: number;
+  placeholder?: string;
+}>> {
+  const mdxPath = `./content/${storyId}/body.mdx`;
+  if (!fs.existsSync(mdxPath)) {
+    return {};
   }
 
-  const body = await fs.promises.readFile(`./content/${storyId}/body.mdx`, { encoding: "utf8" });
-  const contentBlocks = extractContentBlocks(body);
-  const blocks = extractBlocks(body);
+  // Read MDX file and extract all blobIds
+  const body = await fs.promises.readFile(mdxPath, { encoding: "utf8" });
+  const blobIdMatches = body.matchAll(/blobId=["']([^"']+)["']/g);
+  const blobIds = Array.from(blobIdMatches, (m) => m[1]);
+  const uniqueBlobIds = [...new Set(blobIds)];
 
-  if (blocks.length === 0) {
-    return { blobs: [], contentBlocks };
+  if (uniqueBlobIds.length === 0) {
+    return {};
   }
 
+  // Fetch blob data from GraphQL API
   const res = await fetch(`${process.env.API}/graphql`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      query: `query Story { ${blocks.map(
-        ({ id }) =>
+      query: `query Story { ${uniqueBlobIds.map(
+        (id) =>
           `b${id}: blob(name: "${id}") {
               name
               asImage { url dimensions { width height } placeholder { url } }
-              asVideo { poster { url dimensions { width height } placeholder { url } } renditions { url } }
             }`,
-      )} }`,
+      ).join('\n')} }`,
     }),
   });
   const json = await res.json();
 
-  return {
-    blobs: Object.values(json.data) as Array<BlobData>,
-    contentBlocks,
-  };
+  // Transform to a map keyed by blobId
+  const blobMap: Record<string, any> = {};
+  Object.values(json.data as Record<string, any>).forEach((blob: any) => {
+    if (blob && blob.name) {
+      blobMap[blob.name] = {
+        blobId: blob.name,
+        url: blob.asImage.url,
+        width: blob.asImage.dimensions.width,
+        height: blob.asImage.dimensions.height,
+        placeholder: blob.asImage.placeholder?.url,
+      };
+    }
+  });
+
+  return blobMap;
 }

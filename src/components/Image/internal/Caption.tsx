@@ -32,7 +32,7 @@ const styles = stylex.create({
 
 const captionPlacementVariant = stylex.create({
   below: {
-    textAlign: "center",
+    textAlign: "left",
     margin: "8px 0",
 
     color: color.secondaryText,

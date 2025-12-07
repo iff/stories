@@ -49,7 +49,10 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
         };
       };
 
-      renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
+      renditions: Array<{
+        url: string;
+        dimensions: { width: number; height: number };
+      }>;
     };
   }>;
 
@@ -63,10 +66,16 @@ function Body(props: Props) {
     <Root {...stylex.props(styles.root)} {...rest}>
       <Component
         components={{
-          h1: (props: React.ComponentProps<"h1">) => <h2 {...stylex.props(styles.h2)} {...props} />,
-          h2: (props: React.ComponentProps<"h2">) => <h3 {...stylex.props(styles.h3)} {...props} />,
+          h1: (props: React.ComponentProps<"h1">) => (
+            <h2 {...stylex.props(styles.h2)} {...props} />
+          ),
+          h2: (props: React.ComponentProps<"h2">) => (
+            <h3 {...stylex.props(styles.h3)} {...props} />
+          ),
 
-          p: (props: React.ComponentProps<"p">) => <p {...stylex.props(styles.p)} {...props} />,
+          p: (props: React.ComponentProps<"p">) => (
+            <p {...stylex.props(styles.p)} {...props} />
+          ),
 
           blockquote: (props: React.ComponentProps<"blockquote">) => (
             <blockquote {...stylex.props(styles.blockquote)} {...props} />
@@ -98,7 +107,10 @@ function Body(props: Props) {
                     return child;
                   }
 
-                  const childProps = child.props as { blobId?: string; aspectRatio?: number };
+                  const childProps = child.props as {
+                    blobId?: string;
+                    aspectRatio?: number;
+                  };
 
                   /*
                    * If the child element is an Image, and is missing 'aspectRatio',
@@ -107,7 +119,9 @@ function Body(props: Props) {
                   if (childProps?.blobId) {
                     const props = { ...childProps };
 
-                    const blob = blobs.find((x) => x.name === childProps.blobId);
+                    const blob = blobs.find(
+                      (x) => x.name === childProps.blobId,
+                    );
                     if (!props.aspectRatio && blob?.asImage?.dimensions) {
                       const { width, height } = blob.asImage.dimensions;
                       props.aspectRatio = width / height;
@@ -122,7 +136,10 @@ function Body(props: Props) {
             );
           },
 
-          Image: (props: { blobId: string; size?: "narrow" | "wide" | "full" }) => {
+          Image: (props: {
+            blobId: string;
+            size?: "narrow" | "wide" | "full";
+          }) => {
             const { blobId, size, ...rest } = props;
             const blob = blobs.find((x) => x.name === blobId);
             if (!blob) {
