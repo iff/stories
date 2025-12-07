@@ -1,7 +1,13 @@
-import { css, cx } from "@linaria/core";
+import * as stylex from "@stylexjs/stylex";
+import { CompiledStyles, InlineStyles, StyleXArray } from "@stylexjs/stylex";
+import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 import NextImage from "next/image";
 import Link, { LinkProps } from "next/link";
 import * as React from "react";
+
+import Caption from "./internal/Caption";
+
+import { vars } from "./variables.stylex";
 
 /**
  * The underlying DOM element which is rendered by this component.
@@ -20,7 +26,7 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
         height: number;
       };
 
-      placeholder: {
+      placeholder?: {
         url: string;
       };
     };
@@ -52,132 +58,94 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
    */
   span?: number | number[];
   aspectRatio?: number;
+
+  sx?: StyleXArray<(null | undefined | CompiledStyles) | boolean | Readonly<[CompiledStyles, InlineStyles]>>;
 }
 
 function Image(props: Props) {
-  const { blob, fill = false, sizes, caption, captionPlacement = "below", href, className, ...rest } = props;
+  const { id, blob, fill = false, sizes, caption, captionPlacement = "below", href, sx, ...rest } = props;
+
+  const image = (
+    <NextImage
+      {...stylex.props(styles.img, fill ? styles.cover : false, blob.asImage.url ? false : styles.blank)}
+      alt=""
+      src={blob.asImage.url}
+      width={fill ? undefined : blob.asImage.dimensions.width}
+      height={fill ? undefined : blob.asImage.dimensions.height}
+      fill={fill}
+      sizes={sizes}
+      placeholder={blob.asImage.placeholder?.url as PlaceholderValue}
+    />
+  );
 
   return (
-    <Root className={cx(classes.root, className, classes.captionPlacement[captionPlacement])} {...rest}>
+    <Root {...stylex.props(captionPlacementVariant[captionPlacement], styles.root, sx)} {...rest}>
       {(() => {
         if (href) {
           return (
-            <Link passHref href={href} className={classes.image}>
-              <NextImage
-                alt=""
-                src={blob.asImage.url}
-                width={fill ? undefined : blob.asImage.dimensions.width}
-                height={fill ? undefined : blob.asImage.dimensions.height}
-                fill={fill}
-                style={{ objectFit: fill ? "cover" : undefined }}
-                sizes={sizes}
-              />
-              <div
-                className={classes.placeholder}
-                style={{ backgroundImage: `url(${blob.asImage.placeholder.url})` }}
-              />
+            <Link id={id} href={href} {...stylex.props(styles.image)}>
+              {image}
             </Link>
           );
         } else {
           return (
-            <div className={classes.image}>
-              <NextImage
-                alt=""
-                src={blob.asImage.url}
-                width={fill ? undefined : blob.asImage.dimensions.width}
-                height={fill ? undefined : blob.asImage.dimensions.height}
-                fill={fill}
-                style={{ objectFit: fill ? "cover" : undefined }}
-                sizes={sizes}
-              />
-              <div
-                className={classes.placeholder}
-                style={{ backgroundImage: `url(${blob.asImage.placeholder.url})` }}
-              />
+            <div id={id} {...stylex.props(styles.image)}>
+              {image}
             </div>
           );
         }
       })()}
 
-      {caption && <figcaption className={classes.figcaption}>{caption}</figcaption>}
+      {caption && <Caption captionPlacement={captionPlacement}>{caption}</Caption>}
     </Root>
   );
 }
 
 export default Image;
 
-const classes = {
-  root: css`
-    contain: layout;
-    display: grid;
-    width: 100%;
-    isolation: isolate;
-
-    margin: 0;
-
-    & img {
-      display: block;
-
-      max-width: 100%;
-      height: 100%;
-    }
-  `,
-
-  image: css`
-    position: relative;
-    display: block;
-    color: inherit;
-    text-decoration: none;
-
-    outline-offset: 2px;
-  `,
-
-  placeholder: css`
-    position: absolute;
-    inset: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-
-    background-size: cover;
-    background-position: 50% 50%;
-
-    z-index: -1;
-  `,
-
-  figcaption: css`
-    text-align: center;
-    margin: 8px 0;
-    font-size: 0.75em;
-    line-height: 1.3;
-    color: var(--secondary-text-color);
-  `,
-
-  captionPlacement: {
-    overlay: css`
-      & figcaption {
-        position: absolute;
-        margin: 0;
-        left: 2px;
-        right: 2px;
-        bottom: 2px;
-        background-color: #18191b;
-        color: #fefefe;
-        padding: 8px 10px 6px;
-        text-align: left;
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.4s;
-      }
-
-      &:hover figcaption {
-        opacity: 1;
-      }
-      &:focus-within figcaption {
-        opacity: 1;
-      }
-    `,
+const styles = stylex.create({
+  root: {
+    contain: "layout",
+    display: "grid",
+    width: "100%",
+    isolation: "isolate",
+    margin: "0",
   },
-};
+
+  image: {
+    position: "relative",
+    display: "block",
+    color: "inherit",
+    textDecoration: "none",
+    outlineOffset: "2px",
+    backgroundColor: "black",
+  },
+
+  img: {
+    display: "block",
+    maxWidth: "100%",
+    height: "100%",
+  },
+
+  cover: {
+    objectFit: "cover",
+  },
+
+  blank: {
+    display: "none",
+  },
+});
+
+const captionPlacementVariant = stylex.create({
+  below: {},
+
+  overlay: {
+    [vars.figcaptionOpacity]: "0",
+    ":hover": {
+      [vars.figcaptionOpacity]: "1",
+    },
+    ":focus-within": {
+      [vars.figcaptionOpacity]: "1",
+    },
+  },
+});

@@ -1,32 +1,43 @@
-"use client";
-
+import * as stylex from "@stylexjs/stylex";
+import { CompiledStyles, InlineStyles, StyleXArray } from "@stylexjs/stylex";
 import * as React from "react";
-import { css, cx } from "@linaria/core";
 
 /**
  * The underlying DOM element which is rendered by this component.
  */
 const Root = "div";
 
-interface Props extends React.ComponentPropsWithoutRef<typeof Root> {}
+interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
+  sx?: StyleXArray<(null | undefined | CompiledStyles) | boolean | Readonly<[CompiledStyles, InlineStyles]>>;
+}
 
-function Group(props: Props, ref: React.ForwardedRef<React.ElementRef<typeof Root>>) {
-  const { children, className, ...rest } = props;
+function Group(props: Props) {
+  const { children, sx, ...rest } = props;
 
   return (
-    <Root ref={ref} className={cx(className, classes.root)} {...rest}>
+    <Root {...stylex.props(styles.root, sx)} {...rest}>
       {React.Children.map(children, (child) => {
         if (!React.isValidElement(child)) {
           return child;
         }
 
-        const { span = [], aspectRatio = 1, ...props } = child.props;
+        const { span = [], aspectRatio = 1, ...props } = child.props as { span?: Array<number>; aspectRatio?: number };
 
         return (
-          <div className={cx(classes.item, classes.span[span[0] ?? 12], span[1] && classes.span[`md:${span[1]}`])}>
-            <div style={{ aspectRatio: `${aspectRatio}` }} />
-            {React.createElement<any>(child.type, {
+          <div
+            {...stylex.props(
+              styles.item,
+              spanVariants[`${span[0] ?? 12}` as keyof typeof spanVariants],
+              typeof span[1] === "number" ? spanVariants[`md:${span[1]}` as keyof typeof spanVariants] : undefined,
+            )}
+          >
+            <div {...stylex.props(styles.itemChild)} style={{ aspectRatio: `${aspectRatio}` }} />
+            {React.createElement(child.type, {
               ...props,
+
+              aspectRatio,
+              sx: styles.itemChild,
+
               captionPlacement: "overlay",
               fill: true,
               sizes: (() => {
@@ -45,126 +56,127 @@ function Group(props: Props, ref: React.ForwardedRef<React.ElementRef<typeof Roo
   );
 }
 
-export default React.forwardRef(Group);
+export default Group;
 
-const classes = {
-  root: css`
-    display: grid;
+const styles = stylex.create({
+  root: {
+    display: "grid",
 
-    grid-template-columns: repeat(12, 1fr);
-    grid-gap: 1rem;
+    gridTemplateColumns: "repeat(12, 1fr)",
+    gridGap: "1rem",
 
-    justify-items: stretch;
-    align-items: stretch;
-  `,
-
-  item: css`
-    display: grid;
-    position: relative;
-
-    & > * {
-      grid-area: 1 / 1 / 1 / 1;
-      place-self: stretch;
-    }
-  `,
-
-  span: {
-    [`1`]: css`
-      grid-column-end: span 1;
-    `,
-    [`2`]: css`
-      grid-column-end: span 2;
-    `,
-    [`3`]: css`
-      grid-column-end: span 3;
-    `,
-    [`4`]: css`
-      grid-column-end: span 4;
-    `,
-    [`5`]: css`
-      grid-column-end: span 5;
-    `,
-    [`6`]: css`
-      grid-column-end: span 6;
-    `,
-    [`7`]: css`
-      grid-column-end: span 7;
-    `,
-    [`8`]: css`
-      grid-column-end: span 8;
-    `,
-    [`9`]: css`
-      grid-column-end: span 9;
-    `,
-    [`10`]: css`
-      grid-column-end: span 10;
-    `,
-    [`11`]: css`
-      grid-column-end: span 11;
-    `,
-    [`12`]: css`
-      grid-column-end: span 12;
-    `,
-
-    [`md:1`]: css`
-      @media (min-width: 720px) {
-        grid-column-end: span 1;
-      }
-    `,
-    [`md:2`]: css`
-      @media (min-width: 720px) {
-        grid-column-end: span 2;
-      }
-    `,
-    [`md:3`]: css`
-      @media (min-width: 720px) {
-        grid-column-end: span 3;
-      }
-    `,
-    [`md:4`]: css`
-      @media (min-width: 720px) {
-        grid-column-end: span 4;
-      }
-    `,
-    [`md:5`]: css`
-      @media (min-width: 720px) {
-        grid-column-end: span 5;
-      }
-    `,
-    [`md:6`]: css`
-      @media (min-width: 720px) {
-        grid-column-end: span 6;
-      }
-    `,
-    [`md:7`]: css`
-      @media (min-width: 720px) {
-        grid-column-end: span 7;
-      }
-    `,
-    [`md:8`]: css`
-      @media (min-width: 720px) {
-        grid-column-end: span 8;
-      }
-    `,
-    [`md:9`]: css`
-      @media (min-width: 720px) {
-        grid-column-end: span 9;
-      }
-    `,
-    [`md:10`]: css`
-      @media (min-width: 720px) {
-        grid-column-end: span 10;
-      }
-    `,
-    [`md:11`]: css`
-      @media (min-width: 720px) {
-        grid-column-end: span 11;
-      }
-    `,
-    [`md:12`]: css`
-      @media (min-width: 720px) {
-        grid-column-end: span 12;
-      }
-    `,
+    justifyItems: "stretch",
+    alignItems: "stretch",
   },
-};
+
+  item: {
+    display: "grid",
+    position: "relative",
+  },
+
+  itemChild: {
+    gridArea: "1 / 1 / 1 / 1",
+    placeSelf: "stretch",
+    minWidth: 0,
+  },
+});
+
+const spanVariants = stylex.create({
+  "1": {
+    gridColumnEnd: "span 1",
+  },
+  "2": {
+    gridColumnEnd: "span 2",
+  },
+  "3": {
+    gridColumnEnd: "span 3",
+  },
+  "4": {
+    gridColumnEnd: "span 4",
+  },
+  "5": {
+    gridColumnEnd: "span 5",
+  },
+  "6": {
+    gridColumnEnd: "span 6",
+  },
+  "7": {
+    gridColumnEnd: "span 7",
+  },
+  "8": {
+    gridColumnEnd: "span 8",
+  },
+  "9": {
+    gridColumnEnd: "span 9",
+  },
+  "10": {
+    gridColumnEnd: "span 10",
+  },
+  "11": {
+    gridColumnEnd: "span 11",
+  },
+  "12": {
+    gridColumnEnd: "span 12",
+  },
+
+  "md:1": {
+    "@media (min-width: 720px)": {
+      gridColumnEnd: "span 1",
+    },
+  },
+  "md:2": {
+    "@media (min-width: 720px)": {
+      gridColumnEnd: "span 2",
+    },
+  },
+  "md:3": {
+    "@media (min-width: 720px)": {
+      gridColumnEnd: "span 3",
+    },
+  },
+  "md:4": {
+    "@media (min-width: 720px)": {
+      gridColumnEnd: "span 4",
+    },
+  },
+  "md:5": {
+    "@media (min-width: 720px)": {
+      gridColumnEnd: "span 5",
+    },
+  },
+  "md:6": {
+    "@media (min-width: 720px)": {
+      gridColumnEnd: "span 6",
+    },
+  },
+  "md:7": {
+    "@media (min-width: 720px)": {
+      gridColumnEnd: "span 7",
+    },
+  },
+  "md:8": {
+    "@media (min-width: 720px)": {
+      gridColumnEnd: "span 8",
+    },
+  },
+  "md:9": {
+    "@media (min-width: 720px)": {
+      gridColumnEnd: "span 9",
+    },
+  },
+  "md:10": {
+    "@media (min-width: 720px)": {
+      gridColumnEnd: "span 10",
+    },
+  },
+  "md:11": {
+    "@media (min-width: 720px)": {
+      gridColumnEnd: "span 11",
+    },
+  },
+  "md:12": {
+    "@media (min-width: 720px)": {
+      gridColumnEnd: "span 12",
+    },
+  },
+});

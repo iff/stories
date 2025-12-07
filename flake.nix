@@ -1,10 +1,14 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
     flake-utils.url = "github:numtide/flake-utils";
+
+    nix-develop.url = "github:nicknovitski/nix-develop";
+    nix-develop.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, nix-develop }:
     flake-utils.lib.eachDefaultSystem
       (system:
         let
@@ -19,27 +23,42 @@
             echo " … for nothing remains of us but the vibrations we leave behind."
           '';
 
-          node = pkgs.nodejs-18_x;
-
           scripts = {
             dev = pkgs.writeShellScriptBin "dev" ''
               ./node_modules/.bin/next dev
             '';
           };
         in {
+          packages.nix-develop = nix-develop.packages.${system}.default;
+
           devShells.default = pkgs.mkShell {
             buildInputs = [
-              node
-              (pkgs.nodePackages.pnpm.override { inherit node; })
+              pkgs.nodejs
+              pkgs.pnpm
+              pkgs.biome
 
               scripts.dev
             ];
 
             shellHook = ''
-              if [ -n "$PS1" ]; then
-                ${banner}/bin/banner
-              fi
+              ${banner}/bin/banner
             '';
+          };
+
+          devShells.workflow = pkgs.mkShell {
+            buildInputs = [
+              pkgs.nodejs
+              pkgs.pnpm
+              pkgs.biome
+
+              pkgs.curl
+            ];
+
+            shellHook = ''
+              pnpm install >/dev/null 2>&1
+            '';
+
+            PLAYWRIGHT_EXECUTABLE_PATH = "${pkgs.chromium}/bin/chromium";
           };
         }
       );

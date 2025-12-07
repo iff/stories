@@ -1,0 +1,181 @@
+scalar Date
+scalar DateTime
+scalar GeoPoint
+scalar URI
+scalar Integer
+
+type Query {
+  node(id: ID!): Node
+
+  blob(name: String!): Blob
+  blobs(first: Int, after: String, orderBy: BlobOrder): BlobConnection!
+
+  collection(name: String!): Collection
+
+  """
+  Generates a new name – a base58 encoded bitstring.
+
+  The number of bits is rounded up to the next multiple of 8.
+
+  XXX: This likely should be a Mutation, since the result is not cacheable!
+  """
+  name(bits: Int!): String
+}
+
+type Mutation {
+  purgeCache(id: ID!): Boolean!
+  delete(id: ID!): Boolean!
+  writeAttributes(id: ID!, input: AttributesInput): Node
+}
+
+input AttributesInput {
+  createdAt: Date
+  description: String
+  location: LocationInput
+}
+
+input LocationInput {
+  label: String
+  point: GeoPoint
+}
+
+interface Node {
+  id: ID!
+}
+
+type Blob implements Node {
+  id: ID!
+
+  """
+  Blob names are 256 bit random numbers encoded in Base58.
+  """
+  name: String!
+
+  """
+  Absolute URL to the raw blob.
+  """
+  url: URI!
+
+  contentType: String!
+
+  """
+  The size of the blob.
+  """
+  size: Integer!
+
+  """
+  Time when the blob was created (eg. image taken).
+  """
+  createdAt: Date
+
+  """
+  Time when the blob was published on the platform. Is always later than the
+  'createdAt' timestamp.
+  """
+  publishedAt: Date
+
+  location: Location
+  description: String
+
+  """
+  Only available when contentType of the blob is 'image/*'.
+  """
+  asImage: Image
+
+  """
+  Only available when the contentType of the Blob is 'video/*'.
+  """
+  asVideo: Video
+}
+
+enum OrderDirection {
+  ASC
+  DESC
+}
+
+type PageInfo {
+  hasPreviousPage: Boolean
+  hasNextPage: Boolean
+  startCursor: String
+  endCursor: String
+}
+
+input BlobOrder {
+  field: BlobOrderField
+  direction: OrderDirection
+}
+
+enum BlobOrderField {
+  NAME
+  CREATED_AT
+}
+
+type BlobConnection {
+  edges: [BlobEdge!]!
+  pageInfo: PageInfo
+  totalCount: Int!
+}
+
+type BlobEdge {
+  node: Blob!
+  cursor: String!
+}
+
+type Location {
+  id: ID!
+  label: String
+  point: GeoPoint
+}
+
+type Dimensions {
+  width: Int!
+  height: Int!
+}
+
+enum ImagePlaceholderVariant {
+  SQIP
+  PNG
+  WEBP
+}
+
+type Image implements Node {
+  id: ID!
+
+  url: URI!
+  dimensions: Dimensions!
+
+  """
+  A lower quality placeholder image.
+  """
+  placeholder(variant: ImagePlaceholderVariant, q: Int): Image!
+}
+
+type Video implements Node {
+  id: ID!
+
+  url: URI!
+  dimensions: Dimensions!
+
+  poster: Image!
+
+  renditions: [Rendition!]!
+}
+
+type Rendition implements Node {
+  id: ID!
+  name: String!
+
+  url: URI!
+
+  dimensions: Dimensions!
+}
+
+type Collection implements Node {
+  id: ID!
+  name: String!
+
+  title: String!
+  slug: String!
+
+  blobs(first: Int, after: String): BlobConnection!
+}

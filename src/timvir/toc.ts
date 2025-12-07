@@ -3,12 +3,16 @@ export default [
     label: "Components",
     children: [
       {
-        label: "Clip",
-        path: "/docs/components/Clip",
+        label: "Body",
+        path: "/docs/components/Body",
       },
       {
-        label: "Content",
-        path: "/docs/components/Content",
+        label: "Brandmark",
+        path: "/docs/components/Brandmark",
+      },
+      {
+        label: "Clip",
+        path: "/docs/components/Clip",
       },
       {
         label: "Group",
@@ -17,6 +21,10 @@ export default [
       {
         label: "Header",
         path: "/docs/components/Header",
+      },
+      {
+        label: "Hero",
+        path: "/docs/components/Hero",
       },
       {
         label: "Image",

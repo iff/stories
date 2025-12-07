@@ -1,8 +1,12 @@
 "use client";
 
-import { css, cx } from "@linaria/core";
-import NextImage from "next/image";
+import * as stylex from "@stylexjs/stylex";
+import { CompiledStyles, InlineStyles, StyleXArray } from "@stylexjs/stylex";
+import Image from "next/image";
+import Link, { LinkProps } from "next/link";
 import * as React from "react";
+
+import { color } from "@/tokens.stylex";
 
 /**
  * The underlying DOM element which is rendered by this component.
@@ -10,9 +14,7 @@ import * as React from "react";
 const Root = "figure";
 
 interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
-  blobId?: string;
-
-  video?: {
+  video: {
     poster: {
       url: string;
 
@@ -20,35 +22,29 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
         width: number;
         height: number;
       };
-
-      placeholder: {
-        url: string;
-      };
     };
 
-    renditions: Array<{ url: string; dimensions: { width: number; height: number } }>;
+    renditions: ReadonlyArray<{ url: string; dimensions: { width: number; height: number } }>;
   };
 
   caption?: React.ReactNode;
 
   /**
-   * Invoked when the user clicks on the arrow in the top right of the clip.
-   * Inside stories, this will open the clip in a Lightbox, on a separate URL.
-   *
-   * XXX: The name `onFocus` is misleading, and it overrides the default DOM
-   * `onFocus` event handler. Rename to something else. Ideas: `onOpen`.
+   * URL to open when the user clicks on the arrow in the top right of the clip.
+   * Inside stories, this will open the clip in a Lightbox.
    */
-  onFocus?: () => void;
+  href?: LinkProps["href"];
+
+  sx?: StyleXArray<(null | undefined | CompiledStyles) | boolean | Readonly<[CompiledStyles, InlineStyles]>>;
 }
 
 /*
- * - SQIP    : showing the low quality placeholder
  * - POSTER  : showing the poster in full resolution
  * - PLAYING : playing the video
  */
 
 function Clip(props: Props) {
-  const { blobId, video, caption, onFocus, className, ...rest } = props;
+  const { video, caption, href, sx, ...rest } = props;
 
   const ref = React.useRef<null | HTMLDivElement>(null);
   const videoRef = React.useRef<null | HTMLVideoElement>(null);
@@ -57,7 +53,7 @@ function Clip(props: Props) {
 
   const progressRef = React.useRef<null | HTMLDivElement>(null);
   React.useEffect(() => {
-    let rafId: undefined | number = undefined;
+    let rafId: undefined | number;
 
     if (playing) {
       const update = () => {
@@ -65,7 +61,7 @@ function Clip(props: Props) {
           if (videoRef.current && progressRef.current) {
             const video = videoRef.current;
             const progress = video.currentTime / video.duration;
-            progressRef.current.style.width = `calc(${progress * 100}% - 10px)`;
+            progressRef.current.style.width = `calc((100% - 10px) * ${progress})`;
           }
 
           update();
@@ -80,15 +76,22 @@ function Clip(props: Props) {
         cancelAnimationFrame(rafId);
         rafId = undefined;
       }
+
+      if (progressRef.current) {
+        progressRef.current.style.width = "0px";
+      }
     };
   }, [playing]);
 
   return (
-    <Root ref={ref} className={cx(classes.root, className)} {...rest}>
-      <div style={{ position: "relative", contain: "layout" }}>
+    <Root ref={ref} {...stylex.props(styles.root, sx)} {...rest}>
+      <div
+        {...stylex.props(styles.wrapper)}
+        style={{ aspectRatio: `${video.poster.dimensions.width} / ${video.poster.dimensions.height}` }}
+      >
         <video
           ref={videoRef}
-          className={classes.video}
+          {...stylex.props(styles.video)}
           playsInline
           onPause={() => {
             setPlaying(false);
@@ -100,32 +103,26 @@ function Clip(props: Props) {
             setPlaying(false);
           }}
         >
-          <source src={video?.renditions?.[0]?.url} type="video/mp4" />
+          <source src={video.renditions[0]?.url} type="video/mp4" />
         </video>
 
-        <div className={classes.poster} style={{ opacity: playing ? 0 : 1 }}>
-          {video?.poster?.url && (
-            <NextImage
-              alt=""
-              src={video?.poster?.url}
-              fill
-              sizes="100vw"
-              style={{
-                objectFit: "cover",
-              }}
-            />
-          )}
-          <div className={classes.sqip} style={{ backgroundImage: `url(${video?.poster?.placeholder?.url})` }} />
-        </div>
+        <Image
+          {...stylex.props(styles.poster, playing ? false : styles.visible)}
+          alt=""
+          src={video.poster.url}
+          fill
+          sizes="100vw"
+        />
 
-        {onFocus && (
-          <div className={classes.focus} onClick={onFocus}>
+        {href && (
+          <Link {...stylex.props(styles.focus)} href={href}>
             <svg
               width={400}
               height={200}
               viewBox="-400 0 400 200"
-              style={{ position: "absolute", top: 0, right: 0, zIndex: -1, cursor: "pointer" }}
+              style={{ position: "absolute", top: -1, right: -1, cursor: "pointer" }}
             >
+              <title>Open in Lightbox</title>
               <path d="M0 0 L-80 0 L0 100 Z" fill="black" />
               <g
                 transform="scale(1.5) translate(-28, 4)"
@@ -139,32 +136,30 @@ function Clip(props: Props) {
                 <polyline points="7 7 17 7 17 17" />
               </g>
             </svg>
-          </div>
+          </Link>
         )}
 
-        <div className={classes.actions}>
+        <div {...stylex.props(styles.actions)}>
           <svg
             width={400}
             height={200}
             viewBox="-400 -200 400 200"
-            style={{ position: "absolute", bottom: 0, right: 0, zIndex: -1, cursor: "pointer" }}
+            style={{ position: "absolute", bottom: -1, right: -1, cursor: "pointer" }}
             onClick={() => {
               const videoElement = ref.current?.querySelector("video");
-              const posterElement = ref.current?.querySelector<HTMLElement>(`.${classes.poster}`);
-              if (!videoElement || !posterElement) {
+              if (!videoElement) {
                 return;
               }
 
               if (videoElement.paused) {
                 videoElement.currentTime = 0;
                 videoElement.play();
-                posterElement.style.opacity = "0";
               } else {
                 videoElement.pause();
-                posterElement.style.opacity = "1";
               }
             }}
           >
+            <title>{playing ? "Pause" : "Play"}</title>
             <path d="M0 0 L-250 0 L0 -80 Z" fill="black" />
             <g
               transform="translate(-90, -90) scale(3)"
@@ -186,98 +181,79 @@ function Clip(props: Props) {
           </svg>
         </div>
 
-        {playing && <div className={classes.progress} ref={progressRef} />}
+        <div {...stylex.props(styles.progress, playing && styles.visible)} ref={progressRef} />
       </div>
 
-      {caption && <figcaption className={classes.figcaption}>{caption}</figcaption>}
+      {caption && <figcaption {...stylex.props(styles.figcaption)}>{caption}</figcaption>}
     </Root>
   );
 }
 
 export default Clip;
 
-const classes = {
-  root: css`
-    margin: 0;
-  `,
+const styles = stylex.create({
+  root: {
+    margin: 0,
+    overflow: "hidden",
+  },
 
-  figcaption: css`
-    text-align: center;
-    margin: 8px 0;
-    font-size: 0.75em;
-    line-height: 1.3;
-    font-style: italic;
-    color: var(--secondary-text-color);
-  `,
+  visible: {
+    opacity: 1,
+  },
 
-  video: css`
-    display: block;
-    width: 100%;
-    object-fit: fill;
-  `,
+  wrapper: {
+    position: "relative",
+    contain: "layout",
+  },
 
-  poster: css`
-    transition: opacity 0.4s ease-out;
+  figcaption: {
+    textAlign: "center",
+    margin: "8px 0",
+    fontSize: "0.75em",
+    lineHeight: 1.3,
+    fontStyle: "italic",
+    color: color.secondaryText,
+  },
 
-    img {
-      z-index: 2;
-    }
-  `,
+  video: {
+    display: "block",
+    width: "100%",
+    objectFit: "fill",
+  },
 
-  sqip: css`
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+  poster: {
+    display: "block",
+    opacity: 0,
+    transition: "opacity 0.4s ease-out",
+    objectFit: "cover",
+    zIndex: 1,
+  },
 
-    background-size: cover;
-    background-position: 50% 50%;
+  focus: {
+    display: "block",
+    position: "absolute",
+    top: 0,
+    right: 0,
+    zIndex: 2,
+  },
 
-    z-index: 1;
-  `,
+  actions: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    zIndex: 2,
+  },
 
-  focus: css`
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 2;
-  `,
+  progress: {
+    position: "absolute",
+    bottom: "6px",
+    left: "5px",
+    height: "3px",
+    borderRadius: "2px",
+    backgroundColor: "white",
+    transition: "width 0.12s ease-out",
+    opacity: 0,
 
-  actions: css`
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: 2;
-
-    & > button {
-      display: block;
-      background: none;
-      outline: none;
-      border: none;
-
-      padding: 3px;
-      background: black;
-      border-radius: 100%;
-
-      cursor: pointer;
-    }
-
-    button svg {
-      display: block;
-      width: 36px;
-      height: 36px;
-      stroke: white;
-      stroke-width: 1;
-    }
-  `,
-
-  progress: css`
-    position: absolute;
-    bottom: 6px;
-    left: 5px;
-    height: 3px;
-    border-radius: 2px;
-    background: white;
-
-    z-index: 3;
-  `,
-};
+    zIndex: 3,
+  },
+});

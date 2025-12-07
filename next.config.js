@@ -1,24 +1,46 @@
+import * as path from "node:path";
 import withMDX from "@next/mdx";
+import stylexPlugin from "@stylexswc/nextjs-plugin";
 import { remarkPlugin } from "@timvir/mdx";
-import withLinaria from "next-with-linaria";
+
+const rootDir = new URL(".", import.meta.url).pathname;
 
 function withPlugins(plugins, config) {
   return plugins.reduce((a, f) => f(a), config);
 }
 
 const plugins = [
-  withLinaria,
   withMDX({
     extension: /\.mdx?$/,
     options: {
-      providerImportSource: "@mdx-js/react",
       remarkPlugins: [remarkPlugin],
+    },
+  }),
+  stylexPlugin({
+    /*
+     * CSS Cascade Layers are widely available across major browsers.
+     */
+    useCSSLayers: true,
+
+    rsOptions: {
+      dev: process.env.NODE_ENV !== "production",
+      aliases: {
+        "@/*": [path.join(rootDir, "src/", "*")],
+      },
+      unstable_moduleResolution: {
+        type: "commonJS",
+        rootDir,
+      },
     },
   }),
 ];
 
 export default withPlugins(plugins, {
   reactStrictMode: true,
+
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 

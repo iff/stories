@@ -1,37 +1,31 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
+  "extends": ["config:recommended"],
   "rangeStrategy": "bump",
   "prHourlyLimit": 0,
+  "dependencyDashboardApproval": true,
   "postUpdateOptions": ["pnpmDedupe"],
   "packageRules": [
     {
-      "extends": "monorepo:react",
+      "extends": ["monorepo:react"],
       "groupName": "React"
     },
     {
-      "extends": "monorepo:nextjs",
+      "extends": ["monorepo:nextjs"],
       "groupName": "Next.js"
     },
-    {
-      "matchPackagePatterns": ["^@linaria/"],
-      "groupName": "Linaria"
-    },
+
     {
       "matchPackageNames": ["immer", "use-immer"],
       "groupName": "Immer"
     },
     {
-      "matchPackagePatterns": ["^@mdx-js/"],
-      "groupName": "MDX"
+      "groupName": "MDX",
+      "matchPackageNames": ["/^@mdx-js//"]
     },
     {
-      "matchPackageNames": ["timvir", "@timvir/mdx"],
-      "groupName": "Timvir"
-    },
-    {
-      "matchPackagePatterns": ["^@types/"],
-      "automerge": true
+      "automerge": true,
+      "matchPackageNames": ["/^@types//"]
     }
   ]
 }

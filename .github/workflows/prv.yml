@@ -1,0 +1,121 @@
+name: Pull Request Verification
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review]
+
+jobs:
+  integrity:
+    if: github.event.pull_request.draft == false
+    name: Integrity
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          clean: false
+
+      - name: install nix
+        uses: cachix/install-nix-action@6004951b182f8860210c8d6f0d808ec5b1a33d28 # v25
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          nix_path: nixpkgs=channel:nixos-unstable
+
+      - run: nix run .#nix-develop .#workflow
+
+      - run: ./node_modules/.bin/graphql-codegen
+      - run: biome format --write .
+
+      - id: create-pull-request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          title: "Fix Integrity Violations in #${{ github.event.pull_request.number }}"
+          branch: fix-integrity-violations-${{ github.event.pull_request.number }}
+          base: ${{ github.event.pull_request.head.ref }}
+          delete-branch: true
+          draft: true
+
+      - if: ${{ steps.create-pull-request.outputs.pull-request-number }}
+        run: exit 1
+
+  biome:
+    if: github.event.pull_request.draft == false
+    name: Biome
+    runs-on: ubuntu-latest
+    needs:
+      - integrity
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          clean: false
+
+      - name: install nix
+        uses: cachix/install-nix-action@6004951b182f8860210c8d6f0d808ec5b1a33d28 # v25
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          nix_path: nixpkgs=channel:nixos-unstable
+
+      - run: nix run .#nix-develop .#workflow
+
+      - run: biome check --reporter=github .
+
+  knip:
+    if: github.event.pull_request.draft == false
+    name: Knip
+    runs-on: ubuntu-latest
+    needs:
+      - integrity
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          clean: false
+
+      - name: install nix
+        uses: cachix/install-nix-action@6004951b182f8860210c8d6f0d808ec5b1a33d28 # v25
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          nix_path: nixpkgs=channel:nixos-unstable
+
+      - run: nix run .#nix-develop .#workflow
+
+      - run: ./node_modules/.bin/knip
+
+  typescript:
+    if: github.event.pull_request.draft == false
+    name: TypeScript
+    runs-on: ubuntu-latest
+    needs:
+      - integrity
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          clean: false
+
+      - name: install nix
+        uses: cachix/install-nix-action@6004951b182f8860210c8d6f0d808ec5b1a33d28 # v25
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          nix_path: nixpkgs=channel:nixos-unstable
+
+      - run: nix run .#nix-develop .#workflow
+
+      - run: ./node_modules/.bin/tsc --build
+
+  prv:
+    if: github.event.pull_request.draft == false
+    name: Pull Request Verification
+    runs-on: ubuntu-latest
+    needs:
+      - integrity
+      - biome
+      - knip
+      - typescript
+    steps:
+      - run: "true"

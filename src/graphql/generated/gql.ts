@@ -1,0 +1,44 @@
+/* eslint-disable */
+import * as types from './graphql';
+
+
+
+/**
+ * Map of all GraphQL operations in the project.
+ *
+ * This map has several performance disadvantages:
+ * 1. It is not tree-shakeable, so it will include all operations in the project.
+ * 2. It is not minifiable, so the string of a GraphQL query will be multiple times inside the bundle.
+ * 3. It does not support dead code elimination, so it will add unused operations.
+ *
+ * Therefore it is highly recommended to use the babel or swc plugin for production.
+ * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
+ */
+type Documents = {
+    "\n    query StoryBlockPage($name: String!) {\n      blob(name: $name) {\n        name\n\n        asImage {\n          url\n          dimensions { width height }\n          placeholder { url }\n        }\n\n        asVideo {\n          poster {\n            url\n            dimensions { width height }\n            placeholder { url }\n          }\n          renditions {\n            url\n            dimensions { width height }\n          }\n        }\n      }\n    }\n  ": typeof types.StoryBlockPageDocument,
+    "\n    query StoryBlockPageSibling($name: String!) {\n      blob(name: $name) {\n        name\n\n        asImage {\n          url\n          dimensions { width height }\n        }\n\n        asVideo {\n          poster {\n            url\n            dimensions { width height }\n          }\n        }\n      }\n    }\n  ": typeof types.StoryBlockPageSiblingDocument,
+    "\n    query Blob($name: String!) {\n      blob(name: $name) {\n        id\n        name\n\n        asImage {\n          url\n          dimensions {\n            width\n            height\n          }\n          placeholder {\n            url\n          }\n        }\n\n        asVideo {\n          poster {\n            url\n            dimensions {\n              width\n              height\n            }\n            placeholder {\n              url\n            }\n          }\n          renditions {\n            url\n\n            dimensions {\n              width\n              height\n            }\n          }\n        }\n      }\n    }\n  ": typeof types.BlobDocument,
+};
+const documents: Documents = {
+    "\n    query StoryBlockPage($name: String!) {\n      blob(name: $name) {\n        name\n\n        asImage {\n          url\n          dimensions { width height }\n          placeholder { url }\n        }\n\n        asVideo {\n          poster {\n            url\n            dimensions { width height }\n            placeholder { url }\n          }\n          renditions {\n            url\n            dimensions { width height }\n          }\n        }\n      }\n    }\n  ": types.StoryBlockPageDocument,
+    "\n    query StoryBlockPageSibling($name: String!) {\n      blob(name: $name) {\n        name\n\n        asImage {\n          url\n          dimensions { width height }\n        }\n\n        asVideo {\n          poster {\n            url\n            dimensions { width height }\n          }\n        }\n      }\n    }\n  ": types.StoryBlockPageSiblingDocument,
+    "\n    query Blob($name: String!) {\n      blob(name: $name) {\n        id\n        name\n\n        asImage {\n          url\n          dimensions {\n            width\n            height\n          }\n          placeholder {\n            url\n          }\n        }\n\n        asVideo {\n          poster {\n            url\n            dimensions {\n              width\n              height\n            }\n            placeholder {\n              url\n            }\n          }\n          renditions {\n            url\n\n            dimensions {\n              width\n              height\n            }\n          }\n        }\n      }\n    }\n  ": types.BlobDocument,
+};
+
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    query StoryBlockPage($name: String!) {\n      blob(name: $name) {\n        name\n\n        asImage {\n          url\n          dimensions { width height }\n          placeholder { url }\n        }\n\n        asVideo {\n          poster {\n            url\n            dimensions { width height }\n            placeholder { url }\n          }\n          renditions {\n            url\n            dimensions { width height }\n          }\n        }\n      }\n    }\n  "): typeof import('./graphql').StoryBlockPageDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    query StoryBlockPageSibling($name: String!) {\n      blob(name: $name) {\n        name\n\n        asImage {\n          url\n          dimensions { width height }\n        }\n\n        asVideo {\n          poster {\n            url\n            dimensions { width height }\n          }\n        }\n      }\n    }\n  "): typeof import('./graphql').StoryBlockPageSiblingDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    query Blob($name: String!) {\n      blob(name: $name) {\n        id\n        name\n\n        asImage {\n          url\n          dimensions {\n            width\n            height\n          }\n          placeholder {\n            url\n          }\n        }\n\n        asVideo {\n          poster {\n            url\n            dimensions {\n              width\n              height\n            }\n            placeholder {\n              url\n            }\n          }\n          renditions {\n            url\n\n            dimensions {\n              width\n              height\n            }\n          }\n        }\n      }\n    }\n  "): typeof import('./graphql').BlobDocument;
+
+
+export function graphql(source: string) {
+  return (documents as any)[source] ?? {};
+}
