@@ -26,14 +26,31 @@ function MdxImage({ blobId, caption, size, span, aspectRatio }: MdxImageProps) {
     return null;
   }
 
+  // Calculate constrained dimensions to fit within viewport
+  const maxWidth = typeof window !== 'undefined' ? window.innerWidth * 0.85 : 1200;
+  const maxHeight = typeof window !== 'undefined' ? window.innerHeight * 0.85 - 50 : 800;
+
+  let constrainedWidth = blobData.width;
+  let constrainedHeight = blobData.height;
+
+  // Scale down if needed
+  const widthRatio = maxWidth / blobData.width;
+  const heightRatio = maxHeight / blobData.height;
+  const scale = Math.min(widthRatio, heightRatio, 1); // Don't scale up
+
+  if (scale < 1) {
+    constrainedWidth = Math.round(blobData.width * scale);
+    constrainedHeight = Math.round(blobData.height * scale);
+  }
+
   // Transform blob data to match Image component's expected format
   const blob = {
     name: blobId,
     asImage: {
       url: blobData.url,
       dimensions: {
-        width: blobData.width,
-        height: blobData.height,
+        width: constrainedWidth,
+        height: constrainedHeight,
       },
       placeholder: blobData.placeholder ? {
         url: blobData.placeholder
@@ -66,9 +83,11 @@ const styles = stylex.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    height: "100%",
+    height: "100vh",
+    maxHeight: "100vh",
     boxSizing: "border-box",
     overflow: "hidden",
+    position: "relative",
   },
 
   imageContainer: {
@@ -76,32 +95,49 @@ const styles = stylex.create({
     flexDirection: "column",
     alignItems: "center",
     gap: "0.5rem",
-    maxWidth: "min(85vw, 1200px)",
+    maxWidth: "85vw",
     maxHeight: "85vh",
+    width: "auto",
+    height: "auto",
 
     // Constrain the figure element
     ":where(figure)": {
       maxWidth: "100%",
-      maxHeight: "calc(85vh - 3rem)",
+      maxHeight: "100%",
+      width: "auto",
+      height: "auto",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
+      justifyContent: "center",
       gap: "0.5rem",
+      contain: "size",
+    },
+
+    // Constrain the link/div wrapper inside figure
+    ":where(figure > div), :where(figure > a)": {
+      maxWidth: "100%",
+      maxHeight: "calc(85vh - 3rem)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      overflow: "hidden",
     },
 
     // Constrain the img inside
     ":where(img)": {
-      maxWidth: "100%",
-      maxHeight: "calc(85vh - 4rem)",
+      maxWidth: "100% !important",
+      maxHeight: "calc(85vh - 3rem) !important",
       width: "auto !important",
       height: "auto !important",
-      objectFit: "contain",
+      objectFit: "contain !important",
     },
 
     // Left-align caption
     ":where(figcaption)": {
       alignSelf: "flex-start",
       width: "100%",
+      flexShrink: 0,
     },
   },
 });
