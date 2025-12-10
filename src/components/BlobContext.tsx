@@ -1,39 +1,36 @@
-'use client'
+"use client";
 
-import React, { createContext, useContext } from 'react'
+import React, { createContext, useContext } from "react";
 
 export interface BlobData {
-  blobId: string
-  url: string
-  width: number
-  height: number
-  placeholder?: string
+  blobId: string;
+  url: string;
+  width: number;
+  height: number;
 }
 
 interface BlobContextValue {
-  blobs: Record<string, BlobData>
+  blobs: Record<string, BlobData>;
 }
 
-const BlobContext = createContext<BlobContextValue | undefined>(undefined)
+const BlobContext = createContext<BlobContextValue | undefined>(undefined);
 
 export function BlobProvider({
   blobs,
-  children
+  children,
 }: {
-  blobs: Record<string, BlobData>
-  children: React.ReactNode
+  blobs: Record<string, BlobData>;
+  children: React.ReactNode;
 }) {
   return (
-    <BlobContext.Provider value={{ blobs }}>
-      {children}
-    </BlobContext.Provider>
-  )
+    <BlobContext.Provider value={{ blobs }}>{children}</BlobContext.Provider>
+  );
 }
 
 export function useBlobContext() {
-  const context = useContext(BlobContext)
+  const context = useContext(BlobContext);
   if (!context) {
-    throw new Error('useBlobContext must be used within BlobProvider')
+    throw new Error("useBlobContext must be used within BlobProvider");
   }
-  return context.blobs
+  return context.blobs;
 }

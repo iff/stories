@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import * as React from 'react';
-import * as stylex from '@stylexjs/stylex';
-import { useBlobContext } from '@/components/BlobContext';
-import { Image } from '@/components/Image';
+import * as React from "react";
+import * as stylex from "@stylexjs/stylex";
+import { useBlobContext } from "@/components/BlobContext";
+import { Image } from "@/components/Image";
 
 interface MdxImageProps {
   blobId: string;
   caption?: string;
-  size?: 'normal' | 'wide';
+  size?: "normal" | "wide";
   span?: number | number[];
   aspectRatio?: number;
 }
@@ -27,8 +27,10 @@ function MdxImage({ blobId, caption, size, span, aspectRatio }: MdxImageProps) {
   }
 
   // Calculate constrained dimensions to fit within viewport
-  const maxWidth = typeof window !== 'undefined' ? window.innerWidth * 0.85 : 1200;
-  const maxHeight = typeof window !== 'undefined' ? window.innerHeight * 0.85 - 50 : 800;
+  const maxWidth =
+    typeof window !== "undefined" ? window.innerWidth * 0.85 : 1200;
+  const maxHeight =
+    typeof window !== "undefined" ? window.innerHeight * 0.85 - 50 : 800;
 
   let constrainedWidth = blobData.width;
   let constrainedHeight = blobData.height;
@@ -52,9 +54,6 @@ function MdxImage({ blobId, caption, size, span, aspectRatio }: MdxImageProps) {
         width: constrainedWidth,
         height: constrainedHeight,
       },
-      placeholder: blobData.placeholder ? {
-        url: blobData.placeholder
-      } : undefined,
     },
   };
 
@@ -73,7 +72,7 @@ function MdxImage({ blobId, caption, size, span, aspectRatio }: MdxImageProps) {
 }
 
 // Add slideType as a static property for Gallery to identify
-MdxImage.slideType = 'image' as const;
+MdxImage.slideType = "image" as const;
 
 export default MdxImage;
 

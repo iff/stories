@@ -25,10 +25,6 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
         width: number;
         height: number;
       };
-
-      placeholder?: {
-        url: string;
-      };
     };
   };
 
@@ -59,27 +55,51 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
   span?: number | number[];
   aspectRatio?: number;
 
-  sx?: StyleXArray<(null | undefined | CompiledStyles) | boolean | Readonly<[CompiledStyles, InlineStyles]>>;
+  sx?: StyleXArray<
+    | (null | undefined | CompiledStyles)
+    | boolean
+    | Readonly<[CompiledStyles, InlineStyles]>
+  >;
 }
 
 function Image(props: Props) {
-  const { id, blob, fill = false, sizes, caption, captionPlacement = "below", href, sx, ...rest } = props;
+  const {
+    id,
+    blob,
+    fill = false,
+    sizes,
+    caption,
+    captionPlacement = "below",
+    href,
+    sx,
+    ...rest
+  } = props;
 
   const image = (
     <NextImage
-      {...stylex.props(styles.img, fill ? styles.cover : false, blob.asImage.url ? false : styles.blank)}
+      {...stylex.props(
+        styles.img,
+        fill ? styles.cover : false,
+        blob.asImage.url ? false : styles.blank,
+      )}
       alt=""
       src={blob.asImage.url}
       width={fill ? undefined : blob.asImage.dimensions.width}
       height={fill ? undefined : blob.asImage.dimensions.height}
       fill={fill}
       sizes={sizes}
-      placeholder={blob.asImage.placeholder?.url as PlaceholderValue}
     />
   );
 
   return (
-    <Root {...stylex.props(captionPlacementVariant[captionPlacement], styles.root, sx)} {...rest}>
+    <Root
+      {...stylex.props(
+        captionPlacementVariant[captionPlacement],
+        styles.root,
+        sx,
+      )}
+      {...rest}
+    >
       {(() => {
         if (href) {
           return (
@@ -96,7 +116,9 @@ function Image(props: Props) {
         }
       })()}
 
-      {caption && <Caption captionPlacement={captionPlacement}>{caption}</Caption>}
+      {caption && (
+        <Caption captionPlacement={captionPlacement}>{caption}</Caption>
+      )}
     </Root>
   );
 }
@@ -118,7 +140,7 @@ const styles = stylex.create({
     color: "inherit",
     textDecoration: "none",
     outlineOffset: "2px",
-    backgroundColor: "black",
+    backgroundColor: "white",
   },
 
   img: {
