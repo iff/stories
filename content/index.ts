@@ -1,17 +1,6 @@
 import dynamic from "next/dynamic";
 import * as React from "react";
 
-export const site = {
-  title: "Lenses",
-  byline:
-    "sometimes the lense with which I perceive the world is a physical device attached to a camera",
-
-  author: {
-    name: "Yves Ineichen",
-    email: "y@iff.io",
-  },
-};
-
 export async function lookupStory(id: string): Promise<Story | undefined> {
   return stories.find((story) => story.id === id);
 }

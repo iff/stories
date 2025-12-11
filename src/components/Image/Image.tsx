@@ -72,6 +72,8 @@ function Image(props: Props) {
     captionPlacement = "below",
     href,
     sx,
+    span,
+    aspectRatio,
     ...rest
   } = props;
 
