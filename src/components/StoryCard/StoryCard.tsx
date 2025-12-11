@@ -46,8 +46,6 @@ async function StoryCard(props: Props) {
             alt={title}
             src={blob.asImage.url}
             fill
-            placeholder="blur"
-            blurDataURL={blob.asImage.placeholder.url}
             {...stylex.props(styles.image)}
           />
         </div>
