@@ -80,9 +80,7 @@ function Gallery(props: Props) {
         ^
       </Link>
 
-      <div {...stylex.props(styles.slideContainer)}>
-        {currentSlide}
-      </div>
+      <div {...stylex.props(styles.slideContainer)}>{currentSlide}</div>
 
       {currentIndex > 0 && (
         <button
@@ -119,8 +117,6 @@ const styles = stylex.create({
     height: "100vh",
     backgroundColor: color.background,
     overflow: "hidden",
-    fontFamily:
-      "iAWriterQuattroS, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
   },
 
   slideContainer: {

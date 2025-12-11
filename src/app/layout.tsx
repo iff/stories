@@ -1,7 +1,7 @@
 import * as stylex from "@stylexjs/stylex";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
-import { tuna } from "@/fonts";
+import { iaWriterQuattroS } from "@/fonts";
 
 import { color } from "@/tokens.stylex";
 
@@ -23,7 +23,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const { className, ...rest } = stylex.props(styles.html);
 
   return (
-    <html lang="en" className={`${tuna.className} ${className}`} {...rest}>
+    <html lang="en" className={`${iaWriterQuattroS.className} ${className}`} {...rest}>
       <head>
         <link rel="icon" href="/favicon.png" />
       </head>
