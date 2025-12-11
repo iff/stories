@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 
+import { color } from "@/tokens.stylex";
+
 /**
  * The underlying DOM element which is rendered by this component.
  */
@@ -93,6 +95,6 @@ const styles = stylex.create({
     letterSpacing: "0.02em",
     margin: "1rem 0 0 0",
     padding: 0,
-    color: "#000",
+    color: color.text,
   },
 });

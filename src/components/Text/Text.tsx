@@ -3,6 +3,8 @@
 import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 
+import { color } from "@/tokens.stylex";
+
 /**
  * Text component for MDX - renders a text slide in the gallery
  * The markdown content inside is automatically processed by MDX into React elements
@@ -56,7 +58,7 @@ const styles = stylex.create({
       fontSize: "32px",
       fontWeight: 700,
       lineHeight: 1.3,
-      color: "#111",
+      color: color.text,
       marginTop: 0,
       marginBottom: "1.5rem",
     },
@@ -64,7 +66,7 @@ const styles = stylex.create({
       fontSize: "24px",
       fontWeight: 600,
       lineHeight: 1.4,
-      color: "#222",
+      color: color.text,
       marginTop: "2rem",
       marginBottom: "1rem",
     },
@@ -72,13 +74,13 @@ const styles = stylex.create({
     ":where(p)": {
       fontSize: "16px",
       lineHeight: 1.7,
-      color: "#333",
+      color: color.text,
       marginTop: 0,
       marginBottom: "1.2rem",
     },
     // Link styles
     ":where(a)": {
-      color: "#666",
+      color: color.secondaryText,
       textDecoration: "underline",
     },
   },

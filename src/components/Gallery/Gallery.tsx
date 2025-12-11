@@ -4,6 +4,8 @@ import * as stylex from "@stylexjs/stylex";
 import Link from "next/link";
 import * as React from "react";
 
+import { color } from "@/tokens.stylex";
+
 /**
  * The underlying DOM element which is rendered by this component.
  */
@@ -115,7 +117,7 @@ const styles = stylex.create({
     position: "relative",
     width: "100vw",
     height: "100vh",
-    backgroundColor: "#fff",
+    backgroundColor: color.background,
     overflow: "hidden",
     fontFamily:
       "iAWriterQuattroS, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
@@ -168,7 +170,7 @@ const styles = stylex.create({
     borderWidth: 0,
     borderStyle: "none",
     fontSize: "60px",
-    color: "#999",
+    color: color.secondaryText,
     cursor: "pointer",
     padding: "2rem",
     transitionProperty: "color",
@@ -178,7 +180,7 @@ const styles = stylex.create({
     userSelect: "none",
 
     ":hover": {
-      color: "#333",
+      color: color.text,
     },
   },
 
@@ -196,10 +198,11 @@ const styles = stylex.create({
     left: "50%",
     transform: "translateX(-50%)",
     fontSize: "12px",
-    color: "#999",
-    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    color: color.secondaryText,
+    backgroundColor: color.background,
     padding: "0.5rem 1rem",
     borderRadius: "20px",
+    opacity: 0.9,
   },
 
   backButton: {
@@ -207,7 +210,7 @@ const styles = stylex.create({
     top: "1.5rem",
     left: "1.5rem",
     fontSize: "24px",
-    color: "#ccc",
+    color: color.secondaryText,
     textDecoration: "none",
     zIndex: 100,
     transitionProperty: "color",
@@ -216,7 +219,7 @@ const styles = stylex.create({
     padding: "0.5rem",
 
     ":hover": {
-      color: "#666",
+      color: color.text,
     },
   },
 });
