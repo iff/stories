@@ -1,12 +1,10 @@
 import * as stylex from "@stylexjs/stylex";
 import { CompiledStyles, InlineStyles, StyleXArray } from "@stylexjs/stylex";
-import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 import NextImage from "next/image";
 import Link, { LinkProps } from "next/link";
 import * as React from "react";
 
-import Caption from "./internal/Caption";
-
+import { color } from "@/tokens.stylex";
 import { vars } from "./variables.stylex";
 
 /**
@@ -44,17 +42,6 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 
   href?: LinkProps["href"];
 
-  /*
-   * The 'span' and 'aspectRatio' props are not actually used by this component.
-   * But they are sometimes passed to the component when it's rendered inside a
-   * <Group>, and without adding them to the props here TypeScript would
-   * complain.
-   *
-   * XXX: There has to be a better way to support this.
-   */
-  span?: number | number[];
-  aspectRatio?: number;
-
   sx?: StyleXArray<
     | (null | undefined | CompiledStyles)
     | boolean
@@ -72,8 +59,6 @@ function Image(props: Props) {
     captionPlacement = "below",
     href,
     sx,
-    span,
-    aspectRatio,
     ...rest
   } = props;
 
@@ -119,7 +104,9 @@ function Image(props: Props) {
       })()}
 
       {caption && (
-        <Caption captionPlacement={captionPlacement}>{caption}</Caption>
+        <figcaption {...stylex.props(captionVariant[captionPlacement], styles.caption)}>
+          {caption}
+        </figcaption>
       )}
     </Root>
   );
@@ -158,6 +145,12 @@ const styles = stylex.create({
   blank: {
     display: "none",
   },
+
+  caption: {
+    fontSize: "0.75em",
+    lineHeight: "1.3",
+    opacity: vars.figcaptionOpacity,
+  },
 });
 
 const captionPlacementVariant = stylex.create({
@@ -171,5 +164,27 @@ const captionPlacementVariant = stylex.create({
     ":focus-within": {
       [vars.figcaptionOpacity]: "1",
     },
+  },
+});
+
+const captionVariant = stylex.create({
+  below: {
+    textAlign: "left",
+    margin: "8px 0",
+    color: color.secondaryText,
+  },
+
+  overlay: {
+    position: "absolute",
+    margin: "0",
+    left: "2px",
+    right: "2px",
+    bottom: "2px",
+    backgroundColor: color.container,
+    color: color.onContainer,
+    padding: "8px 10px 6px",
+    textAlign: "left",
+    pointerEvents: "none",
+    transition: "opacity 0.4s",
   },
 });

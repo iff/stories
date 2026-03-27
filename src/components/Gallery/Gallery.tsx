@@ -128,36 +128,6 @@ const styles = stylex.create({
     justifyContent: "center",
   },
 
-  imageWrapper: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    maxWidth: "90vw",
-    maxHeight: "85vh",
-  },
-
-  groupContainer: {
-    maxWidth: "90vw",
-    maxHeight: "85vh",
-  },
-
-  textSlide: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "2rem",
-    width: "100%",
-    height: "100%",
-    overflowY: "auto",
-  },
-
-  textContent: {
-    maxWidth: "700px",
-    width: "100%",
-    margin: "0 auto",
-    padding: "2rem",
-  },
-
   navButton: {
     position: "absolute",
     top: "50%",

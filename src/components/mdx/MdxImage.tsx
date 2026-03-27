@@ -71,9 +71,6 @@ function MdxImage({ blobId, caption, size, span, aspectRatio }: MdxImageProps) {
   );
 }
 
-// Add slideType as a static property for Gallery to identify
-MdxImage.slideType = "image" as const;
-
 export default MdxImage;
 
 const styles = stylex.create({
