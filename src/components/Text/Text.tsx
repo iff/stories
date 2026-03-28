@@ -16,7 +16,6 @@ import { color } from "@/tokens.stylex";
  */
 interface Props {
   children: React.ReactNode;
-  slideType?: string; // Added for Gallery to identify slide type
 }
 
 function Text({ children }: Props) {
@@ -28,9 +27,6 @@ function Text({ children }: Props) {
     </div>
   );
 }
-
-// Add slideType as a static property for Gallery to identify
-Text.slideType = 'text' as const;
 
 export default Text;
 

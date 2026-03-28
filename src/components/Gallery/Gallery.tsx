@@ -77,7 +77,9 @@ function Gallery(props: Props) {
         {...stylex.props(styles.backButton)}
         aria-label="Back to home"
       >
-        ^
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M2 8L9 2l7 6v8a1 1 0 01-1 1H3a1 1 0 01-1-1V8z" />
+        </svg>
       </Link>
 
       <div {...stylex.props(styles.slideContainer)}>{currentSlide}</div>
@@ -128,36 +130,6 @@ const styles = stylex.create({
     justifyContent: "center",
   },
 
-  imageWrapper: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    maxWidth: "90vw",
-    maxHeight: "85vh",
-  },
-
-  groupContainer: {
-    maxWidth: "90vw",
-    maxHeight: "85vh",
-  },
-
-  textSlide: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "2rem",
-    width: "100%",
-    height: "100%",
-    overflowY: "auto",
-  },
-
-  textContent: {
-    maxWidth: "700px",
-    width: "100%",
-    margin: "0 auto",
-    padding: "2rem",
-  },
-
   navButton: {
     position: "absolute",
     top: "50%",
@@ -165,18 +137,19 @@ const styles = stylex.create({
     backgroundColor: "transparent",
     borderWidth: 0,
     borderStyle: "none",
-    fontSize: "60px",
-    color: color.secondaryText,
+    fontSize: "40px",
+    color: color.text,
+    opacity: 0.2,
     cursor: "pointer",
     padding: "2rem",
-    transitionProperty: "color",
+    transitionProperty: "opacity",
     transitionDuration: "0.2s",
     transitionTimingFunction: "ease",
     zIndex: 10,
     userSelect: "none",
 
     ":hover": {
-      color: color.text,
+      opacity: 0.6,
     },
   },
 
@@ -204,18 +177,19 @@ const styles = stylex.create({
   backButton: {
     position: "absolute",
     top: "1.5rem",
-    left: "1.5rem",
-    fontSize: "24px",
-    color: color.secondaryText,
+    right: "1.5rem",
+    display: "flex",
+    color: color.text,
+    opacity: 0.2,
     textDecoration: "none",
     zIndex: 100,
-    transitionProperty: "color",
+    transitionProperty: "opacity",
     transitionDuration: "0.2s",
     transitionTimingFunction: "ease",
     padding: "0.5rem",
 
     ":hover": {
-      color: color.text,
+      opacity: 0.6,
     },
   },
 });
