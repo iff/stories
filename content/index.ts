@@ -168,7 +168,7 @@ export const stories: Story[] = [
     image: "57EDbon52VehFxFwSc8wdAamHbwmt1EsPyHifoaqYuwG",
 
     body: {
-      Component: dynamic(() => import(`./lovure/body.mdx`)),
+      Component: dynamic(() => import(`./louvre/body.mdx`)),
     },
   },
 ];
