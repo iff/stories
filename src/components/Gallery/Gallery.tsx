@@ -135,18 +135,19 @@ const styles = stylex.create({
     backgroundColor: "transparent",
     borderWidth: 0,
     borderStyle: "none",
-    fontSize: "60px",
-    color: color.secondaryText,
+    fontSize: "40px",
+    color: color.text,
+    opacity: 0.2,
     cursor: "pointer",
     padding: "2rem",
-    transitionProperty: "color",
+    transitionProperty: "opacity",
     transitionDuration: "0.2s",
     transitionTimingFunction: "ease",
     zIndex: 10,
     userSelect: "none",
 
     ":hover": {
-      color: color.text,
+      opacity: 0.6,
     },
   },
 
