@@ -49,9 +49,6 @@ export const stories: Story[] = [
     ],
 
     body: {
-      /**
-       * A React component that renders the story body.
-       */
       Component: dynamic(() => import(`./hawaii/body.mdx`)),
     },
   },
@@ -69,9 +66,6 @@ export const stories: Story[] = [
     ],
 
     body: {
-      /**
-       * A React component that renders the story body.
-       */
       Component: dynamic(() => import(`./amsterdam/body.mdx`)),
     },
   },
@@ -89,9 +83,6 @@ export const stories: Story[] = [
     ],
 
     body: {
-      /**
-       * A React component that renders the story body.
-       */
       Component: dynamic(() => import(`./marocco/body.mdx`)),
     },
   },
@@ -109,9 +100,6 @@ export const stories: Story[] = [
     ],
 
     body: {
-      /**
-       * A React component that renders the story body.
-       */
       Component: dynamic(() => import(`./snowline/body.mdx`)),
     },
   },
@@ -129,9 +117,6 @@ export const stories: Story[] = [
     ],
 
     body: {
-      /**
-       * A React component that renders the story body.
-       */
       Component: dynamic(() => import(`./bavona/body.mdx`)),
     },
   },
@@ -149,9 +134,6 @@ export const stories: Story[] = [
     ],
 
     body: {
-      /**
-       * A React component that renders the story body.
-       */
       Component: dynamic(() => import(`./bergell/body.mdx`)),
     },
   },
@@ -169,10 +151,24 @@ export const stories: Story[] = [
     ],
 
     body: {
-      /**
-       * A React component that renders the story body.
-       */
       Component: dynamic(() => import(`./nz/body.mdx`)),
+    },
+  },
+  {
+    id: "louvre",
+
+    visibility: "PUBLIC",
+    publishedAt: new Date(Date.parse("2020-01-01")),
+    date: [
+      new Date(Date.parse("2019-05-02")),
+      new Date(Date.parse("2019-05-02")),
+    ],
+
+    title: "Louvre",
+    image: "57EDbon52VehFxFwSc8wdAamHbwmt1EsPyHifoaqYuwG",
+
+    body: {
+      Component: dynamic(() => import(`./lovure/body.mdx`)),
     },
   },
 ];
