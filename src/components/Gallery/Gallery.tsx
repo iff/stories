@@ -77,7 +77,9 @@ function Gallery(props: Props) {
         {...stylex.props(styles.backButton)}
         aria-label="Back to home"
       >
-        ^
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M2 8L9 2l7 6v8a1 1 0 01-1 1H3a1 1 0 01-1-1V8z" />
+        </svg>
       </Link>
 
       <div {...stylex.props(styles.slideContainer)}>{currentSlide}</div>
@@ -175,18 +177,19 @@ const styles = stylex.create({
   backButton: {
     position: "absolute",
     top: "1.5rem",
-    left: "1.5rem",
-    fontSize: "24px",
-    color: color.secondaryText,
+    right: "1.5rem",
+    display: "flex",
+    color: color.text,
+    opacity: 0.2,
     textDecoration: "none",
     zIndex: 100,
-    transitionProperty: "color",
+    transitionProperty: "opacity",
     transitionDuration: "0.2s",
     transitionTimingFunction: "ease",
     padding: "0.5rem",
 
     ":hover": {
-      color: color.text,
+      opacity: 0.6,
     },
   },
 });
