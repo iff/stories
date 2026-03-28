@@ -61,7 +61,18 @@ function Gallery(props: Props) {
           {...stylex.props(styles.backButton)}
           aria-label="Back to home"
         >
-          ^
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M2 8L9 2l7 6v8a1 1 0 01-1 1H3a1 1 0 01-1-1V8z" />
+          </svg>
         </Link>
         <div {...stylex.props(styles.slideContainer)}>
           <p>No slides found</p>
@@ -77,13 +88,23 @@ function Gallery(props: Props) {
         {...stylex.props(styles.backButton)}
         aria-label="Back to home"
       >
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 18 18"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M2 8L9 2l7 6v8a1 1 0 01-1 1H3a1 1 0 01-1-1V8z" />
         </svg>
       </Link>
 
       <div {...stylex.props(styles.slideContainer)}>{currentSlide}</div>
 
+      {/* Arrow buttons — pointer devices only */}
       {currentIndex > 0 && (
         <button
           onClick={goToPrev}
@@ -101,6 +122,24 @@ function Gallery(props: Props) {
         >
           ›
         </button>
+      )}
+
+      {/* Tap zones — touch devices only */}
+      {currentIndex > 0 && (
+        <div
+          onClick={goToPrev}
+          {...stylex.props(styles.tapZone, styles.tapZoneLeft)}
+          aria-label="Previous slide"
+          role="button"
+        />
+      )}
+      {currentIndex < slides.length - 1 && (
+        <div
+          onClick={goToNext}
+          {...stylex.props(styles.tapZone, styles.tapZoneRight)}
+          aria-label="Next slide"
+          role="button"
+        />
       )}
 
       <div {...stylex.props(styles.progress)}>
@@ -151,6 +190,10 @@ const styles = stylex.create({
     ":hover": {
       opacity: 0.6,
     },
+
+    "@media (pointer: coarse)": {
+      display: "none",
+    },
   },
 
   navButtonPrev: {
@@ -159,6 +202,28 @@ const styles = stylex.create({
 
   navButtonNext: {
     right: "1rem",
+  },
+
+  tapZone: {
+    display: "none",
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    width: "50%",
+    zIndex: 10,
+    cursor: "pointer",
+
+    "@media (pointer: coarse)": {
+      display: "block",
+    },
+  },
+
+  tapZoneLeft: {
+    left: 0,
+  },
+
+  tapZoneRight: {
+    right: 0,
   },
 
   progress: {
