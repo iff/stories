@@ -140,14 +140,14 @@ export const stories: Story[] = [
   {
     id: "nz",
 
-    visibility: "HIDDEN",
+    visibility: "PUBLIC",
     publishedAt: new Date(Date.parse("2020-01-01")),
 
     title: "New Zealand",
     image: "8Cfadtq1pQ2XgLn55skdb2CoawepiJF1kF9HwUZW8T3r",
     date: [
-      new Date(Date.parse("2020-01-01")),
-      new Date(Date.parse("2024-02-10")),
+      new Date(Date.parse("2016-12-10")),
+      new Date(Date.parse("2017-01-10")),
     ],
 
     body: {

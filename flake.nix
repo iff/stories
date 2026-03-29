@@ -19,8 +19,7 @@
           banner = pkgs.writeShellScriptBin "banner" ''
             clear
 
-            ${pkgs.figlet}/bin/figlet stories
-            echo " … for nothing remains of us but the vibrations we leave behind."
+            ${pkgs.figlet}/bin/figlet canvas
           '';
 
           scripts = {
