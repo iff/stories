@@ -7,24 +7,22 @@ import { stories } from "../../content";
 
 export default async function Page() {
   return (
-    <>
-      <div {...stylex.props(styles.storyCards)}>
-        {
-          await Promise.all(
-            featuredStories.map(async (story, _index) => (
-              <StoryCard
-                key={story.id}
-                story={{
-                  id: story.id,
-                }}
-                blob={await importImage(story.image)}
-                title={story.title}
-              />
-            )),
-          )
-        }
-      </div>
-    </>
+    <div {...stylex.props(styles.storyCards)}>
+      {
+        await Promise.all(
+          featuredStories.map(async (story, _index) => (
+            <StoryCard
+              key={story.id}
+              story={{
+                id: story.id,
+              }}
+              blob={await importImage(story.image)}
+              title={story.title}
+            />
+          )),
+        )
+      }
+    </div>
   );
 }
 
