@@ -61,4 +61,3 @@ export async function importImage(name: string) {
     asImage: blob.asImage,
   };
 }
-

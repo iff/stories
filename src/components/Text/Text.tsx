@@ -1,5 +1,5 @@
-import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
+import * as React from "react";
 
 import { color } from "@/tokens.stylex";
 
@@ -21,9 +21,7 @@ interface Props {
 function Text({ children }: Props) {
   return (
     <div data-slide-type="text" {...stylex.props(styles.wrapper)}>
-      <div {...stylex.props(styles.content)}>
-        {children}
-      </div>
+      <div {...stylex.props(styles.content)}>{children}</div>
     </div>
   );
 }

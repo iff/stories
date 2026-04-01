@@ -7,9 +7,9 @@ import { stories } from "../../content";
 
 export default async function Page() {
   return (
-    <>
-      <div {...stylex.props(styles.storyCards)}>
-        {await Promise.all(
+    <div {...stylex.props(styles.storyCards)}>
+      {
+        await Promise.all(
           featuredStories.map(async (story, _index) => (
             <StoryCard
               key={story.id}
@@ -20,9 +20,9 @@ export default async function Page() {
               title={story.title}
             />
           )),
-        )}
-      </div>
-    </>
+        )
+      }
+    </div>
   );
 }
 

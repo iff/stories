@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import NextImage from "next/image";
 import { useBlobContext } from "@/components/BlobContext";
@@ -22,12 +21,7 @@ function MdxImage({ blobId, caption }: MdxImageProps) {
   return (
     <div data-slide-type="image" {...stylex.props(styles.wrapper)}>
       <div {...stylex.props(styles.frame)}>
-        <NextImage
-          alt=""
-          src={blobData.url}
-          fill
-          style={{ objectFit: "contain" }}
-        />
+        <NextImage alt="" src={blobData.url} fill style={{ objectFit: "contain" }} />
       </div>
       {caption && <p {...stylex.props(styles.caption)}>{caption}</p>}
     </div>

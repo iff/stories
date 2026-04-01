@@ -42,12 +42,7 @@ async function StoryCard(props: Props) {
     <Root {...rest} {...stylex.props(styles.root)}>
       <Link href={`/${story.id}`} {...stylex.props(styles.link)}>
         <div {...stylex.props(styles.imageContainer)}>
-          <Image
-            alt={title}
-            src={blob.asImage.url}
-            fill
-            {...stylex.props(styles.image)}
-          />
+          <Image alt={title} src={blob.asImage.url} fill {...stylex.props(styles.image)} />
         </div>
         <h4 {...stylex.props(styles.title)}>{title}</h4>
       </Link>

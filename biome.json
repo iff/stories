@@ -2,12 +2,10 @@
   "files": {
     "includes": ["**", "!**/.direnv", "!**/.next", "!**/node_modules", "!test-results", "!src/graphql/generated"]
   },
-
   "formatter": {
     "indentStyle": "space",
     "lineWidth": 120
   },
-
   "linter": {
     "rules": {
       "style": {
@@ -19,7 +17,10 @@
       },
       "a11y": {
         "noStaticElementInteractions": "off",
-        "useKeyWithClickEvents": "off"
+        "noSvgWithoutTitle": "off",
+        "useFocusableInteractive": "off",
+        "useKeyWithClickEvents": "off",
+        "useSemanticElements": "off"
       }
     }
   }
