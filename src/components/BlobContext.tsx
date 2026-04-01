@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext } from "react";
 
-export interface BlobData {
+interface BlobData {
   blobId: string;
   url: string;
   width: number;
