@@ -226,20 +226,6 @@ export type Video = Node & {
   readonly url: Scalars['URI']['output'];
 };
 
-export type StoryBlockPageQueryVariables = Exact<{
-  name: Scalars['String']['input'];
-}>;
-
-
-export type StoryBlockPageQuery = { readonly __typename?: 'Query', readonly blob: { readonly __typename?: 'Blob', readonly name: string, readonly asImage: { readonly __typename?: 'Image', readonly url: string, readonly dimensions: { readonly __typename?: 'Dimensions', readonly width: number, readonly height: number }, readonly placeholder: { readonly __typename?: 'Image', readonly url: string } } | null, readonly asVideo: { readonly __typename?: 'Video', readonly poster: { readonly __typename?: 'Image', readonly url: string, readonly dimensions: { readonly __typename?: 'Dimensions', readonly width: number, readonly height: number }, readonly placeholder: { readonly __typename?: 'Image', readonly url: string } }, readonly renditions: ReadonlyArray<{ readonly __typename?: 'Rendition', readonly url: string, readonly dimensions: { readonly __typename?: 'Dimensions', readonly width: number, readonly height: number } }> } | null } | null };
-
-export type StoryBlockPageSiblingQueryVariables = Exact<{
-  name: Scalars['String']['input'];
-}>;
-
-
-export type StoryBlockPageSiblingQuery = { readonly __typename?: 'Query', readonly blob: { readonly __typename?: 'Blob', readonly name: string, readonly asImage: { readonly __typename?: 'Image', readonly url: string, readonly dimensions: { readonly __typename?: 'Dimensions', readonly width: number, readonly height: number } } | null, readonly asVideo: { readonly __typename?: 'Video', readonly poster: { readonly __typename?: 'Image', readonly url: string, readonly dimensions: { readonly __typename?: 'Dimensions', readonly width: number, readonly height: number } } } | null } | null };
-
 export type BlobQueryVariables = Exact<{
   name: Scalars['String']['input'];
 }>;
@@ -266,65 +252,6 @@ export class TypedDocumentString<TResult, TVariables>
   }
 }
 
-export const StoryBlockPageDocument = new TypedDocumentString(`
-    query StoryBlockPage($name: String!) {
-  blob(name: $name) {
-    name
-    asImage {
-      url
-      dimensions {
-        width
-        height
-      }
-      placeholder {
-        url
-      }
-    }
-    asVideo {
-      poster {
-        url
-        dimensions {
-          width
-          height
-        }
-        placeholder {
-          url
-        }
-      }
-      renditions {
-        url
-        dimensions {
-          width
-          height
-        }
-      }
-    }
-  }
-}
-    `) as unknown as TypedDocumentString<StoryBlockPageQuery, StoryBlockPageQueryVariables>;
-export const StoryBlockPageSiblingDocument = new TypedDocumentString(`
-    query StoryBlockPageSibling($name: String!) {
-  blob(name: $name) {
-    name
-    asImage {
-      url
-      dimensions {
-        width
-        height
-      }
-    }
-    asVideo {
-      poster {
-        url
-        dimensions {
-          width
-          height
-        }
-      }
-    }
-  }
-}
-    `) as unknown as TypedDocumentString<StoryBlockPageSiblingQuery, StoryBlockPageSiblingQueryVariables>;
 export const BlobDocument = new TypedDocumentString(`
     query Blob($name: String!) {
   blob(name: $name) {
