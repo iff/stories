@@ -65,13 +65,18 @@ export default async function Page(props: Props) {
  * Fetches blob data for all blobIds referenced in the story's MDX file
  * Returns a map of blobId -> blob data for use with BlobContext
  */
-async function fetchBlobData({ storyId }: Params): Promise<Record<string, {
-  blobId: string;
-  url: string;
-  width: number;
-  height: number;
-  placeholder?: string;
-}>> {
+async function fetchBlobData({ storyId }: Params): Promise<
+  Record<
+    string,
+    {
+      blobId: string;
+      url: string;
+      width: number;
+      height: number;
+      placeholder?: string;
+    }
+  >
+> {
   const mdxPath = `./content/${storyId}/body.mdx`;
   if (!fs.existsSync(mdxPath)) {
     return {};
@@ -92,13 +97,15 @@ async function fetchBlobData({ storyId }: Params): Promise<Record<string, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      query: `query Story { ${uniqueBlobIds.map(
-        (id) =>
-          `b${id}: blob(name: "${id}") {
+      query: `query Story { ${uniqueBlobIds
+        .map(
+          (id) =>
+            `b${id}: blob(name: "${id}") {
               name
               asImage { url dimensions { width height } placeholder { url } }
             }`,
-      ).join('\n')} }`,
+        )
+        .join("\n")} }`,
     }),
   });
   const json = await res.json();

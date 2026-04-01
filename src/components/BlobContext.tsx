@@ -15,16 +15,8 @@ interface BlobContextValue {
 
 const BlobContext = createContext<BlobContextValue | undefined>(undefined);
 
-export function BlobProvider({
-  blobs,
-  children,
-}: {
-  blobs: Record<string, BlobData>;
-  children: React.ReactNode;
-}) {
-  return (
-    <BlobContext.Provider value={{ blobs }}>{children}</BlobContext.Provider>
-  );
+export function BlobProvider({ blobs, children }: { blobs: Record<string, BlobData>; children: React.ReactNode }) {
+  return <BlobContext.Provider value={{ blobs }}>{children}</BlobContext.Provider>;
 }
 
 export function useBlobContext() {

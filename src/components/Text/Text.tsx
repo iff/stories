@@ -21,9 +21,7 @@ interface Props {
 function Text({ children }: Props) {
   return (
     <div data-slide-type="text" {...stylex.props(styles.wrapper)}>
-      <div {...stylex.props(styles.content)}>
-        {children}
-      </div>
+      <div {...stylex.props(styles.content)}>{children}</div>
     </div>
   );
 }

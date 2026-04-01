@@ -22,12 +22,7 @@ function MdxImage({ blobId, caption }: MdxImageProps) {
   return (
     <div data-slide-type="image" {...stylex.props(styles.wrapper)}>
       <div {...stylex.props(styles.frame)}>
-        <NextImage
-          alt=""
-          src={blobData.url}
-          fill
-          style={{ objectFit: "contain" }}
-        />
+        <NextImage alt="" src={blobData.url} fill style={{ objectFit: "contain" }} />
       </div>
       {caption && <p {...stylex.props(styles.caption)}>{caption}</p>}
     </div>
