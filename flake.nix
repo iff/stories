@@ -42,6 +42,7 @@
             pkgs.nodejs
             pkgs.pnpm
             pkgs.biome
+            pkgs.pinact
 
             scripts.dev
           ];
