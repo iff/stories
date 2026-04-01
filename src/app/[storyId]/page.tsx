@@ -3,8 +3,8 @@ import { lookupStory } from "content";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { importImage } from "@/cms";
-import { Gallery } from "@/components/Gallery";
 import { BlobProvider } from "@/components/BlobContext";
+import { Gallery } from "@/components/Gallery";
 
 export async function generateStaticParams() {
   return [];

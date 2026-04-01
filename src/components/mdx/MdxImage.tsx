@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
 import * as stylex from "@stylexjs/stylex";
 import NextImage from "next/image";
+import * as React from "react";
 import { useBlobContext } from "@/components/BlobContext";
 
 interface MdxImageProps {
