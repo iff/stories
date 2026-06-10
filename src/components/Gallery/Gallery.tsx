@@ -48,11 +48,7 @@ function Gallery(props: Props) {
   const currentSlide = slides[currentIndex];
 
   const BackButton = (
-    <Link
-      href="/"
-      {...stylex.props(styles.backButton)}
-      aria-label="Back to home"
-    >
+    <Link href="/" {...stylex.props(styles.backButton)} aria-label="Back to home">
       <svg
         width="18"
         height="18"
@@ -96,11 +92,7 @@ function Gallery(props: Props) {
         </button>
       )}
       {currentIndex < slides.length - 1 && (
-        <button
-          onClick={goToNext}
-          {...stylex.props(styles.navButton, styles.navButtonNext)}
-          aria-label="Next slide"
-        >
+        <button onClick={goToNext} {...stylex.props(styles.navButton, styles.navButtonNext)} aria-label="Next slide">
           ›
         </button>
       )}
