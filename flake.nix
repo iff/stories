@@ -22,12 +22,6 @@
           inherit system;
         };
 
-        banner = pkgs.writeShellScriptBin "banner" ''
-          clear
-
-          ${pkgs.figlet}/bin/figlet canvas
-        '';
-
         scripts = {
           dev = pkgs.writeShellScriptBin "dev" ''
             ./node_modules/.bin/next dev
@@ -43,13 +37,10 @@
             pkgs.pnpm
             pkgs.biome
             pkgs.pinact
+            pkgs.typescript-language-server
 
             scripts.dev
           ];
-
-          shellHook = ''
-            ${banner}/bin/banner
-          '';
         };
 
         devShells.workflow = pkgs.mkShell {

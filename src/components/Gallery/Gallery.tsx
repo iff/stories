@@ -18,16 +18,10 @@ interface Props extends React.ComponentPropsWithoutRef<typeof Root> {
 function Gallery(props: Props) {
   const { children, ...rest } = props;
 
-  // Extract slides from children - each top-level child is a slide
   const slides = React.useMemo(() => {
-    const slideArray: React.ReactElement[] = [];
-    React.Children.forEach(children, (child) => {
-      if (React.isValidElement(child)) {
-        slideArray.push(child);
-      }
-    });
-    return slideArray;
+    return React.Children.toArray(children).filter(React.isValidElement);
   }, [children]);
+
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
   const goToNext = React.useCallback(() => {
@@ -53,23 +47,27 @@ function Gallery(props: Props) {
 
   const currentSlide = slides[currentIndex];
 
+  const BackButton = (
+    <Link href="/" {...stylex.props(styles.backButton)} aria-label="Back to home">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M2 8L9 2l7 6v8a1 1 0 01-1 1H3a1 1 0 01-1-1V8z" />
+      </svg>
+    </Link>
+  );
+
   if (slides.length === 0) {
     return (
       <Root {...stylex.props(styles.root)} {...rest}>
-        <Link href="/" {...stylex.props(styles.backButton)} aria-label="Back to home">
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 18 18"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M2 8L9 2l7 6v8a1 1 0 01-1 1H3a1 1 0 01-1-1V8z" />
-          </svg>
-        </Link>
+        {BackButton}
         <div {...stylex.props(styles.slideContainer)}>
           <p>No slides found</p>
         </div>
@@ -79,24 +77,11 @@ function Gallery(props: Props) {
 
   return (
     <Root {...stylex.props(styles.root)} {...rest}>
-      <Link href="/" {...stylex.props(styles.backButton)} aria-label="Back to home">
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 18 18"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M2 8L9 2l7 6v8a1 1 0 01-1 1H3a1 1 0 01-1-1V8z" />
-        </svg>
-      </Link>
+      {BackButton}
 
       <div {...stylex.props(styles.slideContainer)}>{currentSlide}</div>
 
-      {/* Arrow buttons — pointer devices only */}
+      {/* Arrow buttons - pointer devices only */}
       {currentIndex > 0 && (
         <button
           onClick={goToPrev}
@@ -112,21 +97,25 @@ function Gallery(props: Props) {
         </button>
       )}
 
-      {/* Tap zones — touch devices only */}
+      {/* Tap zones - touch + keyboard accessibility */}
       {currentIndex > 0 && (
         <div
           onClick={goToPrev}
+          onKeyDown={(e) => e.key === "Enter" && goToPrev()}
           {...stylex.props(styles.tapZone, styles.tapZoneLeft)}
           aria-label="Previous slide"
           role="button"
+          tabIndex={0}
         />
       )}
       {currentIndex < slides.length - 1 && (
         <div
           onClick={goToNext}
+          onKeyDown={(e) => e.key === "Enter" && goToNext()}
           {...stylex.props(styles.tapZone, styles.tapZoneRight)}
           aria-label="Next slide"
           role="button"
+          tabIndex={0}
         />
       )}
 
