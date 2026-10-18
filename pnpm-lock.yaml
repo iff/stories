@@ -2379,8 +2379,8 @@ packages:
     resolution: {integrity: sha512-iOBWFgUX7caIZiuutICxVgX1SdxwAVFFKwt1EvMYYec/NWO5meOJ6K5uQxhrYBdQJne4KxiqZc+KptFOWFSI9w==}
     engines: {node: '>=18'}
 
-  smol-toml@1.5.2:
-    resolution: {integrity: sha512-QlaZEqcAH3/RtNyet1IPIYPsEWAaYyXXv1Krsi+1L/QHppjX4Ifm8MQsBISz9vE8cHicIq3clogsheili5vhaQ==}
+  smol-toml@1.9.1:
+    resolution: {integrity: sha512-j7WyPdf0CJoutMzMoPLF/bVXHtKZIT9Rb4eGeEbWw8X2t5oirjPgpL+OpaENZrILYaXqYwnVH+qgUwVbl+pUJQ==}
     engines: {node: '>= 18'}
 
   snake-case@3.0.4:
@@ -4797,7 +4797,7 @@ snapshots:
       oxc-resolver: 11.15.0
       picocolors: 1.1.1
       picomatch: 4.0.3
-      smol-toml: 1.5.2
+      smol-toml: 1.9.1
       strip-json-comments: 5.0.3
       typescript: 5.9.3
       zod: 4.1.13
@@ -5544,7 +5544,7 @@ snapshots:
       ansi-styles: 6.2.3
       is-fullwidth-code-point: 5.1.0
 
-  smol-toml@1.5.2: {}
+  smol-toml@1.9.1: {}
 
   snake-case@3.0.4:
     dependencies:
